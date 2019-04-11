@@ -12,9 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    //return view('home');
+    return redirect()->route('login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+});

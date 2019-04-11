@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>CMASMEZ | @yield('title', 'Inicio')</title>
-	<link rel="icon" href="{{ asset('img/logo.png') }}">
+	<title>SDAM | @yield('title', 'Inicio')</title>
+	<link rel="icon" href="{{ asset('admin/dist/img/AdminLTELogo.png') }}">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
@@ -49,12 +49,12 @@
 			</section>
 		</div>
 
-		@include('template.partials.sidebar2')
+		{{--@include('template.partials.sidebar2')--}}
 
 		@include('template.partials.footer')
 	</div>
 
-	@routes
+	{{--@routes--}}
 	<script src="{{ asset('plugins/jquery/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>

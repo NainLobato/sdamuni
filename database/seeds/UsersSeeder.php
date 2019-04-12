@@ -12,8 +12,11 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $user = App\User::create([
-            'name' => 'Administrador Godínez',
-            'email' => 'admin@gmail.com',
+            'nombre' => 'ADMINISTRADOR',
+            'primer_ap' => 'APELLIDO',
+            'segundo_ap' => 'APELLIDO',
+            'correo' => 'admin@gmail.com',
+            'nivel' => 1,
             'password' => bcrypt('admin'),
         ]);
     }

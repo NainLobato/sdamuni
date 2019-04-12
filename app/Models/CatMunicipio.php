@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CatMunicipio extends Model
 {
+    use SoftDeletes;
     protected $table = 'cat_municipios';
 
     protected $fillable = [
@@ -15,5 +17,17 @@ class CatMunicipio extends Model
         'clave',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
+
+    public function distrito()
+    {
+        return $this->belongsTo('App\Models\CatDistrito','distrito_id','id');
+    }
+
+    public function ayuntamientos()
+    {
+        return $this->hasMany('App\Models\CatMunicipio','municipio_id','id');
+    }
 }

@@ -17,6 +17,7 @@ class CreateCatCargosTable extends Migration
             $table->increments('id');
             $table->string('cargo', 50);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

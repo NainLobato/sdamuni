@@ -27,6 +27,7 @@ class CreateEmpleadosTable extends Migration
             $table->integer('status');
             $table->date('fecha_fin_funciones');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('ayuntamiento_id')->references('id')->on('ayuntamientos')->onDelete('cascade');

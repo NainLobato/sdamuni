@@ -15,6 +15,8 @@ class CatPartido extends Model
         'partido',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 
     public function ayuntamientos()

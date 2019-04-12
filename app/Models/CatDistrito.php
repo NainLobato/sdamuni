@@ -15,6 +15,8 @@ class CatDistrito extends Model
         'distrito',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 
     public function municipios()

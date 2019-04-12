@@ -17,9 +17,11 @@ class Ayuntamiento extends Model
         'escudo',
         'telefono1',
         'telefono2',
-        'correo'
+        'correo',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 
     public function municipio()

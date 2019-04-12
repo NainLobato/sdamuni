@@ -17,5 +17,7 @@ class AyuntamientoPartido extends Model
         'ayuntamiento_id',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 }

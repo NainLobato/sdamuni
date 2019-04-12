@@ -23,6 +23,8 @@ class Empleado extends Model
         'status',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 
    

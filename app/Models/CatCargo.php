@@ -15,6 +15,8 @@ class CatCargo extends Model
         'cargo',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 
     public function empleados()

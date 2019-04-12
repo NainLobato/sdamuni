@@ -17,6 +17,8 @@ class CatMunicipio extends Model
         'clave',
         'created_at',
         'update_at',
+        'delete_at',
+
     ];
 
     public function distrito()

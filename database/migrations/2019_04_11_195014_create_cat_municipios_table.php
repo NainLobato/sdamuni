@@ -19,6 +19,7 @@ class CreateCatMunicipiosTable extends Migration
             $table->string('municipio');
             $table->integer('clave');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('distrito_id')->references('id')->on('cat_distritos')->onDelete('cascade');
         });

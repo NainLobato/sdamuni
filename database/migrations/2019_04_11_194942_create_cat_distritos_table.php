@@ -17,6 +17,8 @@ class CreateCatDistritosTable extends Migration
             $table->increments('id');
             $table->integer('distrito');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

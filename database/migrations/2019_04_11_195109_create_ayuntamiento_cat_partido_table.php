@@ -18,6 +18,7 @@ class CreateAyuntamientoCatPartidoTable extends Migration
             $table->integer('partido_id')->unsigned();
             $table->integer('ayuntamiento_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('partido_id')->references('id')->on('cat_partidos')->onDelete('cascade');
             $table->foreign('ayuntamiento_id')->references('id')->on('ayuntamientos')->onDelete('cascade');

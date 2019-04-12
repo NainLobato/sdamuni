@@ -21,4 +21,21 @@ class Ayuntamiento extends Model
         'created_at',
         'update_at',
     ];
+
+    public function municipio()
+    {
+        return $this->belongsTo('App\Models\CatMunicipio','municipio_id','id');
+    }
+
+    public function partidos()
+    {
+        return $this->belongsToMany('App\Models\CatPartido','ayuntamiento_cat_partido','partido_id','ayuntamiento_id');
+    }
+
+    public function empleados()
+    {
+        return $this->hasMany('App\Models\Empleado','ayuntamiento_id','id');
+    }
+
+    
 }

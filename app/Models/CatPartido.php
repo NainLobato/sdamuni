@@ -16,4 +16,9 @@ class CatPartido extends Model
         'created_at',
         'update_at',
     ];
+
+    public function ayuntamientos()
+    {
+        return $this->belongsToMany('App\Models\Ayuntamiento','ayuntamiento_cat_partido','ayuntamiento_id','partido_id');
+    }
 }

@@ -24,4 +24,21 @@ class Empleado extends Model
         'created_at',
         'update_at',
     ];
+
+   
+    public function ayuntamiento()
+    {
+        return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');
+    }
+
+    public function cargo()
+    {
+        return $this->belongsTo('App\Models\CatCargo','cargo_id','id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id','id');
+    }
+    
 }

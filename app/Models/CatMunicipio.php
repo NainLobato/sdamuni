@@ -18,4 +18,14 @@ class CatMunicipio extends Model
         'created_at',
         'update_at',
     ];
+
+    public function distrito()
+    {
+        return $this->belongsTo('App\Models\CatDistrito','distrito_id','id');
+    }
+
+    public function ayuntamientos()
+    {
+        return $this->hasMany('App\Models\CatMunicipio','municipio_id','id');
+    }
 }

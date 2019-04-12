@@ -16,4 +16,9 @@ class CatCargo extends Model
         'created_at',
         'update_at',
     ];
+
+    public function empleados()
+    {
+        return $this->hasMany('App\Models\Empleado','cargo_id','id');
+    }
 }

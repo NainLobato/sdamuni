@@ -16,4 +16,10 @@ class CatDistrito extends Model
         'created_at',
         'update_at',
     ];
+
+    public function municipios()
+    {
+        return $this->hasMany('App\Models\CatMunicipio','distrito_id','id');
+    }
+
 }

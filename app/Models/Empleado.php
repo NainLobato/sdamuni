@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Empleado extends Model
 {
+    const ALTA = 1;
+    const BAJA = 2;
+    
     protected $table = 'empleados';
 
     protected $fillable = [

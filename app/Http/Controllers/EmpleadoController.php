@@ -17,7 +17,7 @@ class EmpleadoController extends Controller
     public function index()
     {
         $empleados = Empleado::all();
-        return view('empleados.index')->with('empleados', $empleados);
+        return view('forms.empleados')->with('empleados', $empleados);
     }
 
     /**
@@ -113,7 +113,7 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
 
         if(User::where('correo', '=', $request->correo)->where('id', '!=', $id)->count() > 0){
             return 1;

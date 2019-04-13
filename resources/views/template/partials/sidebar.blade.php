@@ -31,11 +31,17 @@
 							<i class="nav-icon fa fa-user"></i>
 							<p>Registrar usuario</p>
 						</a>
-					</li>
+                    </li>
+                    <li class="nav-item">
+                            <a href="{{ route('empleados.index') }}" class="nav-link">
+                                <i class="nav-icon fa fa-user"></i>
+                                <p>Empleados</p>
+                            </a>
+                        </li>
 
-				<li class="nav-item has-treeview">
+				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
-						<i class="nav-icon fa fa-list"></i>
+						<i class="nav-icon fas fa-user-cog"></i>
 						<p>
 							Catálogos
 							<i class="right fa fa-angle-left"></i>
@@ -49,7 +55,7 @@
 							</a>
 						</li>
 					</ul>
-				</li>
+				</li>  --}}
 			</ul>
 		</nav>
 	</div>

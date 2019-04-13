@@ -19,7 +19,7 @@
 	@stack('estilos')
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 	<div class="wrapper">
 		@include('template.partials.navbar')
 
@@ -59,9 +59,9 @@
 	<script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
 	<script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>
 	{{-- <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
-	<script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
+	<script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
 	<script src="{{asset ('plugins/sweetalert/sweetalert.min.js')}}"></script>
-	
+
 	@stack('scripts')
 	<script type="text/javascript">
 		$( document ).ready(function() {

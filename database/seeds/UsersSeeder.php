@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
             'nombre' => 'ADMINISTRADOR',
             'primer_ap' => 'APELLIDO',
             'segundo_ap' => 'APELLIDO',
-            'correo' => 'admin@gmail.com',
+            'email' => 'admin@gmail.com',
             'nivel' => 1,
             'password' => bcrypt('admin'),
         ]);

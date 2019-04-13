@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('primer_ap', 100);
             $table->string('segundo_ap', 100);
             $table->integer('nivel');
-            $table->string('correo', 100)->unique();
+            $table->string('email', 100)->unique();
             $table->string('password', 100);
             $table->rememberToken();
             $table->timestamps();

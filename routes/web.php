@@ -28,8 +28,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/ayuntamientos', 'AyuntamientoController@index')->name('ayuntamiento.index');
     Route::get('/ayuntamiento/create', 'AyuntamientoController@create')->name('ayuntamiento.create');
-    Route::get('/ayuntamiento/store', 'AyuntamientoController@store')->name('ayuntamiento.store');
+    Route::post('/ayuntamiento/store', 'AyuntamientoController@store')->name('ayuntamiento.store');
     Route::get('/ayuntamiento/{id}/show', 'AyuntamientoController@show')->name('ayuntamiento.show');
     Route::get('/ayuntamiento/{id}/edit', 'AyuntamientoController@edit')->name('ayuntamiento.edit');
-    Route::get('/ayuntamiento/{id}/update', 'AyuntamientoController@update')->name('ayuntamiento.update');
+    Route::post('/ayuntamiento/{id}/update', 'AyuntamientoController@update')->name('ayuntamiento.update');
 });

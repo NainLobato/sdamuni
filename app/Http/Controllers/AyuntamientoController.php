@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ayuntamiento;
 use App\Models\CatMunicipio;
+use App\Models\CatPartido;
 use App\Models\AyuntamientoPartido;
 
 class AyuntamientoController extends Controller
@@ -13,14 +14,14 @@ class AyuntamientoController extends Controller
     public function index()
     {
         $ayuntamiento = Ayuntamiento::all();
-        return view('ayuntamiento.index')->with('ayuntamiento',$ayuntamiento);
+        return view('forms.ayuntamiento')->with('ayuntamiento',$ayuntamiento);
     }
 
     public function create()
     {
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->pluck('municipio', 'id');
         $partidos = CatPartido::orderBy('partido', 'asc')->pluck('partido', 'id');
-        return view('ayuntamiento.create')->with('municipios',$municipios)->with('partidos',$partidos);
+        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos);
     }
 
     public function store(Request $request)

@@ -30,6 +30,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <form v-on:submit.prevent="onSubmit">
                     <div class="row col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -112,7 +113,11 @@
                                 <input type="email" id="correoEmp" v-model="correoEmp" class="form-control" placeholder="Ejemplo: Lic.">
                             </div>
                         </div>
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
                     </div>
+                    </form>
                 </div>
         </div>
     </div>
@@ -121,6 +126,9 @@
 </template>
 
 <script>
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
     export default {
         data(){
             return{
@@ -146,6 +154,11 @@
         },
         created(){
 
+        },
+        methods:{
+            onSubmit(){
+                console.log('hola que hace')
+            }
         }
     }
 </script>

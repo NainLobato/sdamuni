@@ -34,10 +34,16 @@
                     </li>
                     <li class="nav-item">
                             <a href="{{ route('empleados.index') }}" class="nav-link">
-                                <i class="nav-icon fa fa-user"></i>
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>Empleados</p>
                             </a>
                         </li>
+                    <li class="nav-item">
+                        <a href="{{ route('ayuntamiento.index') }}" class="nav-link">
+                            <i class="nav-icon fa fa-user"></i>
+                            <p>Empleados</p>
+                        </a>
+                    </li
 
 				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">

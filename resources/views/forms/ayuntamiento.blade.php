@@ -10,13 +10,13 @@
 	--}}
 @endpush
 
-@section('title', 'Empleados')
+@section('title', 'Ayuntamiento')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <empleado></empleado>
+                <municipio :municipios='{{$municipios}}'></municipio>
             </div>
         </div>
     </div>

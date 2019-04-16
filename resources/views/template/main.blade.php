@@ -9,7 +9,7 @@
 	<link rel="icon" href="{{ asset('admin/dist/img/AdminLTELogo.png') }}">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/all.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/bootstrap/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/sweetalert/sweetalert.css')}}">
@@ -57,11 +57,12 @@
 	{{--@routes--}}
 	<script src="{{ asset('plugins/jquery/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('plugins/popper/popper.min.js') }}"></script>
-	<script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('plugins/font-awesome/js/all.js') }}"></script>
 	{{-- <script src="{{ asset('admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
 	<script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
 	<script src="{{asset ('plugins/sweetalert/sweetalert.min.js')}}"></script>
-
+    @routes
 	@stack('scripts')
 	<script type="text/javascript">
 		$( document ).ready(function() {

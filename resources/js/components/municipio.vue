@@ -12,6 +12,7 @@
                     </div>
                 </div>
                 <div class="card-body">
+                     <form v-on:submit.prevent="onSubmit">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
@@ -22,7 +23,10 @@
                                    <div>
                                        <div class="form-group">
                                             <label for="claveMunicipio">Clave del municipio</label>
-                                            <input type="text" id="claveMunicipio" v-model="claveMunicipio" class="form-control" placeholder="Ingrese la clave">
+                                            <v-select :options="claveMunicipio" label="nombre" placeholder="Elige un municipio" >
+                                                <slot name="no-options">¡No hay opciones disponibles!</slot>
+                                            </v-select>
+
                                         </div>
                                    </div>
                                 </div>
@@ -30,7 +34,10 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="nombreMunicipio">Municipio</label>
-                                            <p v-html="nombreMunicipio"></p>
+                                             <v-select :options="munic" label="nombre" placeholder="Elige un municipio" >
+                                                <slot name="no-options">¡No hay opciones disponibles!</slot>
+                                            </v-select>
+                                            <!-- <p v-html="nombreMunicipio"></p> -->
                                             <!-- <input type="text" id="nombreMunicipio" v-model="nombreMunicipio" class="form-control" placeholder="Ingrese la clave"> -->
                                         </div>
                                     </div>
@@ -56,6 +63,7 @@
                                         <label for="telefono2">Telefono 2</label>
                                         <input type="text" id="telefono2" v-model="telefono2" class="form-control" placeholder="Ingrese telefono">
                                     </div>
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -71,18 +79,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
                     </div>
+                    </form>
                 </div>
             </div>
 </template>
 
 <script>
+    import vSelect from 'vue-select'
+    import 'vue-select/dist/vue-select.css';
+    Vue.component('v-select', vSelect)
     export default {
         data(){
             return{
                 logo:'../../public/admin/dist/img/avatar2.png',
-                claveMunicipio:'',
-                nombreMunicipio:'ZONGOLICA',
+                claveMunicipio:[{id:1,nombre:'PERRON'}],
+                munic:[{id:1,nombre:'ZONGOLICA'}],
                 distrito:'',
                 telefono1:'',
                 telefono2:'',
@@ -91,12 +106,19 @@
             }
 
         },
-        props:{},
+        props:['municipios'],
         mounted() {
             console.log('Component mounted.')
         },
         created(){
 
+        },
+        methods:{
+            onSubmit(){
+                const urlStoreAyuntamiento = route('ayuntamiento.store')
+                console.log(urlStoreAyuntamiento)
+                console.log('hola que hace')
+            }
         }
     }
 </script>

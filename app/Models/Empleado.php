@@ -17,6 +17,7 @@ class Empleado extends Model
         'user_id',
         'ayuntamiento_id', 
         'cargo_id',
+        'cargo',
         'sexo', 
         'fism',
         'profesion', 

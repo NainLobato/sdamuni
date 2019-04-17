@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Models\CatCargo;
 use App\User;
+use DB;
 
 class EmpleadoController extends Controller
 {
@@ -17,7 +18,9 @@ class EmpleadoController extends Controller
     public function index()
     {
         $empleados = Empleado::all();
-        return view('forms.empleados')->with('empleados', $empleados);
+        $cargos = CatCargo::select('id', 'cargo')->get();//->toArray();
+        //dd($cargos);
+        return view('forms.empleados')->with('empleados', $empleados)->with('cargos', $cargos);
     }
 
     /**
@@ -41,40 +44,42 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        if(User::where('correo', '=', $request->correo)->count() > 0){
+        if(User::where('email', '=', $request->usuario['email'])->count() > 0){
             return 1;
         }
-        if($request->password != $request->password2){
+        /* if($request->password != $request->password2){
             return 2;
-        }
+        } */
+        $emp = $request->usuario;
+        //dd($emp['empleado']['cargo']['id']);
         DB::beginTransaction();
         try{
             $user = new User();
-            $user->nombre = $request->nombre;
-            $user->primer_ap = $request->primer_ap;
-            $user->segundo_ap = $request->segundo_ap;
+            $user->nombre = $emp['nombres'];
+            $user->primer_ap = $emp['primer_ap'];
+            $user->segundo_ap = $emp['segundo_ap'];
             $user->nivel = User::EMPLEADO;
-            $user->correo = $request->correo;
-            $user->password = bcrypt($request->password);
+            $user->email = $emp['email'];
+            $user->password = bcrypt($emp['password']);
             $user->save();
 
             $empleado = new Empleado();
             $empleado->user_id = $user->id;
-            $empleado->ayuntamiento_id = $request->ayuntamiento_id;
-            $empleado->cargo_id = $request->cargo_id;
-            $empleado->sexo = $request->sexo;
-            $empleado->fism = $request->fism;
-            $empleado->profesion = $request->profesion;
-            $empleado->profesion_abrev = $request->profesion_abrev;
-            $empleado->fecha_inicio_funciones = $request->fecha_inicio_funciones;
-            $empleado->telefono = $request->telefono;
+            $empleado->ayuntamiento_id = 1;//$emp['empleado']['ayuntamiento_id'];
+            $empleado->cargo_id = $emp['empleado']['cargo']['id'];
+            $empleado->sexo = $emp['empleado']['sexo'];
+            $empleado->fism = ($emp['empleado']['fism'] == "") ? 0 : 1;
+            $empleado->profesion = $emp['empleado']['profesion'];
+            $empleado->profesion_abrev = $emp['empleado']['abrev'];
+            $empleado->fecha_inicio_funciones = $emp['empleado']['inicioFun'];
+            $empleado->telefono = $emp['empleado']['telefono'];
             $empleado->status = 1;
             $empleado->save();
             DB::commit();
             return 3;
         }catch(Exception $e){
             DB::rollBack();
-            return 4;
+            return 0;
         }
     }
 

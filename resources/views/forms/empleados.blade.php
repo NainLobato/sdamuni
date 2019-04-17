@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <empleado></empleado>
+                <empleado :empleados="{{$empleados}}" :cargos="{{$cargos}}"></empleado>
             </div>
         </div>
     </div>

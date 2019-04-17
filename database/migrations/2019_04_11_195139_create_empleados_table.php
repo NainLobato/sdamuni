@@ -18,14 +18,14 @@ class CreateEmpleadosTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('ayuntamiento_id')->unsigned();
             $table->integer('cargo_id')->unsigned();
-            $table->string('cargo', 50);
+            $table->string('cargo', 50)->nullable();
             $table->integer('sexo');
             $table->boolean('fism');
             $table->string('profesion', 100);
             $table->date('fecha_inicio_funciones');
             $table->string('telefono', 10);
             $table->integer('status');
-            $table->date('fecha_fin_funciones');
+            $table->date('fecha_fin_funciones')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

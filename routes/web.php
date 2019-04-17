@@ -22,8 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
-    Route::prefix('empleados')->name('empleados.')->group(function () {
-        Route::get('index', 'EmpleadoController@index')->name('index');
+    Route::name('empleados.')->group(function () {
+        Route::get('empleados', 'EmpleadoController@index')->name('index');
+        Route::post('empleado-store', 'EmpleadoController@store')->name('store');
+        Route::post('empleado-get', 'EmpleadoController@show')->name('get');
+        Route::post('empleado-update', 'EmpleadoController@update')->name('update');
     });
 
     Route::get('/ayuntamientos', 'AyuntamientoController@index')->name('ayuntamiento.index');

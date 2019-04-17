@@ -15,7 +15,20 @@ window.$ = window.jQuery = require('jquery');
 // import Toastr from 'vue-toastr';
 
 // require('vue-toastr/src/vue-toastr.scss');
-
+import BootstrapVue from 'bootstrap-vue'
+import VueSweetalert2 from 'vue-sweetalert2';
+import es from 'vee-validate/dist/locale/es';
+import VeeValidate, { Validator } from 'vee-validate';
+Vue.use(VueSweetalert2);
+Vue.use(BootstrapVue);
+Vue.use(VeeValidate, {
+   classes: true,
+   classNames: {
+       valid: 'is-valid',
+       invalid: 'is-invalid'
+   }
+});
+Validator.localize('es', es);
 // Vue.component('vue-toastr', Toastr);
 // window.municipio = require('./components/municipio.vue')
 Vue.component("municipio", require("./components/municipio.vue").default);

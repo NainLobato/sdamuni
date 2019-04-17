@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="{{ asset('plugins/font-awesome/css/all.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/bootstrap/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('plugins/sweetalert/sweetalert.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert/sweetalert.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 	{{--
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/all.min.js') }}">
 	--}}

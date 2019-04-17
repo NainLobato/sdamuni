@@ -31,6 +31,7 @@ Vue.use(VeeValidate, {
 Validator.localize('es', es);
 // Vue.component('vue-toastr', Toastr);
 // window.municipio = require('./components/municipio.vue')
+Vue.component("dashboard", require("./components/dashboard.vue").default);
 Vue.component("municipio", require("./components/municipio.vue").default);
 // window.empleado = require('./components/empleado.vue')
 Vue.component("empleado", require("./components/empleado.vue").default);

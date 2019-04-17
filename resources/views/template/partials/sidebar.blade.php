@@ -21,29 +21,28 @@
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 				<li class="nav-item">
 					<a href="{{ route('home') }}" class="nav-link">
-						<i class="nav-icon fa fa-book"></i>
+						<i class="nav-icon fas fa-home"></i>
 						<p>Inicio</p>
 					</a>
 				</li>
-
-				<li class="nav-item">
-						<a href="{{ route('register') }}" class="nav-link">
-							<i class="nav-icon fa fa-user"></i>
-							<p>Registrar usuario</p>
-						</a>
-                    </li>
+				{{-- <li class="nav-item">
+					<a href="{{ route('register') }}" class="nav-link">
+						<i class="nav-icon fa fa-user"></i>
+						<p>Registrar usuario</p>
+					</a>
+                </li> --}}
                     <li class="nav-item">
                             <a href="{{ route('empleados.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user"></i>
                                 <p>Empleados</p>
                             </a>
                         </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="{{ route('ayuntamiento.index') }}" class="nav-link">
                             <i class="nav-icon fa fa-user"></i>
                             <p>Empleados</p>
                         </a>
-                    </li
+                    </li --}}
 
 				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">

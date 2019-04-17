@@ -12,12 +12,14 @@
 @section('title', 'Inicio')
 
 @section('content')
-    <div class="row">
+    <div id="app">
+        <dashboard></dashboard>
+        {{-- <municipio></municipio>
+        <empleado></empleado> --}}
+    </div>
+    {{-- <div class="row">
         <div class="col-md-12">
-            <div id="app">
-                <municipio></municipio>
-                <empleado></empleado>
-            </div>
+
             {{--<div class="card ">
                 <div class="card-header">
                     <h5 class="card-title text-center">Información municipal</h5>
@@ -41,9 +43,9 @@
                         </div>
                     </div>
                 </div>
-            </div>--}}
+            </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @push('scripts')

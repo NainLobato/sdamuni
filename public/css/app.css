@@ -10660,3 +10660,36 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.img-circle-2 {
+  display: table-cell;
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+}
+
+.btn-form {
+  color: #1b1b1b;
+  border: none;
+  border-radius: 4px 4px 4px 4px;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-form:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  color: #000000;
+}
+
+.image-card {
+  overflow: hidden;
+  max-height: 15rem;
+}
+
+.image-card img {
+  display: table-cell;
+}
+

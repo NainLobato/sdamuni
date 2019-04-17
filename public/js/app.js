@@ -1812,17 +1812,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/Smadav-Vector.png',
+      color: 'background-color:#4286f4;',
+      href: ''
+    };
   },
   props: [],
   mounted: function mounted() {
     console.log('Component mounted.');
+    this.href = route('empleados.index').template;
   },
   created: function created() {},
   components: {
@@ -38129,11 +38144,105 @@ var render = function() {
     _c(
       "div",
       { staticClass: "col-md-9" },
-      [_c("municipio"), _vm._v(" "), _vm._m(0)],
+      [
+        _c("municipio"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row " }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "card " }, [
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-md-5  d-flex justify-content-center align-items-center",
+                    style: _vm.color
+                  },
+                  [
+                    _c("img", {
+                      staticClass:
+                        "center img-circle-2 elevation-2 align-middle",
+                      attrs: { src: _vm.imagen }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-7" }, [
+                  _c("h2", { staticClass: "text-center" }, [
+                    _vm._v("Empleados")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: " mr-3" }, [
+                    _vm._v(
+                      "En este modulo puede realizar la creación y edición de tus empleados "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center mb-2" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: " btn rounded-pill btn-card",
+                        attrs: { href: _vm.href }
+                      },
+                      [_vm._v("Ir al modulo")]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "card " }, [
+              _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-md-5  d-flex justify-content-center align-items-center",
+                    style: _vm.color
+                  },
+                  [
+                    _c("img", {
+                      staticClass:
+                        "center img-circle-2 elevation-2 align-middle",
+                      attrs: { src: _vm.imagen }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-7" }, [
+                  _c("h2", { staticClass: "text-center" }, [
+                    _vm._v("Empleados")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: " mr-3" }, [
+                    _vm._v(
+                      "En este modulo puede realizar la creación y edición de tus empleados "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "text-center mb-2" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn rounded-pill btn-card",
+                        attrs: { href: _vm.href }
+                      },
+                      [_vm._v("Ir al modulo")]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ],
       1
     ),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
@@ -38141,58 +38250,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row " }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "card " }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-5 text-center align-middle" }, [
-              _c("img", {
-                staticClass: "center img-circle-2 elevation-2 align-middle",
-                attrs: { src: "http://bit.ly/2tMBBTd" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-7" }, [
-              _c("div", { staticClass: "product-text" }, [
-                _c("h2", [_vm._v("Empleados")]),
-                _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "En este modulo puede realizar la creación y edición de tus empleados "
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-center" }, [
-                _c("button", { attrs: { type: "button" } }, [
-                  _vm._v("Ir al modulo")
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [_vm._v(" SOY UNA CARD")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-footer" })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }),
+      _c("div", { staticClass: "card panel-derecha" }, [
+        _c("div", { staticClass: "card-header" }, [_vm._v(" Panel lateral")]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [_vm._v(" SOY OTRA CARD")]),
+        _c("div", { staticClass: "card-body" }, [_vm._v(" Contenido")]),
         _vm._v(" "),
         _c("div", { staticClass: "card-footer" })
       ])
@@ -38944,6 +39006,13 @@ var render = function() {
                                   options: _vm.claveMunicipio,
                                   label: "nombre",
                                   placeholder: "Elige un municipio"
+                                },
+                                model: {
+                                  value: _vm.claveMunicSelec,
+                                  callback: function($$v) {
+                                    _vm.claveMunicSelec = $$v
+                                  },
+                                  expression: "claveMunicSelec"
                                 }
                               },
                               [
@@ -38976,6 +39045,13 @@ var render = function() {
                                   options: _vm.munic,
                                   label: "nombre",
                                   placeholder: "Elige un municipio"
+                                },
+                                model: {
+                                  value: _vm.municSel,
+                                  callback: function($$v) {
+                                    _vm.municSel = $$v
+                                  },
+                                  expression: "municSel"
                                 }
                               },
                               [

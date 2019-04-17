@@ -6,36 +6,46 @@
                 <div class="col-md-6">
                     <div class="card ">
                         <div class="row">
-                            <div class="col-md-5 text-center align-middle">
-                                <img class="center img-circle-2 elevation-2 align-middle" src="http://bit.ly/2tMBBTd"  >
+                            <div class="col-md-5  d-flex justify-content-center align-items-center" :style="color">
+                                <img class="center img-circle-2 elevation-2 align-middle" :src="imagen"  >
                             </div>
                             <div class="col-md-7">
-                                <div class="product-text">
-                                    <h2>Empleados</h2>
+                                    <h2 class="text-center">Empleados</h2>
                                     <!-- <h5>Registro y edción</h5> -->
-                                    <p>En este modulo puede realizar la creación y edición de tus empleados </p>
-                                </div>
-                                <div class="text-center">
-                                    <button type="button">Ir al modulo</button>
+                                    <p class=" mr-3">En este modulo puede realizar la creación y edición de tus empleados </p>
+
+                                <div class="text-center mb-2">
+                                    <a :href="href" class=" btn rounded-pill btn-card">Ir al modulo</a>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card">
-                    <div class="card-header"></div>
-                    <div class="card-body"> SOY UNA CARD</div>
-                    <div class="card-footer"></div>
-                </div>
+                    <div class="card ">
+                        <div class="row">
+                            <div class="col-md-5  d-flex justify-content-center align-items-center" :style="color">
+                                <img class="center img-circle-2 elevation-2 align-middle" :src="imagen"  >
+                            </div>
+                            <div class="col-md-7">
+                                    <h2 class="text-center">Empleados</h2>
+                                    <!-- <h5>Registro y edción</h5> -->
+                                    <p class=" mr-3">En este modulo puede realizar la creación y edición de tus empleados </p>
+
+                                <div class="text-center mb-2">
+                                    <a  class="btn rounded-pill btn-card" :href="href">Ir al modulo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-header"></div>
-                <div class="card-body"> SOY OTRA CARD</div>
+            <div class="card panel-derecha">
+                <div class="card-header"> Panel lateral</div>
+                <div class="card-body"> Contenido</div>
                 <div class="card-footer"></div>
             </div>
         </div>
@@ -50,13 +60,16 @@
     export default {
         data(){
             return{
-
+                imagen:window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/Smadav-Vector.png',
+                color:'background-color:#4286f4;',
+                href:''
             }
 
         },
         props:[],
         mounted() {
             console.log('Component mounted.')
+            this.href = route('empleados.index').template
         },
         created(){
 

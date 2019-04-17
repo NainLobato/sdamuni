@@ -70,7 +70,7 @@
                                     <div>
                                     <div class="form-group">
                                         <label for="claveMunicipio">Clave del municipio</label>
-                                        <v-select :options="claveMunicipio" label="nombre" placeholder="Elige un municipio" >
+                                        <v-select :options="claveMunicipio" v-model="claveMunicSelec" label="nombre" placeholder="Elige un municipio" >
                                             <slot name="no-options">¡No hay opciones disponibles!</slot>
                                         </v-select>
                                     </div>
@@ -80,7 +80,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="nombreMunicipio">Municipio</label>
-                                                <v-select :options="munic" label="nombre" placeholder="Elige un municipio" >
+                                                <v-select :options="munic" v-model="municSel" label="nombre" placeholder="Elige un municipio" >
                                                     <slot name="no-options">¡No hay opciones disponibles!</slot>
                                                 </v-select>
                                                 <!-- <p v-html="nombreMunicipio"></p> -->

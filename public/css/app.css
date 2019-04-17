@@ -10690,6 +10690,27 @@ a.text-dark:focus {
 }
 
 .image-card img {
-  display: table-cell;
+  display: flex;
+  align-items: center;
+}
+
+.btn-card {
+  background-color: #21252917;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-card:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  color: #000000;
+  font-weight: bold;
+}
+
+.panel-derecha {
+  height: 100%;
 }
 

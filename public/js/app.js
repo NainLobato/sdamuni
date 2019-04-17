@@ -2223,9 +2223,18 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     onSubmit: function onSubmit() {
       var urlStoreAyuntamiento = route('ayuntamiento.store');
       console.log(urlStoreAyuntamiento);
-      console.log('hola que hace');
+      var ayuntamiento = {
+        municipio_id: this.municSel.id,
+        escudo: this.logo,
+        telefono1: this.telefono1,
+        telefono2: this.telefono2,
+        correo: this.correo
+      };
+      console.log(ayuntamiento);
     },
     editar: function editar() {
+      var urlCreateAyuntamiento = route('ayuntamiento.create');
+      console.log(urlCreateAyuntamiento);
       this.editando = true;
     },
     cancelarEdicion: function cancelarEdicion() {

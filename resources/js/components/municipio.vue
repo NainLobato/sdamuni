@@ -175,9 +175,18 @@
             onSubmit(){
                 const urlStoreAyuntamiento = route('ayuntamiento.store')
                 console.log(urlStoreAyuntamiento)
-                console.log('hola que hace')
+                let ayuntamiento={
+                    municipio_id : this.municSel.id,
+                    escudo: this.logo,
+                    telefono1: this.telefono1,
+                    telefono2: this.telefono2,
+                    correo: this.correo
+                }
+                console.log(ayuntamiento)
             },
             editar(){
+                const urlCreateAyuntamiento = route('ayuntamiento.create')
+                console.log(urlCreateAyuntamiento);
                 this.editando = true
             },
             cancelarEdicion(){

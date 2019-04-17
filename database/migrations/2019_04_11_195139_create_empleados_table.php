@@ -22,6 +22,7 @@ class CreateEmpleadosTable extends Migration
             $table->integer('sexo');
             $table->boolean('fism');
             $table->string('profesion', 100);
+            $table->string('profesion_abrev', 10);
             $table->date('fecha_inicio_funciones');
             $table->string('telefono', 10);
             $table->integer('status');

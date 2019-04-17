@@ -13,7 +13,7 @@ class ManualAdministrativo extends Model
 
     protected $fillable = [
         'id', 
-        'relacion_manuales_id',
+        'relacion_id',
         'denominacion', 
         'fecha_autorizacion',
         'observaciones',
@@ -21,4 +21,9 @@ class ManualAdministrativo extends Model
         'update_at',
         'delete_at',
     ];
+
+    public function relacion()
+    {
+        return $this->belongsTo('App\Models\RelacionManuales','distrito_id','id');
+    }
 }

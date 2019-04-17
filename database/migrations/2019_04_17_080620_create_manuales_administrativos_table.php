@@ -15,7 +15,7 @@ class CreateManualesAdministrativosTable extends Migration
     {
         Schema::create('manuales_administrativos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('relacion_manuales_id')->unsigned();
+            $table->integer('relacion_id')->unsigned();
             $table->string('denominacion', 100);
             $table->date('fecha_autorizacion');
             $table->string('observaciones', 300);
@@ -23,7 +23,7 @@ class CreateManualesAdministrativosTable extends Migration
             $table->timestamps();
             $table->softDeletes(); 
             
-            $table->foreign('relacion_manuales_id')->references('id')->on('relacion_manuales')->onDelete('cascade');
+            $table->foreign('relacion_id')->references('id')->on('relacion_manuales')->onDelete('cascade');
           });
     }
 

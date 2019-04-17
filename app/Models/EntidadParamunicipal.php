@@ -23,4 +23,9 @@ class EntidadParamunicipal extends Model
         'delete_at',
 
     ];
+
+    public function relacion()
+    {
+        return $this->belongsTo('App\Models\RelacionEntidades','distrito_id','id');
+    }
 }

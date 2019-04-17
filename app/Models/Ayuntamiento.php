@@ -39,5 +39,16 @@ class Ayuntamiento extends Model
         return $this->hasMany('App\Models\Empleado','ayuntamiento_id','id');
     }
 
+    public function relacionesEntidades()
+    {
+        return $this->hasMany('App\Models\RelacionEntidades','ayuntamiento_id','id');
+    }
+
+    public function relacionesManuales()
+    {
+        return $this->hasMany('App\Models\RelacionManuales','ayuntamiento_id','id');
+    }
+
+
     
 }

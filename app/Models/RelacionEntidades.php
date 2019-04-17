@@ -22,4 +22,15 @@ class RelacionEntidades extends Model
         'update_at',
         'delete_at',
     ];
+    
+    public function entidades()
+    {
+        return $this->hasMany('App\Models\EntidadParamunicipal','relacion_id','id');
+    }
+
+    public function ayuntamiento()
+    {
+        return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');
+    }
+
 }

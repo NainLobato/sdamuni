@@ -23,4 +23,14 @@ class RelacionManuales extends Model
         'delete_at',
 
     ];
+
+    public function manuales()
+    {
+        return $this->hasMany('App\Models\ManualAdministrativo','relacion_id','id');
+    }
+
+    public function ayuntamiento()
+    {
+        return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');
+    }
 }

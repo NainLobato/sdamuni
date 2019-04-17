@@ -17,7 +17,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $empleados = Empleado::all();
+        $empleados = User::with('empleado')->has('empleado')->get();
+        //dd($empleados);
         $cargos = CatCargo::select('id', 'cargo')->get();//->toArray();
         //dd($cargos);
         return view('forms.empleados')->with('empleados', $empleados)->with('cargos', $cargos);

@@ -2000,6 +2000,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73597,7 +73603,31 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
-      _vm._m(1),
+      _c("div", { staticClass: "col-md-4  " }, [
+        _c("div", { staticClass: "card" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-body" }, [
+            _vm.empleadosE.length === 0
+              ? _c("ul", [_c("li", [_vm._v("Sin registros")])])
+              : _c(
+                  "ul",
+                  _vm._l(_vm.empleadosE, function(empleado) {
+                    return _c("li", { key: empleado.id }, [
+                      _vm._v(
+                        _vm._s(empleado.nombre) +
+                          " " +
+                          _vm._s(empleado.primer_ap) +
+                          " " +
+                          _vm._s(empleado.segundo_ap)
+                      )
+                    ])
+                  }),
+                  0
+                )
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-8 card " }, [
         _vm._m(2),
@@ -74234,16 +74264,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4  " }, [
-      _c("div", { staticClass: "card" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h5", { staticClass: "card-title text-center" }, [
-            _vm._v("Empleados")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" })
-      ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title text-center" }, [_vm._v("Empleados")])
     ])
   },
   function() {

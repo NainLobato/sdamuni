@@ -13,6 +13,12 @@
                 <h5 class="card-title text-center">Empleados</h5>
                 </div>
                 <div class="card-body">
+                    <ul v-if="empleadosE.length===0">
+                        <li>Sin registros</li>
+                    </ul>
+                    <ul v-else>
+                        <li v-for="empleado in empleadosE" :key="empleado.id">{{empleado.nombre}} {{empleado.primer_ap}} {{empleado.segundo_ap}}</li>
+                    </ul>
                 </div>
             </div>
         </div>

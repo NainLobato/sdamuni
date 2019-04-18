@@ -19,9 +19,21 @@ class AyuntamientoController extends Controller
 
     public function create()
     {
-        $municipios = CatMunicipio::orderBy('municipio', 'asc')->pluck('municipio', 'id');
-        $partidos = CatPartido::orderBy('partido', 'asc')->pluck('partido', 'id');
+        $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id')->get();
+        $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
         return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos);
+    }
+
+    public function getCatalogos()
+    {
+
+        $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id')->get();
+        $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
+		$data = array(
+		'municipios' => $municipios,
+		'partidos' => $partidos
+		);
+		return response()->json($data);
     }
 
     public function store(Request $request)

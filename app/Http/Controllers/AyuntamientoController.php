@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ayuntamiento;
 use App\Models\CatMunicipio;
 use App\Models\CatPartido;
+use App\Models\CatDistrito;
 use App\Models\AyuntamientoPartido;
 
 class AyuntamientoController extends Controller
@@ -19,9 +20,11 @@ class AyuntamientoController extends Controller
 
     public function create()
     {
-        $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id')->get();
+        $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
-        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos);
+        $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
+        // dump( $municipios, $partidos);
+        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos);
     }
 
     public function getCatalogos()

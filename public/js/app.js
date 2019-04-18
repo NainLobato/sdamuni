@@ -2350,6 +2350,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2364,38 +2371,41 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   data: function data() {
     return {
       logo: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/avatar5.png',
-      claveMunicipio: [{
-        id: 1,
-        nombre: 'PERRON'
-      }],
-      claveMunicSelec: {
-        id: 1,
-        nombre: 'PERRON'
-      },
-      munic: [{
-        id: 1,
-        nombre: 'ZONGOLICA'
-      }],
-      municSel: {
-        id: 1,
-        nombre: 'ZONGOLICA'
-      },
-      distrito: 'DXI',
+      claveMunicipio: '',
+      claveMunicSelec: '',
+      munic: [],
+      municSel: '',
+      distri: [],
+      distriSel: '',
       telefono1: '22558141145',
       telefono2: '2251488787',
       correo: 'municipio@munic.com',
-      partido: 'PRD-PAN',
+      partidox: [],
+      partido: [],
       editando: false,
       claveNombre: '',
-      municNombre: ''
+      municNombre: '',
+      hola: ''
     };
   },
-  props: ['municipios', 'create'],
+  props: ['municipios', 'create', 'distritos', 'partidos'],
   mounted: function mounted() {
     if (this.editando == false) {
       console.log('es falso');
       this.claveNombre = this.claveMunicSelec.nombre;
       this.municNombre = this.municSel.nombre;
+    }
+
+    if (this.municipios) {
+      this.munic = this.municipios;
+    }
+
+    if (this.distritos) {
+      this.distri = this.distritos;
+    }
+
+    if (this.partidos) {
+      this.partidox = this.partidos;
     }
 
     console.log('Component mounted.');
@@ -2428,7 +2438,10 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     handleFilePondInit: function handleFilePondInit() {
       console.log('FilePond has initialized'); // example of instance method call on pond reference
 
-      this.$refs.pond.getFiles();
+      console.log(this.$refs.pond.getFiles());
+    },
+    selecMunic: function selecMunic(data) {
+      this.claveMunicSelec = this.municSel.clave;
     }
   }
 });
@@ -85946,7 +85959,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", {}, [
-        _vm.editando == false && _vm.create == _vm.undefinied
+        _vm.editando == false && _vm.create == 0
           ? _c("div", { staticClass: "row " }, [
               _c("div", { staticClass: "col-md-12" }, [
                 _vm._m(0),
@@ -85987,7 +86000,8 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("h6", {
-                          domProps: { innerHTML: _vm._s(_vm.distrito) }
+                          attrs: { name: "distrito" },
+                          domProps: { innerHTML: _vm._s(_vm.distriSel.nombre) }
                         })
                       ]),
                       _vm._v(" "),
@@ -86086,6 +86100,13 @@ var render = function() {
                                 init: function($event) {
                                   return _vm.handleFilePondInit()
                                 }
+                              },
+                              model: {
+                                value: _vm.hola,
+                                callback: function($$v) {
+                                  _vm.hola = $$v
+                                },
+                                expression: "hola"
                               }
                             })
                           ],
@@ -86096,45 +86117,6 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c(
-                                "label",
-                                { attrs: { for: "claveMunicipio" } },
-                                [_vm._v("Clave del municipio")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-select",
-                                {
-                                  attrs: {
-                                    options: _vm.claveMunicipio,
-                                    label: "nombre",
-                                    placeholder: "Elige un municipio"
-                                  },
-                                  model: {
-                                    value: _vm.claveMunicSelec,
-                                    callback: function($$v) {
-                                      _vm.claveMunicSelec = $$v
-                                    },
-                                    expression: "claveMunicSelec"
-                                  }
-                                },
-                                [
-                                  _vm._t("no-options", [
-                                    _vm._v("¡No hay opciones disponibles!")
-                                  ])
-                                ],
-                                2
-                              )
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "div",
                           { staticClass: "form-group" },
@@ -86151,6 +86133,11 @@ var render = function() {
                                   label: "nombre",
                                   placeholder: "Elige un municipio"
                                 },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.selecMunic()
+                                  }
+                                },
                                 model: {
                                   value: _vm.municSel,
                                   callback: function($$v) {
@@ -86165,42 +86152,60 @@ var render = function() {
                                 ])
                               ],
                               2
-                            )
+                            ),
+                            _vm._v(" "),
+                            _c("h6", { staticClass: "mt-2" }, [
+                              _c("strong", [_vm._v("Clave del municipio")]),
+                              _vm._v(" "),
+                              _c("span", {
+                                domProps: {
+                                  innerHTML: _vm._s(_vm.claveMunicSelec)
+                                }
+                              })
+                            ])
                           ],
                           1
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "distrito" } }, [
-                            _vm._v("Distrito")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "distrito" } }, [
+                              _vm._v("Distrito")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-select",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.distrito,
-                                expression: "distrito"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "distrito",
-                              placeholder: "Ingrese la clave"
-                            },
-                            domProps: { value: _vm.distrito },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                                attrs: {
+                                  options: _vm.distri,
+                                  label: "nombre",
+                                  placeholder: "Elige un distrito"
+                                },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.selecMunic()
+                                  }
+                                },
+                                model: {
+                                  value: _vm.distriSel,
+                                  callback: function($$v) {
+                                    _vm.distriSel = $$v
+                                  },
+                                  expression: "distriSel"
                                 }
-                                _vm.distrito = $event.target.value
-                              }
-                            }
-                          })
-                        ])
+                              },
+                              [
+                                _vm._t("no-options", [
+                                  _vm._v("¡No hay opciones disponibles!")
+                                ])
+                              ],
+                              2
+                            )
+                          ],
+                          1
+                        )
                       ])
                     ])
                   ]),
@@ -86310,37 +86315,41 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "partido" } }, [
-                            _vm._v("Partido político")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", { attrs: { for: "partido" } }, [
+                              _vm._v("Partido político")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "v-select",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.partido,
-                                expression: "partido"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "partido",
-                              placeholder: "Ingrese el partido"
-                            },
-                            domProps: { value: _vm.partido },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                                attrs: {
+                                  options: _vm.partidox,
+                                  label: "nombre",
+                                  multiple: true,
+                                  placeholder: "Elige un partido"
+                                },
+                                model: {
+                                  value: _vm.partido,
+                                  callback: function($$v) {
+                                    _vm.partido = $$v
+                                  },
+                                  expression: "partido"
                                 }
-                                _vm.partido = $event.target.value
-                              }
-                            }
-                          })
-                        ])
+                              },
+                              [
+                                _vm._t("no-options", [
+                                  _vm._v("¡No hay opciones disponibles!")
+                                ])
+                              ],
+                              2
+                            )
+                          ],
+                          1
+                        )
                       ])
                     ])
                   ]),

@@ -89,7 +89,6 @@
                                                 </v-select>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="nombreMunicipio">Municipio</label>
                                                 <v-select :options="munic" v-model="municSel" label="nombre" placeholder="Elige un municipio" >
@@ -98,13 +97,10 @@
                                                 <!-- <p v-html="nombreMunicipio"></p> -->
                                                 <!-- <input type="text" id="nombreMunicipio" v-model="nombreMunicipio" class="form-control" placeholder="Ingrese la clave"> -->
                                             </div>
-                                        </div>
-                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="distrito">Distrito</label>
                                                 <input type="text" id="distrito" v-model="distrito" class="form-control" placeholder="Ingrese la clave">
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -147,9 +143,42 @@
             </div>
             <div>
                 <div v-if="create==1" class="card">
-                    <table>
+                    <div class="card-header text-center">
+                        <h6><strong>Ayuntamientos registrados</strong></h6>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                <th scope="col">Municipio</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td><i class="fas fa-edit"></i></td>
+                                </tr>
+                                <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td><i class="fas fa-edit"></i></td>
+                                </tr>
+                                <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td><i class="fas fa-edit"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                    </table>
                 </div>
             </div>
     </div>

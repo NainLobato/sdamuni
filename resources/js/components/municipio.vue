@@ -67,12 +67,12 @@
                                     <div class="col-md-6">
                                         <div class="text-center">
                                             <file-pond
-                                            v-model="hola"
+                                            v-model="imgEscudo"
                                                 name="test"
                                                 ref="pond"
                                                 class-name="my-pond"
                                                 label-idle="Drop files here..."
-                                                allow-multiple="true"
+                                                allow-multiple="false"
                                                 accepted-file-types="image/jpeg, image/png"
                                                 v-bind:files="logo"
                                                 v-on:init="handleFilePondInit()"/>
@@ -222,7 +222,7 @@
                 editando:false,
                 claveNombre:'',
                 municNombre:'',
-                hola:''
+                imgEscudo:''
 
             }
 
@@ -257,7 +257,9 @@
                 console.log(urlStoreAyuntamiento)
                 let ayuntamiento={
                     municipio_id : this.municSel.id,
-                    escudo: this.logo,
+                    distrito_id: this.distriSel.id,
+                    partido_id:this.partido,
+                    escudo: this.imgEscudo,
                     telefono1: this.telefono1,
                     telefono2: this.telefono2,
                     correo: this.correo
@@ -273,10 +275,10 @@
                 this.editando=false
             },
             handleFilePondInit() {
-            console.log('FilePond has initialized');
+            // console.log('FilePond has initialized');
 
             // example of instance method call on pond reference
-            console.log(this.$refs.pond.getFiles())
+            this.$refs.pond.getFiles()
             },
             selecMunic(data){
                 this.claveMunicSelec = this.municSel.clave

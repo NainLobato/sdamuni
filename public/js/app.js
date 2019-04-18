@@ -2385,7 +2385,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       editando: false,
       claveNombre: '',
       municNombre: '',
-      hola: ''
+      imgEscudo: ''
     };
   },
   props: ['municipios', 'create', 'distritos', 'partidos'],
@@ -2420,7 +2420,9 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       console.log(urlStoreAyuntamiento);
       var ayuntamiento = {
         municipio_id: this.municSel.id,
-        escudo: this.logo,
+        distrito_id: this.distriSel.id,
+        partido_id: this.partido,
+        escudo: this.imgEscudo,
         telefono1: this.telefono1,
         telefono2: this.telefono2,
         correo: this.correo
@@ -2436,9 +2438,9 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.editando = false;
     },
     handleFilePondInit: function handleFilePondInit() {
-      console.log('FilePond has initialized'); // example of instance method call on pond reference
-
-      console.log(this.$refs.pond.getFiles());
+      // console.log('FilePond has initialized');
+      // example of instance method call on pond reference
+      this.$refs.pond.getFiles();
     },
     selecMunic: function selecMunic(data) {
       this.claveMunicSelec = this.municSel.clave;
@@ -86092,7 +86094,7 @@ var render = function() {
                                 name: "test",
                                 "class-name": "my-pond",
                                 "label-idle": "Drop files here...",
-                                "allow-multiple": "true",
+                                "allow-multiple": "false",
                                 "accepted-file-types": "image/jpeg, image/png",
                                 files: _vm.logo
                               },
@@ -86102,11 +86104,11 @@ var render = function() {
                                 }
                               },
                               model: {
-                                value: _vm.hola,
+                                value: _vm.imgEscudo,
                                 callback: function($$v) {
-                                  _vm.hola = $$v
+                                  _vm.imgEscudo = $$v
                                 },
-                                expression: "hola"
+                                expression: "imgEscudo"
                               }
                             })
                           ],

@@ -37,12 +37,12 @@
                                 <p>Empleados</p>
                             </a>
                         </li>
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('ayuntamiento.index') }}" class="nav-link">
-                            <i class="nav-icon fa fa-user"></i>
-                            <p>Empleados</p>
+                    <li class="nav-item">
+                        <a href="{{ route('ayuntamiento.create') }}" class="nav-link">
+                            <i class="nav-icon fas fa-university"></i>
+                            <p>Creación de ayuntamientos</p>
                         </a>
-                    </li --}}
+                    </li>
 
 				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">

@@ -1,6 +1,7 @@
 <template>
-     <div class="card ">
-                <div v-if="editando==true" class="card-header">
+    <div>
+        <div class="card ">
+                <div v-if="editando==true || create==1" class="card-header">
                     <h5 class="card-title text-center">Información municipal</h5>
                     <div class="card-tools">
                          <!-- <button type="button" class="btn btn-tool" data-widget="collapse">
@@ -12,7 +13,7 @@
                     </div>
                 </div>
                 <div class="">
-                    <div v-if="editando==false" class="row ">
+                    <div v-if="editando==false && create==undefinied" class="row ">
                             <div  class="col-md-12">
                                 <div class=" text-center">
                                     <h5><strong>Mi municipio</strong></h5>
@@ -59,24 +60,35 @@
                             <button class="btn-form" v-on:click="editar()"><i class="fas fa-edit"></i></button>
                         </div>
                     </div>
-                    <form v-if="editando==true" v-on:submit.prevent="onSubmit">
+                    <form v-if="editando==true || create==1" v-on:submit.prevent="onSubmit">
                         <div  class="row mx-2">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="text-center">
-                                            <img :src='logo' class="img-circle-2 elevation-2" alt="">
+                                            <file-pond
+                                                name="test"
+                                                ref="pond"
+                                                class-name="my-pond"
+                                                label-idle="Drop files here..."
+                                                allow-multiple="true"
+                                                accepted-file-types="image/jpeg, image/png"
+                                                v-bind:files="logo"
+                                                v-on:init="handleFilePondInit()"/>
+                                            <!-- <img :src='logo' class="img-circle-2 elevation-2" alt=""> -->
                                         </div>
                                     <div>
-                                    <div class="form-group">
-                                        <label for="claveMunicipio">Clave del municipio</label>
-                                        <v-select :options="claveMunicipio" v-model="claveMunicSelec" label="nombre" placeholder="Elige un municipio" >
-                                            <slot name="no-options">¡No hay opciones disponibles!</slot>
-                                        </v-select>
-                                    </div>
                                     </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div>
+                                            <div class="form-group">
+                                                <label for="claveMunicipio">Clave del municipio</label>
+                                                <v-select :options="claveMunicipio" v-model="claveMunicSelec" label="nombre" placeholder="Elige un municipio" >
+                                                    <slot name="no-options">¡No hay opciones disponibles!</slot>
+                                                </v-select>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="nombreMunicipio">Municipio</label>
@@ -126,18 +138,35 @@
                                 </div>
                             </div>
                             <div class="col-md-12 text-right mb-2">
-                                <button type="button" v-on:click="cancelarEdicion()" class="btn btn-secondary">Cancelar edición</button>
+                                <button type="button" v-if="editando==true" v-on:click="cancelarEdicion()" class="btn btn-secondary">Cancelar edición</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <div>
+                <div v-if="create==1" class="card">
+                    <table>
+
+                    </table>
+                </div>
+            </div>
+    </div>
+
 </template>
 
 <script>
     import vSelect from 'vue-select'
     import 'vue-select/dist/vue-select.css';
+    import vueFilePond from 'vue-filepond';
+    import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js';
+    import FilePondPluginImagePreview from 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js';
+
+    // Import styles
+    import 'filepond/dist/filepond.min.css';
+    import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+    const FilePond = vueFilePond( FilePondPluginFileValidateType, FilePondPluginImagePreview );
     Vue.component('v-select', vSelect)
     export default {
         data(){
@@ -159,17 +188,21 @@
             }
 
         },
-        props:['municipios'],
+        props:['municipios','create'],
         mounted() {
             if(this.editando==false){
                 console.log('es falso')
                 this.claveNombre= this.claveMunicSelec.nombre
                 this.municNombre= this.municSel.nombre
             }
+
             console.log('Component mounted.')
         },
         created(){
 
+        },
+        components:{
+            FilePond
         },
         methods:{
             onSubmit(){
@@ -191,7 +224,13 @@
             },
             cancelarEdicion(){
                 this.editando=false
-            }
+            },
+            handleFilePondInit() {
+            console.log('FilePond has initialized');
+
+            // example of instance method call on pond reference
+            this.$refs.pond.getFiles();
+        }
         }
     }
 </script>

@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <municipio :municipios='{{$municipios}}'></municipio>
+                <municipio :create="'1'"></municipio>
             </div>
         </div>
     </div>

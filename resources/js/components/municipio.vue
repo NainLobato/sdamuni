@@ -65,6 +65,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <!-- <input type="file" v-on:change="onFileChange" name="" id=""> -->
                                         <div class="text-center">
                                             <file-pond
                                             v-model="imgEscudo"
@@ -164,7 +165,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="(ayunta, index) in ayuntamiento" :key="index">
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -227,7 +228,7 @@
             }
 
         },
-        props:['municipios','create','distritos','partidos'],
+        props:['municipios','create','distritos','partidos','ayuntamientos'],
         mounted() {
             if(this.editando==false){
                 console.log('es falso')
@@ -253,7 +254,7 @@
         },
         methods:{
             onSubmit(){
-                const urlStoreAyuntamiento = route('ayuntamiento.store')
+                const urlStoreAyuntamiento = route('ayuntamiento.store').template
                 console.log(urlStoreAyuntamiento)
                 let ayuntamiento={
                     municipio_id : this.municSel.id,
@@ -264,7 +265,13 @@
                     telefono2: this.telefono2,
                     correo: this.correo
                 }
-                console.log(ayuntamiento)
+                axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
+                   console.log(reponse.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                // console.log(ayuntamiento)
             },
             editar(){
                 const urlCreateAyuntamiento = route('ayuntamiento.create')
@@ -278,12 +285,30 @@
             // console.log('FilePond has initialized');
 
             // example of instance method call on pond reference
-            this.$refs.pond.getFiles()
+            this.imgEscudo =this.$refs.pond.getFiles()
+
             },
             selecMunic(data){
                 this.claveMunicSelec = this.municSel.clave
 
-            }
+            },
+            // onFileChange(e) {
+            // var files = e.target.files || e.dataTransfer.files;
+            // if (!files.length)
+            //     return;
+            //     this.imgEscudo= files[0]
+            // this.createImage(files[0]);
+            // },
+            // createImage(file) {
+            // var image = new Image();
+            // var reader = new FileReader();
+            // var vm = this;
+
+            // reader.onload = (e) => {
+            //     vm.image = e.target.result;
+            // };
+            // reader.readAsDataURL(file);
+            // },
         }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="row ">
         <div class="col-md-9">
-            <municipio></municipio>
+            <municipio :create="0"></municipio>
             <div class="row ">
                 <div class="col-md-6">
                     <div class="card ">

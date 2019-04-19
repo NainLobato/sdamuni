@@ -8,6 +8,7 @@ use App\Models\CatMunicipio;
 use App\Models\CatPartido;
 use App\Models\CatDistrito;
 use App\Models\AyuntamientoPartido;
+use DB;
 
 class AyuntamientoController extends Controller
 {
@@ -20,11 +21,12 @@ class AyuntamientoController extends Controller
 
     public function create()
     {
+        $ayuntamiento = Ayuntamiento::all();
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
         $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
         // dump( $municipios, $partidos);
-        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos);
+        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos)->with('ayuntamiento',$ayuntamiento);
     }
 
     public function getCatalogos()
@@ -41,20 +43,21 @@ class AyuntamientoController extends Controller
 
     public function store(Request $request)
     {
+
         DB::beginTransaction();
         try{
             $ayuntamiento = new Ayuntamiento();
-            $ayuntamiento->municipio_id = $request->municipio_id;
-            $ayuntamiento->escudo = $request->escudo;
-            $ayuntamiento->telefono1 = $request->telefono1;
-            $ayuntamiento->telefono2 = $request->telefono2;
-            $ayuntamiento->correo = $request->correo;
+            $ayuntamiento->municipio_id = $request->ayuntamiento['municipio_id'];
+            // $ayuntamiento->escudo = $request->escudo;
+            $ayuntamiento->telefono1 = $request->ayuntamiento['telefono1'];
+            $ayuntamiento->telefono2 = $request->ayuntamiento['telefono2'];
+            $ayuntamiento->correo = $request->ayuntamiento['correo'];
             $ayuntamiento->save();
 
-            foreach ($request->partidos_id as $partidos) {
+            foreach ($request->ayuntamiento['partido_id'] as $partidos) {
                 $ayuntamientoPartido = new AyuntamientoPartido();
                 $ayuntamientoPartido->ayuntamiento_id = $ayuntamiento->id;
-                $ayuntamientoPartido->partido_id = $request->partido_id;
+                $ayuntamientoPartido->partido_id =  $partidos['id'];
                 $ayuntamientoPartido->save();
             }
             DB::commit();

@@ -2357,6 +2357,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2388,7 +2389,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       imgEscudo: ''
     };
   },
-  props: ['municipios', 'create', 'distritos', 'partidos'],
+  props: ['municipios', 'create', 'distritos', 'partidos', 'ayuntamientos'],
   mounted: function mounted() {
     if (this.editando == false) {
       console.log('es falso');
@@ -2416,7 +2417,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   },
   methods: {
     onSubmit: function onSubmit() {
-      var urlStoreAyuntamiento = route('ayuntamiento.store');
+      var urlStoreAyuntamiento = route('ayuntamiento.store').template;
       console.log(urlStoreAyuntamiento);
       var ayuntamiento = {
         municipio_id: this.municSel.id,
@@ -2427,7 +2428,13 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
         telefono2: this.telefono2,
         correo: this.correo
       };
-      console.log(ayuntamiento);
+      axios.post(urlStoreAyuntamiento, {
+        ayuntamiento: ayuntamiento
+      }).then(function (response) {
+        console.log(reponse.data);
+      })["catch"](function (error) {
+        console.log(error);
+      }); // console.log(ayuntamiento)
     },
     editar: function editar() {
       var urlCreateAyuntamiento = route('ayuntamiento.create');
@@ -2440,7 +2447,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     handleFilePondInit: function handleFilePondInit() {
       // console.log('FilePond has initialized');
       // example of instance method call on pond reference
-      this.$refs.pond.getFiles();
+      this.imgEscudo = this.$refs.pond.getFiles();
     },
     selecMunic: function selecMunic(data) {
       this.claveMunicSelec = this.municSel.clave;
@@ -85098,7 +85105,7 @@ var render = function() {
       "div",
       { staticClass: "col-md-9" },
       [
-        _c("municipio"),
+        _c("municipio", { attrs: { create: 0 } }),
         _vm._v(" "),
         _c("div", { staticClass: "row " }, [
           _c("div", { staticClass: "col-md-6" }, [
@@ -86394,7 +86401,33 @@ var render = function() {
         ? _c("div", { staticClass: "card" }, [
             _vm._m(1),
             _vm._v(" "),
-            _vm._m(2)
+            _c("div", { staticClass: "card-body" }, [
+              _c("table", { staticClass: "table" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.ayuntamiento, function(ayunta, index) {
+                      return _c("tr", { key: index }, [
+                        _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Mark")]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v("Otto")]),
+                        _vm._v(" "),
+                        _vm._m(3, true)
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ],
+                  2
+                )
+              ])
+            ])
           ])
         : _vm._e()
     ])
@@ -86421,52 +86454,50 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("table", { staticClass: "table" }, [
-        _c("thead", { staticClass: "thead-dark" }, [
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Correo")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Telefono")]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
-          ])
-        ]),
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Municipio")]),
         _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Mark")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Otto")]),
-            _vm._v(" "),
-            _c("td", [_c("i", { staticClass: "fas fa-edit" })])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v("2")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Jacob")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Thornton")]),
-            _vm._v(" "),
-            _c("td", [_c("i", { staticClass: "fas fa-edit" })])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", { attrs: { scope: "row" } }, [_vm._v("3")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Larry")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("the Bird")]),
-            _vm._v(" "),
-            _c("td", [_c("i", { staticClass: "fas fa-edit" })])
-          ])
-        ])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Correo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telefono")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [_c("i", { staticClass: "fas fa-edit" })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { scope: "row" } }, [_vm._v("2")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Jacob")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Thornton")]),
+      _vm._v(" "),
+      _c("td", [_c("i", { staticClass: "fas fa-edit" })])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", { attrs: { scope: "row" } }, [_vm._v("3")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Larry")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("the Bird")]),
+      _vm._v(" "),
+      _c("td", [_c("i", { staticClass: "fas fa-edit" })])
     ])
   }
 ]

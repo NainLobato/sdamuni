@@ -13,7 +13,7 @@
 
 @section('content')
     <div id="app">
-        <dashboard></dashboard>
+        <dashboard :create="'0'"></dashboard>
         {{-- <municipio></municipio>
         <empleado></empleado> --}}
     </div>

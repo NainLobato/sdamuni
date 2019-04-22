@@ -46,9 +46,11 @@ class AyuntamientoController extends Controller
 
         DB::beginTransaction();
         try{
+            // dd($request->all());
             $ayuntamiento = new Ayuntamiento();
             $ayuntamiento->municipio_id = $request->ayuntamiento['municipio_id'];
-            // $ayuntamiento->escudo = $request->escudo;
+            // $ayuntamiento->escudo = $request->ayuntamiento['escudo'];
+            $ayuntamiento->escudo = '';
             $ayuntamiento->telefono1 = $request->ayuntamiento['telefono1'];
             $ayuntamiento->telefono2 = $request->ayuntamiento['telefono2'];
             $ayuntamiento->correo = $request->ayuntamiento['correo'];

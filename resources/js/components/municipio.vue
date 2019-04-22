@@ -166,21 +166,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(ayunta, index) in ayuntamiento" :key="index">
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td><i class="fas fa-edit"></i></td>
-                                </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td><i class="fas fa-edit"></i></td>
-                                </tr>
-                                <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
+                                <td>{{ayunta.id}}</td>
+                                <td>{{ayunta.correo}}</td>
+                                <td>{{ayunta.telefono1}}</td>
                                 <td><i class="fas fa-edit"></i></td>
                                 </tr>
                             </tbody>

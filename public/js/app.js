@@ -2346,18 +2346,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -86407,24 +86395,18 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  [
-                    _vm._l(_vm.ayuntamiento, function(ayunta, index) {
-                      return _c("tr", { key: index }, [
-                        _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Mark")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v("Otto")]),
-                        _vm._v(" "),
-                        _vm._m(3, true)
-                      ])
-                    }),
-                    _vm._v(" "),
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _vm._m(5)
-                  ],
-                  2
+                  _vm._l(_vm.ayuntamiento, function(ayunta, index) {
+                    return _c("tr", { key: index }, [
+                      _c("td", [_vm._v(_vm._s(ayunta.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(ayunta.correo))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(ayunta.telefono1))]),
+                      _vm._v(" "),
+                      _vm._m(3, true)
+                    ])
+                  }),
+                  0
                 )
               ])
             ])
@@ -86471,34 +86453,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [_c("i", { staticClass: "fas fa-edit" })])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", { attrs: { scope: "row" } }, [_vm._v("2")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("Jacob")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("Thornton")]),
-      _vm._v(" "),
-      _c("td", [_c("i", { staticClass: "fas fa-edit" })])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", { attrs: { scope: "row" } }, [_vm._v("3")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("Larry")]),
-      _vm._v(" "),
-      _c("td", [_vm._v("the Bird")]),
-      _vm._v(" "),
-      _c("td", [_c("i", { staticClass: "fas fa-edit" })])
-    ])
   }
 ]
 render._withStripped = true

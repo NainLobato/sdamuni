@@ -21,11 +21,11 @@ class AyuntamientoController extends Controller
 
     public function create()
     {
-        $ayuntamiento = Ayuntamiento::all();
+        $ayuntamiento = Ayuntamiento::with('municipio','partidos')->has('municipio')->get();
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
         $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
-        // dump( $municipios, $partidos);
+        dd( $ayuntamiento);
         return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos)->with('ayuntamiento',$ayuntamiento);
     }
 

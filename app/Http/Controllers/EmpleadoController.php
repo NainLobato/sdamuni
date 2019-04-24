@@ -25,19 +25,6 @@ class EmpleadoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $cargos = CatCargo::select('id', 'nombre')->pluck('nombre', 'id');
-        return view('empleados.create')
-            ->with('cargos', $cargos);
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -84,30 +71,10 @@ class EmpleadoController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $empleado = Empleado::findOrFail($id)->get();
-        return view('empleados.show')
-            ->with('empleado', $empleado);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $empleado = Empleado::findOrFail($id)->get();
-        return view('empleados.edit')
-            ->with('empleado', $empleado);
+    public function get(Request $request){
+        $empleado = User::with('empleado.cargo')->has('empleado')->where('id', $request->idEmpleado)->first();
+        return response()->json($empleado, 200);
+        dd($empleado);
     }
 
     /**
@@ -119,8 +86,6 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-
         if(User::where('correo', '=', $request->correo)->where('id', '!=', $id)->count() > 0){
             return 1;
         }

@@ -312,24 +312,7 @@
                      }
                      else{}
                  })
-                const urlStoreAyuntamiento = route('ayuntamiento.store').template
-                console.log(urlStoreAyuntamiento)
-                let ayuntamiento={
-                    municipio_id : this.municSel.id,
-                    distrito_id: this.distriSel.id,
-                    partido_id:this.partido,
-                    escudo: this.imgEscudo,
-                    telefono1: this.telefono1,
-                    telefono2: this.telefono2,
-                    correo: this.correo
-                }
-                axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
-                   console.log(reponse.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-                console.log(ayuntamiento)
+
             },
             editar(){
                 const urlCreateAyuntamiento = route('ayuntamiento.create')

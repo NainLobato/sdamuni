@@ -24,6 +24,6 @@ class ManualAdministrativo extends Model
 
     public function relacion()
     {
-        return $this->belongsTo('App\Models\RelacionManuales','distrito_id','id');
+        return $this->belongsTo('App\Models\Relacion','relacion_id','id');
     }
 }

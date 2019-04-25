@@ -144,6 +144,12 @@
                                 <div class="invalid-feedback" v-if="errors.has('password')">{{ errors.first('password') }}</div>
                             </div>
                         </div>
+                        <div class="col-md-4 text-center" v-if="formStatus==2">
+                             <label class="form-check-label" for="baja"> <strong>Dar de baja</strong></label>
+                            <div class="form-check ">
+                                <input class="form-check-input" v-model="usuario.empleado.status" type="checkbox" id="baja" :disabled="formStatus==3">
+                            </div>
+                        </div>
                         <div class="col-md-12 text-right">
                             <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
                             <button class="btn btn-danger" @click="cancelar">Cancelar</button>
@@ -180,12 +186,13 @@ Vue.component('v-select', vSelect)
                     password: '',
                     empleado: {
                         cargo:'',
-                        sexo:1,
+                        sexo:"1",
                         fism: '',
                         profesion:'',
                         abrev:'',
                         inicioFun:'',
                         telefono:'',
+                        status:false
                         //fuenteAct:'',
                     }
                 },
@@ -203,7 +210,7 @@ Vue.component('v-select', vSelect)
         },
         methods:{
             onSubmit(){
-                console.log('hola que hace')
+                //console.log('hola que hace')
             },
             aMayusculas(){
                 this.usuario.nombres = this.usuario.nombres.toUpperCase()
@@ -278,7 +285,7 @@ Vue.component('v-select', vSelect)
                 this.usuario.password = ''
 
                 this.usuario.empleado.cargo = ''
-                this.usuario.empleado.sexo = ''
+                this.usuario.empleado.sexo = "1"
                 this.usuario.empleado.fism = ''
                 this.usuario.empleado.profesion = ''
                 this.usuario.empleado.abrev = ''
@@ -309,12 +316,13 @@ Vue.component('v-select', vSelect)
                 this.usuario.email = usuario.email,
                 this.usuario.password = (usuario.password) ? usuario.password : '',
                 this.usuario.empleado.cargo = {id: usuario.empleado.cargo_id, cargo: usuario.empleado.cargo.cargo},
-                this.usuario.empleado.sex = usuario.empleado.sexo,
+                this.usuario.empleado.sexo = usuario.empleado.sexo,
                 this.usuario.empleado.fism = usuario.empleado.fism,
                 this.usuario.empleado.profesion = usuario.empleado.profesion,
                 this.usuario.empleado.abrev = usuario.empleado.profesion_abrev,
                 this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones,
-                this.usuario.empleado.telefono = usuario.empleado.telefono
+                this.usuario.empleado.telefono = usuario.empleado.telefono,
+                this.usuario.empleado.status = (usuario.empleado.status == 1) ? 0 : 1
             },
             editarEmpleado(empleado){
                 this.indexEmpleado = this.empleadosE.indexOf(empleado)
@@ -328,7 +336,7 @@ Vue.component('v-select', vSelect)
                 })
             },
             updateEmpleado(){
-                console.log(this.usuario.id)
+                //console.log(this.usuario.id)
                 this.$validator.validate().then(valid => {
                     if (valid) {
                         var url = './empleado-update';

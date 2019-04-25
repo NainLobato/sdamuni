@@ -85,6 +85,7 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request)
     {
+        //dd($request->all());
         $id = intval($request->usuario['id']);
         if(User::where('email', '=', $request->usuario['email'])->where('id', '!=', $id)->count() > 0){
             return 1;
@@ -111,7 +112,7 @@ class EmpleadoController extends Controller
             $empleado->profesion_abrev = $emp['empleado']['abrev'];
             $empleado->fecha_inicio_funciones = $emp['empleado']['inicioFun'];
             $empleado->telefono = $emp['empleado']['telefono'];
-            $empleado->status = 1;
+            $empleado->status = ($emp['empleado']['status']) ? 2 : 1;
             $empleado->save();
             DB::commit();
             return 3;

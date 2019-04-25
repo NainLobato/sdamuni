@@ -2026,6 +2026,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2045,12 +2051,13 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
         password: '',
         empleado: {
           cargo: '',
-          sexo: 1,
+          sexo: "1",
           fism: '',
           profesion: '',
           abrev: '',
           inicioFun: '',
-          telefono: '' //fuenteAct:'',
+          telefono: '',
+          status: false //fuenteAct:'',
 
         }
       },
@@ -2065,8 +2072,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   },
   created: function created() {},
   methods: {
-    onSubmit: function onSubmit() {
-      console.log('hola que hace');
+    onSubmit: function onSubmit() {//console.log('hola que hace')
     },
     aMayusculas: function aMayusculas() {
       this.usuario.nombres = this.usuario.nombres.toUpperCase();
@@ -2146,7 +2152,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.usuario.email = '';
       this.usuario.password = '';
       this.usuario.empleado.cargo = '';
-      this.usuario.empleado.sexo = '';
+      this.usuario.empleado.sexo = "1";
       this.usuario.empleado.fism = '';
       this.usuario.empleado.profesion = '';
       this.usuario.empleado.abrev = '';
@@ -2178,7 +2184,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.usuario.id = usuario.id, this.usuario.nombres = usuario.nombres, this.usuario.primer_ap = usuario.primer_ap, this.usuario.segundo_ap = usuario.segundo_ap, this.usuario.email = usuario.email, this.usuario.password = usuario.password ? usuario.password : '', this.usuario.empleado.cargo = {
         id: usuario.empleado.cargo_id,
         cargo: usuario.empleado.cargo.cargo
-      }, this.usuario.empleado.sex = usuario.empleado.sexo, this.usuario.empleado.fism = usuario.empleado.fism, this.usuario.empleado.profesion = usuario.empleado.profesion, this.usuario.empleado.abrev = usuario.empleado.profesion_abrev, this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones, this.usuario.empleado.telefono = usuario.empleado.telefono;
+      }, this.usuario.empleado.sexo = usuario.empleado.sexo, this.usuario.empleado.fism = usuario.empleado.fism, this.usuario.empleado.profesion = usuario.empleado.profesion, this.usuario.empleado.abrev = usuario.empleado.profesion_abrev, this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones, this.usuario.empleado.telefono = usuario.empleado.telefono, this.usuario.empleado.status = usuario.empleado.status == 1 ? 0 : 1;
     },
     editarEmpleado: function editarEmpleado(empleado) {
       var _this3 = this;
@@ -2199,7 +2205,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     updateEmpleado: function updateEmpleado() {
       var _this4 = this;
 
-      console.log(this.usuario.id);
+      //console.log(this.usuario.id)
       this.$validator.validate().then(function (valid) {
         if (valid) {
           var url = './empleado-update';
@@ -86206,6 +86212,66 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
+                _vm.formStatus == 2
+                  ? _c("div", { staticClass: "col-md-4 text-center" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check " }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.usuario.empleado.status,
+                              expression: "usuario.empleado.status"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "checkbox",
+                            id: "baja",
+                            disabled: _vm.formStatus == 3
+                          },
+                          domProps: {
+                            checked: Array.isArray(_vm.usuario.empleado.status)
+                              ? _vm._i(_vm.usuario.empleado.status, null) > -1
+                              : _vm.usuario.empleado.status
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.usuario.empleado.status,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.usuario.empleado,
+                                      "status",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.usuario.empleado,
+                                      "status",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.usuario.empleado, "status", $$c)
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "col-md-12 text-right" }, [
                   _c(
                     "button",
@@ -86283,6 +86349,16 @@ var staticRenderFns = [
       "label",
       { staticClass: "form-check-label", attrs: { for: "fism" } },
       [_c("strong", [_vm._v("Enlace FISM")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-check-label", attrs: { for: "baja" } },
+      [_c("strong", [_vm._v("Dar de baja")])]
     )
   }
 ]

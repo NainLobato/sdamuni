@@ -2575,27 +2575,46 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     FilePond: FilePond
   },
   methods: {
-    onSubmit: function onSubmit() {
+    onFileChange: function onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.imgEscudo = files[0];
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var imgEscudo = new Image();
+      var reader = new FileReader();
+      var vm = this;
+
+      reader.onload = function (e) {
+        vm.imgEscudo = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    },
+    onSubmit: function onSubmit(file) {
       this.$validator.validate().then(function (valid) {
         if (valid) {} else {}
-      }); // const urlStoreAyuntamiento = route('ayuntamiento.store').template
-      // console.log(urlStoreAyuntamiento)
-      // let ayuntamiento={
-      //     municipio_id : this.municSel.id,
-      //     distrito_id: this.distriSel.id,
-      //     partido_id:this.partido,
-      //     escudo: this.imgEscudo,
-      //     telefono1: this.telefono1,
-      //     telefono2: this.telefono2,
-      //     correo: this.correo
-      // }
-      // axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
-      //    console.log(reponse.data)
-      // })
-      // .catch(error => {
-      //     console.log(error)
-      // })
-      // console.log(ayuntamiento)
+      });
+      var urlStoreAyuntamiento = route('ayuntamiento.store').template;
+      console.log(urlStoreAyuntamiento);
+      var ayuntamiento = {
+        municipio_id: this.municSel.id,
+        distrito_id: this.distriSel.id,
+        partido_id: this.partido,
+        escudo: this.imgEscudo,
+        telefono1: this.telefono1,
+        telefono2: this.telefono2,
+        correo: this.correo
+      };
+      axios.post(urlStoreAyuntamiento, {
+        ayuntamiento: ayuntamiento
+      }).then(function (response) {
+        console.log(reponse.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+      console.log(ayuntamiento);
     },
     editar: function editar() {
       var urlCreateAyuntamiento = route('ayuntamiento.create');
@@ -86516,36 +86535,10 @@ var render = function() {
                   _c("div", { staticClass: "col-md-6" }, [
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-6" }, [
-                        _c(
-                          "div",
-                          { staticClass: "text-center" },
-                          [
-                            _c("file-pond", {
-                              ref: "pond",
-                              attrs: {
-                                name: "test",
-                                "class-name": "my-pond",
-                                "label-idle": "Drop files here...",
-                                "allow-multiple": "false",
-                                "accepted-file-types": "image/jpeg, image/png",
-                                files: _vm.logo
-                              },
-                              on: {
-                                init: function($event) {
-                                  return _vm.handleFilePondInit()
-                                }
-                              },
-                              model: {
-                                value: _vm.imgEscudo,
-                                callback: function($$v) {
-                                  _vm.imgEscudo = $$v
-                                },
-                                expression: "imgEscudo"
-                              }
-                            })
-                          ],
-                          1
-                        ),
+                        _c("input", {
+                          attrs: { type: "file", name: "", id: "" },
+                          on: { change: _vm.onFileChange }
+                        }),
                         _vm._v(" "),
                         _c("div")
                       ]),

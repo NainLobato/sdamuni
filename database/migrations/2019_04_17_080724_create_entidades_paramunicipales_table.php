@@ -24,7 +24,7 @@ class CreateEntidadesParamunicipalesTable extends Migration
             $table->timestamps();
             $table->softDeletes(); 
             
-            $table->foreign('relacion_id')->references('id')->on('ayuntamientos')->onDelete('cascade');
+            $table->foreign('relacion_id')->references('id')->on('relaciones')->onDelete('cascade');
             $table->foreign('empleado_titular_id')->references('id')->on('empleados')->onDelete('cascade');
        
         });

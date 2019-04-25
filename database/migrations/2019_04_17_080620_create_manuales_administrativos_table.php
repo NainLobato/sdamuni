@@ -23,7 +23,7 @@ class CreateManualesAdministrativosTable extends Migration
             $table->timestamps();
             $table->softDeletes(); 
             
-            $table->foreign('relacion_id')->references('id')->on('relacion_manuales')->onDelete('cascade');
+            $table->foreign('relacion_id')->references('id')->on('relaciones')->onDelete('cascade');
           });
     }
 

@@ -19,9 +19,9 @@
                     <!-- <ul v-else>
                         <li v-for="empleado in empleadosE" :key="empleado.id">{{empleado.nombre}} {{empleado.primer_ap}} {{empleado.segundo_ap}}</li>
                     </ul> -->
-                    <b-dropdown v-for="empleado in empleadosE" :key="empleado.id" dropright :text="empleado.nombre+' '+empleado.primer_ap+' '+empleado.segundo_ap" variant="primary" class="m-2">
-                        <b-dropdown-item @click="verEmpleado(empleado.id)" >Ver</b-dropdown-item>
-                        <b-dropdown-item href="#">Editar</b-dropdown-item>
+                    <b-dropdown v-for="empleado in empleadosE" :key="empleado.id" dropright :text="empleado.nombres+' '+empleado.primer_ap+' '+empleado.segundo_ap" variant="primary" class="m-2">
+                        <b-dropdown-item @click="verEmpleado(empleado.id)">Ver</b-dropdown-item>
+                        <b-dropdown-item @click="editarEmpleado(empleado)">Editar</b-dropdown-item>
                         <b-dropdown-item href="#">Eliminar</b-dropdown-item>
                     </b-dropdown>
                     </br>
@@ -47,7 +47,7 @@
                     <div class="row col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="nombre">Nombres</label>
+                                <label for="nombres">Nombres</label>
                                 <input type="text" id="nombres" name="nombres" v-model="usuario.nombres" class="form-control" placeholder="Ingrese el nombre" data-vv-as="nombre(s)" v-validate="'required|alpha_spaces'" :readonly="formStatus==3">
                                 <div class="invalid-feedback" v-if="errors.has('nombres')">{{ errors.first('nombres') }}</div>
                             </div>
@@ -148,7 +148,7 @@
                             <!-- <button type="submit" class="btn btn-primary">Guardar</button> -->
                             <button class="btn btn-danger" @click="cancelar">Cancelar</button>
                             <button class="btn btn-success" v-if="formStatus==1" @click="store">Guardar</button>
-                            <button class="btn btn-success" v-else-if="formStatus==2" @click="update">Actualizar</button>
+                            <button class="btn btn-success" v-else-if="formStatus==2" @click="updateEmpleado">Actualizar</button>
                         </div>
                     </div>
                     </form>
@@ -172,6 +172,7 @@ Vue.component('v-select', vSelect)
             return{
                 formStatus: 1,
                 usuario: {
+                    id: '',
                     nombres:'',
                     primer_ap:'',
                     segundo_ap:'',
@@ -239,7 +240,8 @@ Vue.component('v-select', vSelect)
                                 })
                             }else{
                                 var emp = {
-                                    nombre: this.usuario.nombres+' '+this.usuario.primer_ap+' '+this.usuario.segundo_ap
+                                    id: response,
+                                    nombres: this.usuario.nombres+' '+this.usuario.primer_ap+' '+this.usuario.segundo_ap
                                 }
                                 this.empleadosE.push(emp)
                                 this.limpiar()
@@ -300,6 +302,7 @@ Vue.component('v-select', vSelect)
                 })
             },
             asignarCampos(usuario){
+                this.usuario.id = usuario.id,
                 this.usuario.nombres = usuario.nombres,
                 this.usuario.primer_ap = usuario.primer_ap,
                 this.usuario.segundo_ap = usuario.segundo_ap,
@@ -312,6 +315,65 @@ Vue.component('v-select', vSelect)
                 this.usuario.empleado.abrev = usuario.empleado.profesion_abrev,
                 this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones,
                 this.usuario.empleado.telefono = usuario.empleado.telefono
+            },
+            editarEmpleado(empleado){
+                this.indexEmpleado = this.empleadosE.indexOf(empleado)
+                var url = './empleado-get'
+                axios.post(url, {idEmpleado: empleado.id}).then(response => {
+                    //console.log(this.clientesE[id])
+                    this.asignarCampos(response.data)
+                    this.formStatus = 2
+                }).catch(function (error) {
+                    console.log(error)
+                })
+            },
+            updateEmpleado(){
+                console.log(this.usuario.id)
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        var url = './empleado-update';
+                        this.aMayusculas()
+                        axios.post(url, {id: this.usuario.id, usuario: this.usuario})
+                        .then(response => {
+                            if(response.data == 0){
+                                Vue.swal({
+                                    title: 'Error',
+                                    text: "Hubo un error, inténtelo de nuevo.",
+                                    type: 'error',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }else{
+                                //console.log(this.clientesE[this.indexCliente])
+                                this.empleadosE[this.indexEmpleado].nombres = this.usuario.nombres
+                                this.empleadosE[this.indexEmpleado].primer_ap = this.usuario.primer_ap
+                                this.empleadosE[this.indexEmpleado].segundo_ap = this.usuario.segundo_ap
+                                this.limpiar()
+                                Vue.swal({
+                                    title: 'Hecho',
+                                    text: "Empleado actualizado correctamente.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error)
+                        })
+                    }else{
+                        Vue.swal({
+                            title: 'Atención',
+                            text: "Por favor completa los campos correctamente.",
+                            type: 'warning',
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                        })
+                    }
+                })
             },
         }
     }

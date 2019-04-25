@@ -2037,6 +2037,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     return {
       formStatus: 1,
       usuario: {
+        id: '',
         nombres: '',
         primer_ap: '',
         segundo_ap: '',
@@ -2106,7 +2107,8 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
               });
             } else {
               var emp = {
-                nombre: _this.usuario.nombres + ' ' + _this.usuario.primer_ap + ' ' + _this.usuario.segundo_ap
+                id: response,
+                nombres: _this.usuario.nombres + ' ' + _this.usuario.primer_ap + ' ' + _this.usuario.segundo_ap
               };
 
               _this.empleadosE.push(emp);
@@ -2173,10 +2175,81 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       });
     },
     asignarCampos: function asignarCampos(usuario) {
-      this.usuario.nombres = usuario.nombres, this.usuario.primer_ap = usuario.primer_ap, this.usuario.segundo_ap = usuario.segundo_ap, this.usuario.email = usuario.email, this.usuario.password = usuario.password ? usuario.password : '', this.usuario.empleado.cargo = {
+      this.usuario.id = usuario.id, this.usuario.nombres = usuario.nombres, this.usuario.primer_ap = usuario.primer_ap, this.usuario.segundo_ap = usuario.segundo_ap, this.usuario.email = usuario.email, this.usuario.password = usuario.password ? usuario.password : '', this.usuario.empleado.cargo = {
         id: usuario.empleado.cargo_id,
         cargo: usuario.empleado.cargo.cargo
       }, this.usuario.empleado.sex = usuario.empleado.sexo, this.usuario.empleado.fism = usuario.empleado.fism, this.usuario.empleado.profesion = usuario.empleado.profesion, this.usuario.empleado.abrev = usuario.empleado.profesion_abrev, this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones, this.usuario.empleado.telefono = usuario.empleado.telefono;
+    },
+    editarEmpleado: function editarEmpleado(empleado) {
+      var _this3 = this;
+
+      this.indexEmpleado = this.empleadosE.indexOf(empleado);
+      var url = './empleado-get';
+      axios.post(url, {
+        idEmpleado: empleado.id
+      }).then(function (response) {
+        //console.log(this.clientesE[id])
+        _this3.asignarCampos(response.data);
+
+        _this3.formStatus = 2;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateEmpleado: function updateEmpleado() {
+      var _this4 = this;
+
+      console.log(this.usuario.id);
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          var url = './empleado-update';
+
+          _this4.aMayusculas();
+
+          axios.post(url, {
+            id: _this4.usuario.id,
+            usuario: _this4.usuario
+          }).then(function (response) {
+            if (response.data == 0) {
+              Vue.swal({
+                title: 'Error',
+                text: "Hubo un error, inténtelo de nuevo.",
+                type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            } else {
+              //console.log(this.clientesE[this.indexCliente])
+              _this4.empleadosE[_this4.indexEmpleado].nombres = _this4.usuario.nombres;
+              _this4.empleadosE[_this4.indexEmpleado].primer_ap = _this4.usuario.primer_ap;
+              _this4.empleadosE[_this4.indexEmpleado].segundo_ap = _this4.usuario.segundo_ap;
+
+              _this4.limpiar();
+
+              Vue.swal({
+                title: 'Hecho',
+                text: "Empleado actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else {
+          Vue.swal({
+            title: 'Atención',
+            text: "Por favor completa los campos correctamente.",
+            type: 'warning',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
     }
   }
 });
@@ -85345,7 +85418,7 @@ var render = function() {
                     attrs: {
                       dropright: "",
                       text:
-                        empleado.nombre +
+                        empleado.nombres +
                         " " +
                         empleado.primer_ap +
                         " " +
@@ -85366,9 +85439,17 @@ var render = function() {
                       [_vm._v("Ver")]
                     ),
                     _vm._v(" "),
-                    _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                      _vm._v("Editar")
-                    ]),
+                    _c(
+                      "b-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.editarEmpleado(empleado)
+                          }
+                        }
+                      },
+                      [_vm._v("Editar")]
+                    ),
                     _vm._v(" "),
                     _c("b-dropdown-item", { attrs: { href: "#" } }, [
                       _vm._v("Eliminar")
@@ -85407,7 +85488,7 @@ var render = function() {
               _c("div", { staticClass: "row col-md-12" }, [
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "nombre" } }, [
+                    _c("label", { attrs: { for: "nombres" } }, [
                       _vm._v("Nombres")
                     ]),
                     _vm._v(" "),
@@ -86094,7 +86175,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          on: { click: _vm.update }
+                          on: { click: _vm.updateEmpleado }
                         },
                         [_vm._v("Actualizar")]
                       )

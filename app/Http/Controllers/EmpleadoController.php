@@ -43,7 +43,7 @@ class EmpleadoController extends Controller
         DB::beginTransaction();
         try{
             $user = new User();
-            $user->nombre = $emp['nombres'];
+            $user->nombres = $emp['nombres'];
             $user->primer_ap = $emp['primer_ap'];
             $user->segundo_ap = $emp['segundo_ap'];
             $user->nivel = User::EMPLEADO;
@@ -74,7 +74,6 @@ class EmpleadoController extends Controller
     public function get(Request $request){
         $empleado = User::with('empleado.cargo')->has('empleado')->where('id', $request->idEmpleado)->first();
         return response()->json($empleado, 200);
-        dd($empleado);
     }
 
     /**
@@ -84,32 +83,34 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        if(User::where('correo', '=', $request->correo)->where('id', '!=', $id)->count() > 0){
+        $id = intval($request->usuario['id']);
+        if(User::where('email', '=', $request->usuario['email'])->where('id', '!=', $id)->count() > 0){
             return 1;
         }
-        if($request->password != $request->password2){
+        /* if($request->password != $request->password2){
             return 2;
-        }
+        } */
+        $emp = $request->usuario;
         DB::beginTransaction();
         try{
-            $empleado = Empleado::findOrFail($id)->get();
-            $user = User::findOrFail($empleado->user_id)->get();
-            $user->nombre = $request->nombre;
-            $user->primer_ap = $request->primer_ap;
-            $user->segundo_ap = $request->segundo_ap;
-            $user->correo = $request->correo;
-            $user->password = bcrypt($request->password);
+            $user = User::findOrFail($id);
+            $user->nombres = $emp['nombres'];
+            $user->primer_ap = $emp['primer_ap'];
+            $user->segundo_ap = $emp['segundo_ap'];
+            $user->email = $emp['email'];
+            $user->password = bcrypt($emp['password']);
             $user->save();
-
-            $empleado->cargo_id = $request->cargo_id;
-            $empleado->sexo = $request->sexo;
-            $empleado->fism = $request->fism;
-            $empleado->profesion = $request->profesion;
-            $empleado->profesion_abrev = $request->profesion_abrev;
-            $empleado->fecha_inicio_funciones = $request->fecha_inicio_funciones;
-            $empleado->telefono = $request->telefono;
+            
+            $empleado = Empleado::where('user_id', $user->id)->first();
+            $empleado->cargo_id = $emp['empleado']['cargo']['id'];
+            $empleado->sexo = $emp['empleado']['sexo'];
+            $empleado->fism = ($emp['empleado']['fism'] == "") ? 0 : 1;
+            $empleado->profesion = $emp['empleado']['profesion'];
+            $empleado->profesion_abrev = $emp['empleado']['abrev'];
+            $empleado->fecha_inicio_funciones = $emp['empleado']['inicioFun'];
+            $empleado->telefono = $emp['empleado']['telefono'];
             $empleado->status = 1;
             $empleado->save();
             DB::commit();

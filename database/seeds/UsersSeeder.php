@@ -12,7 +12,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         $user = App\User::create([
-            'nombre' => 'ADMINISTRADOR',
+            'nombres' => 'ADMINISTRADOR',
             'primer_ap' => 'APELLIDO',
             'segundo_ap' => 'APELLIDO',
             'email' => 'admin@gmail.com',

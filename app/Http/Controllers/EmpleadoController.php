@@ -133,10 +133,8 @@ class EmpleadoController extends Controller
         //dd($id);
         DB::beginTransaction();
         try{
-            $user = User::findOrFail($id);
-            $empleado = Empleado::where('user_id', $user->id)->first();
-            $empleado->delete();
-            $user->delete();
+            $user = User::destroy($id);
+            $empleado = Empleado::where('user_id', $id)->delete();
             DB::commit();
             return 1;
         }catch(Exception $e){

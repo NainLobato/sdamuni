@@ -32,7 +32,7 @@ class CreateEmpleadosTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('ayuntamiento_id')->references('id')->on('ayuntamientos')->onDelete('cascade');
-            $table->foreign('cargo_id')->references('id')->on('cat_Cargos')->onDelete('cascade');
+            $table->foreign('cargo_id')->references('id')->on('cat_cargos')->onDelete('cascade');
 
         });
     }

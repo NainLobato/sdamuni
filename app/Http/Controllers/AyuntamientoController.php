@@ -8,6 +8,8 @@ use App\Models\CatMunicipio;
 use App\Models\CatPartido;
 use App\Models\CatDistrito;
 use App\Models\AyuntamientoPartido;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\File;
 use DB;
 
 class AyuntamientoController extends Controller
@@ -46,11 +48,27 @@ class AyuntamientoController extends Controller
 
         DB::beginTransaction();
         try{
-            // dd($request->all());
+            if($request->ayuntamiento['escudo']){
+                // $image = $request->ayuntamiento['escudo'];
+                // $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                // $path = public_path().DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'escudos'.DIRECTORY_SEPARATOR.$name;
+                // // if(!File::exists($path)) File::makeDirectory($path, 0777,true);
+                // if (!file_exists($path)) {
+                //     mkdir($path, 777, true);
+
+                // }
+                // $img = Image::make($image)->save($path);
+
+                $name = '';
+            }else {
+                $name = '';
+            }
+            // dump($request->ayuntamiento['escudo']);
+            // dump($request->file('escudo'));
+            // dd($name);
             $ayuntamiento = new Ayuntamiento();
             $ayuntamiento->municipio_id = $request->ayuntamiento['municipio_id'];
-            // $ayuntamiento->escudo = $request->ayuntamiento['escudo'];
-            $ayuntamiento->escudo = '';
+            $ayuntamiento->escudo = $name;
             $ayuntamiento->telefono1 = $request->ayuntamiento['telefono1'];
             $ayuntamiento->telefono2 = $request->ayuntamiento['telefono2'];
             $ayuntamiento->correo = $request->ayuntamiento['correo'];
@@ -63,7 +81,7 @@ class AyuntamientoController extends Controller
                 $ayuntamientoPartido->save();
             }
             DB::commit();
-            return 1;
+            return 3;
         }catch(Exception $e){
             DB::rollBack();
             return 0;

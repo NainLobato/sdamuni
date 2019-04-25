@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RelacionManuales extends Model
+class Relacion extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'relacion_manuales';
+    protected $table = 'relaciones';
 
     protected $fillable = [
         'id', 
+        'formato_id',
         'ayuntamiento_id',
         'empleado_integra_id',
         'empleado_entrega_id',
@@ -21,8 +22,12 @@ class RelacionManuales extends Model
         'created_at',
         'update_at',
         'delete_at',
-
     ];
+    
+    public function entidades()
+    {
+        return $this->hasMany('App\Models\EntidadParamunicipal','relacion_id','id');
+    }
 
     public function manuales()
     {
@@ -33,4 +38,5 @@ class RelacionManuales extends Model
     {
         return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');
     }
+
 }

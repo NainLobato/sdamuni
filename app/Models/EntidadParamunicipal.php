@@ -26,6 +26,6 @@ class EntidadParamunicipal extends Model
 
     public function relacion()
     {
-        return $this->belongsTo('App\Models\RelacionEntidades','distrito_id','id');
+        return $this->belongsTo('App\Models\Relacion','relacion_id','id');
     }
 }

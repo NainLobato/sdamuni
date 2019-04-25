@@ -65,8 +65,8 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <!-- <input type="file" v-on:change="onFileChange" name="" id=""> -->
-                                        <div class="text-center">
+                                        <input type="file" v-on:change="onFileChange" name="" id="">
+                                        <!-- <div class="text-center">
                                             <file-pond
                                             v-model="imgEscudo"
                                                 name="test"
@@ -77,8 +77,8 @@
                                                 accepted-file-types="image/jpeg, image/png"
                                                 v-bind:files="logo"
                                                 v-on:init="handleFilePondInit()"/>
-                                            <!-- <img :src='logo' class="img-circle-2 elevation-2" alt=""> -->
-                                        </div>
+                                            <img :src='logo' class="img-circle-2 elevation-2" alt="">
+                                        </div> -->
                                     <div>
                                     </div>
                                     </div>
@@ -239,7 +239,24 @@
             FilePond
         },
         methods:{
-            onSubmit(){
+            onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+                this.imgEscudo= files[0]
+                this.createImage(files[0]);
+            },
+            createImage(file) {
+                var imgEscudo = new Image();
+                var reader = new FileReader();
+                var vm = this;
+
+                reader.onload = (e) => {
+                    vm.imgEscudo = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+            onSubmit(file){
                  this.$validator.validate().then(valid => {
                      if (valid) {
                     const urlStoreAyuntamiento = route('ayuntamiento.store').template
@@ -295,7 +312,24 @@
                      }
                      else{}
                  })
-
+                const urlStoreAyuntamiento = route('ayuntamiento.store').template
+                console.log(urlStoreAyuntamiento)
+                let ayuntamiento={
+                    municipio_id : this.municSel.id,
+                    distrito_id: this.distriSel.id,
+                    partido_id:this.partido,
+                    escudo: this.imgEscudo,
+                    telefono1: this.telefono1,
+                    telefono2: this.telefono2,
+                    correo: this.correo
+                }
+                axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
+                   console.log(reponse.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+                console.log(ayuntamiento)
             },
             editar(){
                 const urlCreateAyuntamiento = route('ayuntamiento.create')
@@ -316,23 +350,7 @@
                 this.claveMunicSelec = this.municSel.clave
 
             },
-            // onFileChange(e) {
-            // var files = e.target.files || e.dataTransfer.files;
-            // if (!files.length)
-            //     return;
-            //     this.imgEscudo= files[0]
-            // this.createImage(files[0]);
-            // },
-            // createImage(file) {
-            // var image = new Image();
-            // var reader = new FileReader();
-            // var vm = this;
 
-            // reader.onload = (e) => {
-            //     vm.image = e.target.result;
-            // };
-            // reader.readAsDataURL(file);
-            // },
         }
     }
 </script>

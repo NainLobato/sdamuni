@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRelacionManualesTable extends Migration
+class CreateRelacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateRelacionManualesTable extends Migration
      */
     public function up()
     {
-        Schema::create('relacion_manuales', function (Blueprint $table) {
+        Schema::create('relaciones', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('formato_id')->unsigned();
             $table->integer('ayuntamiento_id')->unsigned();
             $table->integer('empleado_integra_id')->unsigned();
             $table->integer('empleado_entrega_id')->unsigned();
@@ -38,6 +39,6 @@ class CreateRelacionManualesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relacion_manuales');
+        Schema::dropIfExists('relaciones');
     }
 }

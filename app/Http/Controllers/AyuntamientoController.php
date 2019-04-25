@@ -9,7 +9,6 @@ use App\Models\CatPartido;
 use App\Models\CatDistrito;
 use App\Models\AyuntamientoPartido;
 use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\File;
 use DB;
 
 class AyuntamientoController extends Controller
@@ -48,24 +47,15 @@ class AyuntamientoController extends Controller
 
         DB::beginTransaction();
         try{
-            if($request->ayuntamiento['escudo']){
-                // $image = $request->ayuntamiento['escudo'];
-                // $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                // $path = public_path().DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'escudos'.DIRECTORY_SEPARATOR.$name;
-                // // if(!File::exists($path)) File::makeDirectory($path, 0777,true);
-                // if (!file_exists($path)) {
-                //     mkdir($path, 777, true);
-
-                // }
-                // $img = Image::make($image)->save($path);
-
-                $name = '';
+            // dd($request->get('ayuntamiento')['escudo']);
+            if($request->get('ayuntamiento')['escudo']){
+                $image = $request->get('ayuntamiento')['escudo'];
+                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                \Image::make($request->get('ayuntamiento')['escudo'])->save(storage_path('escudos'.DIRECTORY_SEPARATOR).$name);
             }else {
                 $name = '';
             }
-            // dump($request->ayuntamiento['escudo']);
-            // dump($request->file('escudo'));
-            // dd($name);
+
             $ayuntamiento = new Ayuntamiento();
             $ayuntamiento->municipio_id = $request->ayuntamiento['municipio_id'];
             $ayuntamiento->escudo = $name;

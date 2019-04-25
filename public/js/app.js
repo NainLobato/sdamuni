@@ -2026,6 +2026,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2037,6 +2043,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     return {
       formStatus: 1,
       usuario: {
+        id: '',
         nombres: '',
         primer_ap: '',
         segundo_ap: '',
@@ -2044,12 +2051,13 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
         password: '',
         empleado: {
           cargo: '',
-          sexo: 1,
+          sexo: "1",
           fism: '',
           profesion: '',
           abrev: '',
           inicioFun: '',
-          telefono: '' //fuenteAct:'',
+          telefono: '',
+          status: false //fuenteAct:'',
 
         }
       },
@@ -2064,8 +2072,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   },
   created: function created() {},
   methods: {
-    onSubmit: function onSubmit() {
-      console.log('hola que hace');
+    onSubmit: function onSubmit() {//console.log('hola que hace')
     },
     aMayusculas: function aMayusculas() {
       this.usuario.nombres = this.usuario.nombres.toUpperCase();
@@ -2106,7 +2113,8 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
               });
             } else {
               var emp = {
-                nombre: _this.usuario.nombres + ' ' + _this.usuario.primer_ap + ' ' + _this.usuario.segundo_ap
+                id: response,
+                nombres: _this.usuario.nombres + ' ' + _this.usuario.primer_ap + ' ' + _this.usuario.segundo_ap
               };
 
               _this.empleadosE.push(emp);
@@ -2144,7 +2152,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       this.usuario.email = '';
       this.usuario.password = '';
       this.usuario.empleado.cargo = '';
-      this.usuario.empleado.sexo = '';
+      this.usuario.empleado.sexo = "1";
       this.usuario.empleado.fism = '';
       this.usuario.empleado.profesion = '';
       this.usuario.empleado.abrev = '';
@@ -2173,10 +2181,128 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       });
     },
     asignarCampos: function asignarCampos(usuario) {
-      this.usuario.nombres = usuario.nombres, this.usuario.primer_ap = usuario.primer_ap, this.usuario.segundo_ap = usuario.segundo_ap, this.usuario.email = usuario.email, this.usuario.password = usuario.password ? usuario.password : '', this.usuario.empleado.cargo = {
+      this.usuario.id = usuario.id, this.usuario.nombres = usuario.nombres, this.usuario.primer_ap = usuario.primer_ap, this.usuario.segundo_ap = usuario.segundo_ap, this.usuario.email = usuario.email, this.usuario.password = usuario.password ? usuario.password : '', this.usuario.empleado.cargo = {
         id: usuario.empleado.cargo_id,
         cargo: usuario.empleado.cargo.cargo
-      }, this.usuario.empleado.sex = usuario.empleado.sexo, this.usuario.empleado.fism = usuario.empleado.fism, this.usuario.empleado.profesion = usuario.empleado.profesion, this.usuario.empleado.abrev = usuario.empleado.profesion_abrev, this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones, this.usuario.empleado.telefono = usuario.empleado.telefono;
+      }, this.usuario.empleado.sexo = usuario.empleado.sexo, this.usuario.empleado.fism = usuario.empleado.fism, this.usuario.empleado.profesion = usuario.empleado.profesion, this.usuario.empleado.abrev = usuario.empleado.profesion_abrev, this.usuario.empleado.inicioFun = usuario.empleado.fecha_inicio_funciones, this.usuario.empleado.telefono = usuario.empleado.telefono, this.usuario.empleado.status = usuario.empleado.status == 1 ? 0 : 1;
+    },
+    editarEmpleado: function editarEmpleado(empleado) {
+      var _this3 = this;
+
+      this.indexEmpleado = this.empleadosE.indexOf(empleado);
+      var url = './empleado-get';
+      axios.post(url, {
+        idEmpleado: empleado.id
+      }).then(function (response) {
+        //console.log(this.clientesE[id])
+        _this3.asignarCampos(response.data);
+
+        _this3.formStatus = 2;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateEmpleado: function updateEmpleado() {
+      var _this4 = this;
+
+      //console.log(this.usuario.id)
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          var url = './empleado-update';
+
+          _this4.aMayusculas();
+
+          axios.post(url, {
+            id: _this4.usuario.id,
+            usuario: _this4.usuario
+          }).then(function (response) {
+            if (response.data == 0) {
+              Vue.swal({
+                title: 'Error',
+                text: "Hubo un error, inténtelo de nuevo.",
+                type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            } else {
+              //console.log(this.clientesE[this.indexCliente])
+              _this4.empleadosE[_this4.indexEmpleado].nombres = _this4.usuario.nombres;
+              _this4.empleadosE[_this4.indexEmpleado].primer_ap = _this4.usuario.primer_ap;
+              _this4.empleadosE[_this4.indexEmpleado].segundo_ap = _this4.usuario.segundo_ap;
+
+              _this4.limpiar();
+
+              Vue.swal({
+                title: 'Hecho',
+                text: "Empleado actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        } else {
+          Vue.swal({
+            title: 'Atención',
+            text: "Por favor completa los campos correctamente.",
+            type: 'warning',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Aceptar'
+          });
+        }
+      });
+    },
+    deleteEmpleado: function deleteEmpleado(empleado) {
+      var _this5 = this;
+
+      Vue.swal({
+        title: '¿Está seguro de eliminar a: ' + empleado.nombres + ' ' + empleado.primer_ap + ' ' + empleado.segundo_ap + '?',
+        text: "No se podrá revertir esta acción.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        confirmButtonColor: '#28a745',
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#dc3545',
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          _this5.indexEmpleado = _this5.empleadosE.indexOf(empleado);
+          var url = './empleado-delete';
+          axios.post(url, {
+            id: empleado.id
+          }).then(function (response) {
+            if (response.data == 0) {
+              Vue.swal({
+                title: 'Error',
+                text: "Hubo un error, inténtelo de nuevo.",
+                type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            } else {
+              _this5.empleadosE.splice(_this5.indexEmpleado, 1);
+
+              Vue.swal({
+                title: 'Hecho',
+                text: "Empleado eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
     }
   }
 });
@@ -85351,7 +85477,7 @@ var render = function() {
                     attrs: {
                       dropright: "",
                       text:
-                        empleado.nombre +
+                        empleado.nombres +
                         " " +
                         empleado.primer_ap +
                         " " +
@@ -85372,13 +85498,29 @@ var render = function() {
                       [_vm._v("Ver")]
                     ),
                     _vm._v(" "),
-                    _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                      _vm._v("Editar")
-                    ]),
+                    _c(
+                      "b-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.editarEmpleado(empleado)
+                          }
+                        }
+                      },
+                      [_vm._v("Editar")]
+                    ),
                     _vm._v(" "),
-                    _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                      _vm._v("Eliminar")
-                    ])
+                    _c(
+                      "b-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteEmpleado(empleado)
+                          }
+                        }
+                      },
+                      [_vm._v("Eliminar")]
+                    )
                   ],
                   1
                 )
@@ -85413,7 +85555,7 @@ var render = function() {
               _c("div", { staticClass: "row col-md-12" }, [
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "nombre" } }, [
+                    _c("label", { attrs: { for: "nombres" } }, [
                       _vm._v("Nombres")
                     ]),
                     _vm._v(" "),
@@ -86076,6 +86218,66 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
+                _vm.formStatus == 2
+                  ? _c("div", { staticClass: "col-md-4 text-center" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check " }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.usuario.empleado.status,
+                              expression: "usuario.empleado.status"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "checkbox",
+                            id: "baja",
+                            disabled: _vm.formStatus == 3
+                          },
+                          domProps: {
+                            checked: Array.isArray(_vm.usuario.empleado.status)
+                              ? _vm._i(_vm.usuario.empleado.status, null) > -1
+                              : _vm.usuario.empleado.status
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.usuario.empleado.status,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = null,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    _vm.$set(
+                                      _vm.usuario.empleado,
+                                      "status",
+                                      $$a.concat([$$v])
+                                    )
+                                } else {
+                                  $$i > -1 &&
+                                    _vm.$set(
+                                      _vm.usuario.empleado,
+                                      "status",
+                                      $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1))
+                                    )
+                                }
+                              } else {
+                                _vm.$set(_vm.usuario.empleado, "status", $$c)
+                              }
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "col-md-12 text-right" }, [
                   _c(
                     "button",
@@ -86100,7 +86302,7 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-success",
-                          on: { click: _vm.update }
+                          on: { click: _vm.updateEmpleado }
                         },
                         [_vm._v("Actualizar")]
                       )
@@ -86153,6 +86355,16 @@ var staticRenderFns = [
       "label",
       { staticClass: "form-check-label", attrs: { for: "fism" } },
       [_c("strong", [_vm._v("Enlace FISM")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      { staticClass: "form-check-label", attrs: { for: "baja" } },
+      [_c("strong", [_vm._v("Dar de baja")])]
     )
   }
 ]

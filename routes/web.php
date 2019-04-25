@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
         Route::post('empleado-store', 'EmpleadoController@store')->name('store');
         Route::post('empleado-get', 'EmpleadoController@get')->name('get');
         Route::post('empleado-update', 'EmpleadoController@update')->name('update');
+        Route::post('empleado-delete', 'EmpleadoController@destroy')->name('delete');
     });
 
     Route::get('/ayuntamientos', 'AyuntamientoController@index')->name('ayuntamiento.index');

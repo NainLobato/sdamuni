@@ -22,7 +22,7 @@
                     <b-dropdown v-for="empleado in empleadosE" :key="empleado.id" dropright :text="empleado.nombres+' '+empleado.primer_ap+' '+empleado.segundo_ap" variant="primary" class="m-2">
                         <b-dropdown-item @click="verEmpleado(empleado.id)">Ver</b-dropdown-item>
                         <b-dropdown-item @click="editarEmpleado(empleado)">Editar</b-dropdown-item>
-                        <b-dropdown-item href="#">Eliminar</b-dropdown-item>
+                        <b-dropdown-item @click="deleteEmpleado(empleado)">Eliminar</b-dropdown-item>
                     </b-dropdown>
                     </br>
                     </br>
@@ -371,6 +371,48 @@ Vue.component('v-select', vSelect)
                             showCancelButton: false,
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'Aceptar'
+                        })
+                    }
+                })
+            },
+            deleteEmpleado(empleado){
+                Vue.swal({
+                    title: '¿Está seguro de eliminar a: '+empleado.nombres+' '+empleado.primer_ap+' '+empleado.segundo_ap+'?',
+                    text: "No se podrá revertir esta acción.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Eliminar',
+                    confirmButtonColor: '#28a745',
+                    cancelButtonText: 'Cancelar',
+                    cancelButtonColor: '#dc3545',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        this.indexEmpleado = this.empleadosE.indexOf(empleado)
+                        var url = './empleado-delete'
+                        axios.post(url, {id: empleado.id}).then(response => {
+                            if(response.data == 0){
+                                Vue.swal({
+                                    title: 'Error',
+                                    text: "Hubo un error, inténtelo de nuevo.",
+                                    type: 'error',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }else{
+                                this.empleadosE.splice(this.indexEmpleado, 1)
+                                Vue.swal({
+                                    title: 'Hecho',
+                                    text: "Empleado eliminado correctamente.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }
+                        }).catch(function (error) {
+                            console.log(error)
                         })
                     }
                 })

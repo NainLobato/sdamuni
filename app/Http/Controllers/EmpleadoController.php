@@ -127,14 +127,16 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = intval($request->id);
+        //dd($id);
         DB::beginTransaction();
         try{
-            $empleado = Empleado::findOrFail($id)->get();
-            Empleado::destroy($id);
-            $user = User::findOrFail($empleado->user_id)->get();
-            User::destroy($empleado->user_id);
+            $user = User::findOrFail($id);
+            $empleado = Empleado::where('user_id', $user->id)->first();
+            $empleado->delete();
+            $user->delete();
             DB::commit();
             return 1;
         }catch(Exception $e){

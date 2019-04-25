@@ -2250,6 +2250,53 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
           });
         }
       });
+    },
+    deleteEmpleado: function deleteEmpleado(empleado) {
+      var _this5 = this;
+
+      Vue.swal({
+        title: '¿Está seguro de eliminar a: ' + empleado.nombres + ' ' + empleado.primer_ap + ' ' + empleado.segundo_ap + '?',
+        text: "No se podrá revertir esta acción.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        confirmButtonColor: '#28a745',
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#dc3545',
+        reverseButtons: true
+      }).then(function (result) {
+        if (result.value) {
+          _this5.indexEmpleado = _this5.empleadosE.indexOf(empleado);
+          var url = './empleado-delete';
+          axios.post(url, {
+            id: empleado.id
+          }).then(function (response) {
+            if (response.data == 0) {
+              Vue.swal({
+                title: 'Error',
+                text: "Hubo un error, inténtelo de nuevo.",
+                type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            } else {
+              _this5.empleadosE.splice(_this5.indexEmpleado, 1);
+
+              Vue.swal({
+                title: 'Hecho',
+                text: "Empleado eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            }
+          })["catch"](function (error) {
+            console.log(error);
+          });
+        }
+      });
     }
   }
 });
@@ -85451,9 +85498,17 @@ var render = function() {
                       [_vm._v("Editar")]
                     ),
                     _vm._v(" "),
-                    _c("b-dropdown-item", { attrs: { href: "#" } }, [
-                      _vm._v("Eliminar")
-                    ])
+                    _c(
+                      "b-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteEmpleado(empleado)
+                          }
+                        }
+                      },
+                      [_vm._v("Eliminar")]
+                    )
                   ],
                   1
                 )

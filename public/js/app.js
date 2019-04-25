@@ -2415,7 +2415,8 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       editando: false,
       claveNombre: '',
       municNombre: '',
-      imgEscudo: ''
+      imgEscudo: '',
+      ayuntamiento: []
     };
   },
   props: ['municipios', 'create', 'distritos', 'partidos', 'ayuntamientos'],
@@ -2436,7 +2437,10 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 
     if (this.partidos) {
       this.partidox = this.partidos;
-    }
+    } // if(this.ayuntamientos){
+    //     this.ayuntamiento
+    // }
+
 
     console.log('Component mounted.');
   },
@@ -2446,24 +2450,26 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   },
   methods: {
     onSubmit: function onSubmit() {
-      var urlStoreAyuntamiento = route('ayuntamiento.store').template;
-      console.log(urlStoreAyuntamiento);
-      var ayuntamiento = {
-        municipio_id: this.municSel.id,
-        distrito_id: this.distriSel.id,
-        partido_id: this.partido,
-        escudo: this.imgEscudo,
-        telefono1: this.telefono1,
-        telefono2: this.telefono2,
-        correo: this.correo
-      };
-      axios.post(urlStoreAyuntamiento, {
-        ayuntamiento: ayuntamiento
-      }).then(function (response) {
-        console.log(reponse.data);
-      })["catch"](function (error) {
-        console.log(error);
-      }); // console.log(ayuntamiento)
+      this.$validator.validate().then(function (valid) {
+        if (valid) {} else {}
+      }); // const urlStoreAyuntamiento = route('ayuntamiento.store').template
+      // console.log(urlStoreAyuntamiento)
+      // let ayuntamiento={
+      //     municipio_id : this.municSel.id,
+      //     distrito_id: this.distriSel.id,
+      //     partido_id:this.partido,
+      //     escudo: this.imgEscudo,
+      //     telefono1: this.telefono1,
+      //     telefono2: this.telefono2,
+      //     correo: this.correo
+      // }
+      // axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
+      //    console.log(reponse.data)
+      // })
+      // .catch(error => {
+      //     console.log(error)
+      // })
+      // console.log(ayuntamiento)
     },
     editar: function editar() {
       var urlCreateAyuntamiento = route('ayuntamiento.create');
@@ -86219,16 +86225,7 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-2 " }, [
-                        _c("label", { attrs: { for: "distrito" } }, [
-                          _vm._v("Distrito")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", {
-                          attrs: { name: "distrito" },
-                          domProps: { innerHTML: _vm._s(_vm.distriSel.nombre) }
-                        })
-                      ]),
+                      _vm._m(1),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-2" }, [
                         _c("label", { attrs: { for: "partido" } }, [
@@ -86353,10 +86350,21 @@ var render = function() {
                             _c(
                               "v-select",
                               {
+                                directives: [
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate",
+                                    value: "required",
+                                    expression: "'required'"
+                                  }
+                                ],
                                 attrs: {
                                   options: _vm.munic,
+                                  name: "nombreMunicipio",
+                                  id: "nombreMunicipio",
                                   label: "nombre",
-                                  placeholder: "Elige un municipio"
+                                  placeholder: "Elige un municipio",
+                                  "data-vv-as": "nombre del municipio"
                                 },
                                 on: {
                                   input: function($event) {
@@ -86378,6 +86386,14 @@ var render = function() {
                               ],
                               2
                             ),
+                            _vm._v(" "),
+                            _vm.errors.has("nombreMunicipio")
+                              ? _c("div", { staticClass: "invalid-feedback" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.errors.first("nombreMunicipio"))
+                                  )
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("h6", { staticClass: "mt-2" }, [
                               _c("strong", [_vm._v("Clave del municipio")]),
@@ -86615,15 +86631,15 @@ var render = function() {
     _c("div", [
       _vm.create == 1
         ? _c("div", { staticClass: "card" }, [
-            _vm._m(1),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("table", { staticClass: "table" }, [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.ayuntamiento, function(ayunta, index) {
+                  _vm._l(_vm.ayuntamientos, function(ayunta, index) {
                     return _c("tr", { key: index }, [
                       _c("td", [_vm._v(_vm._s(ayunta.id))]),
                       _vm._v(" "),
@@ -86631,7 +86647,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(ayunta.telefono1))]),
                       _vm._v(" "),
-                      _vm._m(3, true)
+                      _vm._m(4, true)
                     ])
                   }),
                   0
@@ -86650,6 +86666,14 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: " text-center" }, [
       _c("h5", [_c("strong", [_vm._v("Mi municipio")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2 " }, [
+      _c("label", { attrs: { for: "distrito" } }, [_vm._v("Distrito")])
     ])
   },
   function() {

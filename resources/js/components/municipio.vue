@@ -34,7 +34,7 @@
                                             </div>
                                             <div class="col-md-2 ">
                                                 <label for="distrito">Distrito</label>
-                                                <h6 name="distrito" v-html="distriSel.nombre"></h6>
+                                                <!-- <h6 name="distrito" v-html="distriSel.nombre"></h6> -->
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="partido">Partido político</label>
@@ -93,9 +93,10 @@
                                         </div> -->
                                             <div class="form-group">
                                                 <label for="nombreMunicipio">Municipio</label>
-                                                <v-select :options="munic" v-model="municSel" label="nombre" @input="selecMunic()" placeholder="Elige un municipio" >
+                                                <v-select :options="munic" v-model="municSel" name="nombreMunicipio" id="nombreMunicipio" label="nombre" @input="selecMunic()" placeholder="Elige un municipio" data-vv-as="nombre del municipio" v-validate="'required'" >
                                                     <slot name="no-options">¡No hay opciones disponibles!</slot>
                                                 </v-select>
+                                                <div class="invalid-feedback" v-if="errors.has('nombreMunicipio')">{{ errors.first('nombreMunicipio') }}</div>
                                                 <h6 class="mt-2"><strong>Clave del municipio</strong> <span v-html="claveMunicSelec"></span> </h6>
                                                 <!-- <p v-html="nombreMunicipio"></p> -->
                                                 <!-- <input type="text" id="nombreMunicipio" v-model="nombreMunicipio" class="form-control" placeholder="Ingrese la clave"> -->
@@ -165,7 +166,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(ayunta, index) in ayuntamiento" :key="index">
+                                <tr v-for="(ayunta, index) in ayuntamientos" :key="index">
                                 <td>{{ayunta.id}}</td>
                                 <td>{{ayunta.correo}}</td>
                                 <td>{{ayunta.telefono1}}</td>
@@ -178,7 +179,6 @@
                 </div>
             </div>
     </div>
-
 </template>
 
 <script>
@@ -211,7 +211,8 @@
                 editando:false,
                 claveNombre:'',
                 municNombre:'',
-                imgEscudo:''
+                imgEscudo:'',
+                ayuntamiento:[]
 
             }
 
@@ -232,6 +233,9 @@
             if(this.partidos){
                 this.partidox = this.partidos
             }
+            // if(this.ayuntamientos){
+            //     this.ayuntamiento
+            // }
             console.log('Component mounted.')
         },
         created(){
@@ -242,23 +246,27 @@
         },
         methods:{
             onSubmit(){
-                const urlStoreAyuntamiento = route('ayuntamiento.store').template
-                console.log(urlStoreAyuntamiento)
-                let ayuntamiento={
-                    municipio_id : this.municSel.id,
-                    distrito_id: this.distriSel.id,
-                    partido_id:this.partido,
-                    escudo: this.imgEscudo,
-                    telefono1: this.telefono1,
-                    telefono2: this.telefono2,
-                    correo: this.correo
-                }
-                axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
-                   console.log(reponse.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
+                 this.$validator.validate().then(valid => {
+                     if (valid) {}
+                     else{}
+                 })
+                // const urlStoreAyuntamiento = route('ayuntamiento.store').template
+                // console.log(urlStoreAyuntamiento)
+                // let ayuntamiento={
+                //     municipio_id : this.municSel.id,
+                //     distrito_id: this.distriSel.id,
+                //     partido_id:this.partido,
+                //     escudo: this.imgEscudo,
+                //     telefono1: this.telefono1,
+                //     telefono2: this.telefono2,
+                //     correo: this.correo
+                // }
+                // axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
+                //    console.log(reponse.data)
+                // })
+                // .catch(error => {
+                //     console.log(error)
+                // })
                 // console.log(ayuntamiento)
             },
             editar(){

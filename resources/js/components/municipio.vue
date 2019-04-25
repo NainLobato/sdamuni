@@ -83,31 +83,21 @@
                                     </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <!-- <div>
-                                            <div class="form-group">
-                                                <label for="claveMunicipio">Clave del municipio</label>
-                                                <v-select :options="claveMunicipio" v-model="claveMunicSelec" label="nombre" placeholder="Elige un municipio" >
-                                                    <slot name="no-options">¡No hay opciones disponibles!</slot>
-                                                </v-select>
-                                            </div>
-                                        </div> -->
-                                            <div class="form-group">
-                                                <label for="nombreMunicipio">Municipio</label>
-                                                <v-select :options="munic" v-model="municSel" name="nombreMunicipio" id="nombreMunicipio" label="nombre" @input="selecMunic()" placeholder="Elige un municipio" data-vv-as="nombre del municipio" v-validate="'required'" >
-                                                    <slot name="no-options">¡No hay opciones disponibles!</slot>
-                                                </v-select>
-                                                <div class="invalid-feedback" v-if="errors.has('nombreMunicipio')">{{ errors.first('nombreMunicipio') }}</div>
-                                                <h6 class="mt-2"><strong>Clave del municipio</strong> <span v-html="claveMunicSelec"></span> </h6>
-                                                <!-- <p v-html="nombreMunicipio"></p> -->
-                                                <!-- <input type="text" id="nombreMunicipio" v-model="nombreMunicipio" class="form-control" placeholder="Ingrese la clave"> -->
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="distrito">Distrito</label>
-                                                <v-select :options="distri" v-model="distriSel" label="nombre" @input="selecMunic()"  placeholder="Elige un distrito" >
-                                                    <slot name="no-options">¡No hay opciones disponibles!</slot>
-                                                </v-select>
-                                                <!-- <input type="text" id="distrito" v-model="distrito" class="form-control" placeholder="Ingrese la clave"> -->
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="nombreMunicipio">Municipio</label>
+                                            <v-select :options="munic" v-model="municSel" name="nombreMunicipio"  label="nombre"  placeholder="Elige un municipio"  v-validate="'required'" @input="selecMunic()">
+                                                <slot name="no-options">¡No hay opciones disponibles!</slot>
+                                            </v-select>
+                                            <div class="invalid-feedback ver" v-if="errors.has('nombreMunicipio')">{{ errors.first('nombreMunicipio') }}</div>
+                                        </div>
+                                        <h6 class="mt-2"><strong>Clave del municipio</strong> <span v-html="claveMunicSelec"></span> </h6>
+                                        <div class="form-group">
+                                            <label for="distrito">Distrito</label>
+                                            <v-select :options="distri" v-model="distriSel" name="distrito" label="nombre" @input="selecMunic()" v-validate="'required'"  placeholder="Elige un distrito" >
+                                                <slot name="no-options">¡No hay opciones disponibles!</slot>
+                                            </v-select>
+                                            <div class="invalid-feedback ver" v-if="errors.has('distrito')">{{ errors.first('distrito') }}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -116,28 +106,32 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="telefono1">Telefono 1</label>
-                                            <input type="text" id="telefono1" v-model="telefono1" class="form-control" placeholder="Ingrese telefono">
+                                            <input type="text" id="telefono1" v-model="telefono1" name="telefono1" class="form-control" placeholder="Ingrese telefono" data-vv-as="teléfono uno" v-validate="'required||length:10'">
+                                            <div class="invalid-feedback ver" v-if="errors.has('telefono1')">{{ errors.first('telefono1') }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="telefono2">Telefono 2</label>
-                                            <input type="text" id="telefono2" v-model="telefono2" class="form-control" placeholder="Ingrese telefono">
+                                            <input type="text" id="telefono2" v-model="telefono2" name="telefono2" class="form-control" placeholder="Ingrese telefono" data-vv-as="teléfono dos" v-validate="'required||length:10'" >
+                                            <div class="invalid-feedback ver" v-if="errors.has('telefono2')">{{ errors.first('telefono2') }}</div>
                                         </div>
 
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="correo">Correo electrónico municipal</label>
-                                            <input type="text" id="correo" v-model="correo" class="form-control" placeholder="Ingrese telefono">
+                                            <input type="text" id="correo" v-model="correo" name="correo" class="form-control" placeholder="Ingrese email" v-validate="'required||email'">
+                                            <div class="invalid-feedback ver" v-if="errors.has('correo')">{{ errors.first('correo') }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="partido">Partido político</label>
-                                            <v-select :options="partidox" v-model="partido" label="nombre"  :multiple="true" placeholder="Elige un partido" >
+                                            <v-select :options="partidox" v-model="partido" label="nombre" name="partido" :multiple="true" placeholder="Elige un partido" v-validate="'required'" >
                                                     <slot name="no-options">¡No hay opciones disponibles!</slot>
                                                 </v-select>
+                                            <div class="invalid-feedback ver" v-if="errors.has('partido')">{{ errors.first('partido') }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -247,27 +241,61 @@
         methods:{
             onSubmit(){
                  this.$validator.validate().then(valid => {
-                     if (valid) {}
+                     if (valid) {
+                    const urlStoreAyuntamiento = route('ayuntamiento.store').template
+                    let ayuntamiento={
+                        municipio_id : this.municSel.id,
+                        distrito_id: this.distriSel.id,
+                        partido_id:this.partido,
+                        escudo: this.imgEscudo,
+                        telefono1: this.telefono1,
+                        telefono2: this.telefono2,
+                        correo: this.correo
+                    }
+                    axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
+                        if(response.data == 0){
+                                Vue.swal({
+                                    title: 'Error',
+                                    text: "Hubo un error, inténtelo de nuevo.",
+                                    type: 'error',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }else if(response.data == 1){
+                                Vue.swal({
+                                    title: 'Hecho',
+                                    text: "Ayuntamiento registrado correctamente.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Aceptar',
+                                    confirmButtonColor: '#3085d6',
+                                })
+                             }//else{
+                            //     var emp = {
+                            //         id: response,
+                            //         nombres: this.usuario.nombres+' '+this.usuario.primer_ap+' '+this.usuario.segundo_ap
+                            //     }
+                            //     this.empleadosE.push(emp)
+                            //     this.limpiar()
+                            //     Vue.swal({
+                            //         title: 'Hecho',
+                            //         text: "Empleado registrado correctamente.",
+                            //         type: 'success',
+                            //         showCancelButton: false,
+                            //         confirmButtonText: 'Aceptar',
+                            //         confirmButtonColor: '#3085d6',
+                            //     })
+                            // }
+                       console.log(reponse.data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                     }
                      else{}
                  })
-                // const urlStoreAyuntamiento = route('ayuntamiento.store').template
-                // console.log(urlStoreAyuntamiento)
-                // let ayuntamiento={
-                //     municipio_id : this.municSel.id,
-                //     distrito_id: this.distriSel.id,
-                //     partido_id:this.partido,
-                //     escudo: this.imgEscudo,
-                //     telefono1: this.telefono1,
-                //     telefono2: this.telefono2,
-                //     correo: this.correo
-                // }
-                // axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
-                //    console.log(reponse.data)
-                // })
-                // .catch(error => {
-                //     console.log(error)
-                // })
-                // console.log(ayuntamiento)
+
             },
             editar(){
                 const urlCreateAyuntamiento = route('ayuntamiento.create')
@@ -308,3 +336,8 @@
         }
     }
 </script>
+<style >
+    .ver{
+    display: block;
+    }
+</style>

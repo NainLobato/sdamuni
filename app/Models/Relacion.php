@@ -24,6 +24,11 @@ class Relacion extends Model
         'delete_at',
     ];
 
+    public function formato()
+    {
+        return $this->belongsTo('App\Models\CatFormato','formato_id','id');
+    }
+
     public function ayuntamiento()
     {
         return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');

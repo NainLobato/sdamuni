@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Ayuntamiento extends Model
 {
     use SoftDeletes;
-    
+
     protected $table = 'ayuntamientos';
 
     protected $fillable = [
-        'id', 
+        'id',
         'municipio_id',
         'escudo',
         'telefono1',
@@ -49,6 +49,11 @@ class Ayuntamiento extends Model
         return $this->hasMany('App\Models\RelacionManuales','ayuntamiento_id','id');
     }
 
+    public function getRutaImagenAttribute()
+    {
+        return storage_path('escudos'.DIRECTORY_SEPARATOR).$this->escudo;
+    }
 
-    
+
+
 }

@@ -30,11 +30,15 @@ Route::middleware('auth')->group(function () {
         Route::post('empleado-delete', 'EmpleadoController@destroy')->name('delete');
     });
 
-    Route::get('/ayuntamientos', 'AyuntamientoController@index')->name('ayuntamiento.index');
-    Route::get('/ayuntamiento/create', 'AyuntamientoController@create')->name('ayuntamiento.create');
-    Route::get('/ayuntamiento/catalogos', 'AyuntamientoController@getCatalogos')->name('ayuntamiento.catalogos');
-    Route::post('/ayuntamiento/store', 'AyuntamientoController@store')->name('ayuntamiento.store');
-    Route::get('/ayuntamiento/{id}/show', 'AyuntamientoController@show')->name('ayuntamiento.show');
-    Route::get('/ayuntamiento/{id}/edit', 'AyuntamientoController@edit')->name('ayuntamiento.edit');
-    Route::post('/ayuntamiento/{id}/update', 'AyuntamientoController@update')->name('ayuntamiento.update');
+    Route::name('ayuntamiento.')->group(function () {
+        Route::get('ayuntamientos', 'AyuntamientoController@index')->name('index');
+        Route::get('ayuntamiento-catalogos', 'AyuntamientoController@getCatalogos')->name('catalogos');
+        Route::post('ayuntamiento-store', 'AyuntamientoController@store')->name('store');
+        Route::post('ayuntamiento-update', 'AyuntamientoController@update')->name('update');
+        Route::post('ayuntamiento-delete', 'AyuntamientoController@delete')->name('delete');
+        Route::get('ayuntamiento/{id}/show', 'AyuntamientoController@show')->name('show');
+        Route::get('ayuntamiento/{id}/edit', 'AyuntamientoController@edit')->name('edit');
+    });
+
+
 });

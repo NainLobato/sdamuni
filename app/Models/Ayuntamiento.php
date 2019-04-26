@@ -31,7 +31,7 @@ class Ayuntamiento extends Model
 
     public function partidos()
     {
-        return $this->belongsToMany('App\Models\CatPartido','ayuntamiento_cat_partido','partido_id','ayuntamiento_id');
+        return $this->belongsToMany('App\Models\CatPartido','ayuntamiento_cat_partido','ayuntamiento_id','partido_id');
     }
 
     public function empleados()
@@ -48,12 +48,5 @@ class Ayuntamiento extends Model
     {
         return $this->hasMany('App\Models\RelacionManuales','ayuntamiento_id','id');
     }
-
-    public function getRutaImagenAttribute()
-    {
-        return storage_path('escudos'.DIRECTORY_SEPARATOR).$this->escudo;
-    }
-
-
 
 }

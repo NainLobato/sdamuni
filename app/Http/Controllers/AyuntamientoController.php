@@ -45,7 +45,7 @@ class AyuntamientoController extends Controller
             array_push($arrayAyunta,$varAyuntamiento);
 
         }
-        $ayuntamientos = $arrayAyunta;
+        $ayuntamientos = collect($arrayAyunta);
         // dd($ayuntamientos);
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();

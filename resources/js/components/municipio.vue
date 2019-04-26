@@ -66,19 +66,19 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <input type="file" v-on:change="onFileChange" name="" id="">
-                                        <!-- <div class="text-center">
+                                        <div class="text-center">
                                             <file-pond
-                                            v-model="imgEscudo"
                                                 name="test"
                                                 ref="pond"
                                                 class-name="my-pond"
                                                 label-idle="Drop files here..."
                                                 allow-multiple="false"
                                                 accepted-file-types="image/jpeg, image/png"
-                                                v-bind:files="logo"
-                                                v-on:init="handleFilePondInit()"/>
-                                            <img :src='logo' class="img-circle-2 elevation-2" alt="">
-                                        </div> -->
+
+
+                                                 v-on:addfile="handleFilePondInit()"/>
+                                            <!-- <img :src='logo' class="img-circle-2 elevation-2" alt=""> -->
+                                        </div>
                                     <div>
                                     </div>
                                     </div>
@@ -181,7 +181,7 @@
     import vueFilePond from 'vue-filepond';
     import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js';
     import FilePondPluginImagePreview from 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js';
-
+    import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
     // Import styles
     import 'filepond/dist/filepond.min.css';
     import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
@@ -240,6 +240,7 @@
         },
         methods:{
             onFileChange(e) {
+                console.log(e)
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;
@@ -250,7 +251,7 @@
                 var imgEscudo = new Image();
                 var reader = new FileReader();
                 var vm = this;
-
+                console.log(reader)
                 reader.onload = (e) => {
                     vm.imgEscudo = e.target.result;
                 };
@@ -279,7 +280,7 @@
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Aceptar'
                                 })
-                            }else if(response.data == 1){
+                            }else if(response.data == 3){
                                 Vue.swal({
                                     title: 'Hecho',
                                     text: "Ayuntamiento registrado correctamente.",
@@ -324,9 +325,10 @@
             },
             handleFilePondInit() {
             // console.log('FilePond has initialized');
-
+            console.log(this.$refs.pond.getFileEncodeBase64String())
+            this.createImage(this.$refs.pond.getFile())
             // example of instance method call on pond reference
-            this.imgEscudo =this.$refs.pond.getFiles()
+            // this.imgEscudo =this.$refs.pond.getFiles()
 
             },
             selecMunic(data){

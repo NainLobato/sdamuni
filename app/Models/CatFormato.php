@@ -17,4 +17,9 @@ class CatFormato extends Model
         'update_at',
         'delete_at',
     ];
+
+    public function relaciones()
+    {
+        return $this->hasMany('App\Models\Relacion','formato_id','id');
+    }
 }

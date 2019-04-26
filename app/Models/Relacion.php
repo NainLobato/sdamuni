@@ -23,7 +23,17 @@ class Relacion extends Model
         'update_at',
         'delete_at',
     ];
-    
+
+    public function formato()
+    {
+        return $this->belongsTo('App\Models\CatFormato','formato_id','id');
+    }
+
+    public function ayuntamiento()
+    {
+        return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');
+    }
+
     public function entidades()
     {
         return $this->hasMany('App\Models\EntidadParamunicipal','relacion_id','id');
@@ -34,9 +44,21 @@ class Relacion extends Model
         return $this->hasMany('App\Models\ManualAdministrativo','relacion_id','id');
     }
 
-    public function ayuntamiento()
+    public function contratosConvenios()
     {
-        return $this->belongsTo('App\Models\Ayuntamiento','ayuntamiento_id','id');
+        return $this->hasMany('App\Models\ContratoConvenio','relacion_id','id');
     }
+
+    public function juiciosPorAyuntamiento()
+    {
+        return $this->hasMany('App\Models\JuicioPorAyuntamiento','relacion_id','id');
+    }
+
+    public function juiciosContraAyuntamiento()
+    {
+        return $this->hasMany('App\Models\JuicioContraAyuntamiento','relacion_id','id');
+    }
+
+    
 
 }

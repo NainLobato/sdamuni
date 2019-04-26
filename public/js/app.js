@@ -2326,12 +2326,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_filepond__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_filepond__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var filepond_plugin_file_validate_type_dist_filepond_plugin_file_validate_type_esm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js");
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_esm_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js");
+<<<<<<< HEAD
 /* harmony import */ var filepond_plugin_file_encode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! filepond-plugin-file-encode */ "./node_modules/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js");
 /* harmony import */ var filepond_plugin_file_encode__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_encode__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
 /* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css");
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_7__);
+=======
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
+/* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css");
+/* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_min_css__WEBPACK_IMPORTED_MODULE_6__);
+>>>>>>> develop
 //
 //
 //
@@ -2513,7 +2520,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
  // Import styles
 
 
@@ -2573,7 +2583,10 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   },
   methods: {
     onFileChange: function onFileChange(e) {
+<<<<<<< HEAD
       console.log(e);
+=======
+>>>>>>> develop
       var files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.imgEscudo = files[0];
@@ -2583,17 +2596,29 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       var imgEscudo = new Image();
       var reader = new FileReader();
       var vm = this;
+<<<<<<< HEAD
       console.log(reader);
+=======
+>>>>>>> develop
 
       reader.onload = function (e) {
         vm.imgEscudo = e.target.result;
       };
+<<<<<<< HEAD
 
       reader.readAsDataURL(file);
     },
     onSubmit: function onSubmit(file) {
       var _this = this;
 
+=======
+
+      reader.readAsDataURL(file);
+    },
+    onSubmit: function onSubmit(file) {
+      var _this = this;
+
+>>>>>>> develop
       this.$validator.validate().then(function (valid) {
         if (valid) {
           var urlStoreAyuntamiento = route('ayuntamiento.store').template;
@@ -2618,7 +2643,11 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Aceptar'
               });
+<<<<<<< HEAD
             } else if (response.data == 3) {
+=======
+            } else if (response.data == 1) {
+>>>>>>> develop
               Vue.swal({
                 title: 'Hecho',
                 text: "Ayuntamiento registrado correctamente.",
@@ -2662,9 +2691,14 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     },
     handleFilePondInit: function handleFilePondInit() {
       // console.log('FilePond has initialized');
+<<<<<<< HEAD
       console.log(this.$refs.pond.getFileEncodeBase64String());
       this.createImage(this.$refs.pond.getFile()); // example of instance method call on pond reference
       // this.imgEscudo =this.$refs.pond.getFiles()
+=======
+      // example of instance method call on pond reference
+      this.imgEscudo = this.$refs.pond.getFiles();
+>>>>>>> develop
     },
     selecMunic: function selecMunic(data) {
       this.claveMunicSelec = this.municSel.clave;
@@ -31400,6 +31434,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js":
 /*!**************************************************************************************!*\
   !*** ./node_modules/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js ***!
@@ -31593,6 +31628,8 @@ function toComment(sourceMap) {
 
 /***/ }),
 
+=======
+>>>>>>> develop
 /***/ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js":
 /*!********************************************************************************************************!*\
   !*** ./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js ***!

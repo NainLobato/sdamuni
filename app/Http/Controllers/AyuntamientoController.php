@@ -9,6 +9,7 @@ use App\Models\CatPartido;
 use App\Models\CatDistrito;
 use App\Models\AyuntamientoPartido;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 use DB;
 
 class AyuntamientoController extends Controller
@@ -22,12 +23,12 @@ class AyuntamientoController extends Controller
 
     public function create()
     {
-        $ayuntamiento = Ayuntamiento::with('municipio','partidos')->has('municipio')->get();
+        $ayuntamientos = Ayuntamiento::with('municipio','partidos')->has('municipio')->get();
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
         $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
         // dd( $ayuntamiento);
-        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos)->with('ayuntamiento',$ayuntamiento);
+        return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos)->with('ayuntamientos',$ayuntamientos);
     }
 
     public function getCatalogos()
@@ -80,24 +81,34 @@ class AyuntamientoController extends Controller
 
     public function show($id)
     {
-        $ayuntamiento = Ayuntamiento::where('id',$id)->first();
+        $ayuntamiento = Ayuntamiento::with('municipio','partidos','RutaImagen')->has('municipio')->where('id',$id)->first();
         return view('ayuntamiento.show')->with('ayuntamiento',$ayuntamiento);
     }
 
     public function edit($id)
     {
-        $ayuntamiento = Ayuntamiento::where('id',$id)->first();
+        $ayuntamiento = Ayuntamiento::with('municipio','partidos','RutaImagen')->has('municipio')->where('id',$id)->first();
+        $ayuntamientos = Ayuntamiento::with('municipio','partidos')->has('municipio')->get();
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->pluck('municipio', 'id');
         $partidos = CatPartido::orderBy('partido', 'asc')->pluck('partido', 'id');
-        return view('ayuntamiento.edit')->with('ayuntamiento',$ayuntamiento)->with('municipios',$municipios)->with('partidos',$partidos);    }
+        return view('forms.ayuntamiento')->with('ayuntamiento',$ayuntamiento)->with('ayuntamientos',$ayuntamientos)->with('municipios',$municipios)->with('partidos',$partidos);    }
 
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
         try{
+            if($request->get('ayuntamiento')['escudo']){
+                $image = $request->get('ayuntamiento')['escudo'];
+                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                \Image::make($request->get('ayuntamiento')['escudo'])->save(storage_path('escudos'.DIRECTORY_SEPARATOR).$name);
+            }else {
+                $name = '';
+            }
+
             $ayuntamiento = Ayuntamiento::find($id);
             $ayuntamiento->municipio_id = $request->municipio_id;
-            $ayuntamiento->escudo = $request->escudo;
+            Storage::delete(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+            $ayuntamiento->escudo = $name;
             $ayuntamiento->telefono1 = $request->telefono1;
             $ayuntamiento->telefono2 = $request->telefono2;
             $ayuntamiento->correo = $request->correo;

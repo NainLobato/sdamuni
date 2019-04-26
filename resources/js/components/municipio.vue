@@ -155,8 +155,8 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(ayunta, index) in ayuntamientos" :key="index">
-                                <td class="text-center">Una imagen por aqui</td>
-                                <td class="text-center">{{ayunta.municipio.municipio}}</td>
+                                <td class="text-center"><img class="imagenTabla" :src="'data:image/'+ayunta.formato+';base64,' + ayunta.escudo  " alt=""></td>
+                                <td class="text-center">{{ayunta.municipio.nombre}}</td>
                                 <td class="text-center">{{ayunta.correo}}</td>
                                 <td class="text-center">{{ayunta.telefono1}}</td>
                                 <td class="text-center"><button v-on:click="editar(ayunta)"><i class="fas fa-edit"></i></button></td>
@@ -387,9 +387,9 @@
     .ver{
     display: block;
     }
-    .imagenSubir{
-        width: 8rem;
-        height: 8rem;
+    .imagenTabla{
+        width: 3rem;
+        height: 3rem;
         border-radius: 50%;
         background-color: aliceblue;
     }

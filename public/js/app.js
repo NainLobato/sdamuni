@@ -31296,7 +31296,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.ver{\ndisplay: block;\n}\n.imagenSubir{\n    width: 8rem;\n    height: 8rem;\n    border-radius: 50%;\n    background-color: aliceblue;\n}\n.errorImagen{\n    position: absolute;\n    bottom: 0;\n}\n.upload-btn-wrapper {\nposition: relative;\noverflow: hidden;\ndisplay: inline-block;\n}\n.jom {\nborder: 2px solid gray;\ncolor: gray;\nbackground-color: white;\npadding: 8px 20px;\nborder-radius: 8px;\nfont-size: 0.8rem;\nfont-weight: bold;\n}\n.upload-btn-wrapper input[type=file] {\nfont-size: 0.8rem;\nposition: absolute;\nleft: 0;\ntop: 0;\nopacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.ver{\ndisplay: block;\n}\n.imagenTabla{\n    width: 3rem;\n    height: 3rem;\n    border-radius: 50%;\n    background-color: aliceblue;\n}\n.errorImagen{\n    position: absolute;\n    bottom: 0;\n}\n.upload-btn-wrapper {\nposition: relative;\noverflow: hidden;\ndisplay: inline-block;\n}\n.jom {\nborder: 2px solid gray;\ncolor: gray;\nbackground-color: white;\npadding: 8px 20px;\nborder-radius: 8px;\nfont-size: 0.8rem;\nfont-weight: bold;\n}\n.upload-btn-wrapper input[type=file] {\nfont-size: 0.8rem;\nposition: absolute;\nleft: 0;\ntop: 0;\nopacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -75553,11 +75553,21 @@ var render = function() {
                   _vm._l(_vm.ayuntamientos, function(ayunta, index) {
                     return _c("tr", { key: index }, [
                       _c("td", { staticClass: "text-center" }, [
-                        _vm._v("Una imagen por aqui")
+                        _c("img", {
+                          staticClass: "imagenTabla",
+                          attrs: {
+                            src:
+                              "data:image/" +
+                              ayunta.formato +
+                              ";base64," +
+                              ayunta.escudo,
+                            alt: ""
+                          }
+                        })
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-center" }, [
-                        _vm._v(_vm._s(ayunta.municipio.municipio))
+                        _vm._v(_vm._s(ayunta.municipio.nombre))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-center" }, [

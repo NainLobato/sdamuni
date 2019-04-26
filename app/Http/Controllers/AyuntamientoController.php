@@ -93,6 +93,7 @@ class AyuntamientoController extends Controller
         $partidos = CatPartido::orderBy('partido', 'asc')->pluck('partido', 'id');
         return view('forms.ayuntamiento')->with('ayuntamiento',$ayuntamiento)->with('ayuntamientos',$ayuntamientos)->with('municipios',$municipios)->with('partidos',$partidos);    }
 
+
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
@@ -121,6 +122,23 @@ class AyuntamientoController extends Controller
                 $ayuntamientoPartido->partido_id = $request->partido_id;
                 $ayuntamientoPartido->save();
             }
+            DB::commit();
+            return 1;
+        }catch(Exception $e){
+            DB::rollBack();
+            return 0;
+        }
+    }
+
+    public function delete($id)
+    {
+        DB::beginTransaction();
+        try{
+            $ayuntamiento = Ayuntamiento::find($id);
+            Storage::delete(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+            AyuntamientoPartido::where('ayuntamiento_id', $ayuntamiento->id)->delete();
+            $ayuntamiento->delete();
+
             DB::commit();
             return 1;
         }catch(Exception $e){

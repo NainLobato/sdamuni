@@ -22,9 +22,11 @@ class AyuntamientoController extends Controller
         foreach ($ayuntamientos as $ayuntamiento) {
             if($ayuntamiento->escudo==''){
                 $imdata='';
+                $formato='';
             }else{
                 $im = file_get_contents(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
                 $imdata = base64_encode($im);
+                $formato =explode(".", $ayuntamiento->escudo)[1];
             }
             $varAyuntamiento = [];
             $varAyuntamiento['municipio'] = [ 'id' => $ayuntamiento->municipio->id, 'nombre' => $ayuntamiento->municipio->municipio, 'clave' => $ayuntamiento->municipio->clave];
@@ -42,6 +44,7 @@ class AyuntamientoController extends Controller
             $varAyuntamiento['telefono2'] = $ayuntamiento->telefono2;
             $varAyuntamiento['correo'] = $ayuntamiento->correo;
             $varAyuntamiento['escudo'] = $imdata;
+            $varAyuntamiento['formato'] = $formato;
             array_push($arrayAyunta,$varAyuntamiento);
 
         }

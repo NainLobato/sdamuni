@@ -20,17 +20,17 @@
                                 </div>
                                 <div class="row mx-1">
                                     <div class="col-md-2">
-                                        <img :src='logo' class="center img-circle-2 elevation-2" alt="">
+                                        <img :src='ayuntamiento.logo' class="center img-circle-2 elevation-2" alt="">
                                     </div>
                                      <div class="col-md-10">
                                         <div class="row mr-2">
                                             <div class="col-md-4">
                                                 <label for="claveMunicipio">Clave del municipio</label>
-                                                <h6 v-html="claveNombre"></h6>
+                                                <h6 v-html="ayuntamiento.claveNombre"></h6>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="nombreMunicipio">Municipio</label>
-                                                <h6 v-html="municNombre"></h6>
+                                                <h6 v-html="ayuntamiento.municNombre"></h6>
                                             </div>
                                             <div class="col-md-2 ">
                                                 <label for="distrito">Distrito</label>
@@ -38,19 +38,19 @@
                                             </div>
                                             <div class="col-md-2">
                                                 <label for="partido">Partido político</label>
-                                                <h6 v-html="partido"></h6>
+                                                <h6 v-html="ayuntamiento.partidos"></h6>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="telefono1">Telefono 1</label>
-                                                <h6 v-html="telefono1"></h6>
+                                                <h6 v-html="ayuntamiento.telefono1"></h6>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="telefono2">Telefono 2</label>
-                                                <h6 v-html="telefono2" > </h6>
+                                                <h6 v-html="ayuntamiento.telefono2" > </h6>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="correo">Correo electrónico municipal</label>
-                                                <h6 v-html="correo" ></h6>
+                                                <h6 v-html="ayuntamiento.correo" ></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -64,28 +64,20 @@
                         <div  class="row mx-2">
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="file" v-on:change="onFileChange" name="" id="">
-                                        <div class="text-center">
-                                            <file-pond
-                                                name="test"
-                                                ref="pond"
-                                                class-name="my-pond"
-                                                label-idle="Drop files here..."
-                                                allow-multiple="false"
-                                                accepted-file-types="image/jpeg, image/png"
+                                    <div class="col-md-6 text-center">
+                                        <div id="profile">
+                                        <div class="dashes"></div>
+                                        <label>Da click o arrastra una imagen</label></div>
+                                        <input type="file" id="mediaFile"  v-validate="'image||required'"  name="imagen"/>
 
-
-                                                 v-on:addfile="handleFilePondInit()"/>
-                                            <!-- <img :src='logo' class="img-circle-2 elevation-2" alt=""> -->
-                                        </div>
                                     <div>
+                                        <div class="invalid-feedback ver errorImagen" v-if="errors.has('imagen')">{{ errors.first('imagen') }}</div>
                                     </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="nombreMunicipio">Municipio</label>
-                                            <v-select :options="munic" v-model="municSel" name="nombreMunicipio"  label="nombre"  placeholder="Elige un municipio"  v-validate="'required'" @input="selecMunic()">
+                                            <v-select :options="municipios" v-model="ayuntamiento.municipio" name="nombreMunicipio"  label="nombre"  placeholder="Elige un municipio"  v-validate="'required'" @input="selecMunic()">
                                                 <slot name="no-options">¡No hay opciones disponibles!</slot>
                                             </v-select>
                                             <div class="invalid-feedback ver" v-if="errors.has('nombreMunicipio')">{{ errors.first('nombreMunicipio') }}</div>
@@ -93,7 +85,7 @@
                                         <h6 class="mt-2"><strong>Clave del municipio</strong> <span v-html="claveMunicSelec"></span> </h6>
                                         <div class="form-group">
                                             <label for="distrito">Distrito</label>
-                                            <v-select :options="distri" v-model="distriSel" name="distrito" label="nombre" @input="selecMunic()" v-validate="'required'"  placeholder="Elige un distrito" >
+                                            <v-select :options="distritos" v-model="ayuntamiento.distrito" name="distrito" label="nombre" @input="selecMunic()" v-validate="'required'"  placeholder="Elige un distrito" >
                                                 <slot name="no-options">¡No hay opciones disponibles!</slot>
                                             </v-select>
                                             <div class="invalid-feedback ver" v-if="errors.has('distrito')">{{ errors.first('distrito') }}</div>
@@ -106,14 +98,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="telefono1">Telefono 1</label>
-                                            <input type="text" id="telefono1" v-model="telefono1" name="telefono1" class="form-control" placeholder="Ingrese telefono" data-vv-as="teléfono uno" v-validate="'required||length:10'">
+                                            <input type="text" id="telefono1" v-model="ayuntamiento.telefono1" name="telefono1" class="form-control" placeholder="Ingrese telefono" data-vv-as="teléfono uno" v-validate="'required||length:10'">
                                             <div class="invalid-feedback ver" v-if="errors.has('telefono1')">{{ errors.first('telefono1') }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="telefono2">Telefono 2</label>
-                                            <input type="text" id="telefono2" v-model="telefono2" name="telefono2" class="form-control" placeholder="Ingrese telefono" data-vv-as="teléfono dos" v-validate="'required||length:10'" >
+                                            <input type="text" id="telefono2" v-model="ayuntamiento.telefono2" name="telefono2" class="form-control" placeholder="Ingrese telefono" data-vv-as="teléfono dos" v-validate="'required||length:10'" >
                                             <div class="invalid-feedback ver" v-if="errors.has('telefono2')">{{ errors.first('telefono2') }}</div>
                                         </div>
 
@@ -121,14 +113,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="correo">Correo electrónico municipal</label>
-                                            <input type="text" id="correo" v-model="correo" name="correo" class="form-control" placeholder="Ingrese email" v-validate="'required||email'">
+                                            <input type="text" id="correo" v-model="ayuntamiento.correo" name="correo" class="form-control" placeholder="Ingrese email" v-validate="'required||email'">
                                             <div class="invalid-feedback ver" v-if="errors.has('correo')">{{ errors.first('correo') }}</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="partido">Partido político</label>
-                                            <v-select :options="partidox" v-model="partido" label="nombre" name="partido" :multiple="true" placeholder="Elige un partido" v-validate="'required'" >
+                                            <v-select :options="partidos" v-model="ayuntamiento.partidos" label="nombre" name="partido" :multiple="true" placeholder="Elige un partido" v-validate="'required'" >
                                                     <slot name="no-options">¡No hay opciones disponibles!</slot>
                                                 </v-select>
                                             <div class="invalid-feedback ver" v-if="errors.has('partido')">{{ errors.first('partido') }}</div>
@@ -153,18 +145,20 @@
                         <table class="table">
                             <thead class="thead-dark">
                                 <tr>
-                                <th scope="col">Municipio</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Telefono</th>
-                                <th scope="col">Acciones</th>
+                                <th class=" text-center">Escudo</th>
+                                <th class=" text-center">Ayuntamiento</th>
+                                <th class=" text-center">Correo</th>
+                                <th class=" text-center">Telefono</th>
+                                <th class=" text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(ayunta, index) in ayuntamientos" :key="index">
-                                <td>{{ayunta.id}}</td>
-                                <td>{{ayunta.correo}}</td>
-                                <td>{{ayunta.telefono1}}</td>
-                                <td><i class="fas fa-edit"></i></td>
+                                <td class="text-center">Una imagen por aqui</td>
+                                <td class="text-center">{{ayunta.municipio.municipio}}</td>
+                                <td class="text-center">{{ayunta.correo}}</td>
+                                <td class="text-center">{{ayunta.telefono1}}</td>
+                                <td class="text-center"><button v-on:click="editar(ayunta)"><i class="fas fa-edit"></i></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -178,82 +172,106 @@
 <script>
     import vSelect from 'vue-select'
     import 'vue-select/dist/vue-select.css';
-    import vueFilePond from 'vue-filepond';
-    import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js';
-    import FilePondPluginImagePreview from 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js';
-    import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
-    // Import styles
-    import 'filepond/dist/filepond.min.css';
-    import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
-    const FilePond = vueFilePond( FilePondPluginFileValidateType, FilePondPluginImagePreview );
     Vue.component('v-select', vSelect)
     export default {
         data(){
             return{
-                logo: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/avatar5.png',
-                claveMunicipio:'',
-                claveMunicSelec:'',
-                munic:[],
-                municSel:'',
-                distri:[],
-                distriSel:'',
-                telefono1:'22558141145',
-                telefono2:'2251488787',
-                correo:'municipio@munic.com',
-                partidox:[],
-                partido:[],
                 editando:false,
+                imgEscudo:window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/escudo.png',
+                claveMunicipio:'',
                 claveNombre:'',
                 municNombre:'',
-                imgEscudo:'',
-                ayuntamiento:[]
+                claveMunicSelec:'',
+                ayuntamiento:{
+                    logo: '',
+                    municipio:'',
+                    partidos:[],
+                    distrito:'',
+                    telefono1:'',
+                    telefono2:'',
+                    correo:'',
+                    partidox:[],
+                    escudo:'',
+                    id:'',
+
+                }
+                // correo:"ijopuo@munic.com"
+                // created_at:"2019-04-25 20:45:02"
+                // deleted_at:null
+                // escudo:"1556243101.png"
+                // id:4
+                // municipio:Object
+                // municipio_id:29
+                // partidos:Array[0]
+                // telefono1:"1121578454"
+                // telefono2:"2251488787"
+                // updated_at:"2019-04-25 20:45:02"
 
             }
 
         },
         props:['municipios','create','distritos','partidos','ayuntamientos'],
         mounted() {
-            if(this.editando==false){
-                console.log('es falso')
-                this.claveNombre= this.claveMunicSelec.nombre
-                this.municNombre= this.municSel.nombre
-            }
-            if(this.municipios){
-                this.munic = this.municipios
-            }
-            if(this.distritos){
-                this.distri = this.distritos
-            }
-            if(this.partidos){
-                this.partidox = this.partidos
-            }
+
             // if(this.ayuntamientos){
             //     this.ayuntamiento
             // }
             console.log('Component mounted.')
         },
         created(){
-
+            if(this.editando==false){
+                console.log('es falso')
+                this.claveNombre= this.ayuntamiento.municipio.nombre
+                this.municNombre= this.ayuntamiento.municipio.nombre
+            }
+        },
+        mounted(){
+            var self = this
+            $(function() {
+                $('#profile').addClass('dragging').removeClass('dragging');
+            });
+            $('#profile').on('dragover', function() {
+                $('#profile').addClass('dragging')
+                }).on('dragleave', function() {
+                $('#profile').removeClass('dragging')
+                }).on('drop', function(e) {
+                    $('#profile').removeClass('dragging hasImage');
+                    self.onFileChange(e)
+                                    })
+                $('#profile').on('click', function(e) {
+                    console.log('clicked')
+                    $('#mediaFile').click();
+                });
+                window.addEventListener("dragover", function(e) {
+                e = e || event;
+                e.preventDefault();
+                }, false);
+                window.addEventListener("drop", function(e) {
+                e = e || event;
+                e.preventDefault();
+                }, false);
+                $('#mediaFile').change(function(e) {
+                    self.onFileChange(e)
+                })
         },
         components:{
-            FilePond
+
         },
         methods:{
             onFileChange(e) {
-                console.log(e)
             var files = e.target.files || e.dataTransfer.files;
             if (!files.length)
                 return;
-                this.imgEscudo= files[0]
+                // this.ayuntamiento.imgEscudo= files[0]
                 this.createImage(files[0]);
             },
             createImage(file) {
                 var imgEscudo = new Image();
                 var reader = new FileReader();
                 var vm = this;
-                console.log(reader)
                 reader.onload = (e) => {
-                    vm.imgEscudo = e.target.result;
+                    $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                    vm.ayuntamiento.imgEscudo = e.target.result;
                 };
                 reader.readAsDataURL(file);
             },
@@ -262,13 +280,13 @@
                      if (valid) {
                     const urlStoreAyuntamiento = route('ayuntamiento.store').template
                     let ayuntamiento={
-                        municipio_id : this.municSel.id,
-                        distrito_id: this.distriSel.id,
-                        partido_id:this.partido,
-                        escudo: this.imgEscudo,
-                        telefono1: this.telefono1,
-                        telefono2: this.telefono2,
-                        correo: this.correo
+                        municipio_id : this.ayuntamiento.municipio.id,
+                        distrito_id: this.ayuntamiento.distrito.id,
+                        partido_id:this.ayuntamiento.partidos,
+                        escudo: this.ayuntamiento.imgEscudo,
+                        telefono1: this.ayuntamiento.telefono1,
+                        telefono2: this.ayuntamiento.telefono2,
+                        correo: this.ayuntamiento.correo
                     }
                     axios.post(urlStoreAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
                         if(response.data == 0){
@@ -288,6 +306,11 @@
                                     showCancelButton: false,
                                     confirmButtonText: 'Aceptar',
                                     confirmButtonColor: '#3085d6',
+                                    closeOnClickOutside: false,
+                                }).then((confirmed) => {
+                                    if (confirmed) {
+                                        location.reload()
+                                    }
                                 })
                              }//else{
                             //     var emp = {
@@ -315,10 +338,12 @@
                  })
 
             },
-            editar(){
+            editar(data){
+                this.ayuntamiento = data
                 const urlCreateAyuntamiento = route('ayuntamiento.create')
                 console.log(urlCreateAyuntamiento);
-                this.editando = true
+                console.log
+                // this.editando = true
             },
             cancelarEdicion(){
                 this.editando=false
@@ -332,9 +357,10 @@
 
             },
             selecMunic(data){
-                this.claveMunicSelec = this.municSel.clave
+                this.claveMunicSelec = this.ayuntamiento.municipio.clave
 
             },
+
 
         }
     }
@@ -342,5 +368,38 @@
 <style >
     .ver{
     display: block;
+    }
+    .imagenSubir{
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        background-color: aliceblue;
+    }
+    .errorImagen{
+        position: absolute;
+        bottom: 0;
+    }
+    .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    }
+
+    .jom {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+    font-size: 0.8rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
     }
 </style>

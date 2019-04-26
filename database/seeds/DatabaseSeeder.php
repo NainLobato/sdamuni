@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CargosSeeder::class);
         $this->call(PartidosSeeder::class);
         $this->call(AyuntamientoSeeder::class); // Seeder  para registro de prueba
+        $this->call(ValoresEfectivoSeeder::class);
+
 
     }
 }

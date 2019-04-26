@@ -2497,6 +2497,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
@@ -2663,12 +2664,26 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   },
   editar: function editar(data) {
     this.ayuntamiento = data;
+    this.editando = true;
     var urlCreateAyuntamiento = route('ayuntamiento.create');
     console.log(urlCreateAyuntamiento);
     console.log; // this.editando = true
   },
   cancelarEdicion: function cancelarEdicion() {
     this.editando = false;
+    this.ayuntamiento = {
+      logo: '',
+      municipio: '',
+      partidos: [],
+      distrito: '',
+      telefono1: '',
+      telefono2: '',
+      correo: '',
+      partidox: [],
+      escudo: '',
+      id: ''
+    };
+    this.$validator.reset();
   },
   handleFilePondInit: function handleFilePondInit() {
     // console.log('FilePond has initialized');
@@ -74960,7 +74975,7 @@ var render = function() {
       _vm.editando == true || _vm.create == 1
         ? _c("div", { staticClass: "card-header" }, [
             _c("h5", { staticClass: "card-title text-center" }, [
-              _vm._v("Información municipal")
+              _vm._v("Creación y edición de ayuntamientos")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-tools" })
@@ -75495,14 +75510,23 @@ var render = function() {
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Guardar")]
-                    )
+                    _vm.editando == true
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Actualizar")]
+                        )
+                      : _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Guardar")]
+                        )
                   ])
                 ])
               ]

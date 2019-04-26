@@ -2,7 +2,7 @@
     <div>
         <div class="card ">
                 <div v-if="editando==true || create==1" class="card-header">
-                    <h5 class="card-title text-center">Información municipal</h5>
+                    <h5 class="card-title text-center">Creación y edición de ayuntamientos</h5>
                     <div class="card-tools">
                          <!-- <button type="button" class="btn btn-tool" data-widget="collapse">
                             <i class="fa fa-minus"></i>
@@ -130,7 +130,8 @@
                             </div>
                             <div class="col-md-12 text-right mb-2">
                                 <button type="button" v-if="editando==true" v-on:click="cancelarEdicion()" class="btn btn-secondary">Cancelar edición</button>
-                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="submit"  v-if="editando==true" class="btn btn-primary">Actualizar</button>
+                                <button type="submit" v-else="" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -340,6 +341,7 @@
             },
             editar(data){
                 this.ayuntamiento = data
+                this.editando= true
                 const urlCreateAyuntamiento = route('ayuntamiento.create')
                 console.log(urlCreateAyuntamiento);
                 console.log
@@ -347,6 +349,19 @@
             },
             cancelarEdicion(){
                 this.editando=false
+                this.ayuntamiento={
+                    logo: '',
+                    municipio:'',
+                    partidos:[],
+                    distrito:'',
+                    telefono1:'',
+                    telefono2:'',
+                    correo:'',
+                    partidox:[],
+                    escudo:'',
+                    id:'',
+                }
+                this.$validator.reset()
             },
             handleFilePondInit() {
             // console.log('FilePond has initialized');

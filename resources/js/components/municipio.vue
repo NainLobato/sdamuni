@@ -130,7 +130,7 @@
                             </div>
                             <div class="col-md-12 text-right mb-2">
                                 <button type="button" v-if="editando==true" v-on:click="cancelarEdicion()" class="btn btn-secondary">Cancelar edición</button>
-                                <button type="submit"  v-if="editando==true" class="btn btn-primary">Actualizar</button>
+                                <button type="button"  v-if="editando==true" class="btn btn-primary">Actualizar</button>
                                 <button type="submit" v-else="" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
@@ -342,13 +342,16 @@
             editar(data){
                 this.ayuntamiento = data
                 this.editando= true
-                const urlCreateAyuntamiento = route('ayuntamiento.create')
-                console.log(urlCreateAyuntamiento);
-                console.log
+                if(this.ayuntamiento.formato){
+                    $('#profile').css('background-image', 'url(data:image/'+this.ayuntamiento.formato+';base64,' + this.ayuntamiento.escudo + ')').addClass('hasImage');
+                }
+                const urlUpdateAyuntamiento = route('ayuntamiento.update').template
+
                 // this.editando = true
             },
             cancelarEdicion(){
                 this.editando=false
+                $('#profile').removeAttr("style").removeClass('hasImage');
                 this.ayuntamiento={
                     logo: '',
                     municipio:'',

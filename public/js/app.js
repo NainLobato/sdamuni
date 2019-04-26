@@ -2665,12 +2665,16 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
   editar: function editar(data) {
     this.ayuntamiento = data;
     this.editando = true;
-    var urlCreateAyuntamiento = route('ayuntamiento.create');
-    console.log(urlCreateAyuntamiento);
-    console.log; // this.editando = true
+
+    if (this.ayuntamiento.formato) {
+      $('#profile').css('background-image', 'url(data:image/' + this.ayuntamiento.formato + ';base64,' + this.ayuntamiento.escudo + ')').addClass('hasImage');
+    }
+
+    var urlUpdateAyuntamiento = route('ayuntamiento.update').template; // this.editando = true
   },
   cancelarEdicion: function cancelarEdicion() {
     this.editando = false;
+    $('#profile').removeAttr("style").removeClass('hasImage');
     this.ayuntamiento = {
       logo: '',
       municipio: '',
@@ -75515,7 +75519,7 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn btn-primary",
-                            attrs: { type: "submit" }
+                            attrs: { type: "button" }
                           },
                           [_vm._v("Actualizar")]
                         )

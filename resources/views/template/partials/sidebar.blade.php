@@ -38,7 +38,7 @@
                             </a>
                         </li>
                     <li class="nav-item">
-                        <a href="{{ route('ayuntamiento.create') }}" class="nav-link">
+                        <a href="{{ route('ayuntamiento.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-university"></i>
                             <p>Creación de ayuntamientos</p>
                         </a>

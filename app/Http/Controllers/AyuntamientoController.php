@@ -17,17 +17,10 @@ class AyuntamientoController extends Controller
 
     public function index()
     {
-        $ayuntamiento = Ayuntamiento::all();
-        return view('forms.ayuntamiento')->with('ayuntamiento',$ayuntamiento);
-    }
-
-    public function create()
-    {
         $ayuntamientos = Ayuntamiento::with('municipio','partidos')->has('municipio')->get();
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
         $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
-        // dd( $ayuntamiento);
         return view('forms.ayuntamiento')->with('municipios',$municipios)->with('partidos',$partidos)->with('distritos',$distritos)->with('ayuntamientos',$ayuntamientos);
     }
 
@@ -94,8 +87,9 @@ class AyuntamientoController extends Controller
         return view('forms.ayuntamiento')->with('ayuntamiento',$ayuntamiento)->with('ayuntamientos',$ayuntamientos)->with('municipios',$municipios)->with('partidos',$partidos);    }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = intval($request->id);
         DB::beginTransaction();
         try{
             if($request->get('ayuntamiento')['escudo']){
@@ -130,8 +124,9 @@ class AyuntamientoController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
+        $id = intval($request->id);
         DB::beginTransaction();
         try{
             $ayuntamiento = Ayuntamiento::find($id);

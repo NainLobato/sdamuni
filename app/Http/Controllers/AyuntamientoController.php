@@ -18,6 +18,35 @@ class AyuntamientoController extends Controller
     public function index()
     {
         $ayuntamientos = Ayuntamiento::with('municipio','partidos')->has('municipio')->get();
+        $arrayAyunta = [];
+        foreach ($ayuntamientos as $ayuntamiento) {
+            if($ayuntamiento->escudo==''){
+                $imdata='';
+            }else{
+                $im = file_get_contents(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+                $imdata = base64_encode($im);
+            }
+            $varAyuntamiento = [];
+            $varAyuntamiento['municipio'] = [ 'id' => $ayuntamiento->municipio->id, 'nombre' => $ayuntamiento->municipio->municipio, 'clave' => $ayuntamiento->municipio->clave];
+            $varAyuntamiento['distrito'] = [ 'id' => $ayuntamiento->municipio->distrito->id, 'nombre' => $ayuntamiento->municipio->distrito->distrito];
+            $varAyuntamiento['partidos'] = [];
+
+            foreach ($ayuntamiento->partidos as $partido) {
+                $row = [];
+                $row['id'] = $partido->id;
+                $row['nombre'] = $partido->partido;
+                array_push($varAyuntamiento['partidos'],$row);
+            }
+            $varAyuntamiento['id'] = $ayuntamiento->id;
+            $varAyuntamiento['telefono1'] = $ayuntamiento->telefono1;
+            $varAyuntamiento['telefono2'] = $ayuntamiento->telefono2;
+            $varAyuntamiento['correo'] = $ayuntamiento->correo;
+            $varAyuntamiento['escudo'] = $imdata;
+            array_push($arrayAyunta,$varAyuntamiento);
+
+        }
+        $ayuntamientos = $arrayAyunta;
+        // dd($ayuntamientos);
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id', 'clave')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
         $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
@@ -29,9 +58,11 @@ class AyuntamientoController extends Controller
 
         $municipios = CatMunicipio::orderBy('municipio', 'asc')->select('municipio as nombre', 'id')->get();
         $partidos = CatPartido::orderBy('partido', 'asc')->select('partido as nombre', 'id')->get();
+        $distritos = CatDistrito::orderBy('distrito', 'asc')->select('distrito as nombre', 'id')->get();
 		$data = array(
 		'municipios' => $municipios,
-		'partidos' => $partidos
+		'partidos' => $partidos,
+		'distritos' => $distritos
 		);
 		return response()->json($data);
     }

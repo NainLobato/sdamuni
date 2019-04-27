@@ -59,6 +59,26 @@ class Relacion extends Model
         return $this->hasMany('App\Models\JuicioContraAyuntamiento','relacion_id','id');
     }
 
+    public function arqueoCaja()
+    {
+        return $this->hasMany('App\Models\ArqueoCaja','relacion_id','id');
+    }
+
+    public function concilacion()
+    {
+        return $this->hasMany('App\Models\Conciliacion','relacion_id','id');
+    }
+
+    public function talonarioCheque()
+    {
+        return $this->hasMany('App\Models\TalonarioCheque','relacion_id','id');
+    }
+    
+    public function inventarioFormaValorada()
+    {
+        return $this->hasMany('App\Models\InventarioFormaValorada','relacion_id','id');
+    }
+
     
 
 }

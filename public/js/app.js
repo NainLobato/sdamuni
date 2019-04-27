@@ -2498,6 +2498,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
@@ -74975,7 +74978,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "card " }, [
+    _c("div", { staticClass: "card card-select" }, [
       _vm.editando == true || _vm.create == 1
         ? _c("div", { staticClass: "card-header" }, [
             _c("h5", { staticClass: "card-title text-center" }, [
@@ -75582,6 +75585,7 @@ var render = function() {
                         _c(
                           "button",
                           {
+                            staticClass: "btn btn-outline-info",
                             on: {
                               click: function($event) {
                                 return _vm.editar(ayunta)
@@ -75589,6 +75593,19 @@ var render = function() {
                             }
                           },
                           [_c("i", { staticClass: "fas fa-edit" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-danger",
+                            on: {
+                              click: function($event) {
+                                return _vm.editar(ayunta)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-trash-alt" })]
                         )
                       ])
                     ])

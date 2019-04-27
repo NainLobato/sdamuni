@@ -10702,6 +10702,14 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+.btn-outline-info:hover {
+  color: #ffffff;
+}
+
+.card-select {
+  overflow: visible !important;
+}
+
 .btn-card:hover {
   -webkit-transform: scale(1.1);
           transform: scale(1.1);

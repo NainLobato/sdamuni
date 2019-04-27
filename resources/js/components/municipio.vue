@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card ">
+        <div class="card card-select">
                 <div v-if="editando==true || create==1" class="card-header">
                     <h5 class="card-title text-center">Creación y edición de ayuntamientos</h5>
                     <div class="card-tools">
@@ -159,7 +159,10 @@
                                 <td class="text-center">{{ayunta.municipio.nombre}}</td>
                                 <td class="text-center">{{ayunta.correo}}</td>
                                 <td class="text-center">{{ayunta.telefono1}}</td>
-                                <td class="text-center"><button v-on:click="editar(ayunta)"><i class="fas fa-edit"></i></button></td>
+                                <td class="text-center">
+                                    <button v-on:click="editar(ayunta)" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
+                                    <button v-on:click="editar(ayunta)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
                                 </tr>
                             </tbody>
                         </table>

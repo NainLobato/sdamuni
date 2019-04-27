@@ -67,8 +67,9 @@
                                     <div class="col-md-6 text-center">
                                         <div id="profile">
                                         <div class="dashes"></div>
-                                        <label>Da click o arrastra una imagen</label></div>
-                                        <input type="file" id="mediaFile"  v-validate="'image||required'"  name="imagen"/>
+                                        <label>Da click para agregar una imagen</label></div>
+                                        <input type="file" v-if="editando==true" id="mediaFile"  v-validate="`${ imagenCargada == 1 ? 'image||required' : ''}`"  name="imagen"/>
+                                        <input type="file" v-else="" id="mediaFile"  v-validate="'image||required'"  name="imagen"/>
 
                                     <div>
                                         <div class="invalid-feedback ver errorImagen" v-if="errors.has('imagen')">{{ errors.first('imagen') }}</div>
@@ -130,7 +131,7 @@
                             </div>
                             <div class="col-md-12 text-right mb-2">
                                 <button type="button" v-if="editando==true" v-on:click="cancelarEdicion()" class="btn btn-secondary">Cancelar edición</button>
-                                <button type="button"  v-if="editando==true" class="btn btn-primary">Actualizar</button>
+                                <button type="button"  v-if="editando==true" v-on:click="update()" class="btn btn-primary">Actualizar</button>
                                 <button type="submit" v-else="" class="btn btn-primary">Guardar</button>
                             </div>
                         </div>
@@ -161,7 +162,7 @@
                                 <td class="text-center">{{ayunta.telefono1}}</td>
                                 <td class="text-center">
                                     <button v-on:click="editar(ayunta)" class="btn btn-outline-info"><i class="fas fa-edit"></i></button>
-                                    <button v-on:click="editar(ayunta)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                                    <button v-on:click="eliminar(ayunta.id)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                                 </tr>
                             </tbody>
@@ -180,6 +181,7 @@
     export default {
         data(){
             return{
+                imagenCargada:0,
                 editando:false,
                 imgEscudo:window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/escudo.png',
                 claveMunicipio:'',
@@ -275,6 +277,10 @@
                 var vm = this;
                 reader.onload = (e) => {
                     $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+                    if(vm.editando == true){
+                        vm.ayuntamiento.escudo=''
+                    }
+                    vm.imagenCargada = true
                     vm.ayuntamiento.imgEscudo = e.target.result;
                 };
                 reader.readAsDataURL(file);
@@ -342,15 +348,114 @@
                  })
 
             },
+            update(){
+                const urlUpdateAyuntamiento = route('ayuntamiento.update').template
+                console.log(urlUpdateAyuntamiento)
+                this.$validator.validate().then(valid => {
+                     if (valid) {
+                    let ayuntamiento={
+                        id:this.ayuntamiento.id,
+                        municipio_id : this.ayuntamiento.municipio.id,
+                        distrito_id: this.ayuntamiento.distrito.id,
+                        partido_id:this.ayuntamiento.partidos,
+                        escudo: this.ayuntamiento.imgEscudo,
+                        telefono1: this.ayuntamiento.telefono1,
+                        telefono2: this.ayuntamiento.telefono2,
+                        correo: this.ayuntamiento.correo
+                    }
+                    axios.post(urlUpdateAyuntamiento,{ayuntamiento:ayuntamiento}).then(response => {
+                        if(response.data == 0){
+                                Vue.swal({
+                                    title: 'Error',
+                                    text: "Hubo un error, inténtelo de nuevo.",
+                                    type: 'error',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
+                            }else if(response.data == 3){
+                                Vue.swal({
+                                    title: 'Hecho',
+                                    text: "Ayuntamiento registrado correctamente.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Aceptar',
+                                    confirmButtonColor: '#3085d6',
+                                    closeOnClickOutside: false,
+                                }).then((confirmed) => {
+                                    if (confirmed) {
+                                        location.reload()
+                                    }
+                                })
+                             }//else{
+                            //     var emp = {
+                            //         id: response,
+                            //         nombres: this.usuario.nombres+' '+this.usuario.primer_ap+' '+this.usuario.segundo_ap
+                            //     }
+                            //     this.empleadosE.push(emp)
+                            //     this.limpiar()
+                            //     Vue.swal({
+                            //         title: 'Hecho',
+                            //         text: "Empleado registrado correctamente.",
+                            //         type: 'success',
+                            //         showCancelButton: false,
+                            //         confirmButtonText: 'Aceptar',
+                            //         confirmButtonColor: '#3085d6',
+                            //     })
+                            // }
+                       console.log(reponse.data)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                     }
+                     else{}
+                 })
+            },
             editar(data){
+                this.$validator.reset()
                 this.ayuntamiento = data
                 this.editando= true
                 if(this.ayuntamiento.formato){
                     $('#profile').css('background-image', 'url(data:image/'+this.ayuntamiento.formato+';base64,' + this.ayuntamiento.escudo + ')').addClass('hasImage');
                 }
-                const urlUpdateAyuntamiento = route('ayuntamiento.update').template
 
                 // this.editando = true
+            },
+            eliminar(data){
+                console.log('Eliminando',data)
+                 const urlDeleteAyuntamiento = route('ayuntamiento.delete').template
+                 console.log(urlDeleteAyuntamiento)
+                 Vue.swal({
+                    title: '¡Cuidado!',
+                    text: "¿Estas seguro que deseas borrar este ayuntamiento?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar',
+                    cancelButtonText: 'Cancelar'
+                }).then((confirmed) => {
+                    if (confirmed) {
+                        axios.post(urlDeleteAyuntamiento,{id:data}).then(response => {
+                        if(response.data == 1){
+                                Vue.swal({
+                                    title: 'Hecho',
+                                    text: "Hubo un error, inténtelo de nuevo.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar',
+                                    closeOnClickOutside: false,
+                                }).then((confirmed) => {
+                                    if (confirmed) {
+                                        location.reload()
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+
             },
             cancelarEdicion(){
                 this.editando=false

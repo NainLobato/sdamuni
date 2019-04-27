@@ -2501,12 +2501,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = (_data$props$mounted$c = {
   data: function data() {
     return {
+      imagenCargada: 0,
       editando: false,
       imgEscudo: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/escudo.png',
       claveMunicipio: '',
@@ -2594,6 +2596,12 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 
     reader.onload = function (e) {
       $('#profile').css('background-image', 'url(' + reader.result + ')').addClass('hasImage');
+
+      if (vm.editando == true) {
+        vm.ayuntamiento.escudo = '';
+      }
+
+      vm.imagenCargada = true;
       vm.ayuntamiento.imgEscudo = e.target.result;
     };
 
@@ -2665,15 +2673,119 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       } else {}
     });
   },
+  update: function update() {
+    var _this2 = this;
+
+    var urlUpdateAyuntamiento = route('ayuntamiento.update').template;
+    console.log(urlUpdateAyuntamiento);
+    this.$validator.validate().then(function (valid) {
+      if (valid) {
+        var ayuntamiento = {
+          id: _this2.ayuntamiento.id,
+          municipio_id: _this2.ayuntamiento.municipio.id,
+          distrito_id: _this2.ayuntamiento.distrito.id,
+          partido_id: _this2.ayuntamiento.partidos,
+          escudo: _this2.ayuntamiento.imgEscudo,
+          telefono1: _this2.ayuntamiento.telefono1,
+          telefono2: _this2.ayuntamiento.telefono2,
+          correo: _this2.ayuntamiento.correo
+        };
+        axios.post(urlUpdateAyuntamiento, {
+          ayuntamiento: ayuntamiento
+        }).then(function (response) {
+          if (response.data == 0) {
+            Vue.swal({
+              title: 'Error',
+              text: "Hubo un error, inténtelo de nuevo.",
+              type: 'error',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Aceptar'
+            });
+          } else if (response.data == 3) {
+            Vue.swal({
+              title: 'Hecho',
+              text: "Ayuntamiento registrado correctamente.",
+              type: 'success',
+              showCancelButton: false,
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#3085d6',
+              closeOnClickOutside: false
+            }).then(function (confirmed) {
+              if (confirmed) {
+                location.reload();
+              }
+            });
+          } //else{
+          //     var emp = {
+          //         id: response,
+          //         nombres: this.usuario.nombres+' '+this.usuario.primer_ap+' '+this.usuario.segundo_ap
+          //     }
+          //     this.empleadosE.push(emp)
+          //     this.limpiar()
+          //     Vue.swal({
+          //         title: 'Hecho',
+          //         text: "Empleado registrado correctamente.",
+          //         type: 'success',
+          //         showCancelButton: false,
+          //         confirmButtonText: 'Aceptar',
+          //         confirmButtonColor: '#3085d6',
+          //     })
+          // }
+
+
+          console.log(reponse.data);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {}
+    });
+  },
   editar: function editar(data) {
+    this.$validator.reset();
     this.ayuntamiento = data;
     this.editando = true;
 
     if (this.ayuntamiento.formato) {
       $('#profile').css('background-image', 'url(data:image/' + this.ayuntamiento.formato + ';base64,' + this.ayuntamiento.escudo + ')').addClass('hasImage');
-    }
+    } // this.editando = true
 
-    var urlUpdateAyuntamiento = route('ayuntamiento.update').template; // this.editando = true
+  },
+  eliminar: function eliminar(data) {
+    console.log('Eliminando', data);
+    var urlDeleteAyuntamiento = route('ayuntamiento.delete').template;
+    console.log(urlDeleteAyuntamiento);
+    Vue.swal({
+      title: '¡Cuidado!',
+      text: "¿Estas seguro que deseas borrar este ayuntamiento?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then(function (confirmed) {
+      if (confirmed) {
+        axios.post(urlDeleteAyuntamiento, {
+          id: data
+        }).then(function (response) {
+          if (response.data == 1) {
+            Vue.swal({
+              title: 'Hecho',
+              text: "Hubo un error, inténtelo de nuevo.",
+              type: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Aceptar',
+              closeOnClickOutside: false
+            }).then(function (confirmed) {
+              if (confirmed) {
+                location.reload();
+              }
+            });
+          }
+        });
+      }
+    });
   },
   cancelarEdicion: function cancelarEdicion() {
     this.editando = false;
@@ -75118,21 +75230,42 @@ var render = function() {
                       _c("div", { staticClass: "col-md-6 text-center" }, [
                         _vm._m(2),
                         _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "image||required",
-                              expression: "'image||required'"
-                            }
-                          ],
-                          attrs: {
-                            type: "file",
-                            id: "mediaFile",
-                            name: "imagen"
-                          }
-                        }),
+                        _vm.editando == true
+                          ? _c("input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value:
+                                    "" +
+                                    (_vm.imagenCargada == 1
+                                      ? "image||required"
+                                      : ""),
+                                  expression:
+                                    "`${ imagenCargada == 1 ? 'image||required' : ''}`"
+                                }
+                              ],
+                              attrs: {
+                                type: "file",
+                                id: "mediaFile",
+                                name: "imagen"
+                              }
+                            })
+                          : _c("input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "image||required",
+                                  expression: "'image||required'"
+                                }
+                              ],
+                              attrs: {
+                                type: "file",
+                                id: "mediaFile",
+                                name: "imagen"
+                              }
+                            }),
                         _vm._v(" "),
                         _c("div", [
                           _vm.errors.has("imagen")
@@ -75522,7 +75655,12 @@ var render = function() {
                           "button",
                           {
                             staticClass: "btn btn-primary",
-                            attrs: { type: "button" }
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.update()
+                              }
+                            }
                           },
                           [_vm._v("Actualizar")]
                         )
@@ -75601,7 +75739,7 @@ var render = function() {
                             staticClass: "btn btn-outline-danger",
                             on: {
                               click: function($event) {
-                                return _vm.editar(ayunta)
+                                return _vm.eliminar(ayunta.id)
                               }
                             }
                           },
@@ -75643,7 +75781,7 @@ var staticRenderFns = [
     return _c("div", { attrs: { id: "profile" } }, [
       _c("div", { staticClass: "dashes" }),
       _vm._v(" "),
-      _c("label", [_vm._v("Da click o arrastra una imagen")])
+      _c("label", [_vm._v("Da click para agregar una imagen")])
     ])
   },
   function() {

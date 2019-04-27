@@ -145,7 +145,8 @@ class AyuntamientoController extends Controller
 
     public function update(Request $request)
     {
-        $id = intval($request->id);
+
+        $id = intval($request->ayuntamiento['id']);
         DB::beginTransaction();
         try{
             if($request->get('ayuntamiento')['escudo']){

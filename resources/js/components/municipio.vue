@@ -500,6 +500,13 @@
         height: 3rem;
         border-radius: 50%;
         background-color: aliceblue;
+        -webkit-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);
+        -moz-box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);
+        box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);
+         transition: all .2s ease-in-out;
+    }
+    .imagenTabla:hover{
+        transform: scale(1.2);
     }
     .errorImagen{
         position: absolute;

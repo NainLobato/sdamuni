@@ -31411,7 +31411,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.ver{\ndisplay: block;\n}\n.imagenTabla{\n    width: 3rem;\n    height: 3rem;\n    border-radius: 50%;\n    background-color: aliceblue;\n}\n.errorImagen{\n    position: absolute;\n    bottom: 0;\n}\n.upload-btn-wrapper {\nposition: relative;\noverflow: hidden;\ndisplay: inline-block;\n}\n.jom {\nborder: 2px solid gray;\ncolor: gray;\nbackground-color: white;\npadding: 8px 20px;\nborder-radius: 8px;\nfont-size: 0.8rem;\nfont-weight: bold;\n}\n.upload-btn-wrapper input[type=file] {\nfont-size: 0.8rem;\nposition: absolute;\nleft: 0;\ntop: 0;\nopacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.ver{\ndisplay: block;\n}\n.imagenTabla{\n    width: 3rem;\n    height: 3rem;\n    border-radius: 50%;\n    background-color: aliceblue;\n    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);\n     transition: all .2s ease-in-out;\n}\n.imagenTabla:hover{\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n}\n.errorImagen{\n    position: absolute;\n    bottom: 0;\n}\n.upload-btn-wrapper {\nposition: relative;\noverflow: hidden;\ndisplay: inline-block;\n}\n.jom {\nborder: 2px solid gray;\ncolor: gray;\nbackground-color: white;\npadding: 8px 20px;\nborder-radius: 8px;\nfont-size: 0.8rem;\nfont-weight: bold;\n}\n.upload-btn-wrapper input[type=file] {\nfont-size: 0.8rem;\nposition: absolute;\nleft: 0;\ntop: 0;\nopacity: 0;\n}\n", ""]);
 
 // exports
 

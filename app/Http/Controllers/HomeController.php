@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ayuntamiento;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $ayuntamineto = Ayuntamiento::get()->last();
+
+        return view('home')
+        ->with('ayuntamineto',$ayuntamineto);
     }
 }

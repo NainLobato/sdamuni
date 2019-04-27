@@ -2309,6 +2309,118 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/librosActas.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/librosActas.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    console.log('whatever it takes');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/municipio.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/municipio.vue?vue&type=script&lang=js& ***!
@@ -75074,6 +75186,339 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/librosActas.vue?vue&type=template&id=2fc64318&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/librosActas.vue?vue&type=template&id=2fc64318& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-card",
+        {
+          staticStyle: {
+            "max-width": "auto",
+            "font-weight": "bold",
+            "font-size": "18px"
+          },
+          attrs: { align: "center", "no-body": "" }
+        },
+        [
+          _c("template", { slot: "header" }, [
+            _c("span", [_vm._v("Administrador de libros de actas de cabildo")])
+          ])
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-md-4" },
+          [
+            _c(
+              "b-card",
+              {
+                staticStyle: { "max-width": "auto", "font-size": "18px" },
+                attrs: {
+                  header: "Libros",
+                  "header-tag": "header",
+                  align: "center"
+                }
+              },
+              [
+                _c("b-card-body", { attrs: { align: "left" } }, [
+                  _c("li", [_vm._v("1")]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("2")])
+                ])
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-8" },
+          [
+            _c(
+              "b-card",
+              {
+                staticStyle: { "max-width": "auto", "font-size": "18px" },
+                attrs: {
+                  header: "Informacion del libro",
+                  "header-tag": "header",
+                  align: "center"
+                }
+              },
+              [
+                _c("b-card-body", { attrs: { align: "left" } }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "clave" } }, [
+                          _vm._v("Clave:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "clave",
+                            name: "clave",
+                            placeholder: "Ingrese clave",
+                            "data-vv-as": "clave"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("clave")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.first("clave")))
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "fecha_primer_sesion" } }, [
+                          _vm._v("Fecha de sesion de primer acta:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "date",
+                            id: "fecha_primer_sesion",
+                            name: "fecha_primer_sesion",
+                            "data-vv-as": "fecha de primer sesion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("fecha_primer_sesion")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(
+                                _vm._s(_vm.errors.first("fecha_primer_sesion"))
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "fecha_ultima_sesion" } }, [
+                          _vm._v("Fecha de sesion de ultima acta:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "date",
+                            id: "fecha_ultima_sesion",
+                            name: "fecha_ultima_sesion",
+                            "data-vv-as": "fecha de ultima sesion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("fecha_ultima_sesion")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(
+                                _vm._s(_vm.errors.first("fecha_ultima_sesion"))
+                              )
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "primer_folio" } }, [
+                          _vm._v("Primer folio:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required|numeric",
+                              expression: "'required|numeric'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "primer_folio",
+                            name: "primer_folio",
+                            placeholder: "Ingrese folio de la primer acta",
+                            "data-vv-as": "primer folio"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("primer_folio")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.first("primer_folio")))
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "ultimo_folio" } }, [
+                          _vm._v("Ultimo folio:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required|numeric",
+                              expression: "'required|numeric'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "ultimo_folio",
+                            name: "ultimo_folio",
+                            placeholder: "Ingrese folio de la ultima acta",
+                            "data-vv-as": "ultimo folio"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("ultimo_folio")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.first("ultimo_folio")))
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-7" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "comentarios" } }, [
+                          _vm._v("Comentarios:")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "alpha_dash_field",
+                              expression: "'alpha_dash_field'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            rows: "3",
+                            id: "comentarios",
+                            name: "comentarios",
+                            placeholder: "Ingrese comentarios",
+                            "data-vv-as": "comentarios"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("comentarios")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.first("comentarios")))
+                            ])
+                          : _vm._e()
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-5" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("label", { attrs: { for: "ubicacion" } }, [
+                          _vm._v("Ubicacion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "alpha_dash_field",
+                              expression: "'alpha_dash_field'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "ubicacion",
+                            name: "ubicacion",
+                            placeholder: "Ingrese ubicacion de comentarios",
+                            "data-vv-as": "ubicacion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("ubicacion")
+                          ? _c("div", { staticClass: "invalid-feedback" }, [
+                              _vm._v(_vm._s(_vm.errors.first("ubicacion")))
+                            ])
+                          : _vm._e()
+                      ])
+                    ])
+                  ])
+                ])
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/municipio.vue?vue&type=template&id=0c7753b2&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/municipio.vue?vue&type=template&id=0c7753b2& ***!
@@ -88097,6 +88542,7 @@ Vue.component("dashboard", __webpack_require__(/*! ./components/dashboard.vue */
 Vue.component("municipio", __webpack_require__(/*! ./components/municipio.vue */ "./resources/js/components/municipio.vue")["default"]); // window.empleado = require('./components/empleado.vue')
 
 Vue.component("empleado", __webpack_require__(/*! ./components/empleado.vue */ "./resources/js/components/empleado.vue")["default"]);
+Vue.component("libros-actas", __webpack_require__(/*! ./components/librosActas.vue */ "./resources/js/components/librosActas.vue")["default"]);
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');
@@ -88337,6 +88783,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/librosActas.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/librosActas.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _librosActas_vue_vue_type_template_id_2fc64318___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./librosActas.vue?vue&type=template&id=2fc64318& */ "./resources/js/components/librosActas.vue?vue&type=template&id=2fc64318&");
+/* harmony import */ var _librosActas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./librosActas.vue?vue&type=script&lang=js& */ "./resources/js/components/librosActas.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _librosActas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _librosActas_vue_vue_type_template_id_2fc64318___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _librosActas_vue_vue_type_template_id_2fc64318___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/librosActas.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/librosActas.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/librosActas.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_librosActas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./librosActas.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/librosActas.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_librosActas_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/librosActas.vue?vue&type=template&id=2fc64318&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/librosActas.vue?vue&type=template&id=2fc64318& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_librosActas_vue_vue_type_template_id_2fc64318___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./librosActas.vue?vue&type=template&id=2fc64318& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/librosActas.vue?vue&type=template&id=2fc64318&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_librosActas_vue_vue_type_template_id_2fc64318___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_librosActas_vue_vue_type_template_id_2fc64318___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/municipio.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/municipio.vue ***!
@@ -88453,9 +88968,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

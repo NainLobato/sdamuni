@@ -35,6 +35,7 @@ Vue.component("dashboard", require("./components/dashboard.vue").default);
 Vue.component("municipio", require("./components/municipio.vue").default);
 // window.empleado = require('./components/empleado.vue')
 Vue.component("empleado", require("./components/empleado.vue").default);
+Vue.component("libros-actas", require("./components/librosActas.vue").default);
 
 const app = new Vue({
    el: '#app',

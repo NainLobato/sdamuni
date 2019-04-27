@@ -92,12 +92,8 @@ class AyuntamientoController extends Controller
             $ayuntamiento->correo = $request->ayuntamiento['correo'];
             $ayuntamiento->save();
 
-            foreach ($request->ayuntamiento['partido_id'] as $partidos) {
-                $ayuntamientoPartido = new AyuntamientoPartido();
-                $ayuntamientoPartido->ayuntamiento_id = $ayuntamiento->id;
-                $ayuntamientoPartido->partido_id =  $partidos['id'];
-                $ayuntamientoPartido->save();
-            }
+            $ayuntamiento->partidos()->sync(array_column($request->ayuntamiento['partido_id'],'id'));
+
             DB::commit();
             return 3;
         }catch(Exception $e){
@@ -151,28 +147,28 @@ class AyuntamientoController extends Controller
         try{
             $ayuntamiento = Ayuntamiento::find($id);
 
-            if($request->get('ayuntamiento')['escudo']){
-                $image = $request->get('ayuntamiento')['escudo'];
-                $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                \Image::make($request->get('ayuntamiento')['escudo'])->save(storage_path('escudos'.DIRECTORY_SEPARATOR).$name);
+            if(isset($request->get('ayuntamiento')['escudo'])){
+                if($request->get('ayuntamiento')['escudo']){
+                    $image = $request->get('ayuntamiento')['escudo'];
+                    $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                    \Image::make($request->get('ayuntamiento')['escudo'])->save(storage_path('escudos'.DIRECTORY_SEPARATOR).$name);
+                    Storage::delete(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+                }else{
+                    $name = '';
+                }
                 $ayuntamiento->escudo = $name;
-                Storage::delete(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
             }
-            $ayuntamiento->municipio_id = $request->municipio_id;
-            $ayuntamiento->telefono1 = $request->telefono1;
-            $ayuntamiento->telefono2 = $request->telefono2;
-            $ayuntamiento->correo = $request->correo;
+            $ayuntamiento->municipio_id = $request->ayuntamiento['municipio_id'];
+            $ayuntamiento->telefono1 = $request->ayuntamiento['telefono1'];
+            $ayuntamiento->telefono2 = $request->ayuntamiento['telefono2'];
+            $ayuntamiento->correo = $request->ayuntamiento['correo'];
             $ayuntamiento->save();
 
             AyuntamientoPartido::where('ayuntamiento_id', $ayuntamiento->id)->delete();
-            foreach ($request->partidos_id as $partidos) {
-                $ayuntamientoPartido = new AyuntamientoPartido();
-                $ayuntamientoPartido->ayuntamiento_id = $ayuntamiento->id;
-                $ayuntamientoPartido->partido_id = $request->partido_id;
-                $ayuntamientoPartido->save();
-            }
+            $ayuntamiento->partidos()->sync(array_column($request->ayuntamiento['partido_id'],'id'));
+
             DB::commit();
-            return 1;
+            return 3;
         }catch(Exception $e){
             DB::rollBack();
             return 0;
@@ -190,7 +186,7 @@ class AyuntamientoController extends Controller
             $ayuntamiento->delete();
 
             DB::commit();
-            return 1;
+            return 3;
         }catch(Exception $e){
             DB::rollBack();
             return 0;

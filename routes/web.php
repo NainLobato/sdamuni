@@ -40,5 +40,8 @@ Route::middleware('auth')->group(function () {
         Route::get('ayuntamiento/{id}/edit', 'AyuntamientoController@edit')->name('edit');
     });
 
+    Route::name('libro-actas.')->group(function () {
+        Route::get('libros-actas', 'LibroActasController@index')->name('index');
+    });
 
 });

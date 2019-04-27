@@ -92,12 +92,8 @@ class AyuntamientoController extends Controller
             $ayuntamiento->correo = $request->ayuntamiento['correo'];
             $ayuntamiento->save();
 
-            foreach ($request->ayuntamiento['partido_id'] as $partidos) {
-                $ayuntamientoPartido = new AyuntamientoPartido();
-                $ayuntamientoPartido->ayuntamiento_id = $ayuntamiento->id;
-                $ayuntamientoPartido->partido_id =  $partidos['id'];
-                $ayuntamientoPartido->save();
-            }
+            $ayuntamiento->partidos()->sync(array_column($request->ayuntamiento['partido_id'],'id'));
+
             DB::commit();
             return 3;
         }catch(Exception $e){
@@ -169,12 +165,8 @@ class AyuntamientoController extends Controller
             $ayuntamiento->save();
 
             AyuntamientoPartido::where('ayuntamiento_id', $ayuntamiento->id)->delete();
-            foreach ($request->ayuntamiento['partido_id'] as $partidos) {
-                $ayuntamientoPartido = new AyuntamientoPartido();
-                $ayuntamientoPartido->ayuntamiento_id = $ayuntamiento->id;
-                $ayuntamientoPartido->partido_id = $partidos['id'];
-                $ayuntamientoPartido->save();
-            }
+            $ayuntamiento->partidos()->sync(array_column($request->ayuntamiento['partido_id'],'id'));
+
             DB::commit();
             return 3;
         }catch(Exception $e){

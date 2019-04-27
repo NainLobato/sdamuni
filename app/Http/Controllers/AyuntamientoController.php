@@ -149,18 +149,16 @@ class AyuntamientoController extends Controller
         $id = intval($request->ayuntamiento['id']);
         DB::beginTransaction();
         try{
+            $ayuntamiento = Ayuntamiento::find($id);
+
             if($request->get('ayuntamiento')['escudo']){
                 $image = $request->get('ayuntamiento')['escudo'];
                 $name = time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 \Image::make($request->get('ayuntamiento')['escudo'])->save(storage_path('escudos'.DIRECTORY_SEPARATOR).$name);
-            }else {
-                $name = '';
+                $ayuntamiento->escudo = $name;
+                Storage::delete(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
             }
-
-            $ayuntamiento = Ayuntamiento::find($id);
             $ayuntamiento->municipio_id = $request->municipio_id;
-            Storage::delete(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
-            $ayuntamiento->escudo = $name;
             $ayuntamiento->telefono1 = $request->telefono1;
             $ayuntamiento->telefono2 = $request->telefono2;
             $ayuntamiento->correo = $request->correo;

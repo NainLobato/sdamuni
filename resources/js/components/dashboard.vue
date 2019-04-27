@@ -60,7 +60,11 @@
     export default {
         data(){
             return{
-                imagen:window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/Smadav-Vector.png',
+                imagen:[
+                    {usuarios: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-collaborator-male-96.png',},
+                    {usuarios: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/Smadav-Vector.png',},
+
+                ],
                 color:'background-color:#4286f4;',
                 href:''
             }

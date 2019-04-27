@@ -176,7 +176,7 @@ class AyuntamientoController extends Controller
                 $ayuntamientoPartido->save();
             }
             DB::commit();
-            return 1;
+            return 3;
         }catch(Exception $e){
             DB::rollBack();
             return 0;
@@ -194,7 +194,7 @@ class AyuntamientoController extends Controller
             $ayuntamiento->delete();
 
             DB::commit();
-            return 1;
+            return 3;
         }catch(Exception $e){
             DB::rollBack();
             return 0;

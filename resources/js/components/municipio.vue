@@ -121,7 +121,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="partido">Partido político</label>
-                                            <v-select :options="partidos" v-model="ayuntamiento.partidos" label="nombre" name="partido" :multiple="true" placeholder="Elige un partido" v-validate="'required'" >
+                                            <v-select :options="partidos" v-model="ayuntamiento.partidos" label="nombre" name="partido" :multiple="true" :closeOnSelect="true" placeholder="Elige un partido" v-validate="'required'" >
                                                     <slot name="no-options">¡No hay opciones disponibles!</slot>
                                                 </v-select>
                                             <div class="invalid-feedback ver" v-if="errors.has('partido')">{{ errors.first('partido') }}</div>

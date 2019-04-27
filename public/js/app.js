@@ -75601,6 +75601,7 @@ var render = function() {
                                   label: "nombre",
                                   name: "partido",
                                   multiple: true,
+                                  closeOnSelect: true,
                                   placeholder: "Elige un partido"
                                 },
                                 model: {

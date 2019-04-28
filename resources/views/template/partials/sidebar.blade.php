@@ -67,6 +67,12 @@
                             <p>Actas del consejo de planeacion</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('juicio-por-ayuntamiento.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-gavel"></i>
+                            <p>Jucios en proceso</p>
+                        </a>
+                    </li>
 
 
 				{{--  <li class="nav-item has-treeview">

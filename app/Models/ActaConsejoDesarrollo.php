@@ -13,8 +13,9 @@ class ActaConsejoDesarrollo extends Model
     protected $fillable = [
         'id',
         'num_acta',
-        'asuntos_acta',
         'fecha_levanto_acta',
+        'asuntos_acta',
+        'año_acta',
         'num_forjas',
         'firmas_consejo',
         'sellos_validez',

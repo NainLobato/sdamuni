@@ -49,6 +49,25 @@
                             <p>Libros de actas</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('acuerdo-pendiente.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-contract"></i>
+                            <p>Acuerdos pendientes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('acta-consejo-desarrollo.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-contract"></i>
+                            <p>Actas del consejo de desarrollo</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('acta-consejo-planeacion.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-contract"></i>
+                            <p>Actas del consejo de planeacion</p>
+                        </a>
+                    </li>
+
 
 				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">

@@ -44,4 +44,30 @@ Route::middleware('auth')->group(function () {
         Route::get('libros-actas', 'LibroActasController@index')->name('index');
     });
 
+    Route::name('acuerdo-pendiente.')->group(function () {
+        Route::get('acuerdos-pendientes', 'AcuerdoPendienteController@index')->name('index');
+    });
+
+    Route::name('acta-consejo-desarrollo.')->group(function () {
+        Route::get('actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@index')->name('index');
+    });
+
+    Route::name('acta-consejo-planeacion.')->group(function () {
+        Route::get('actas-consejo-planeacion', 'ActaConsejoPlaneacionController@index')->name('index');
+    });
+
+    Route::name('contrato-convenio.')->group(function () {
+        Route::post('contrato-store', 'ContratoConvenioController@store')->name('store');
+        Route::get('contrato/{id}/edit', 'ContratoConvenioController@edit')->name('edit');
+        Route::post('contrato-update', 'ContratoConvenioController@update')->name('update');
+        Route::post('contrato-delete', 'ContratoConvenioController@delete')->name('delete');
+    });
+
+    Route::name('conciliacion-bancaria.')->group(function () {
+        Route::post('conciliacion-store', 'ConciliacionBancariaController@store')->name('store');
+        Route::get('conciliacion/{id}/edit', 'ConciliacionBancariaController@edit')->name('edit');
+        Route::post('conciliacion-update', 'ConciliacionBancariaController@update')->name('update');
+        Route::post('conciliacion-delete', 'ConciliacionBancariaController@delete')->name('delete');
+    });
+
 });

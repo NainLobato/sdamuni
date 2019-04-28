@@ -13,7 +13,7 @@ class AcuerdoPendiente extends Model
     protected $fillable = [
         'id',
         'num_acta',
-        'fecha_Acta',
+        'fecha_acta',
         'acuerdo',
         'empleado_id',
         'accion_situacion',

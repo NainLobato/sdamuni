@@ -32,26 +32,31 @@ class HomeController extends Controller
     public function index()
     {
         $ayuntamiento = Ayuntamiento::get()->last();
-        $im = file_get_contents(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
-        $imdata = base64_encode($im);
-        $formato =explode(".", $ayuntamiento->escudo)[1];
-        $varAyuntamiento = [];
-        $varAyuntamiento['municipio'] = [ 'id' => $ayuntamiento->municipio->id, 'nombre' => $ayuntamiento->municipio->municipio];
-        $varAyuntamiento['distrito'] = [ 'id' => $ayuntamiento->municipio->distrito->id, 'nombre' => $ayuntamiento->municipio->distrito->distrito];
-        $varAyuntamiento['partidos'] = [];
-        foreach ($ayuntamiento->partidos as $partido) {
-            $row = [];
-            $row['id'] = $partido->id;
-            $row['nombre'] = $partido->partido;
-            array_push($varAyuntamiento['partidos'],$row);
+        if($ayuntamiento != null){
+            $im = file_get_contents(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+            $imdata = base64_encode($im);
+            $formato =explode(".", $ayuntamiento->escudo)[1];
+            $varAyuntamiento = [];
+            $varAyuntamiento['municipio'] = [ 'id' => $ayuntamiento->municipio->id, 'nombre' => $ayuntamiento->municipio->municipio];
+            $varAyuntamiento['distrito'] = [ 'id' => $ayuntamiento->municipio->distrito->id, 'nombre' => $ayuntamiento->municipio->distrito->distrito];
+            $varAyuntamiento['partidos'] = [];
+            foreach ($ayuntamiento->partidos as $partido) {
+                $row = [];
+                $row['id'] = $partido->id;
+                $row['nombre'] = $partido->partido;
+                array_push($varAyuntamiento['partidos'],$row);
+            }
+            $varAyuntamiento['id'] = $ayuntamiento->id;
+            $varAyuntamiento['telefono1'] = $ayuntamiento->telefono1;
+            $varAyuntamiento['telefono2'] = $ayuntamiento->telefono2;
+            $varAyuntamiento['correo'] = $ayuntamiento->correo;
+            $varAyuntamiento['escudo'] = $imdata;
+            $varAyuntamiento['formato'] = $formato;
+            $ayuntamiento = collect($varAyuntamiento);
         }
-        $varAyuntamiento['id'] = $ayuntamiento->id;
-        $varAyuntamiento['telefono1'] = $ayuntamiento->telefono1;
-        $varAyuntamiento['telefono2'] = $ayuntamiento->telefono2;
-        $varAyuntamiento['correo'] = $ayuntamiento->correo;
-        $varAyuntamiento['escudo'] = $imdata;
-        $varAyuntamiento['formato'] = $formato;
-        $ayuntamiento = collect($varAyuntamiento);
+        else{
+            $ayuntamiento =collect([]);
+        }
 
         return view('home')
         ->with('ayuntamiento',$ayuntamiento);

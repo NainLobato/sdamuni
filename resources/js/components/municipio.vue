@@ -237,7 +237,7 @@
                 this.claveNombre= this.ayuntamiento.municipio.nombre
                 this.municNombre= this.ayuntamiento.municipio.nombre
             }
-            if(this.ayuntamientom){
+            if(this.ayuntamientom && this.ayuntamientom!= ''){
                     var partidos=''
                     // this.ayuntamientom.partidos.forEach(function(element) {
                     //     // console.log (element.nombre)

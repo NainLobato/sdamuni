@@ -10697,11 +10697,14 @@ a.text-dark:focus {
 }
 
 .btn-card {
-  background-color: #21252917;
+  background-color: #0abab5;
   border: none;
+  color: #ffffff;
+  font-weight: bolder;
   outline: none;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 .btn-outline-info:hover {

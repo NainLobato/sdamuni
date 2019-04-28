@@ -13,10 +13,11 @@
 
 @section('content')
     <div id="app">
-        <dashboard :create="'0'"></dashboard>
+        <dashboard :create="'0'" :ayuntamiento='{!!$ayuntamiento!!}'  ></dashboard>
         {{-- <municipio></municipio>
         <empleado></empleado> --}}
     </div>
+    {{--  <img src="{!!$imagen!!}" alt="">  --}}
     {{-- <div class="row">
         <div class="col-md-12">
 
@@ -52,7 +53,11 @@
     <script src="{{ asset('plugins/datatables/datatables.min.js')}}"></script>
 	<script src="{{ asset('plugins/select2/select2.min.js')}}"></script>
     <script src="{{ asset('plugins/select2/es.js')}}"></script>
+    <script>
+        var storage_path = ['{!! storage_path() !!}'];
+    </script>
     <script src="{{ asset('js/app.js')}}"></script>
+
 	{{--
 	<script src="{{ asset('plugins/moment/js/moment.min.js') }}"></script>
 	<script src="{{ asset('plugins/moment/locales/es.js') }}"></script>

@@ -1822,6 +1822,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1829,15 +1836,34 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/Smadav-Vector.png',
+      cards: [{
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-collaborator-male-96.png',
+        href: route('empleados.index').template,
+        color: 'background-color:#4286f4;',
+        titulo: 'Empleados',
+        descripcion: 'Crea y administra usuarios para tu ayuntamiento'
+      }, {
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-organization-96.png',
+        href: route('ayuntamiento.index').template,
+        color: 'background-color:#4286f4;',
+        titulo: 'Ayuntamientos',
+        descripcion: 'Crea, elimina, edita ayuntamientos'
+      }, {
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
+        href: route('libro-actas.index').template,
+        color: 'background-color:#4286f4;',
+        titulo: 'Libros de actas',
+        descripcion: 'Crea, elimina, edita actas'
+      }],
       color: 'background-color:#4286f4;',
       href: ''
     };
   },
-  props: [],
+  props: ['ayuntamiento', 'storagepath'],
   mounted: function mounted() {
     console.log('Component mounted.');
     this.href = route('empleados.index').template;
+    console.log(storage_path);
   },
   created: function created() {},
   components: {
@@ -2614,6 +2640,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
@@ -2652,7 +2685,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       }
     };
   },
-  props: ['municipios', 'create', 'distritos', 'partidos', 'ayuntamientos'],
+  props: ['municipios', 'create', 'distritos', 'partidos', 'ayuntamientos', 'ayuntamientom'],
   mounted: function mounted() {
     // if(this.ayuntamientos){
     //     this.ayuntamiento
@@ -2664,6 +2697,26 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       console.log('es falso');
       this.claveNombre = this.ayuntamiento.municipio.nombre;
       this.municNombre = this.ayuntamiento.municipio.nombre;
+    }
+
+    if (this.ayuntamientom) {
+      var partidos = ''; // this.ayuntamientom.partidos.forEach(function(element) {
+      //     // console.log (element.nombre)
+      // partidos = partidos+' '+element.nombre
+      // })
+
+      var ayuntamiento = {
+        municipio: this.ayuntamientom.municipio,
+        partidos: this.ayuntamientom.partidos,
+        distrito: this.ayuntamientom.distrito,
+        telefono1: this.ayuntamientom.telefono1,
+        telefono2: this.ayuntamientom.telefono2,
+        correo: this.ayuntamientom.correo,
+        formato: this.ayuntamientom.formato,
+        escudo: 'data:image/' + this.ayuntamientom.formato + ';base64,' + this.ayuntamientom.escudo,
+        id: this.ayuntamientom.id
+      };
+      this.ayuntamiento = ayuntamiento;
     }
   }
 }, _defineProperty(_data$props$mounted$c, "mounted", function mounted() {
@@ -2858,7 +2911,10 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
     this.ayuntamiento = data;
     this.editando = true;
 
-    if (this.ayuntamiento.formato) {
+    if (this.ayuntamientom) {
+      console.log(this.ayuntamiento.escudo);
+      $('#profile').css('background-image', this.ayuntamiento.escudo).addClass('hasImage');
+    } else if (this.ayuntamiento.formato && !this.ayuntamientom) {
       $('#profile').css('background-image', 'url(data:image/' + this.ayuntamiento.formato + ';base64,' + this.ayuntamiento.escudo + ')').addClass('hasImage');
     } // this.editando = true
 
@@ -31492,6 +31548,25 @@ exports.push([module.i, ".v-select{position:relative;font-family:inherit}.v-sele
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/empleado.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/empleado.vue?vue&type=style&index=0&lang=css& ***!
@@ -31523,7 +31598,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.ver{\ndisplay: block;\n}\n.imagenTabla{\n    width: 3rem;\n    height: 3rem;\n    border-radius: 50%;\n    background-color: aliceblue;\n    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);\n     transition: all .2s ease-in-out;\n}\n.imagenTabla:hover{\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n}\n.errorImagen{\n    position: absolute;\n    bottom: 0;\n}\n.upload-btn-wrapper {\nposition: relative;\noverflow: hidden;\ndisplay: inline-block;\n}\n.jom {\nborder: 2px solid gray;\ncolor: gray;\nbackground-color: white;\npadding: 8px 20px;\nborder-radius: 8px;\nfont-size: 0.8rem;\nfont-weight: bold;\n}\n.upload-btn-wrapper input[type=file] {\nfont-size: 0.8rem;\nposition: absolute;\nleft: 0;\ntop: 0;\nopacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.ver{\ndisplay: block;\n}\n.imagenTabla{\n    width: 3rem;\n    height: 3rem;\n    border-radius: 50%;\n    background-color: aliceblue;\n    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.56);\n     transition: all .2s ease-in-out;\n}\n.imagenTabla:hover{\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n}\n.errorImagen{\n    position: absolute;\n    bottom: 0;\n}\n.upload-btn-wrapper {\nposition: relative;\noverflow: hidden;\ndisplay: inline-block;\n}\n.jom {\nborder: 2px solid gray;\ncolor: gray;\nbackground-color: white;\npadding: 8px 20px;\nborder-radius: 8px;\nfont-size: 0.8rem;\nfont-weight: bold;\n}\n.upload-btn-wrapper input[type=file] {\nfont-size: 0.8rem;\nposition: absolute;\nleft: 0;\ntop: 0;\nopacity: 0;\n}\n.munic-desc{\n    background-color:#00000034;\n    border-radius: 50%;\n    padding: 0.8rem;\n}\n.lista-partido{\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -62371,6 +62446,36 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./dashboard.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/empleado.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/empleado.vue?vue&type=style&index=0&lang=css& ***!
@@ -74127,99 +74232,59 @@ var render = function() {
       "div",
       { staticClass: "col-md-9" },
       [
-        _c("municipio", { attrs: { create: 0 } }),
+        _c("municipio", {
+          attrs: { create: 0, ayuntamientom: _vm.ayuntamiento }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "row " }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "card " }, [
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-md-5  d-flex justify-content-center align-items-center",
-                    style: _vm.color
-                  },
-                  [
-                    _c("img", {
+        _c(
+          "div",
+          { staticClass: "row " },
+          _vm._l(_vm.cards, function(card, index) {
+            return _c("div", { key: index, staticClass: "col-md-6 " }, [
+              _c("div", { staticClass: "card " }, [
+                _c("div", { staticClass: "row card-home" }, [
+                  _c(
+                    "div",
+                    {
                       staticClass:
-                        "center img-circle-2 elevation-2 align-middle",
-                      attrs: { src: _vm.imagen }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-7" }, [
-                  _c("h2", { staticClass: "text-center" }, [
-                    _vm._v("Empleados")
-                  ]),
+                        "col-md-5  d-flex justify-content-center align-items-center",
+                      style: card.color
+                    },
+                    [
+                      _c("img", {
+                        staticClass:
+                          "center img-circle-2 elevation-2 align-middle",
+                        attrs: { src: card.imagen }
+                      })
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("p", { staticClass: " mr-3" }, [
-                    _vm._v(
-                      "En este modulo puede realizar la creación y edición de tus empleados "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-center mb-2" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: " btn rounded-pill btn-card",
-                        attrs: { href: _vm.href }
-                      },
-                      [_vm._v("Ir al modulo")]
-                    )
+                  _c("div", { staticClass: "col-md-7 my-auto" }, [
+                    _c("h2", { staticClass: "text-center" }, [
+                      _vm._v(_vm._s(card.titulo))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: " mr-3 text-center" }, [
+                      _vm._v(_vm._s(card.descripcion))
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "text-center mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: " btn rounded-pill btn-card",
+                          attrs: { href: card.href }
+                        },
+                        [_vm._v("Ir al modulo")]
+                      )
+                    ])
                   ])
                 ])
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "card " }, [
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-md-5  d-flex justify-content-center align-items-center",
-                    style: _vm.color
-                  },
-                  [
-                    _c("img", {
-                      staticClass:
-                        "center img-circle-2 elevation-2 align-middle",
-                      attrs: { src: _vm.imagen }
-                    })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-7" }, [
-                  _c("h2", { staticClass: "text-center" }, [
-                    _vm._v("Empleados")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: " mr-3" }, [
-                    _vm._v(
-                      "En este modulo puede realizar la creación y edición de tus empleados "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-center mb-2" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn rounded-pill btn-card",
-                        attrs: { href: _vm.href }
-                      },
-                      [_vm._v("Ir al modulo")]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ])
+          }),
+          0
+        )
       ],
       1
     ),
@@ -74234,9 +74299,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-3" }, [
       _c("div", { staticClass: "card panel-derecha" }, [
-        _c("div", { staticClass: "card-header" }, [_vm._v(" Panel lateral")]),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h5", [_c("strong", [_vm._v("Opciones generales")])])
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [_vm._v(" Contenido")]),
+        _c(
+          "div",
+          {
+            staticClass: "card-body ",
+            staticStyle: { padding: "0.3rem !important" }
+          },
+          [
+            _c("div", { staticClass: "card card-panel " }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-2 text-center my-2  " }, [
+                  _c("i", { staticClass: "fas fa-check" })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-10 my-2 " }, [
+                  _vm._v("Contenido1")
+                ])
+              ])
+            ])
+          ]
+        ),
         _vm._v(" "),
         _c("div", { staticClass: "card-footer" })
       ])
@@ -75535,605 +75621,617 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "card card-select" }, [
-      _vm.editando == true || _vm.create == 1
-        ? _c("div", { staticClass: "card-header" }, [
-            _c("h5", { staticClass: "card-title text-center" }, [
-              _vm._v("Creación y edición de ayuntamientos")
-            ]),
+    _vm.editando == false && _vm.create == 0
+      ? _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "row" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "col-md-2 d-flex justify-content-center  align-items-center "
+              },
+              [
+                _c("div", { staticClass: "munic-desc" }, [
+                  _c("img", {
+                    staticClass: "center img-circle-2 elevation-2",
+                    attrs: { src: _vm.ayuntamiento.escudo, alt: "" }
+                  })
+                ])
+              ]
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "card-tools" })
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", {}, [
-        _vm.editando == false && _vm.create == 0
-          ? _c("div", { staticClass: "row " }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "row mx-1" }, [
-                  _c("div", { staticClass: "col-md-2" }, [
-                    _c("img", {
-                      staticClass: "center img-circle-2 elevation-2",
-                      attrs: { src: _vm.ayuntamiento.logo, alt: "" }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-10" }, [
-                    _c("div", { staticClass: "row mr-2" }, [
-                      _c("div", { staticClass: "col-md-4" }, [
-                        _c("label", { attrs: { for: "claveMunicipio" } }, [
-                          _vm._v("Clave del municipio")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", {
-                          domProps: {
-                            innerHTML: _vm._s(_vm.ayuntamiento.claveNombre)
-                          }
-                        })
+            _c("div", { staticClass: "col-md-10 " }, [
+              _c("div", { staticClass: "my-2 text-center card-header" }, [
+                _c("h5", [
+                  _c("strong", {
+                    domProps: {
+                      innerHTML: _vm._s(_vm.ayuntamiento.municipio.nombre)
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row mx-1" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "row mr-2" }, [
+                    _c("div", { staticClass: "col-md-2" }, [
+                      _c("label", { attrs: { for: "telefono1" } }, [
+                        _vm._v("Telefono 1")
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-4" }, [
-                        _c("label", { attrs: { for: "nombreMunicipio" } }, [
-                          _vm._v("Municipio")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", {
-                          domProps: {
-                            innerHTML: _vm._s(_vm.ayuntamiento.municNombre)
-                          }
-                        })
+                      _c("h6", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.ayuntamiento.telefono1)
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-2" }, [
+                      _c("label", { attrs: { for: "telefono2" } }, [
+                        _vm._v("Telefono 2")
                       ]),
                       _vm._v(" "),
-                      _vm._m(1),
+                      _c("h6", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.ayuntamiento.telefono2)
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("label", { attrs: { for: "correo" } }, [
+                        _vm._v("Correo electrónico municipal")
+                      ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-2" }, [
+                      _c("h6", {
+                        domProps: { innerHTML: _vm._s(_vm.ayuntamiento.correo) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-md-5" },
+                      [
                         _c("label", { attrs: { for: "partido" } }, [
                           _vm._v("Partido político")
                         ]),
                         _vm._v(" "),
-                        _c("h6", {
-                          domProps: {
-                            innerHTML: _vm._s(_vm.ayuntamiento.partidos)
-                          }
+                        _vm._l(_vm.ayuntamiento.partidos, function(
+                          partido,
+                          index
+                        ) {
+                          return _c(
+                            "li",
+                            { key: index, staticClass: "lista-partido" },
+                            [_c("h6", [_vm._v(_vm._s(partido.nombre))])]
+                          )
                         })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-4" }, [
-                        _c("label", { attrs: { for: "telefono1" } }, [
-                          _vm._v("Telefono 1")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", {
-                          domProps: {
-                            innerHTML: _vm._s(_vm.ayuntamiento.telefono1)
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-4" }, [
-                        _c("label", { attrs: { for: "telefono2" } }, [
-                          _vm._v("Telefono 2")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", {
-                          domProps: {
-                            innerHTML: _vm._s(_vm.ayuntamiento.telefono2)
-                          }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-4" }, [
-                        _c("label", { attrs: { for: "correo" } }, [
-                          _vm._v("Correo electrónico municipal")
-                        ]),
-                        _vm._v(" "),
-                        _c("h6", {
-                          domProps: {
-                            innerHTML: _vm._s(_vm.ayuntamiento.correo)
-                          }
-                        })
-                      ])
-                    ])
+                      ],
+                      2
+                    )
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-12 text-right mr-2" }, [
-                _c(
-                  "button",
+              ])
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.editando == true || _vm.create == 1
+      ? _c("div", { staticClass: "card card-select" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", {}, [
+            _vm.editando == true || _vm.create == 1
+              ? _c(
+                  "form",
                   {
-                    staticClass: "btn-form",
                     on: {
-                      click: function($event) {
-                        return _vm.editar()
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.onSubmit($event)
                       }
                     }
                   },
-                  [_c("i", { staticClass: "fas fa-edit" })]
-                )
-              ])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.editando == true || _vm.create == 1
-          ? _c(
-              "form",
-              {
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.onSubmit($event)
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "row mx-2" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-md-6 text-center" }, [
-                        _vm._m(2),
+                  [
+                    _c("div", { staticClass: "row mx-2" }, [
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-6 text-center" }, [
+                            _vm._m(1),
+                            _vm._v(" "),
+                            _vm.editando == true
+                              ? _c("input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value:
+                                        "" +
+                                        (_vm.imagenCargada == 1
+                                          ? "image||required"
+                                          : ""),
+                                      expression:
+                                        "`${ imagenCargada == 1 ? 'image||required' : ''}`"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "file",
+                                    id: "mediaFile",
+                                    name: "imagen"
+                                  }
+                                })
+                              : _c("input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "image||required",
+                                      expression: "'image||required'"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "file",
+                                    id: "mediaFile",
+                                    name: "imagen"
+                                  }
+                                }),
+                            _vm._v(" "),
+                            _c("div", [
+                              _vm.errors.has("imagen")
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "invalid-feedback ver errorImagen"
+                                    },
+                                    [_vm._v(_vm._s(_vm.errors.first("imagen")))]
+                                  )
+                                : _vm._e()
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c(
+                                  "label",
+                                  { attrs: { for: "nombreMunicipio" } },
+                                  [_vm._v("Municipio")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "v-select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "validate",
+                                        rawName: "v-validate",
+                                        value: "required",
+                                        expression: "'required'"
+                                      }
+                                    ],
+                                    attrs: {
+                                      options: _vm.municipios,
+                                      name: "nombreMunicipio",
+                                      label: "nombre",
+                                      placeholder: "Elige un municipio"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.selecMunic()
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.ayuntamiento.municipio,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.ayuntamiento,
+                                          "municipio",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "ayuntamiento.municipio"
+                                    }
+                                  },
+                                  [
+                                    _vm._t("no-options", [
+                                      _vm._v("¡No hay opciones disponibles!")
+                                    ])
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.has("nombreMunicipio")
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "invalid-feedback ver" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first("nombreMunicipio")
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("h6", { staticClass: "mt-2" }, [
+                              _c("strong", [_vm._v("Clave del municipio")]),
+                              _vm._v(" "),
+                              _c("span", {
+                                domProps: {
+                                  innerHTML: _vm._s(_vm.claveMunicSelec)
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "distrito" } }, [
+                                  _vm._v("Distrito")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "validate",
+                                        rawName: "v-validate",
+                                        value: "required",
+                                        expression: "'required'"
+                                      }
+                                    ],
+                                    attrs: {
+                                      options: _vm.distritos,
+                                      name: "distrito",
+                                      label: "nombre",
+                                      placeholder: "Elige un distrito"
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        return _vm.selecMunic()
+                                      }
+                                    },
+                                    model: {
+                                      value: _vm.ayuntamiento.distrito,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.ayuntamiento,
+                                          "distrito",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "ayuntamiento.distrito"
+                                    }
+                                  },
+                                  [
+                                    _vm._t("no-options", [
+                                      _vm._v("¡No hay opciones disponibles!")
+                                    ])
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.has("distrito")
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "invalid-feedback ver" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.errors.first("distrito"))
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "telefono1" } }, [
+                                _vm._v("Telefono 1")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ayuntamiento.telefono1,
+                                    expression: "ayuntamiento.telefono1"
+                                  },
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate",
+                                    value: "required||length:10",
+                                    expression: "'required||length:10'"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "telefono1",
+                                  name: "telefono1",
+                                  placeholder: "Ingrese telefono",
+                                  "data-vv-as": "teléfono uno"
+                                },
+                                domProps: { value: _vm.ayuntamiento.telefono1 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.ayuntamiento,
+                                      "telefono1",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.errors.has("telefono1")
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback ver" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.errors.first("telefono1"))
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "telefono2" } }, [
+                                _vm._v("Telefono 2")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ayuntamiento.telefono2,
+                                    expression: "ayuntamiento.telefono2"
+                                  },
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate",
+                                    value: "required||length:10",
+                                    expression: "'required||length:10'"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "telefono2",
+                                  name: "telefono2",
+                                  placeholder: "Ingrese telefono",
+                                  "data-vv-as": "teléfono dos"
+                                },
+                                domProps: { value: _vm.ayuntamiento.telefono2 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.ayuntamiento,
+                                      "telefono2",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.errors.has("telefono2")
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback ver" },
+                                    [
+                                      _vm._v(
+                                        _vm._s(_vm.errors.first("telefono2"))
+                                      )
+                                    ]
+                                  )
+                                : _vm._e()
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "correo" } }, [
+                                _vm._v("Correo electrónico municipal")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.ayuntamiento.correo,
+                                    expression: "ayuntamiento.correo"
+                                  },
+                                  {
+                                    name: "validate",
+                                    rawName: "v-validate",
+                                    value: "required||email",
+                                    expression: "'required||email'"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "correo",
+                                  name: "correo",
+                                  placeholder: "Ingrese email"
+                                },
+                                domProps: { value: _vm.ayuntamiento.correo },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.ayuntamiento,
+                                      "correo",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.errors.has("correo")
+                                ? _c(
+                                    "div",
+                                    { staticClass: "invalid-feedback ver" },
+                                    [_vm._v(_vm._s(_vm.errors.first("correo")))]
+                                  )
+                                : _vm._e()
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-md-6" }, [
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", { attrs: { for: "partido" } }, [
+                                  _vm._v("Partido político")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "v-select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "validate",
+                                        rawName: "v-validate",
+                                        value: "required",
+                                        expression: "'required'"
+                                      }
+                                    ],
+                                    attrs: {
+                                      options: _vm.partidos,
+                                      label: "nombre",
+                                      name: "partido",
+                                      multiple: true,
+                                      closeOnSelect: true,
+                                      placeholder: "Elige un partido"
+                                    },
+                                    model: {
+                                      value: _vm.ayuntamiento.partidos,
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          _vm.ayuntamiento,
+                                          "partidos",
+                                          $$v
+                                        )
+                                      },
+                                      expression: "ayuntamiento.partidos"
+                                    }
+                                  },
+                                  [
+                                    _vm._t("no-options", [
+                                      _vm._v("¡No hay opciones disponibles!")
+                                    ])
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _vm.errors.has("partido")
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "invalid-feedback ver" },
+                                      [
+                                        _vm._v(
+                                          _vm._s(_vm.errors.first("partido"))
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 text-right mb-2" }, [
+                        _vm.editando == true
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-secondary",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.cancelarEdicion()
+                                  }
+                                }
+                              },
+                              [_vm._v("Cancelar edición")]
+                            )
+                          : _vm._e(),
                         _vm._v(" "),
                         _vm.editando == true
-                          ? _c("input", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value:
-                                    "" +
-                                    (_vm.imagenCargada == 1
-                                      ? "image||required"
-                                      : ""),
-                                  expression:
-                                    "`${ imagenCargada == 1 ? 'image||required' : ''}`"
-                                }
-                              ],
-                              attrs: {
-                                type: "file",
-                                id: "mediaFile",
-                                name: "imagen"
-                              }
-                            })
-                          : _c("input", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "image||required",
-                                  expression: "'image||required'"
-                                }
-                              ],
-                              attrs: {
-                                type: "file",
-                                id: "mediaFile",
-                                name: "imagen"
-                              }
-                            }),
-                        _vm._v(" "),
-                        _c("div", [
-                          _vm.errors.has("imagen")
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "invalid-feedback ver errorImagen"
-                                },
-                                [_vm._v(_vm._s(_vm.errors.first("imagen")))]
-                              )
-                            : _vm._e()
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c("label", { attrs: { for: "nombreMunicipio" } }, [
-                              _vm._v("Municipio")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "v-select",
+                          ? _c(
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required",
-                                    expression: "'required'"
-                                  }
-                                ],
-                                attrs: {
-                                  options: _vm.municipios,
-                                  name: "nombreMunicipio",
-                                  label: "nombre",
-                                  placeholder: "Elige un municipio"
-                                },
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "button" },
                                 on: {
-                                  input: function($event) {
-                                    return _vm.selecMunic()
+                                  click: function($event) {
+                                    return _vm.update()
                                   }
-                                },
-                                model: {
-                                  value: _vm.ayuntamiento.municipio,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.ayuntamiento, "municipio", $$v)
-                                  },
-                                  expression: "ayuntamiento.municipio"
                                 }
                               },
-                              [
-                                _vm._t("no-options", [
-                                  _vm._v("¡No hay opciones disponibles!")
-                                ])
-                              ],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _vm.errors.has("nombreMunicipio")
-                              ? _c(
-                                  "div",
-                                  { staticClass: "invalid-feedback ver" },
-                                  [
-                                    _vm._v(
-                                      _vm._s(
-                                        _vm.errors.first("nombreMunicipio")
-                                      )
-                                    )
-                                  ]
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("h6", { staticClass: "mt-2" }, [
-                          _c("strong", [_vm._v("Clave del municipio")]),
-                          _vm._v(" "),
-                          _c("span", {
-                            domProps: { innerHTML: _vm._s(_vm.claveMunicSelec) }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c("label", { attrs: { for: "distrito" } }, [
-                              _vm._v("Distrito")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "v-select",
+                              [_vm._v("Actualizar")]
+                            )
+                          : _c(
+                              "button",
                               {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required",
-                                    expression: "'required'"
-                                  }
-                                ],
-                                attrs: {
-                                  options: _vm.distritos,
-                                  name: "distrito",
-                                  label: "nombre",
-                                  placeholder: "Elige un distrito"
-                                },
-                                on: {
-                                  input: function($event) {
-                                    return _vm.selecMunic()
-                                  }
-                                },
-                                model: {
-                                  value: _vm.ayuntamiento.distrito,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.ayuntamiento, "distrito", $$v)
-                                  },
-                                  expression: "ayuntamiento.distrito"
-                                }
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" }
                               },
-                              [
-                                _vm._t("no-options", [
-                                  _vm._v("¡No hay opciones disponibles!")
-                                ])
-                              ],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _vm.errors.has("distrito")
-                              ? _c(
-                                  "div",
-                                  { staticClass: "invalid-feedback ver" },
-                                  [_vm._v(_vm._s(_vm.errors.first("distrito")))]
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        )
+                              [_vm._v("Guardar")]
+                            )
                       ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "telefono1" } }, [
-                            _vm._v("Telefono 1")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.ayuntamiento.telefono1,
-                                expression: "ayuntamiento.telefono1"
-                              },
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required||length:10",
-                                expression: "'required||length:10'"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "telefono1",
-                              name: "telefono1",
-                              placeholder: "Ingrese telefono",
-                              "data-vv-as": "teléfono uno"
-                            },
-                            domProps: { value: _vm.ayuntamiento.telefono1 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.ayuntamiento,
-                                  "telefono1",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.has("telefono1")
-                            ? _c(
-                                "div",
-                                { staticClass: "invalid-feedback ver" },
-                                [_vm._v(_vm._s(_vm.errors.first("telefono1")))]
-                              )
-                            : _vm._e()
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "telefono2" } }, [
-                            _vm._v("Telefono 2")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.ayuntamiento.telefono2,
-                                expression: "ayuntamiento.telefono2"
-                              },
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required||length:10",
-                                expression: "'required||length:10'"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "telefono2",
-                              name: "telefono2",
-                              placeholder: "Ingrese telefono",
-                              "data-vv-as": "teléfono dos"
-                            },
-                            domProps: { value: _vm.ayuntamiento.telefono2 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.ayuntamiento,
-                                  "telefono2",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.has("telefono2")
-                            ? _c(
-                                "div",
-                                { staticClass: "invalid-feedback ver" },
-                                [_vm._v(_vm._s(_vm.errors.first("telefono2")))]
-                              )
-                            : _vm._e()
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "correo" } }, [
-                            _vm._v("Correo electrónico municipal")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.ayuntamiento.correo,
-                                expression: "ayuntamiento.correo"
-                              },
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required||email",
-                                expression: "'required||email'"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              id: "correo",
-                              name: "correo",
-                              placeholder: "Ingrese email"
-                            },
-                            domProps: { value: _vm.ayuntamiento.correo },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.ayuntamiento,
-                                  "correo",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm.errors.has("correo")
-                            ? _c(
-                                "div",
-                                { staticClass: "invalid-feedback ver" },
-                                [_vm._v(_vm._s(_vm.errors.first("correo")))]
-                              )
-                            : _vm._e()
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c(
-                          "div",
-                          { staticClass: "form-group" },
-                          [
-                            _c("label", { attrs: { for: "partido" } }, [
-                              _vm._v("Partido político")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "v-select",
-                              {
-                                directives: [
-                                  {
-                                    name: "validate",
-                                    rawName: "v-validate",
-                                    value: "required",
-                                    expression: "'required'"
-                                  }
-                                ],
-                                attrs: {
-                                  options: _vm.partidos,
-                                  label: "nombre",
-                                  name: "partido",
-                                  multiple: true,
-                                  closeOnSelect: true,
-                                  placeholder: "Elige un partido"
-                                },
-                                model: {
-                                  value: _vm.ayuntamiento.partidos,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.ayuntamiento, "partidos", $$v)
-                                  },
-                                  expression: "ayuntamiento.partidos"
-                                }
-                              },
-                              [
-                                _vm._t("no-options", [
-                                  _vm._v("¡No hay opciones disponibles!")
-                                ])
-                              ],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _vm.errors.has("partido")
-                              ? _c(
-                                  "div",
-                                  { staticClass: "invalid-feedback ver" },
-                                  [_vm._v(_vm._s(_vm.errors.first("partido")))]
-                                )
-                              : _vm._e()
-                          ],
-                          1
-                        )
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12 text-right mb-2" }, [
-                    _vm.editando == true
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-secondary",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.cancelarEdicion()
-                              }
-                            }
-                          },
-                          [_vm._v("Cancelar edición")]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.editando == true
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.update()
-                              }
-                            }
-                          },
-                          [_vm._v("Actualizar")]
-                        )
-                      : _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Guardar")]
-                        )
-                  ])
-                ])
-              ]
-            )
-          : _vm._e()
-      ])
-    ]),
+                  ]
+                )
+              : _vm._e()
+          ])
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _c("div", [
       _vm.create == 1
         ? _c("div", { staticClass: "card" }, [
-            _vm._m(3),
+            _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _c("table", { staticClass: "table" }, [
-                _vm._m(4),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -76208,16 +76306,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " text-center" }, [
-      _c("h5", [_c("strong", [_vm._v("Mi municipio")])])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2 " }, [
-      _c("label", { attrs: { for: "distrito" } }, [_vm._v("Distrito")])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h5", { staticClass: "card-title text-center" }, [
+        _vm._v("Creación y edición de ayuntamientos")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" })
     ])
   },
   function() {
@@ -88639,7 +88733,9 @@ if (token) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _dashboard_vue_vue_type_template_id_57220a4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dashboard.vue?vue&type=template&id=57220a4e& */ "./resources/js/components/dashboard.vue?vue&type=template&id=57220a4e&");
 /* harmony import */ var _dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dashboard.vue?vue&type=script&lang=js& */ "./resources/js/components/dashboard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboard.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -88647,7 +88743,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _dashboard_vue_vue_type_template_id_57220a4e___WEBPACK_IMPORTED_MODULE_0__["render"],
   _dashboard_vue_vue_type_template_id_57220a4e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -88676,6 +88772,22 @@ component.options.__file = "resources/js/components/dashboard.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./dashboard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./dashboard.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_dashboard_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -88969,9 +89081,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

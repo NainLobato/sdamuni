@@ -1,7 +1,60 @@
 <template>
     <div>
-        <div class="card card-select">
-                <div v-if="editando==true || create==1" class="card-header">
+         <div v-if="editando==false && create==0" class="card">
+             <div class="row">
+                <div class="col-md-2 d-flex justify-content-center  align-items-center ">
+                    <div class="munic-desc">
+                        <img :src='ayuntamiento.escudo' class="center img-circle-2 elevation-2" alt="">
+                    </div>
+                </div>
+                <div  class="col-md-10 ">
+                    <div class="my-2 text-center card-header">
+                        <h5><strong v-html="ayuntamiento.municipio.nombre"></strong></h5>
+                    </div>
+                    <div class="row mx-1">
+                        <div class="col-md-12">
+                        <div class="row mr-2">
+                            <!-- <div class="col-md-4">
+                                <label for="claveMunicipio">Clave del municipio</label>
+                                <h6 v-html="ayuntamiento.claveNombre"></h6>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="nombreMunicipio">Municipio</label>
+                                <h6 v-html="ayuntamiento.municipio.nombre"></h6>
+                            </div> -->
+                            <!-- <div class="col-md-2 ">
+                                    <label for="distrito">Distrito</label>
+                                    <h6 name="distrito" v-html="ayuntamiento.distrito.nombre"></h6>
+                                </div> -->
+                                <div class="col-md-2">
+                                    <label for="telefono1">Telefono 1</label>
+                                    <h6 v-html="ayuntamiento.telefono1"></h6>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="telefono2">Telefono 2</label>
+                                    <h6 v-html="ayuntamiento.telefono2" > </h6>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="correo">Correo electrónico municipal</label>
+                                    <h6 v-html="ayuntamiento.correo" ></h6>
+                                </div>
+                                <div class="col-md-5">
+                                    <label for="partido">Partido político</label>
+                                    <li class="lista-partido" v-for="(partido, index) in ayuntamiento.partidos" :key="index"><h6>{{partido.nombre}}</h6></li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+             </div>
+
+                        <!-- <div class="col-md-12 text-right mr-2"> -->
+                            <!-- <button class="btn-form" v-on:click="editar(ayuntamiento)"><i class="fas fa-edit"></i></button> -->
+                        <!-- </div> -->
+        </div>
+        <div v-if="editando==true || create==1" class="card card-select">
+                <div  class="card-header">
                     <h5 class="card-title text-center">Creación y edición de ayuntamientos</h5>
                     <div class="card-tools">
                          <!-- <button type="button" class="btn btn-tool" data-widget="collapse">
@@ -13,53 +66,7 @@
                     </div>
                 </div>
                 <div class="">
-                    <div v-if="editando==false && create==0" class="row ">
-                            <div  class="col-md-12">
-                                <div class=" text-center">
-                                    <h5><strong>Mi municipio</strong></h5>
-                                </div>
-                                <div class="row mx-1">
-                                    <div class="col-md-2">
-                                        <img :src='ayuntamiento.logo' class="center img-circle-2 elevation-2" alt="">
-                                    </div>
-                                     <div class="col-md-10">
-                                        <div class="row mr-2">
-                                            <div class="col-md-4">
-                                                <label for="claveMunicipio">Clave del municipio</label>
-                                                <h6 v-html="ayuntamiento.claveNombre"></h6>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="nombreMunicipio">Municipio</label>
-                                                <h6 v-html="ayuntamiento.municNombre"></h6>
-                                            </div>
-                                            <div class="col-md-2 ">
-                                                <label for="distrito">Distrito</label>
-                                                <!-- <h6 name="distrito" v-html="distriSel.nombre"></h6> -->
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="partido">Partido político</label>
-                                                <h6 v-html="ayuntamiento.partidos"></h6>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="telefono1">Telefono 1</label>
-                                                <h6 v-html="ayuntamiento.telefono1"></h6>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="telefono2">Telefono 2</label>
-                                                <h6 v-html="ayuntamiento.telefono2" > </h6>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="correo">Correo electrónico municipal</label>
-                                                <h6 v-html="ayuntamiento.correo" ></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-md-12 text-right mr-2">
-                            <button class="btn-form" v-on:click="editar()"><i class="fas fa-edit"></i></button>
-                        </div>
-                    </div>
+
                     <form v-if="editando==true || create==1" v-on:submit.prevent="onSubmit">
                         <div  class="row mx-2">
                             <div class="col-md-6">
@@ -216,7 +223,7 @@
             }
 
         },
-        props:['municipios','create','distritos','partidos','ayuntamientos'],
+        props:['municipios','create','distritos','partidos','ayuntamientos','ayuntamientom'],
         mounted() {
 
             // if(this.ayuntamientos){
@@ -229,6 +236,27 @@
                 console.log('es falso')
                 this.claveNombre= this.ayuntamiento.municipio.nombre
                 this.municNombre= this.ayuntamiento.municipio.nombre
+            }
+            if(this.ayuntamientom){
+                    var partidos=''
+                    // this.ayuntamientom.partidos.forEach(function(element) {
+                    //     // console.log (element.nombre)
+                    // partidos = partidos+' '+element.nombre
+                    // })
+
+
+                var ayuntamiento ={
+                    municipio:this.ayuntamientom.municipio,
+                    partidos:this.ayuntamientom.partidos,
+                    distrito:this.ayuntamientom.distrito,
+                    telefono1:this.ayuntamientom.telefono1,
+                    telefono2:this.ayuntamientom.telefono2,
+                    correo:this.ayuntamientom.correo,
+                    formato:this.ayuntamientom.formato,
+                    escudo:'data:image/' + this.ayuntamientom.formato +';base64,' + this.ayuntamientom.escudo ,
+                    id:this.ayuntamientom.id,
+                }
+                this.ayuntamiento = ayuntamiento
             }
         },
         mounted(){
@@ -416,7 +444,11 @@
                 this.$validator.reset()
                 this.ayuntamiento = data
                 this.editando= true
-                if(this.ayuntamiento.formato){
+                if(this.ayuntamientom){
+                    console.log(this.ayuntamiento.escudo)
+                    $('#profile').css('background-image',  this.ayuntamiento.escudo ).addClass('hasImage');
+                }
+                else if(this.ayuntamiento.formato && !this.ayuntamientom){
                     $('#profile').css('background-image', 'url(data:image/'+this.ayuntamiento.formato+';base64,' + this.ayuntamiento.escudo + ')').addClass('hasImage');
                 }
 
@@ -534,5 +566,14 @@
     left: 0;
     top: 0;
     opacity: 0;
+    }
+    .munic-desc{
+        background-color:#00000034;
+        border-radius: 50%;
+        padding: 0.8rem;
+    }
+    .lista-partido{
+        display: block;
+
     }
 </style>

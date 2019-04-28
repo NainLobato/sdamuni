@@ -22,7 +22,9 @@
             padding: 5% 0;
         }
         #hijo {
-            padding: 6% 0;
+
+            padding-top: 1%;
+            padding-bottom: 5.2%;
         }
     </style>
 </head>
@@ -66,11 +68,7 @@
                         </div>
                     </div>
             </form>
-
-
         </div>
-    </div>
-
     </div>
 
 	{{--@routes--}}

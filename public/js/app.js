@@ -2197,7 +2197,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
         imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
         href: route('acuerdo-pendiente.index').template,
         color: 'background-color:#0abab5;',
-        titulo: 'Libros de actas',
+        titulo: 'Acuerdos pendientes',
         descripcion: 'Crea, elimina, edita acuerdos'
       }, {
         imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
@@ -3297,10 +3297,10 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
         axios.post(urlDeleteAyuntamiento, {
           id: data
         }).then(function (response) {
-          if (response.data == 1) {
+          if (response.data == 3) {
             Vue.swal({
               title: 'Hecho',
-              text: "Hubo un error, inténtelo de nuevo.",
+              text: "Ayuntamiento borrado con éxito",
               type: 'success',
               showCancelButton: false,
               confirmButtonColor: '#3085d6',

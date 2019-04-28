@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Empleado;
 use App\Models\CatCargo;
+use App\Models\Ayuntamiento;
 use App\User;
 use DB;
 
@@ -32,6 +33,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
+        $ayuntamiento = Ayuntamiento::get()->last();
         if(User::where('email', '=', $request->usuario['email'])->count() > 0){
             return 1;
         }
@@ -53,7 +55,7 @@ class EmpleadoController extends Controller
 
             $empleado = new Empleado();
             $empleado->user_id = $user->id;
-            $empleado->ayuntamiento_id = 1;//$emp['empleado']['ayuntamiento_id'];
+            $empleado->ayuntamiento_id = $ayuntamiento->id;//$emp['empleado']['ayuntamiento_id'];
             $empleado->cargo_id = $emp['empleado']['cargo']['id'];
             $empleado->sexo = $emp['empleado']['sexo'];
             $empleado->fism = ($emp['empleado']['fism'] == "") ? 0 : 1;
@@ -103,7 +105,7 @@ class EmpleadoController extends Controller
             $user->email = $emp['email'];
             $user->password = bcrypt($emp['password']);
             $user->save();
-            
+
             $empleado = Empleado::where('user_id', $user->id)->first();
             $empleado->cargo_id = $emp['empleado']['cargo']['id'];
             $empleado->sexo = $emp['empleado']['sexo'];

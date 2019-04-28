@@ -469,10 +469,10 @@
                 }).then((confirmed) => {
                     if (confirmed) {
                         axios.post(urlDeleteAyuntamiento,{id:data}).then(response => {
-                        if(response.data == 1){
+                        if(response.data == 3){
                                 Vue.swal({
                                     title: 'Hecho',
-                                    text: "Hubo un error, inténtelo de nuevo.",
+                                    text: "Ayuntamiento borrado con éxito",
                                     type: 'success',
                                     showCancelButton: false,
                                     confirmButtonColor: '#3085d6',

@@ -55,14 +55,14 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="primer_folio">Primer folio:</label>
+                                <label for="primer_folio">Folio de la primer acta:</label>
                                 <input type="text" id="primer_folio" name="primer_folio" class="form-control" placeholder="Ingrese folio de la primer acta" data-vv-as="primer folio" v-validate="'required|numeric|max:11'">
                                 <div class="invalid-feedback" v-if="errors.has('primer_folio')">{{ errors.first('primer_folio') }}</div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="ultimo_folio">Ultimo folio:</label>
+                                <label for="ultimo_folio">Folio de la ultima acta:</label>
                                 <input type="text" id="ultimo_folio" name="ultimo_folio" class="form-control" placeholder="Ingrese folio de la ultima acta" data-vv-as="ultimo folio" v-validate="'required|numeric|max:11'">
                                 <div class="invalid-feedback" v-if="errors.has('ultimo_folio')">{{ errors.first('ultimo_folio') }}</div>
                             </div>

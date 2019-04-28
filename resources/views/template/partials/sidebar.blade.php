@@ -52,7 +52,13 @@
                     <li class="nav-item">
                         <a href="{{ route('acuerdo-pendiente.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-file-contract"></i>
-                            <p>Acuerdos pendintes</p>
+                            <p>Acuerdos pendientes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('acta-consejo-desarrollo.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-contract"></i>
+                            <p>Actas del consejo de desarrollo</p>
                         </a>
                     </li>
 

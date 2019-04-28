@@ -37,6 +37,7 @@ Vue.component("municipio", require("./components/municipio.vue").default);
 Vue.component("empleado", require("./components/empleado.vue").default);
 Vue.component("libros-actas", require("./components/librosActas.vue").default);
 Vue.component("acuerdos-pendientes", require("./components/acuerdosPendientes.vue").default);
+Vue.component("actas-consejo-desarrollo", require("./components/ActasConsejoDesarrollo.vue").default);
 
 const app = new Vue({
    el: '#app',

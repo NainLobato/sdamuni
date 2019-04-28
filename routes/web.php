@@ -48,6 +48,10 @@ Route::middleware('auth')->group(function () {
         Route::get('acuerdos-pendientes', 'AcuerdoPendienteController@index')->name('index');
     });
 
+    Route::name('acta-consejo-desarrollo.')->group(function () {
+        Route::get('actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@index')->name('index');
+    });
+
     Route::name('contrato-convenio.')->group(function () {
         Route::post('contrato-store', 'ContratoConvenioController@store')->name('store');
         Route::get('contrato/{id}/edit', 'ContratoConvenioController@edit')->name('edit');

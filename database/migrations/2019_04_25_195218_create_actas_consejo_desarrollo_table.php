@@ -18,6 +18,7 @@ class CreateActasConsejoDesarrolloTable extends Migration
             $table->integer('num_acta');
             $table->string('asuntos_acta');
             $table->date('fecha_levanto_acta');
+            $table->integer('año_acta', 4);
             $table->integer('num_forjas');
             $table->boolean('firmas_consejo');
             $table->boolean('sellos_validez');

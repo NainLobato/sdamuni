@@ -65,8 +65,7 @@ class ContratoConvenioController extends Controller
             $relacion->save();
 
             foreach($request->contratos as $registro){
-               $contrato = ContratoConvenio::find($request->idContrato);
-               $contrato->relacion_id = $relacion->id;
+               $contrato = ContratoConvenio::where('relacion_id',$relacion->id)->get()->first();
                $contrato->denominaciones = $registro->denominaciones;
                $contrato->fecha_subscripcion = $registro->fecha_subscripcion;
                $contrato->periodo_inicio = $registro->periodo_inicio;
@@ -89,15 +88,15 @@ class ContratoConvenioController extends Controller
     public function destroy($id)
     {
         DB::beginTransaction();
-        try {            
-            $relacion = Relacion::find($id);
-            $relacion->delete();
-           
+        try {   
             $contratos = ContratoConvenio::where('relacion_id',$id)->get();
             foreach($contratos as $contrato){
                 $contrato->delete();
-            }
-
+            }      
+               
+            $relacion = Relacion::find($id);
+            $relacion->delete();
+           
             DB::commit();
             return response()->json(['response'=>'success','status'=>1],200);
         }catch(Exception $e){

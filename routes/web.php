@@ -60,6 +60,14 @@ Route::middleware('auth')->group(function () {
         Route::get('jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@index')->name('index');
     });
 
+    Route::name('juicio-contra-ayuntamiento.')->group(function () {
+        Route::get('jucios-contra-ayuntamiento', 'JuicioContraAyuntamientoController@index')->name('index');
+    });
+
+    Route::name('contrato-convenio-acuerdo.')->group(function () {
+        Route::get('contratos-convenios-acuerdos', 'ContratosConveniosAcuerdosController@index')->name('index');
+    });
+
     Route::name('contrato-convenio.')->group(function () {
         Route::post('contrato-store', 'ContratoConvenioController@store')->name('store');
         Route::get('contrato/{id}/edit', 'ContratoConvenioController@edit')->name('edit');

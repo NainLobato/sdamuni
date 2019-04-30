@@ -2612,8 +2612,10 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
               });
             } else {
               var emp = {
-                id: response,
-                nombres: _this.usuario.nombres + ' ' + _this.usuario.primer_ap + ' ' + _this.usuario.segundo_ap
+                id: response.data,
+                nombres: _this.usuario.nombres,
+                primer_ap: _this.usuario.primer_ap,
+                segundo_ap: _this.usuario.segundo_ap
               };
 
               _this.empleadosE.push(emp);
@@ -2720,6 +2722,15 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
                 title: 'Error',
                 text: "Hubo un error, inténtelo de nuevo.",
                 type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              });
+            } else if (response.data == 1) {
+              Vue.swal({
+                title: 'Atención',
+                text: "Ya existe un empleado con ese correo, intente con otro.",
+                type: 'warning',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'Aceptar'
@@ -32056,7 +32067,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.ver{\r\n    display: block;\n}\r\n", ""]);
+exports.push([module.i, "\ninput[type=\"text\"]{\r\n    text-transform:uppercase;\n}\n.ver{\r\n    display: block;\n}\r\n", ""]);
 
 // exports
 

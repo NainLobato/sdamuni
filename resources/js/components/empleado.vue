@@ -247,8 +247,10 @@ Vue.component('v-select', vSelect)
                                 })
                             }else{
                                 var emp = {
-                                    id: response,
-                                    nombres: this.usuario.nombres+' '+this.usuario.primer_ap+' '+this.usuario.segundo_ap
+                                    id: response.data,
+                                    nombres: this.usuario.nombres,
+                                    primer_ap: this.usuario.primer_ap,
+                                    segundo_ap: this.usuario.segundo_ap
                                 }
                                 this.empleadosE.push(emp)
                                 this.limpiar()
@@ -352,6 +354,15 @@ Vue.component('v-select', vSelect)
                                     confirmButtonColor: '#3085d6',
                                     confirmButtonText: 'Aceptar'
                                 })
+                            }else if(response.data == 1){
+                                Vue.swal({
+                                    title: 'Atención',
+                                    text: "Ya existe un empleado con ese correo, intente con otro.",
+                                    type: 'warning',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                })
                             }else{
                                 //console.log(this.clientesE[this.indexCliente])
                                 this.empleadosE[this.indexEmpleado].nombres = this.usuario.nombres
@@ -429,6 +440,9 @@ Vue.component('v-select', vSelect)
     }
 </script>
 <style>
+input[type="text"]{
+    text-transform:uppercase;
+}
 .ver{
     display: block;
 }

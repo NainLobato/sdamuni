@@ -66,7 +66,7 @@ class EmpleadoController extends Controller
             $empleado->status = 1;
             $empleado->save();
             DB::commit();
-            return 3;
+            return $user->id;
         }catch(Exception $e){
             DB::rollBack();
             return 0;

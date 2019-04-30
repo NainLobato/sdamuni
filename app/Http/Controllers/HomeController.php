@@ -33,9 +33,14 @@ class HomeController extends Controller
     {
         $ayuntamiento = Ayuntamiento::get()->last();
         if($ayuntamiento != null){
-            $im = file_get_contents(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+            if ($ayuntamiento->escudo) {
+                $im = file_get_contents(storage_path('escudos'.DIRECTORY_SEPARATOR).$ayuntamiento->escudo);
+                $formato = explode(".", $ayuntamiento->escudo)[1];
+            } else {
+                $im = '';
+                $formato = '';
+            }
             $imdata = base64_encode($im);
-            $formato =explode(".", $ayuntamiento->escudo)[1];
             $varAyuntamiento = [];
             $varAyuntamiento['municipio'] = [ 'id' => $ayuntamiento->municipio->id, 'nombre' => $ayuntamiento->municipio->municipio];
             $varAyuntamiento['distrito'] = [ 'id' => $ayuntamiento->municipio->distrito->id, 'nombre' => $ayuntamiento->municipio->distrito->distrito];

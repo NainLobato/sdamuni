@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <libros-actas></libros-actas>
+            <libros-actas initial-libros="{{ json_encode($libros) }}"></libros-actas>
             </div>
         </div>
     </div>

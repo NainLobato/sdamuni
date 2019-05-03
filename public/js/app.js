@@ -3061,6 +3061,7 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
 //
 //
 //
@@ -3157,9 +3158,104 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'initialLibros': {
+      required: false
+    }
+  },
   data: function data() {
-    return {};
+    return {
+      libro: {
+        clave: '',
+        fecha_primer_sesion: '',
+        fecha_ultima_sesion: '',
+        primer_folio: '',
+        'ultimo_folio': '',
+        'comentarios': '',
+        'ubicacion': ''
+      },
+      urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
+      libros: JSON.parse(this.initialLibros)
+    };
+  },
+  methods: {
+    store: function store() {
+      var _this = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post("".concat(_this.urlSdamuni, "/store-libro-actas"), {
+            libro: _this.libro
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal('Exito!', 'Se ha guardado el libro correctamente.', 'success');
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe la clave ingresada.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    verlibro: function verlibro(libro) {
+      this.libro = libro;
+    },
+    editarlibro: function editarlibro(libro) {
+      this.libro = libro;
+    },
+    deletelibro: function deletelibro(libro) {
+      var _this2 = this;
+
+      Vue.swal({
+        title: '¿ESTAS SEGURO DE ELIMINAR EL LIBRO DE ' + libro.clave + '?',
+        text: "NO SE PODRA REVERTIR EL CAMBIO",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'ELIMINAR',
+        cancelButtonText: 'CANCELAR'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post("".concat(_this2.urlSdamuni, "/destroy-libro-actas"), {
+            idLibro: libro.id
+          }).then(function (response) {
+            if (response.data.status === 1) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Libro eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        }
+      });
+    }
   },
   mounted: function mounted() {
     console.log('whatever it takes');
@@ -78055,11 +78151,69 @@ var render = function() {
                 }
               },
               [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("li", [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("li", [_vm._v("2")])
-                ])
+                _c(
+                  "b-card-body",
+                  { attrs: { align: "left" } },
+                  [
+                    _vm.libros.length === 0
+                      ? _c("ul", [_c("li", [_vm._v("Sin registros")])])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(_vm.libros, function(libro) {
+                      return _c(
+                        "b-dropdown",
+                        {
+                          key: libro.id,
+                          staticClass: "m-2",
+                          attrs: {
+                            dropright: "",
+                            text: libro.clave,
+                            variant: "primary"
+                          }
+                        },
+                        [
+                          _c(
+                            "b-dropdown-item",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.verlibro(libro)
+                                }
+                              }
+                            },
+                            [_vm._v("Ver")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-dropdown-item",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.editarlibro(libro)
+                                }
+                              }
+                            },
+                            [_vm._v("Editar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-dropdown-item",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.deletelibro(libro)
+                                }
+                              }
+                            },
+                            [_vm._v("Eliminar")]
+                          )
+                        ],
+                        1
+                      )
+                    })
+                  ],
+                  2
+                )
               ],
               1
             )
@@ -78093,6 +78247,12 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.clave,
+                              expression: "libro.clave"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
                               value: "required|max:255",
@@ -78106,6 +78266,15 @@ var render = function() {
                             name: "clave",
                             placeholder: "Ingrese clave",
                             "data-vv-as": "clave"
+                          },
+                          domProps: { value: _vm.libro.clave },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.libro, "clave", $event.target.value)
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78126,6 +78295,12 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.fecha_primer_sesion,
+                              expression: "libro.fecha_primer_sesion"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
                               value: "required",
@@ -78138,6 +78313,19 @@ var render = function() {
                             id: "fecha_primer_sesion",
                             name: "fecha_primer_sesion",
                             "data-vv-as": "fecha de primer sesion"
+                          },
+                          domProps: { value: _vm.libro.fecha_primer_sesion },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.libro,
+                                "fecha_primer_sesion",
+                                $event.target.value
+                              )
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78160,6 +78348,12 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.fecha_ultima_sesion,
+                              expression: "libro.fecha_ultima_sesion"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
                               value: "required",
@@ -78172,6 +78366,19 @@ var render = function() {
                             id: "fecha_ultima_sesion",
                             name: "fecha_ultima_sesion",
                             "data-vv-as": "fecha de ultima sesion"
+                          },
+                          domProps: { value: _vm.libro.fecha_ultima_sesion },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.libro,
+                                "fecha_ultima_sesion",
+                                $event.target.value
+                              )
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78194,6 +78401,12 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.primer_folio,
+                              expression: "libro.primer_folio"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
                               value: "required|numeric|max:11",
@@ -78207,6 +78420,19 @@ var render = function() {
                             name: "primer_folio",
                             placeholder: "Ingrese folio de la primer acta",
                             "data-vv-as": "primer folio"
+                          },
+                          domProps: { value: _vm.libro.primer_folio },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.libro,
+                                "primer_folio",
+                                $event.target.value
+                              )
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78227,6 +78453,12 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.ultimo_folio,
+                              expression: "libro.ultimo_folio"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
                               value: "required|numeric|max:11",
@@ -78240,6 +78472,19 @@ var render = function() {
                             name: "ultimo_folio",
                             placeholder: "Ingrese folio de la ultima acta",
                             "data-vv-as": "ultimo folio"
+                          },
+                          domProps: { value: _vm.libro.ultimo_folio },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.libro,
+                                "ultimo_folio",
+                                $event.target.value
+                              )
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78260,10 +78505,16 @@ var render = function() {
                         _c("textarea", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.comentarios,
+                              expression: "libro.comentarios"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
-                              value: "alpha_dash_field|max:255",
-                              expression: "'alpha_dash_field|max:255'"
+                              value: "max:255",
+                              expression: "'max:255'"
                             }
                           ],
                           staticClass: "form-control",
@@ -78273,6 +78524,19 @@ var render = function() {
                             name: "comentarios",
                             placeholder: "Ingrese comentarios",
                             "data-vv-as": "comentarios"
+                          },
+                          domProps: { value: _vm.libro.comentarios },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.libro,
+                                "comentarios",
+                                $event.target.value
+                              )
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78293,10 +78557,16 @@ var render = function() {
                         _c("input", {
                           directives: [
                             {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.libro.ubicacion,
+                              expression: "libro.ubicacion"
+                            },
+                            {
                               name: "validate",
                               rawName: "v-validate",
-                              value: "alpha_dash_field|max:255",
-                              expression: "'alpha_dash_field|max:255'"
+                              value: "max:255",
+                              expression: "'max:255'"
                             }
                           ],
                           staticClass: "form-control",
@@ -78306,6 +78576,19 @@ var render = function() {
                             name: "ubicacion",
                             placeholder: "Ingrese ubicacion de comentarios",
                             "data-vv-as": "ubicacion"
+                          },
+                          domProps: { value: _vm.libro.ubicacion },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.libro,
+                                "ubicacion",
+                                $event.target.value
+                              )
+                            }
                           }
                         }),
                         _vm._v(" "),
@@ -78322,9 +78605,14 @@ var render = function() {
                         _vm._v("Cancelar")
                       ]),
                       _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-success" }, [
-                        _vm._v("Guardar")
-                      ])
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success",
+                          on: { click: _vm.store }
+                        },
+                        [_vm._v("Guardar")]
+                      )
                     ])
                   ])
                 ])
@@ -92213,6 +92501,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/urlSdamuni.js":
+/*!************************************!*\
+  !*** ./resources/js/urlSdamuni.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var urlSdamuni = "".concat(window.location.protocol, "//").concat(window.location.hostname, "/sdamuni/public");
+/* harmony default export */ __webpack_exports__["default"] = (urlSdamuni);
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -92242,9 +92544,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

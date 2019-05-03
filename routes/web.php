@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
 
     Route::name('libro-actas.')->group(function () {
         Route::get('libros-actas', 'LibroActasController@index')->name('index');
+        Route::post('store-libro-actas', 'LibroActasController@store')->name('store');
     });
 
     Route::name('acuerdo-pendiente.')->group(function () {

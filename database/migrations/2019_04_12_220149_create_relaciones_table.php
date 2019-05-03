@@ -20,7 +20,6 @@ class CreateRelacionesTable extends Migration
             $table->integer('empleado_integra_id')->unsigned()->nullable();
             $table->integer('empleado_entrega_id')->unsigned()->nullable();
             $table->integer('empleado_recibe_id')->unsigned()->nullable();
-            $table->date('fecha_actualizacion')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

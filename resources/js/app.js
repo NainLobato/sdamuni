@@ -40,6 +40,7 @@ Vue.component("acuerdos-pendientes", require("./components/acuerdosPendientes.vu
 Vue.component("actas-consejo-desarrollo", require("./components/ActasConsejoDesarrollo.vue").default);
 Vue.component("actas-consejo-planeacion", require("./components/ActasConsejoPlaneacion.vue").default);
 Vue.component("jucios-por-ayuntamiento", require("./components/JuiciosPorAyuntamiento.vue").default);
+Vue.component("actas", require("./components/actas.vue").default);
 
 const app = new Vue({
    el: '#app',

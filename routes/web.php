@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::name('acuerdo-pendiente.')->group(function () {
         Route::get('acuerdos-pendientes', 'AcuerdoPendienteController@index')->name('index');
+        Route::get('store-acuerdo-pendiente', 'AcuerdoPendienteController@store')->name('store');
     });
 
     Route::name('acta-consejo-desarrollo.')->group(function () {

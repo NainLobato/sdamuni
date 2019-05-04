@@ -4,13 +4,13 @@
 @push('estilos')
 @endpush
 
-@section('title', 'Acuerdos de cabildo pendintes')
+@section('title', 'Acuerdos de cabildo pendientes')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <acuerdos-pendientes></acuerdos-pendientes>
+                <acuerdos-pendientes initial-acuerdos="" initial-empleados="{{ json_encode($empleados) }}"></acuerdos-pendientes>
             </div>
         </div>
     </div>

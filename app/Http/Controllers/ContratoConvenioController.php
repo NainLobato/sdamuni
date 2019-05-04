@@ -10,29 +10,31 @@ class ContratoConvenioController extends Controller
 {
     public function store(Request $request)
     {
+        $usuario = Auth::user();
+        $relacion = Relacion::where(['formato_id' => 7, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
+         
         DB::beginTransaction();
         try {
+            if (!$relacion) {
+                $relacion = new Relacion ();
+                $relacion->formato_id = 1;
+                $relacion->ayuntamiento_id = $usuario->empleado->ayuntamiento_id;
+                $relacion->save();
 
-            $relacion = new Relacion();
-            $relacion->formato_id = $request->formato_id;
-            $relacion->ayuntamiento_id = $request->ayuntamiento_id;
-            $relacion->empleado_integra_id = $request->empleado_integra_id;
-            $relacion->empleado_entrega_id = $request->empleado_entrega_id;
-            $relacion->empleado_recibe_id = $request->empleado_recibe_id;
-            $relacion->fecha_actualizacion = $request->fecha_actualizacion;
-            $relacion->save();
-
-            foreach($request->contratos as $registro){
-               $contrato = new ContratoConvenio();
-               $contrato->relacion_id = $relacion->id;
-               $contrato->denominaciones = $registro->denominaciones;
-               $contrato->fecha_subscripcion = $registro->fecha_subscripcion;
-               $contrato->periodo_inicio = $registro->periodo_inicio;
-               $contrato->periodo_final = $registro->periodo_final;
-               $contrato->importe = $registro->importe;
-               $contrato->observaciones = $registro->observaciones;
-               $contrato->save();
+            } else {
+                $relacion->save();
             }
+               
+               $contrato = new ContratoConvenio();
+               $contrato->relacion_id = $relacion;
+               $contrato->denominaciones = $request['denominaciones'];
+               $contrato->fecha_subscripcion = $request['fecha_subscripcion'];
+               $contrato->periodo_inicio = $request['periodo_inicio'];
+               $contrato->periodo_final = $request['periodo_final'];
+               $contrato->importe = $request['importe'];
+               $contrato->observaciones = $request['observaciones'];
+               $contrato->save();
+            
 
             DB::commit();
             return response()->json(['response'=>'success','status'=>1],200);
@@ -46,7 +48,10 @@ class ContratoConvenioController extends Controller
         
     public function edit($id)
     {
-        
+        $contrato = ContratoConvenio::find($id);
+
+        return response()->json(['response'=>'success','status'=>1,'contrato'=>$contrato],200);
+
     }
 
    
@@ -55,25 +60,15 @@ class ContratoConvenioController extends Controller
         DB::beginTransaction();
         try {
 
-            $relacion = Relacion::find($request->idRelacion);
-            $relacion->formato_id = $request->formato_id;
-            $relacion->ayuntamiento_id = $request->ayuntamiento_id;
-            $relacion->empleado_integra_id = $request->empleado_integra_id;
-            $relacion->empleado_entrega_id = $request->empleado_entrega_id;
-            $relacion->empleado_recibe_id = $request->empleado_recibe_id;
-            $relacion->fecha_actualizacion = $request->fecha_actualizacion;
-            $relacion->save();
-
-            foreach($request->contratos as $registro){
-               $contrato = ContratoConvenio::where('relacion_id',$relacion->id)->get()->first();
-               $contrato->denominaciones = $registro->denominaciones;
-               $contrato->fecha_subscripcion = $registro->fecha_subscripcion;
-               $contrato->periodo_inicio = $registro->periodo_inicio;
-               $contrato->periodo_final = $registro->periodo_final;
-               $contrato->importe = $registro->importe;
-               $contrato->observaciones = $registro->observaciones;
+               $contrato = ContratoConvenio::find($request['id']);
+               $contrato->denominaciones = $request['denominaciones'];
+               $contrato->fecha_subscripcion = $request['fecha_subscripcion'];
+               $contrato->periodo_inicio = $request['periodo_inicio'];
+               $contrato->periodo_final = $request['periodo_final'];
+               $contrato->importe = $request['importe'];
+               $contrato->observaciones = $request['observaciones'];
                $contrato->save();
-            }
+            
 
             DB::commit();
             return response()->json(['response'=>'success','status'=>1],200);
@@ -89,14 +84,9 @@ class ContratoConvenioController extends Controller
     {
         DB::beginTransaction();
         try {   
-            $contratos = ContratoConvenio::where('relacion_id',$id)->get();
-            foreach($contratos as $contrato){
-                $contrato->delete();
-            }      
-               
-            $relacion = Relacion::find($id);
-            $relacion->delete();
-           
+            $contratos = ContratoConvenio::find($id);
+            $contrato->delete();               
+          
             DB::commit();
             return response()->json(['response'=>'success','status'=>1],200);
         }catch(Exception $e){

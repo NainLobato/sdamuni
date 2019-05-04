@@ -15,7 +15,7 @@ class CreateContratosConveniosTable extends Migration
     {
         Schema::create('contratos_convenios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('relacion_id')->unsigned();
+            $table->integer('relacion_id')->nullable()->unsigned();
             $table->string('denominaciones', 2000);
             $table->date('fecha_subscripcion');
             $table->date('periodo_inicio');

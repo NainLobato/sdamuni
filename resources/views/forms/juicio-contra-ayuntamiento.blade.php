@@ -4,13 +4,13 @@
 @push('estilos')
 @endpush
 
-@section('title', 'Libros de actas de cabildo')
+@section('title', 'Juicios en proceso promovidos en contra del ayuntamiento')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-            <libros-actas initial-libros="{{ json_encode($libros) }}"></libros-actas>
+                <jucios-contra-ayuntamiento></jucios-contra-ayuntamiento>
             </div>
         </div>
     </div>

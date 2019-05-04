@@ -13,57 +13,63 @@ class ConciliacionBancariaController extends Controller
         
     public function store(Request $request)
     {
+        $usuario = Auth::user();
+        $relacion = Relacion::where(['formato_id' => 9, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
+         
         DB::beginTransaction();
         try {
+            if (!$relacion) {
+                $relacion = new Relacion ();
+                $relacion->formato_id = 1;
+                $relacion->ayuntamiento_id = $usuario->empleado->ayuntamiento_id;
+                $relacion->save();
 
-            $relacion = new Relacion();
-            $relacion->formato_id = $request->formato_id;
-            $relacion->ayuntamiento_id = $request->ayuntamiento_id;
-            $relacion->empleado_integra_id = $request->empleado_integra_id;
-            $relacion->empleado_entrega_id = $request->empleado_entrega_id;
-            $relacion->empleado_recibe_id = $request->empleado_recibe_id;
-            $relacion->fecha_actualizacion = $request->fecha_actualizacion;
-            $relacion->save();
+            } else {
+                $relacion->save();
+            }
+       
 
-            $conciliacion = new Conciliacion();
-            $conciliacion->relacion_id = $relacion->id;
-            $conciliacion->cuenta = $request->cuenta;
-
-            $depositos_municipio = 0.0; 
-            $cheques_noCobrados = 0.0;
-            $cargos_noConsiderados = 0.0;
-            $depositos_banco = 0.0;
+            $conciliacion = Conciliacion::where(['relacion_id' => $relacion->id, 'cuenta' => $request['cuenta']])->first();
          
-            foreach($request->registrosConciliacion as $registro){
+                if (!$conciliacion) {
+                    $conciliacion = new Conciliacion();
+                    $conciliacion->relacion_id = $relacion->id;
+                    $conciliacion->cuenta = $request['cuenta'];
+                    $conciliacion->save();
+               
+                } else {
+                    $conciliacion->save();
+                }
+                  
 
                 $registroConciliacion = new RegistroConciliacion();
                 $registroConciliacion->conciliacion_id = $conciliacion->id;
-                $registroConciliacion->tipo = $registro->tipo;
-                $registroConciliacion->fecha =  $registro->fecha;
-                $registroConciliacion->concepto = $registro->concepto;
-                $registroConciliacion->referencia  = $registro->referencia;
-                $registroConciliacion->importe = $registro->importe;
+                $registroConciliacion->tipo = $request['tipo'];
+                $registroConciliacion->fecha =  $request['fecha'];
+                $registroConciliacion->concepto = $request['concepto'];
+                $registroConciliacion->referencia  = $request['referencia'];
+                $registroConciliacion->importe = $request['importe'];
                 $registroConciliacion->save();
 
-                switch($registro->tipo){
+                 switch($registroConciliacion->tipo){
                     case 1:
-                    $depositos_municipio  = $registroConciliacion->importe + $depositos_municipio;
+                    $conciliacion->depositos_municipio  = $registroConciliacion->importe +  $conciliacion->depositos_municipio;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado + $conciliacion->depositos_municipio;
+
                     case 2:            
-                    $cheques_noCobrados = $registroConciliacion->importe + $cheques_noCobrados;
+                    $conciliacion->cheques_noCobrados = $registroConciliacion->importe + $conciliacion->cheques_noCobrados;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado +  $conciliacion->cheques_noCobrados;
+
                     case 3:
-                    $cargos_noConsiderados = $registroConciliacion->importe +  $cargos_noConsiderados;
+                    $conciliacion->cargos_noConsiderados = $registroConciliacion->importe +  $conciliacion->cargos_noConsiderados;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado - $registroConciliacion->importe;
+
                     case 4:
-                    $depositos_banco = $registroConciliacion->importe + $depositos_banco;
+                    $conciliacion->depositos_banco = $registroConciliacion->importe +  $conciliacion->depositos_banco;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado - $registroConciliacion->importe;
+
                 }     
 
-            }
-
-            $conciliacion->depositos_municipio =  $depositos_municipio;
-            $conciliacion->cheques_noCobrados = $cheques_noCobrados;
-            $conciliacion->cargos_noConsiderados = $cargos_noConsiderados;
-            $conciliacion->depositos_banco = $depositos_banco;
-            $conciliacion->fecha_actualizacion = Carbon::now();
-            $conciliacion->saldo_actualizado = $depositos_municipio + $cheques_noCobrados + $cargos_noConsiderados + $depositos_banco; 
             $conciliacion->save();     
 
             DB::commit();
@@ -78,6 +84,9 @@ class ConciliacionBancariaController extends Controller
         
     public function edit($id)
     {
+        $registroConciliacion = RegistroConciliacion::find($id);
+        return response()->json(['response'=>'success','status'=>1,'registroConciliacion'=>$registroConciliacion],200);
+
         
     }
 
@@ -87,55 +96,37 @@ class ConciliacionBancariaController extends Controller
         
         DB::beginTransaction();
         try {            
-            $relacion = Relacion::find($request->idRelacion);
-            $relacion->formato_id = $request->formato_id;
-            $relacion->ayuntamiento_id = $request->ayuntamiento_id;
-            $relacion->empleado_integra_id = $request->empleado_integra_id;
-            $relacion->empleado_entrega_id = $request->empleado_entrega_id;
-            $relacion->empleado_recibe_id = $request->empleado_recibe_id;
-            $relacion->fecha_actualizacion = $request->fecha_actualizacion;
-            $relacion->save();
 
-            $conciliacion = Conciliacion::where('relacion_id',$relacion->id)->get()->first();
-            $conciliacion->cuenta = $request->cuenta;
+            $registroConciliacion = RegistroConciliacion::find($request['id']);
+            $registroConciliacion->tipo = $request['tipo'];
+            $registroConciliacion->fecha =  $request['fecha'];
+            $registroConciliacion->concepto = $request['concepto'];
+            $registroConciliacion->referencia  = $request['referencia'];
+            $registroConciliacion->importe = $request['importe'];
+            $registroConciliacion->save();
 
-            $depositos_municipio = 0.0; 
-            $cheques_noCobrados = 0.0;
-            $cargos_noConsiderados = 0.0;
-            $depositos_banco = 0.0;
+            $conciliacion = Conciliacion::find($conciliacion->id);
+        
+             switch($registroConciliacion->tipo){
+                case 1:
+                    $conciliacion->depositos_municipio  = $registroConciliacion->importe +  $conciliacion->depositos_municipio;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado + $conciliacion->depositos_municipio;
 
-            $registrosConciliacion = RegistroConciliacion::where('conciliacion_id',$conciliacion->id)->get();
-         
-            foreach($registrosConciliacion as $registro){
-
-                $registroConciliacion = RegistroConciliacion::find($registro->id);
-                $registroConciliacion->tipo = $registro->tipo;
-                $registroConciliacion->fecha =  $registro->fecha;
-                $registroConciliacion->concepto = $registro->concepto;
-                $registroConciliacion->referencia  = $registro->referencia;
-                $registroConciliacion->importe = $registro->importe;
-                $registroConciliacion->save();
-
-                switch($registro->tipo){
-                    case 1:
-                    $depositos_municipio  = $registroConciliacion->importe + $depositos_municipio;
                     case 2:            
-                    $cheques_noCobrados = $registroConciliacion->importe + $cheques_noCobrados;
+                    $conciliacion->cheques_noCobrados = $registroConciliacion->importe + $conciliacion->cheques_noCobrados;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado +  $conciliacion->cheques_noCobrados;
+
                     case 3:
-                    $cargos_noConsiderados = $registroConciliacion->importe +  $cargos_noConsiderados;
+                    $conciliacion->cargos_noConsiderados = $registroConciliacion->importe +  $conciliacion->cargos_noConsiderados;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado - $registroConciliacion->importe;
+
                     case 4:
-                    $depositos_banco = $registroConciliacion->importe + $depositos_banco;
-                }     
+                    $conciliacion->depositos_banco = $registroConciliacion->importe +  $conciliacion->depositos_banco;
+                    $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado - $registroConciliacion->importe;
 
-            }
+            }     
 
-            $conciliacion->depositos_municipio =  $depositos_municipio;
-            $conciliacion->cheques_noCobrados = $cheques_noCobrados;
-            $conciliacion->cargos_noConsiderados = $cargos_noConsiderados;
-            $conciliacion->depositos_banco = $depositos_banco;
-            $conciliacion->fecha_actualizacion = Carbon::now();
-            $conciliacion->saldo_actualizado = $depositos_municipio + $cheques_noCobrados + $cargos_noConsiderados + $depositos_banco; 
-            $conciliacion->save();     
+        $conciliacion->save();   
             DB::commit();
             return response()->json(['response'=>'success','status'=>1],200);
         }catch(Exception $e){
@@ -149,17 +140,31 @@ class ConciliacionBancariaController extends Controller
     public function destroy($id)
     {
         DB::beginTransaction();
-        try {     
-            $conciliacion = Conciliacion::where('relacion_id',$id)->first();
-            $registrosConciliacion = RegistroConciliacion::where('conciliacion_id',$conciliacion->id)->get();
-            foreach($registrosConciliacion as $registro){
-                $registro->delete();
-            }
-            $conciliacion->delete();
+        try {    
+            $registrosConciliacion = RegistroConciliacion::find($id);
+            $conciliacion = Conciliacion::where('id',$registrosConciliacion->conciliacion_id)->first();
+           
+            switch($registroConciliacion->tipo){
+                case 1:
+                $conciliacion->depositos_municipio  = $conciliacion->depositos_municipio - $registroConciliacion->importe;
+                $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado - $registroConciliacion->importe;
 
-            $relacion = Relacion::find($id);
-            $relacion->delete();
-            
+                case 2:            
+                $conciliacion->cheques_noCobrados = $conciliacion->cheques_noCobrados - $registroConciliacion->importe;
+                $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado - $registroConciliacion->importe;
+
+                case 3:
+                $conciliacion->cargos_noConsiderados = $conciliacion->cargos_noConsiderados - $registroConciliacion->importe;;
+                $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado + $registroConciliacion->importe;
+
+                case 4:
+                $conciliacion->depositos_banco = $conciliacion->depositos_banco - $registroConciliacion->importe; 
+                $conciliacion->saldo_actualizado =  $conciliacion->saldo_actualizado + $registroConciliacion->importe;
+
+            }     
+            $conciliacion->save();           
+            $registroConciliacion->delete();
+             
             DB::commit();
             return response()->json(['response'=>'success','status'=>1],200);
         }catch(Exception $e){

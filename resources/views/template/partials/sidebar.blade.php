@@ -74,6 +74,19 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{ route('juicio-contra-ayuntamiento.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-gavel"></i>
+                            <p>Jucios en proceso contra el ayuntamiento</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{ route('contrato-convenio-acuerdo.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-file-contract"></i>
+                            <p>Contratos, convenios o acuerdos</p>
+                        </a>
+                    </li>
 
 				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">

@@ -42,10 +42,12 @@ Route::middleware('auth')->group(function () {
 
     Route::name('libro-actas.')->group(function () {
         Route::get('libros-actas', 'LibroActasController@index')->name('index');
+        Route::post('store-libro-actas', 'LibroActasController@store')->name('store');
     });
 
     Route::name('acuerdo-pendiente.')->group(function () {
         Route::get('acuerdos-pendientes', 'AcuerdoPendienteController@index')->name('index');
+        Route::get('store-acuerdo-pendiente', 'AcuerdoPendienteController@store')->name('store');
     });
 
     Route::name('acta-consejo-desarrollo.')->group(function () {
@@ -58,6 +60,14 @@ Route::middleware('auth')->group(function () {
 
     Route::name('juicio-por-ayuntamiento.')->group(function () {
         Route::get('jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@index')->name('index');
+    });
+
+    Route::name('juicio-contra-ayuntamiento.')->group(function () {
+        Route::get('jucios-contra-ayuntamiento', 'JuicioContraAyuntamientoController@index')->name('index');
+    });
+
+    Route::name('contrato-convenio-acuerdo.')->group(function () {
+        Route::get('contratos-convenios-acuerdos', 'ContratosConveniosAcuerdosController@index')->name('index');
     });
 
     Route::name('contrato-convenio.')->group(function () {

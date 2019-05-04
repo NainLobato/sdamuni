@@ -59,4 +59,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Empleado','user_id','id');
 
     }
+
+    public function getNombreCAttribute($key)
+    {
+        return $this->nombres . ' ' . $this->primer_ap . ' ' . $this->segundo_ap;
+    }
 }

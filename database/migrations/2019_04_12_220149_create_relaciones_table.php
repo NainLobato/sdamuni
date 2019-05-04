@@ -17,13 +17,12 @@ class CreateRelacionesTable extends Migration
             $table->increments('id');
             $table->integer('formato_id')->unsigned();
             $table->integer('ayuntamiento_id')->unsigned();
-            $table->integer('empleado_integra_id')->unsigned();
-            $table->integer('empleado_entrega_id')->unsigned();
-            $table->integer('empleado_recibe_id')->unsigned();
-            $table->date('fecha_actualizacion');
+            $table->integer('empleado_integra_id')->unsigned()->nullable();
+            $table->integer('empleado_entrega_id')->unsigned()->nullable();
+            $table->integer('empleado_recibe_id')->unsigned()->nullable();
             $table->timestamps();
-            $table->softDeletes(); 
-            
+            $table->softDeletes();
+
             $table->foreign('ayuntamiento_id')->references('id')->on('ayuntamientos')->onDelete('cascade');
             $table->foreign('empleado_integra_id')->references('id')->on('empleados')->onDelete('cascade');
             $table->foreign('empleado_entrega_id')->references('id')->on('empleados')->onDelete('cascade');

@@ -21,7 +21,6 @@ class CreateConciliacionesTable extends Migration
             $table->decimal('cheques_noCobrados',10,2);
             $table->decimal('cargos_noConsiderados',10,2);
             $table->decimal('depositos_banco',10,2);
-            $table->date('fecha_actualizacion');
             $table->decimal('saldo_actualizado',10,2); 
          
             $table->timestamps();

@@ -59,6 +59,7 @@
                                     value="accepted"
                                     switches
                                     >
+                                </b-form-checkbox>
 
                             </div>
                         </div>

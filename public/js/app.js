@@ -2092,110 +2092,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/actas.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/actas.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {};
-  },
-  mounted: function mounted() {
-    console.log('whatever it takes');
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/acuerdosPendientes.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/acuerdosPendientes.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
-=======
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/JuiciosContraAyuntamiento.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/JuiciosContraAyuntamiento.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************/
->>>>>>> develop
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2431,10 +2331,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/acuerdosPendientes.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/acuerdosPendientes.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/actas.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/actas.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2514,26 +2414,174 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  mounted: function mounted() {
+    console.log('whatever it takes');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/acuerdosPendientes.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/acuerdosPendientes.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'initialAcuerdos': {
+      required: false
+    },
+    'initialEmpleados': {
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      acuerdo: {
+        'num_acta': '',
+        'fecha_acta': '',
+        'acuerdo': '',
+        'empleado': '',
+        'accion_situacion': '',
+        'comentarios': ''
+      },
+      acuerdos: this.initialAcuerdos,
+      urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
+      titulo: 'titulo',
+      colapsableEstado: false,
+      empleados: JSON.parse(this.initialEmpleados)
+    };
+  },
+  methods: {
+    agregar: function agregar() {
+      this.colapsableEstado = true;
+    },
+    cancelar: function cancelar() {
+      this.colapsableEstado = false;
+    },
+    store: function store() {
+      var _this = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post("".concat(_this.urlSdamuni, "/store-acuerdo-pendiente"), {
+            acuerdo: _this.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal('Exito!', 'Se ha guardado el acuerdo pendiente correctamente.', 'success');
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe la clave ingresada.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    }
   },
   mounted: function mounted() {
     console.log('whatever it takes');
@@ -32477,7 +32525,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n\n", ""]);
+exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -76822,8 +76870,256 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-card",
+        {
+          staticStyle: { "max-width": "auto", "font-size": "18px" },
+          attrs: {
+            header: "Informacion del acta",
+            "header-tag": "header",
+            align: "center"
+          }
+        },
+        [
+          _c("b-card-body", { attrs: { align: "left" } }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "num_acta" } }, [
+                    _vm._v("Numero de acta de consejo:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required|numeric|max:11",
+                        expression: "'required|numeric|max:11'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "num_acta",
+                      name: "num_acta",
+                      placeholder: "Ingrese numero de acta",
+                      "data-vv-as": "numero de acta"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.has("num_acta")
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.first("num_acta")))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "fecha_levanto_acta" } }, [
+                    _vm._v("Fecha en que se levanto acta:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required",
+                        expression: "'required'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "date",
+                      id: "fecha_levanto_acta",
+                      name: "fecha_levanto_acta",
+                      "data-vv-as": "fecha de acta"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.has("fecha_levanto_acta")
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.first("fecha_levanto_acta")))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "año_acta" } }, [
+                    _vm._v("Año del acta:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required|numeric|max:4",
+                        expression: "'required|numeric|max:4'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "date",
+                      id: "año_acta",
+                      name: "año_acta",
+                      "data-vv-as": "año de acta"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.has("año_acta")
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.first("año_acta")))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "asuntos_acta" } }, [
+                    _vm._v("Descripcion de los asuntos del acta:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required|max:255",
+                        expression: "'required|max:255'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "asuntos_acta",
+                      name: "asuntos_acta",
+                      placeholder: "Ingrese asunto",
+                      "data-vv-as": "asunto"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.has("asuntos_acta")
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.first("asuntos_acta")))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "num_forjas" } }, [
+                    _vm._v("Numero de forjas del acta:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required|numeric|max:11",
+                        expression: "'required|numeric|max:11'"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "num_forjas",
+                      name: "num_forjas",
+                      placeholder: "Ingrese numero de forjas",
+                      "data-vv-as": "numero de forjas"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.errors.has("num_forjas")
+                    ? _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors.first("num_forjas")))
+                      ])
+                    : _vm._e()
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "firmas_consejo" } }, [
+                    _vm._v("Cuenta con todas las firmas del consejo:")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "checkbox",
+                      id: "firmas_consejo",
+                      name: "firmas_consejo",
+                      placeholder: "Igrese descripcion del acuero"
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "sellos_validez" } }, [
+                      _vm._v("Cuenta con los sellos correspondientes:")
+                    ]),
+                    _vm._v(" "),
+                    _c("b-form-checkbox", {
+                      attrs: {
+                        id: "checkbox-1",
+                        name: "checkbox-1",
+                        value: "accepted",
+                        switches: ""
+                      },
+                      model: {
+                        value: _vm.check1,
+                        callback: function($$v) {
+                          _vm.check1 = $$v
+                        },
+                        expression: "check1"
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12 text-right" }, [
+                _c("button", { staticClass: "btn btn-danger" }, [
+                  _vm._v("Cancelar")
+                ]),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-success" }, [
+                  _vm._v("Guardar")
+                ])
+              ])
+            ])
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -76855,297 +77151,311 @@ var render = function() {
             "font-weight": "bold",
             "font-size": "18px"
           },
-          attrs: { align: "center", "no-body": "" }
+          attrs: {
+            "header-bg-variant": "dark",
+            "header-tag": "header",
+            align: "center",
+            "no-body": ""
+          }
         },
         [
           _c("template", { slot: "header" }, [
-            _c("span", [
-              _vm._v("Administrador de acuerdos de cabildo pendientes")
+            _c("span", [_vm._v(_vm._s(_vm.titulo))]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools float-right" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.colapsableEstado,
+                      expression: "!colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.agregar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-plus" })])]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.colapsableEstado,
+                      expression: "colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.cancelar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-minus" })])]
+              )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { id: "colapsable" },
+              model: {
+                value: _vm.colapsableEstado,
+                callback: function($$v) {
+                  _vm.colapsableEstado = $$v
+                },
+                expression: "colapsableEstado"
+              }
+            },
+            [
+              _c("b-card-body", { attrs: { align: "left" } }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "clave" } }, [
+                        _vm._v(
+                          "Clave de acta donde consta el acuerdo pendiente de cumplir:"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|numeric|max:11",
+                            expression: "'required|numeric|max:11'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "clave",
+                          name: "clave",
+                          placeholder: "Ingrese clave",
+                          "data-vv-as": "clave"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("clave")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("clave")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_acta" } }, [
+                        _vm._v("Fecha de acta:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_acta",
+                          name: "fecha_acta",
+                          "data-vv-as": "fecha de acta"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("fecha_acta")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "acuerdo" } }, [
+                        _vm._v("Acuerdo:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:255",
+                            expression: "'required|max:255'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "acuerdo",
+                          name: "acuerdo",
+                          placeholder: "Igrese descripcion del acuero",
+                          "data-vv-as": "acuerdo"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("acuerdo")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("acuerdo")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "empleado" } }, [
+                          _vm._v("Servidor publico responsable:")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-select",
+                          {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: "'required'"
+                              }
+                            ],
+                            attrs: {
+                              name: "empleado",
+                              label: "nombre",
+                              options: _vm.empleados,
+                              placeholder: "Elige un empleado"
+                            }
+                          },
+                          [
+                            _vm._t("no-options", [
+                              _vm._v("¡No hay opciones disponibles!")
+                            ])
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _vm.errors.has("empleado")
+                          ? _c("div", { staticClass: "invalid-feedback ver" }, [
+                              _vm._v(_vm._s(_vm.errors.first("empleado")))
+                            ])
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-7" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "accion_situacion" } }, [
+                        _vm._v(
+                          "Acciones o situacion que guarda la atencion del acta:"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:255",
+                            expression: "'required|max:255'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "accion_situacion",
+                          name: "accion_situacion",
+                          placeholder: "Ingrese accion o situacion",
+                          "data-vv-as": "accion o situacion"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("accion_situacion")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("accion_situacion")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "comentarios" } }, [
+                        _vm._v("Comentarios:")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "max:255",
+                            expression: "'max:255'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          rows: "3",
+                          id: "comentarios",
+                          name: "comentarios",
+                          placeholder: "Ingrese comentarios",
+                          "data-vv-as": "comentarios"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("comentarios")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("comentarios")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12 text-right" }, [
+                    _c("button", { staticClass: "btn btn-danger" }, [
+                      _vm._v("Cancelar")
+                    ]),
+                    _vm._v(" "),
+                    _c("button", { staticClass: "btn btn-success" }, [
+                      _vm._v("Guardar")
+                    ])
+                  ])
+                ])
+              ])
+            ],
+            1
+          )
         ],
         2
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-4" },
-          [
-            _c(
-              "b-card",
-              {
-                staticStyle: { "max-width": "auto", "font-size": "18px" },
-                attrs: {
-                  header: "Acuerdos",
-                  "header-tag": "header",
-                  align: "center"
-                }
-              },
-              [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("li", [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("li", [_vm._v("2")])
-                ])
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-8" },
-          [
-            _c(
-              "b-card",
-              {
-                staticStyle: { "max-width": "auto", "font-size": "18px" },
-                attrs: {
-                  header: "Informacion del acuerdo",
-                  "header-tag": "header",
-                  align: "center"
-                }
-              },
-              [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "clave" } }, [
-                          _vm._v(
-                            "Clave de acta donde consta el acuerdo pendiente de cumplir:"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|numeric|max:11",
-                              expression: "'required|numeric|max:11'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "clave",
-                            name: "clave",
-                            placeholder: "Ingrese clave",
-                            "data-vv-as": "clave"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("clave")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("clave")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-5" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "fecha_acta" } }, [
-                          _vm._v("Fecha de acta:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "date",
-                            id: "fecha_acta",
-                            name: "fecha_acta",
-                            "data-vv-as": "fecha de acta"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("fecha_acta")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("fecha_acta")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "acuerdo" } }, [
-                          _vm._v("Acuerdo:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:255",
-                              expression: "'required|max:255'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "acuerdo",
-                            name: "acuerdo",
-                            placeholder: "Igrese descripcion del acuero",
-                            "data-vv-as": "acuerdo"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("acuerdo")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("acuerdo")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-5" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "empleado" } }, [
-                            _vm._v("Servidor publico responsable:")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "v-select",
-                            {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              attrs: {
-                                name: "empleado",
-                                label: "nombre",
-                                placeholder: "Elige un empleado"
-                              }
-                            },
-                            [
-                              _vm._t("no-options", [
-                                _vm._v("¡No hay opciones disponibles!")
-                              ])
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _vm.errors.has("empleado")
-                            ? _c(
-                                "div",
-                                { staticClass: "invalid-feedback ver" },
-                                [_vm._v(_vm._s(_vm.errors.first("empleado")))]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-7" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "accion_situacion" } }, [
-                          _vm._v(
-                            "Acciones o situacion que guarda la atencion del acta:"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:255",
-                              expression: "'required|max:255'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "accion_situacion",
-                            name: "accion_situacion",
-                            placeholder: "Ingrese accion o situacion",
-                            "data-vv-as": "accion o situacion"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("accion_situacion")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("accion_situacion"))
-                              )
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "comentarios" } }, [
-                          _vm._v("Comentarios:")
-                        ]),
-                        _vm._v(" "),
-                        _c("textarea", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "max:255",
-                              expression: "'max:255'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            rows: "3",
-                            id: "comentarios",
-                            name: "comentarios",
-                            placeholder: "Ingrese comentarios",
-                            "data-vv-as": "comentarios"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("comentarios")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("comentarios")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12 text-right" }, [
-                      _c("button", { staticClass: "btn btn-danger" }, [
-                        _vm._v("Cancelar")
-                      ]),
-                      _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-success" }, [
-                        _vm._v("Guardar")
-                      ])
-                    ])
-                  ])
-                ])
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ])
+      _c(
+        "b-card",
+        {
+          staticStyle: { "max-width": "auto", "font-size": "18px" },
+          attrs: { header: "", "header-tag": "header", align: "center" }
+        },
+        [_c("b-card-body", { attrs: { align: "left" } })],
+        1
+      )
     ],
     1
   )
@@ -91789,12 +92099,9 @@ Vue.component("acuerdos-pendientes", __webpack_require__(/*! ./components/acuerd
 Vue.component("actas-consejo-desarrollo", __webpack_require__(/*! ./components/ActasConsejoDesarrollo.vue */ "./resources/js/components/ActasConsejoDesarrollo.vue")["default"]);
 Vue.component("actas-consejo-planeacion", __webpack_require__(/*! ./components/ActasConsejoPlaneacion.vue */ "./resources/js/components/ActasConsejoPlaneacion.vue")["default"]);
 Vue.component("jucios-por-ayuntamiento", __webpack_require__(/*! ./components/JuiciosPorAyuntamiento.vue */ "./resources/js/components/JuiciosPorAyuntamiento.vue")["default"]);
-<<<<<<< HEAD
 Vue.component("actas", __webpack_require__(/*! ./components/actas.vue */ "./resources/js/components/actas.vue")["default"]);
-=======
 Vue.component("jucios-contra-ayuntamiento", __webpack_require__(/*! ./components/JuiciosContraAyuntamiento.vue */ "./resources/js/components/JuiciosContraAyuntamiento.vue")["default"]);
 Vue.component("contratos-convenios-acuerdos", __webpack_require__(/*! ./components/ContratosConveniosAcuerdos.vue */ "./resources/js/components/ContratosConveniosAcuerdos.vue")["default"]);
->>>>>>> develop
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');
@@ -92735,9 +93042,9 @@ var urlSdamuni = "".concat(window.location.protocol, "//").concat(window.locatio
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

@@ -14,16 +14,23 @@ class AcuerdoPendienteController extends Controller
     public function index ()
     {
         $usuario = Auth::user();
-        $acuerdos = AcuerdoPendiente::whereHas('relacion', function ($query) use ($usuario) {
-            $query->where('ayuntamiento_id', $usuario->empleado->ayuntamiento_id);
-        })->with('empleado:id,user_id','empleado.user:id,nombres,primer_ap,segundo_ap')
+        if (isset($usuario->empleado->ayuntamiento_id)) {
+            $ayuntamiento = $usuario->empleado->ayuntamiento_id;
+        }else {
+            return response()->json('No tiene un ayuntamiento asignado, inicia sesion como empleado.', 200);
+        }
+        $acuerdos = AcuerdoPendiente::whereHas('relacion', function ($query) use ($ayuntamiento) {
+            $query->where('ayuntamiento_id', $ayuntamiento)
+            ->where('formato_id', 2);
+        })
+        ->with('empleado:id,user_id','empleado.user:id,nombres,primer_ap,segundo_ap')
         ->select('acuerdos_pendientes.*', DB::raw("DATE_FORMAT(acuerdos_pendientes.fecha_acta, '%Y-%m-%d') as fecha_acta"))
         ->get();
 
         $empleados = Empleado::with(array('user' => function ($query) {
             $query->select('id', DB::raw('CONCAT(nombres," ", primer_ap," ", segundo_ap) as nombre'));
         }))
-        ->where('ayuntamiento_id', $usuario->empleado->ayuntamiento_id)
+        ->where('ayuntamiento_id', $ayuntamiento)
         ->select('id','user_id')
         ->get();
         // dd($empleados, $acuerdos);

@@ -248,8 +248,6 @@
                                 'Ha ocurrido un error, intente de nuevo.',
                                 'error'
                             )
-                            console.log(error)
-
                         })
                     } else {
                         Vue.swal(

@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <contratos-convenios-acuerdos></contratos-convenios-acuerdos>
+            <contratos-convenios-acuerdos initial-documentos='{{ $documentos }}'></contratos-convenios-acuerdos>
             </div>
         </div>
     </div>

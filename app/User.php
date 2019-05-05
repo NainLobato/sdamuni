@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     }
 
-    public function getNombreCAttribute($key)
+    public function getNombreCAttribute()
     {
         return $this->nombres . ' ' . $this->primer_ap . ' ' . $this->segundo_ap;
     }

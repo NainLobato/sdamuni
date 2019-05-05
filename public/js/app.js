@@ -2435,6 +2435,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2544,19 +2561,42 @@ __webpack_require__.r(__webpack_exports__);
         'accion_situacion': '',
         'comentarios': ''
       },
-      acuerdos: this.initialAcuerdos,
+      acuerdos: JSON.parse(this.initialAcuerdos),
       urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
-      titulo: 'titulo',
+      titulo: 'Acuerdos registrados',
       colapsableEstado: false,
-      empleados: JSON.parse(this.initialEmpleados)
+      empleados: JSON.parse(this.initialEmpleados),
+      estadoFormulario: 1
     };
   },
   methods: {
     agregar: function agregar() {
+      this.titulo = 'Nuevo acuerdo';
       this.colapsableEstado = true;
+      this.estadoFormulario = 1;
     },
     cancelar: function cancelar() {
+      this.titulo = 'Acuerdos registrados';
       this.colapsableEstado = false;
+      this.acuerdo = {
+        'num_acta': '',
+        'fecha_acta': '',
+        'acuerdo': '',
+        'empleado': '',
+        'accion_situacion': '',
+        'comentarios': ''
+      };
+    },
+    editar: function editar(acuerdo) {
+      this.titulo = 'Editar acuerdo registrado';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 2;
+      this.acuerdo = _objectSpread({}, acuerdo, {
+        empleado: {
+          id: acuerdo.empleado.id,
+          nombre: "".concat(acuerdo.empleado.user.nombres, " ").concat(acuerdo.empleado.user.primer_ap, " ").concat(acuerdo.empleado.user.segundo_ap)
+        }
+      });
     },
     store: function store() {
       var _this = this;
@@ -2567,9 +2607,20 @@ __webpack_require__.r(__webpack_exports__);
             acuerdo: _this.acuerdo
           }).then(function (response) {
             if (response.data.estado == 2) {
-              Vue.swal('Exito!', 'Se ha guardado el acuerdo pendiente correctamente.', 'success');
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo creado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
             } else if (response.data.estado == 1) {
-              Vue.swal('Error!', 'Ya existe la clave ingresada.', 'error');
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
             } else {
               Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
             }
@@ -2579,6 +2630,80 @@ __webpack_require__.r(__webpack_exports__);
           });
         } else {
           Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post("".concat(_this2.urlSdamuni, "/update-acuerdo-pendiente"), {
+            acuerdo: _this2.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    eliminar: function eliminar(acuerdo) {
+      var _this3 = this;
+
+      Vue.swal({
+        title: '¿Estas seguro de eliminar el acuerdo ' + acuerdo.num_acta + '?',
+        text: "No se podra revertir el cambio.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post(_this3.urlSdamuni + '/eliminar-acuerdo-pendiente', {
+            idAcuerdo: acuerdo.id
+          }).then(function (response) {
+            if (response.data.estado === 1) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
         }
       });
     }
@@ -77218,14 +77343,20 @@ var render = function() {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col-md-12" }, [
                     _c("div", { staticClass: "form-group" }, [
-                      _c("label", { attrs: { for: "clave" } }, [
+                      _c("label", { attrs: { for: "num_acta" } }, [
                         _vm._v(
-                          "Clave de acta donde consta el acuerdo pendiente de cumplir:"
+                          "Numero de acta donde consta el acuerdo pendiente de cumplir:"
                         )
                       ]),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acuerdo.num_acta,
+                            expression: "acuerdo.num_acta"
+                          },
                           {
                             name: "validate",
                             rawName: "v-validate",
@@ -77236,16 +77367,29 @@ var render = function() {
                         staticClass: "form-control",
                         attrs: {
                           type: "text",
-                          id: "clave",
-                          name: "clave",
-                          placeholder: "Ingrese clave",
-                          "data-vv-as": "clave"
+                          id: "num_acta",
+                          name: "num_acta",
+                          placeholder: "Ingrese numero de acta",
+                          "data-vv-as": "numero"
+                        },
+                        domProps: { value: _vm.acuerdo.num_acta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acuerdo,
+                              "num_acta",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
-                      _vm.errors.has("clave")
+                      _vm.errors.has("num_acta")
                         ? _c("div", { staticClass: "invalid-feedback" }, [
-                            _vm._v(_vm._s(_vm.errors.first("clave")))
+                            _vm._v(_vm._s(_vm.errors.first("num_acta")))
                           ])
                         : _vm._e()
                     ])
@@ -77260,6 +77404,12 @@ var render = function() {
                       _c("input", {
                         directives: [
                           {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acuerdo.fecha_acta,
+                            expression: "acuerdo.fecha_acta"
+                          },
+                          {
                             name: "validate",
                             rawName: "v-validate",
                             value: "required",
@@ -77272,6 +77422,19 @@ var render = function() {
                           id: "fecha_acta",
                           name: "fecha_acta",
                           "data-vv-as": "fecha de acta"
+                        },
+                        domProps: { value: _vm.acuerdo.fecha_acta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acuerdo,
+                              "fecha_acta",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
@@ -77292,6 +77455,12 @@ var render = function() {
                       _c("input", {
                         directives: [
                           {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acuerdo.acuerdo,
+                            expression: "acuerdo.acuerdo"
+                          },
+                          {
                             name: "validate",
                             rawName: "v-validate",
                             value: "required|max:255",
@@ -77303,8 +77472,21 @@ var render = function() {
                           type: "text",
                           id: "acuerdo",
                           name: "acuerdo",
-                          placeholder: "Igrese descripcion del acuero",
+                          placeholder: "Ingrese descripcion del acuero",
                           "data-vv-as": "acuerdo"
+                        },
+                        domProps: { value: _vm.acuerdo.acuerdo },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acuerdo,
+                              "acuerdo",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
@@ -77325,36 +77507,45 @@ var render = function() {
                           _vm._v("Servidor publico responsable:")
                         ]),
                         _vm._v(" "),
-                        _c(
-                          "v-select",
-                          {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              name: "empleado",
-                              label: "nombre",
-                              options: _vm.empleados,
-                              placeholder: "Elige un empleado"
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
                             }
-                          },
-                          [
-                            _vm._t("no-options", [
-                              _vm._v("¡No hay opciones disponibles!")
-                            ])
                           ],
-                          2
-                        ),
+                          attrs: {
+                            id: "empleado",
+                            name: "empleado",
+                            label: "nombre",
+                            options: _vm.empleados.map(function(empleado) {
+                              return {
+                                id: empleado.id,
+                                nombre: empleado.user.nombre
+                              }
+                            }),
+                            placeholder: "Elige un empleado"
+                          },
+                          model: {
+                            value: _vm.acuerdo.empleado,
+                            callback: function($$v) {
+                              _vm.$set(_vm.acuerdo, "empleado", $$v)
+                            },
+                            expression: "acuerdo.empleado"
+                          }
+                        }),
                         _vm._v(" "),
                         _vm.errors.has("empleado")
-                          ? _c("div", { staticClass: "invalid-feedback ver" }, [
-                              _vm._v(_vm._s(_vm.errors.first("empleado")))
-                            ])
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("empleado")))]
+                            )
                           : _vm._e()
                       ],
                       1
@@ -77372,6 +77563,12 @@ var render = function() {
                       _c("input", {
                         directives: [
                           {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acuerdo.accion_situacion,
+                            expression: "acuerdo.accion_situacion"
+                          },
+                          {
                             name: "validate",
                             rawName: "v-validate",
                             value: "required|max:255",
@@ -77385,6 +77582,19 @@ var render = function() {
                           name: "accion_situacion",
                           placeholder: "Ingrese accion o situacion",
                           "data-vv-as": "accion o situacion"
+                        },
+                        domProps: { value: _vm.acuerdo.accion_situacion },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acuerdo,
+                              "accion_situacion",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
@@ -77405,10 +77615,16 @@ var render = function() {
                       _c("textarea", {
                         directives: [
                           {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acuerdo.comentarios,
+                            expression: "acuerdo.comentarios"
+                          },
+                          {
                             name: "validate",
                             rawName: "v-validate",
-                            value: "max:255",
-                            expression: "'max:255'"
+                            value: "required|max:255",
+                            expression: "'required|max:255'"
                           }
                         ],
                         staticClass: "form-control",
@@ -77418,6 +77634,19 @@ var render = function() {
                           name: "comentarios",
                           placeholder: "Ingrese comentarios",
                           "data-vv-as": "comentarios"
+                        },
+                        domProps: { value: _vm.acuerdo.comentarios },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acuerdo,
+                              "comentarios",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
@@ -77430,13 +77659,48 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-12 text-right" }, [
-                    _c("button", { staticClass: "btn btn-danger" }, [
-                      _vm._v("Cancelar")
-                    ]),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: { click: _vm.cancelar }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
                     _vm._v(" "),
-                    _c("button", { staticClass: "btn btn-success" }, [
-                      _vm._v("Guardar")
-                    ])
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 1,
+                            expression: "estadoFormulario == 1"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.store }
+                      },
+                      [_vm._v("Guardar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 2,
+                            expression: "estadoFormulario == 2"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.update }
+                      },
+                      [_vm._v("Actualizar")]
+                    )
                   ])
                 ])
               ])
@@ -77447,15 +77711,88 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c(
-        "b-card",
-        {
-          staticStyle: { "max-width": "auto", "font-size": "18px" },
-          attrs: { header: "", "header-tag": "header", align: "center" }
-        },
-        [_c("b-card-body", { attrs: { align: "left" } })],
-        1
-      )
+      _c("b-card", [
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("Num acta")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Empleado")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Acciones")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm.acuerdos.length === 0
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: { "text-align": "center" },
+                        attrs: { colspan: "4" }
+                      },
+                      [_vm._v(" Sin registros. ")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.acuerdos, function(acuerdo, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(" " + _vm._s(acuerdo.num_acta) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(acuerdo.fecha_acta) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      " " +
+                        _vm._s(acuerdo.empleado.user.nombres) +
+                        " " +
+                        _vm._s(acuerdo.empleado.user.primer_ap) +
+                        " " +
+                        _vm._s(acuerdo.empleado.user.segundo_ap) +
+                        " "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            return _vm.editar(acuerdo)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-edit" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            return _vm.eliminar(acuerdo)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-trash-alt" })]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
+        ])
+      ])
     ],
     1
   )

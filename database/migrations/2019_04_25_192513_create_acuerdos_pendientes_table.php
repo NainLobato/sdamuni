@@ -16,7 +16,7 @@ class CreateAcuerdosPendientesTable extends Migration
         Schema::create('acuerdos_pendientes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('num_acta');
-            $table->date('fecha_Acta');
+            $table->date('fecha_acta');
             $table->string('acuerdo');
             $table->integer('empleado_id')->unsigned();
             $table->string('accion_situacion');

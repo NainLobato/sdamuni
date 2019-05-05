@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <acuerdos-pendientes initial-acuerdos="" initial-empleados="{{ json_encode($empleados) }}"></acuerdos-pendientes>
+            <acuerdos-pendientes initial-acuerdos="{{ $acuerdos }}" initial-empleados="{{ $empleados }}"></acuerdos-pendientes>
             </div>
         </div>
     </div>

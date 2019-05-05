@@ -47,7 +47,9 @@ Route::middleware('auth')->group(function () {
 
     Route::name('acuerdo-pendiente.')->group(function () {
         Route::get('acuerdos-pendientes', 'AcuerdoPendienteController@index')->name('index');
-        Route::get('store-acuerdo-pendiente', 'AcuerdoPendienteController@store')->name('store');
+        Route::post('store-acuerdo-pendiente', 'AcuerdoPendienteController@store')->name('store');
+        Route::post('update-acuerdo-pendiente', 'AcuerdoPendienteController@update')->name('update');
+        Route::post('eliminar-acuerdo-pendiente', 'AcuerdoPendienteController@destroy')->name('destroy');
     });
 
     Route::name('acta-consejo-desarrollo.')->group(function () {

@@ -31,13 +31,13 @@ class ContratosConveniosAcuerdosController extends Controller
     public function store(Request $request)
     {
         $usuario = Auth::user();
-        $relacion = Relacion::where(['formato_id' => 7, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
+        $relacion = Relacion::where(['formato_id' => 9, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
 
         DB::beginTransaction();
         try {
             if (!$relacion) {
                 $relacion = new Relacion ();
-                $relacion->formato_id = 7;
+                $relacion->formato_id = 9;
                 $relacion->ayuntamiento_id = $usuario->empleado->ayuntamiento_id;
                 $relacion->save();
 
@@ -80,13 +80,13 @@ class ContratosConveniosAcuerdosController extends Controller
         DB::beginTransaction();
         try {
 
-               $contrato = ContratoConvenio::find($request['id']);
-               $contrato->denominaciones = $request['denominaciones'];
-               $contrato->fecha_subscripcion = $request['fecha_subscripcion'];
-               $contrato->periodo_inicio = $request['periodo_inicio'];
-               $contrato->periodo_final = $request['periodo_final'];
-               $contrato->importe = $request['importe'];
-               $contrato->observaciones = $request['observaciones'];
+               $contrato = ContratoConvenio::find($request['documento']['id']);
+               $contrato->denominaciones = $request['documento']['denominaciones'];
+               $contrato->fecha_subscripcion = $request['documento']['fecha_subscripcion'];
+               $contrato->periodo_inicio = $request['documento']['periodo_inicio'];
+               $contrato->periodo_final = $request['documento']['periodo_final'];
+               $contrato->importe = $request['documento']['importe'];
+               $contrato->observaciones = $request['documento']['observaciones'];
                $contrato->save();
 
 
@@ -100,11 +100,11 @@ class ContratosConveniosAcuerdosController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         DB::beginTransaction();
         try {
-            $contratos = ContratoConvenio::find($id);
+            $contratos = ContratoConvenio::find($request['documento']['id']);
             $contrato->delete();
 
             DB::commit();

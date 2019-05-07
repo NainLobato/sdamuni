@@ -2070,6 +2070,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2165,8 +2205,167 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'initialAcuerdos': {
+      required: false
+    },
+    'initialEmpleados': {
+      required: false
+    }
+  },
   data: function data() {
-    return {};
+    return {
+      acta: {
+        'num_acta': '',
+        'fecha_levanto_acta': '',
+        'ao_acta': '',
+        'asunto_acta': '',
+        'num_forjas': '',
+        'firmas_consejo': '0',
+        'sellos_validez': '0',
+        'empleado': ''
+      },
+      // acuerdos: JSON.parse(this.initialAcuerdos),
+      // urlSdamuni: urlSdamuni,
+      titulo: 'Actas registradas',
+      colapsableEstado: false,
+      empleados: JSON.parse(this.initialEmpleados),
+      estadoFormulario: 1
+    };
+  },
+  methods: {
+    agregar: function agregar() {
+      this.titulo = 'Nueva acta';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 1;
+    },
+    cancelar: function cancelar() {
+      this.titulo = 'Actas registradas';
+      this.colapsableEstado = false;
+      this.acta = {
+        'num_acta': '',
+        'fecha_levanto_acta': '',
+        'ao_acta': '',
+        'asunto_acta': '',
+        'num_forjas': '',
+        'firmas_consejo': '0',
+        'sellos_validez': '0'
+      };
+    },
+    editar: function editar(acta) {
+      this.titulo = 'Editar acta registrada';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 2;
+      this.acta = _objectSpread({}, acta);
+    },
+    store: function store() {
+      var _this = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post(route('acuerdo-pendiente.store').template, {
+            acuerdo: _this.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo creado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post("".concat(_this2.urlSdamuni, "/update-acuerdo-pendiente"), {
+            acuerdo: _this2.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    eliminar: function eliminar(acuerdo) {
+      var _this3 = this;
+
+      Vue.swal({
+        title: '¿Estas seguro de eliminar el acuerdo ' + acuerdo.num_acta + '?',
+        text: "No se podra revertir el cambio.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post(_this3.urlSdamuni + '/eliminar-acuerdo-pendiente', {
+            idAcuerdo: acuerdo.id
+          }).then(function (response) {
+            if (response.data.estado === 1) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        }
+      });
+    }
   },
   mounted: function mounted() {
     console.log('whatever it takes');
@@ -76134,105 +76333,402 @@ var render = function() {
             "font-weight": "bold",
             "font-size": "18px"
           },
-          attrs: { align: "center", "no-body": "" }
+          attrs: {
+            "header-bg-variant": "dark",
+            "header-tag": "header",
+            align: "center",
+            "no-body": ""
+          }
         },
         [
           _c("template", { slot: "header" }, [
-            _c("span", [
-              _vm._v(
-                "Administrador de actas del consejo de planeacion para el desarrollo municipal"
+            _c("span", [_vm._v(_vm._s(_vm.titulo))]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools float-right" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.colapsableEstado,
+                      expression: "!colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.agregar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-plus" })])]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.colapsableEstado,
+                      expression: "colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.cancelar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-minus" })])]
               )
             ])
-          ])
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-4" },
-          [
-            _c(
-              "b-card",
-              {
-                staticStyle: { "max-width": "auto", "font-size": "18px" },
-                attrs: {
-                  header: "Actas",
-                  "header-tag": "header",
-                  align: "center"
-                }
-              },
-              [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("li", [_vm._v("1")]),
-                  _vm._v(" "),
-                  _c("li", [_vm._v("2")])
-                ])
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-8" },
-          [
-            _c(
-              "b-card",
-              {
-                staticStyle: { "max-width": "auto", "font-size": "18px" },
-                attrs: {
-                  header: "Informacion del acta",
-                  "header-tag": "header",
-                  align: "center"
-                }
-              },
-              [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "num_acta" } }, [
-                          _vm._v("Numero de acta de consejo:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|numeric|max:11",
-                              expression: "'required|numeric|max:11'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "num_acta",
-                            name: "num_acta",
-                            placeholder: "Ingrese numero de acta",
-                            "data-vv-as": "numero de acta"
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { id: "colapsable" },
+              model: {
+                value: _vm.colapsableEstado,
+                callback: function($$v) {
+                  _vm.colapsableEstado = $$v
+                },
+                expression: "colapsableEstado"
+              }
+            },
+            [
+              _c("b-card-body", { attrs: { align: "left" } }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "num_acta" } }, [
+                        _vm._v("Numero de acta de consejo:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acta.num_acta,
+                            expression: "acta.num_acta"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|numeric|max:11",
+                            expression: "'required|numeric|max:11'"
                           }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("num_acta")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("num_acta")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "fecha_levanto_acta" } }, [
-                          _vm._v("Fecha en que se levanto acta:")
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "num_acta",
+                          name: "num_acta",
+                          placeholder: "Ingrese numero de acta",
+                          "data-vv-as": "numero de acta"
+                        },
+                        domProps: { value: _vm.acta.num_acta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.acta, "num_acta", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("num_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("num_acta")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_levanto_acta" } }, [
+                        _vm._v("Fecha en que se levanto acta:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acta.fecha_levanto_acta,
+                            expression: "acta.fecha_levanto_acta"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_levanto_acta",
+                          name: "fecha_levanto_acta",
+                          "data-vv-as": "fecha de acta"
+                        },
+                        domProps: { value: _vm.acta.fecha_levanto_acta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acta,
+                              "fecha_levanto_acta",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_levanto_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("fecha_levanto_acta"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "año_acta" } }, [
+                        _vm._v("Año del acta:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acta.ao_acta,
+                            expression: "acta.ao_acta"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|numeric|max:4",
+                            expression: "'required|numeric|max:4'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "año_acta",
+                          name: "año_acta",
+                          "data-vv-as": "año de acta"
+                        },
+                        domProps: { value: _vm.acta.ao_acta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.acta, "ao_acta", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("año_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("año_acta")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "asuntos_acta" } }, [
+                        _vm._v("Descripcion de los asuntos del acta:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acta.asunto_acta,
+                            expression: "acta.asunto_acta"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:255",
+                            expression: "'required|max:255'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "asuntos_acta",
+                          name: "asuntos_acta",
+                          placeholder: "Ingrese asunto",
+                          "data-vv-as": "asunto"
+                        },
+                        domProps: { value: _vm.acta.asunto_acta },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acta,
+                              "asunto_acta",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("asuntos_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("asuntos_acta")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "num_forjas" } }, [
+                        _vm._v("Numero de forjas del acta:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.acta.num_forjas,
+                            expression: "acta.num_forjas"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|numeric|max:11",
+                            expression: "'required|numeric|max:11'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "num_forjas",
+                          name: "num_forjas",
+                          placeholder: "Ingrese numero de forjas",
+                          "data-vv-as": "numero de forjas"
+                        },
+                        domProps: { value: _vm.acta.num_forjas },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.acta,
+                              "num_forjas",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("num_forjas")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("num_forjas")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-6" },
+                    [
+                      _c(
+                        "b-form",
+                        { attrs: { inline: "" } },
+                        [
+                          _c("label", { attrs: { for: "firmas_consejo" } }, [
+                            _vm._v("Cuenta con todas las firmas del consejo:")
+                          ]),
+                          _vm._v(" "),
+                          _c("b-form-checkbox", {
+                            staticClass: "mx-3",
+                            attrs: {
+                              id: "firmas_consejo",
+                              name: "firmas_consejo",
+                              value: "1",
+                              switch: ""
+                            },
+                            model: {
+                              value: _vm.acta.firmas_consejo,
+                              callback: function($$v) {
+                                _vm.$set(_vm.acta, "firmas_consejo", $$v)
+                              },
+                              expression: "acta.firmas_consejo"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-6" },
+                    [
+                      _c(
+                        "b-form",
+                        { attrs: { inline: "" } },
+                        [
+                          _c("label", { attrs: { for: "sellos_validez" } }, [
+                            _vm._v("Cuenta con los sellos correspondientes:")
+                          ]),
+                          _vm._v(" "),
+                          _c("b-form-checkbox", {
+                            attrs: {
+                              id: "sellos_validez",
+                              name: "sellos_validez",
+                              value: "1",
+                              switch: ""
+                            },
+                            model: {
+                              value: _vm.acta.sellos_validez,
+                              callback: function($$v) {
+                                _vm.$set(_vm.acta, "sellos_validez", $$v)
+                              },
+                              expression: "acta.sellos_validez"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-5" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "empleado" } }, [
+                          _vm._v("Servidor publico responsable:")
                         ]),
                         _vm._v(" "),
-                        _c("input", {
+                        _c("v-select", {
                           directives: [
                             {
                               name: "validate",
@@ -76241,178 +76737,76 @@ var render = function() {
                               expression: "'required'"
                             }
                           ],
-                          staticClass: "form-control",
                           attrs: {
-                            type: "date",
-                            id: "fecha_levanto_acta",
-                            name: "fecha_levanto_acta",
-                            "data-vv-as": "fecha de acta"
+                            id: "empleado",
+                            name: "empleado",
+                            label: "nombre",
+                            options: _vm.empleados.map(function(empleado) {
+                              return {
+                                id: empleado.id,
+                                nombre: empleado.user.nombre
+                              }
+                            }),
+                            placeholder: "Elige un empleado"
+                          },
+                          model: {
+                            value: _vm.acta.empleado,
+                            callback: function($$v) {
+                              _vm.$set(_vm.acta, "empleado", $$v)
+                            },
+                            expression: "acta.empleado"
                           }
                         }),
                         _vm._v(" "),
-                        _vm.errors.has("fecha_levanto_acta")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("fecha_levanto_acta"))
-                              )
-                            ])
+                        _vm.errors.has("empleado")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("empleado")))]
+                            )
                           : _vm._e()
-                      ])
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12 text-right" }, [
+                    _c("button", { staticClass: "btn btn-danger" }, [
+                      _vm._v("Cancelar")
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "año_acta" } }, [
-                          _vm._v("Año del acta:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|numeric|max:4",
-                              expression: "'required|numeric|max:4'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "date",
-                            id: "año_acta",
-                            name: "año_acta",
-                            "data-vv-as": "año de acta"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("año_acta")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("año_acta")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "descripcion_acta" } }, [
-                          _vm._v("Descripcion de los asuntos del acta:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:255",
-                              expression: "'required|max:255'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "descripcion_acta",
-                            name: "descripcion_acta",
-                            placeholder: "Ingrese asunto",
-                            "data-vv-as": "asunto"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("descripcion_acta")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("descripcion_acta"))
-                              )
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "num_forjas" } }, [
-                          _vm._v("Numero de forjas del acta:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|numeric|max:11",
-                              expression: "'required|numeric|max:11'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "num_forjas",
-                            name: "num_forjas",
-                            placeholder: "Ingrese numero de forjas",
-                            "data-vv-as": "numero de forjas"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("num_forjas")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("num_forjas")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "firmas_consejo" } }, [
-                          _vm._v("Cuenta con todas las firmas del consejo:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "checkbox",
-                            id: "firmas_consejo",
-                            name: "firmas_consejo",
-                            placeholder: "Igrese descripcion del acuero"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "sellos_validez" } }, [
-                          _vm._v("Cuenta con los sellos correspondientes:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "checkbox",
-                            id: "sellos_validez",
-                            name: "sellos_validez",
-                            placeholder: "Igrese descripcion del acuero"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12 text-right" }, [
-                      _c("button", { staticClass: "btn btn-danger" }, [
-                        _vm._v("Cancelar")
-                      ]),
-                      _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-success" }, [
-                        _vm._v("Guardar")
-                      ])
+                    _c("button", { staticClass: "btn btn-success" }, [
+                      _vm._v("Guardar")
                     ])
                   ])
                 ])
-              ],
-              1
-            )
-          ],
-          1
-        )
+              ])
+            ],
+            1
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("b-card", [
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("Num acta")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Empleado")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Acciones")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tbody")
+        ])
       ])
     ],
     1

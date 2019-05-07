@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <actas-consejo-planeacion></actas-consejo-planeacion>
+                <actas-consejo-planeacion initial-empleados="{{ $empleados }}"></actas-consejo-planeacion>
             </div>
         </div>
     </div>

@@ -20,7 +20,7 @@ class ContratosConveniosAcuerdosController extends Controller
         }
         $documentos = ContratoConvenio::whereHas('relacion', function ($query) use ($ayuntamiento) {
             $query->where('ayuntamiento_id', $ayuntamiento)
-            ->where('formato_id', 7);
+            ->where('formato_id', 9);
         })
         ->get();
         // dd($docs);
@@ -100,11 +100,11 @@ class ContratosConveniosAcuerdosController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function delete(Request $request)
     {
         DB::beginTransaction();
         try {
-            $contratos = ContratoConvenio::find($request['documento']['id']);
+            $contrato = ContratoConvenio::find($request['documento']['id']);
             $contrato->delete();
 
             DB::commit();

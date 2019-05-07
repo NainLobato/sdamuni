@@ -150,7 +150,7 @@
             store () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(`${this.urlSdamuni}/contrato-store`, { documento: this.documento })
+                        axios.post(route('contrato-convenio-acuerdo.store').template, { documento: this.documento })
                         .then( response => {
                             if (response.data.status == 1) {
                                 Vue.swal({

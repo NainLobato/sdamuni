@@ -2145,7 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post("".concat(_this.urlSdamuni, "/contrato-store"), {
+          axios.post(route('contrato-convenio-acuerdo.store').template, {
             documento: _this.documento
           }).then(function (response) {
             if (response.data.status == 1) {
@@ -2692,7 +2692,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post("".concat(_this.urlSdamuni, "/store-acuerdo-pendiente"), {
+          axios.post(route('acuerdo-pendiente.store').template, {
             acuerdo: _this.acuerdo
           }).then(function (response) {
             if (response.data.estado == 2) {
@@ -2891,19 +2891,9 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
         color: 'background-color:#0abab5;',
         titulo: 'Empleados',
         descripcion: 'Crea y administra usuarios para tu ayuntamiento'
-      }, {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-organization-96.png',
-        href: route('ayuntamiento.index').template,
-        color: 'background-color:#0abab5;',
-        titulo: 'Ayuntamientos',
-        descripcion: 'Crea, elimina, edita ayuntamientos'
-      }, {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-book-96.png',
-        href: route('libro-actas.index').template,
-        color: 'background-color:#0abab5;',
-        titulo: 'Libros de actas',
-        descripcion: 'Crea, elimina, edita actas'
-      }, {
+      }, // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-organization-96.png', href: route('ayuntamiento.index').template,color:'background-color:#0abab5;',titulo:'Ayuntamientos',descripcion:'Crea, elimina, edita ayuntamientos'},
+      // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-book-96.png', href: route('libro-actas.index').template,color:'background-color:#0abab5;',titulo:'Libros de actas',descripcion:'Crea, elimina, edita actas'},
+      {
         imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
         href: route('acuerdo-pendiente.index').template,
         color: 'background-color:#0abab5;',
@@ -32738,7 +32728,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n\n", ""]);
 
 // exports
 
@@ -77527,7 +77517,7 @@ var render = function() {
                         id: "checkbox-1",
                         name: "checkbox-1",
                         value: "accepted",
-                        switches: ""
+                        switch: ""
                       },
                       model: {
                         value: _vm.check1,

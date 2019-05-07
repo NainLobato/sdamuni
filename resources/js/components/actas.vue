@@ -57,7 +57,7 @@
                                     v-model="check1"
                                     name="checkbox-1"
                                     value="accepted"
-                                    switches
+                                    switch
                                     >
                                 </b-form-checkbox>
 

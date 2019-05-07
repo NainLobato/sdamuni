@@ -52,20 +52,32 @@ Route::middleware('auth')->group(function () {
         Route::post('eliminar-acuerdo-pendiente', 'AcuerdoPendienteController@destroy')->name('destroy');
     });
 
-    Route::name('acta-consejo-desarrollo.')->group(function () {
-        Route::get('actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@index')->name('index');
-    });
-
     Route::name('acta-consejo-planeacion.')->group(function () {
         Route::get('actas-consejo-planeacion', 'ActaConsejoPlaneacionController@index')->name('index');
     });
 
-    Route::name('juicio-por-ayuntamiento.')->group(function () {
-        Route::get('jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@index')->name('index');
+    Route::name('acta-consejo-desarrollo.')->group(function () {//3.4
+        Route::get('actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@index')->name('index');
+        Route::post('store-actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@store')->name('store');
+        Route::post('update-actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@update')->name('update');
+        Route::post('delete-actas-consejo-desarrollo', 'ActaConsejoDesarrolloController@delete')->name('delete');
+        Route::get('show-actas-consejo-desarrollo/{id}', 'ActaConsejoDesarrolloController@show')->name('show');
     });
 
-    Route::name('juicio-contra-ayuntamiento.')->group(function () {
+    Route::name('juicio-por-ayuntamiento.')->group(function () {//3.5
+        Route::get('jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@index')->name('index');
+        Route::post('store-jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@store')->name('store');
+        Route::post('update-jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@update')->name('update');
+        Route::post('delete-jucios-por-ayuntamiento', 'JuicioPorAyuntamientoController@delete')->name('delete');
+        Route::get('show-jucios-por-ayuntamiento/{id}', 'JuicioPorAyuntamientoController@show')->name('show');
+    });
+
+    Route::name('juicio-contra-ayuntamiento.')->group(function () {//3.6
         Route::get('jucios-contra-ayuntamiento', 'JuicioContraAyuntamientoController@index')->name('index');
+        Route::post('store-jucios-contra-ayuntamiento', 'JuicioContraAyuntamientoController@store')->name('store');
+        Route::post('update-jucios-contra-ayuntamiento', 'JuicioContraAyuntamientoController@update')->name('update');
+        Route::post('delete-jucios-contra-ayuntamiento', 'JuicioContraAyuntamientoController@delete')->name('delete');
+        Route::get('show-jucios-contra-ayuntamiento/{id}', 'JuicioContraAyuntamientoController@show')->name('show');
     });
 
     Route::name('contrato-convenio-acuerdo.')->group(function () {

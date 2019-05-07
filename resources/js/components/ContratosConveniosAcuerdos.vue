@@ -142,10 +142,13 @@
                     'observaciones': '',
                 }
             },
-            editar (acuerdo) {
+            editar (documento) {
                 this.titulo = 'Editar contrato, convenio o acuerdo registrado'
                 this.colapsableEstado = true
                 this.estadoFormulario = 2
+                this.documento = {
+                    ...documento
+                }
             },
             store () {
                 this.$validator.validate().then(valid => {
@@ -190,8 +193,93 @@
                 })
             },
             update () {
-
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        axios.post(`${this.urlSdamuni}/contrato-update`, { documento: this.documento })
+                        .then( response => {
+                            if (response.data.status == 1) {
+                                Vue.swal({
+                                title: 'Exito',
+                                text: "Registro actualizado correctamente.",
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Aceptar'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        location.reload();
+                                    }
+                                })
+                            } else {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ha ocurrido un error, intente de nuevo.',
+                                    'error'
+                                )
+                            }
+                        })
+                        .catch(error => {
+                            Vue.swal(
+                                'Error!',
+                                'Ha ocurrido un error, intente de nuevo.',
+                                'error'
+                            )
+                        })
+                    } else {
+                        Vue.swal(
+                            'Error!',
+                            'Complete el formulario.',
+                            'error'
+                        )
+                    }
+                })
             },
+            eliminar (documento) {
+                Vue.swal({
+                    title: '¿Estas seguro de eliminar el documento '+documento.denominaciones+'?',
+                    text: "No se podra revertir el cambio.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                    if (result.value) {
+                        axios.post(this.urlSdamuni+'/contrato-delete', {documento: { id: documento.id }})
+                        .then(function (response) {
+                            if (response.data.status === 1) {
+                                Vue.swal({
+                                    title: 'Exito',
+                                    text: "Documento eliminado correctamente.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            location.reload();
+                                        }
+                                })
+                            }else {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ha ocurrido un error, intente de nuevo.',
+                                    'error'
+                                )
+                            }
+
+                        })
+                        .catch(function (error) {
+                                Vue.swal(
+                                'Error!',
+                                'Ha ocurrido un error, intente de nuevo.',
+                                'error'
+                            )
+                        })
+                    }
+                })
+            }
         },
         mounted() {
             console.log('whatever it takes')

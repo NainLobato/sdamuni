@@ -86,8 +86,9 @@
                             </b-form>
                         </div>
                         <div class="col-md-12 text-right">
-                            <button class="btn btn-danger">Cancelar</button>
-                            <button class="btn btn-success">Guardar</button>
+                            <button class="btn btn-danger" @click="cancelar">Cancelar</button>
+                            <button v-show="estadoFormulario == 1" class="btn btn-success" @click="store">Guardar</button>
+                            <button v-show="estadoFormulario == 2" class="btn btn-success" @click="update">Actualizar</button>
                         </div>
                     </div>
                 </b-card-body>
@@ -104,14 +105,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr v-if="acuerdos.length === 0">
+                    <!-- <tr v-if="actas.length === 0">
                         <td colspan="4" style="text-align: center;"> Sin registros. </td>
                     </tr>
-                    <tr v-for="(acuerdo, index) in acuerdos" :key="index">
-                        <td> {{ acuerdo.num_acta }} </td>
-                        <td> {{ acuerdo.fecha_acta }} </td>
-                        <td> {{ acuerdo.empleado.user.nombres }} {{ acuerdo.empleado.user.primer_ap }} {{ acuerdo.empleado.user.segundo_ap }} </td>
-                        <td> <a class="btn btn-default" @click=editar(acuerdo)><i class="far fa-edit"></i></a> <a class="btn btn-default" @click="eliminar(acuerdo)"><i class="far fa-trash-alt"></i></a>  </td>
+                    <tr v-for="(acta, index) in actas" :key="index">
+                        <td> {{ acta.num_acta }} </td>
+                        <td> {{ acta.fecha_acta }} </td>
+                        <td> {{ acta.empleado.user.nombres }} {{ acta.empleado.user.primer_ap }} {{ acta.empleado.user.segundo_ap }} </td>
+                        <td> <a class="btn btn-default" @click=editar(acta)><i class="far fa-edit"></i></a> <a class="btn btn-default" @click="eliminar(acta)"><i class="far fa-trash-alt"></i></a>  </td>
                     </tr> -->
                 </tbody>
             </table>
@@ -126,7 +127,7 @@
 
     export default {
         props: {
-            'initialAcuerdos': {
+            'initialactas': {
                 required: false
             },
             'initialEmpleados': {
@@ -144,7 +145,7 @@
                     'firmas_consejo':'0',
                     'sellos_validez': '0',
                 },
-                // acuerdos: JSON.parse(this.initialAcuerdos),
+                // actas: JSON.parse(this.initialactas),
                 urlSdamuni: urlSdamuni,
                 titulo: 'Actas registradas',
                 colapsableEstado: false,
@@ -178,20 +179,20 @@
                 this.acta = {
                     ...acta,
                     // empleado: {
-                    //     id: acuerdo.empleado.id,
-                    //     nombre: `${acuerdo.empleado.user.nombres} ${acuerdo.empleado.user.primer_ap} ${acuerdo.empleado.user.segundo_ap}`
+                    //     id: acta.empleado.id,
+                    //     nombre: `${acta.empleado.user.nombres} ${acta.empleado.user.primer_ap} ${acta.empleado.user.segundo_ap}`
                     // }
                 }
             },
             store () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(route('acuerdo-pendiente.store').template, { acuerdo: this.acuerdo })
+                        axios.post(route('acta-consejo-desarrollo.store').template, { acta: this.acta })
                         .then( response => {
                             if (response.data.estado == 2) {
                                 Vue.swal({
                                 title: 'Exito',
-                                text: "Acuerdo creado correctamente.",
+                                text: "Acta creada correctamente.",
                                 type: 'success',
                                 showCancelButton: false,
                                 confirmButtonColor: '#3085d6',
@@ -236,12 +237,12 @@
             update () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(`${this.urlSdamuni}/update-acuerdo-pendiente`, { acuerdo: this.acuerdo })
+                        axios.post(`${this.urlSdamuni}/update-acta-consejo-desarrollo`, { acta: this.acta })
                         .then( response => {
                             if (response.data.estado == 2) {
                                 Vue.swal({
                                 title: 'Exito',
-                                text: "Acuerdo actualizado correctamente.",
+                                text: "acta actualizado correctamente.",
                                 type: 'success',
                                 showCancelButton: false,
                                 confirmButtonColor: '#3085d6',
@@ -281,9 +282,9 @@
                     }
                 })
             },
-            eliminar (acuerdo) {
+            eliminar (acta) {
                 Vue.swal({
-                    title: '¿Estas seguro de eliminar el acuerdo '+acuerdo.num_acta+'?',
+                    title: '¿Estas seguro de eliminar el acta '+acta.num_acta+'?',
                     text: "No se podra revertir el cambio.",
                     type: 'warning',
                     showCancelButton: true,
@@ -293,12 +294,12 @@
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                        axios.post(this.urlSdamuni+'/eliminar-acuerdo-pendiente', {idAcuerdo: acuerdo.id})
+                        axios.post(this.urlSdamuni+'/eliminar-acta-consejo-desarrollo', {idActa: acta.id})
                         .then(function (response) {
                             if (response.data.estado === 1) {
                                 Vue.swal({
                                     title: 'Exito',
-                                    text: "Acuerdo eliminado correctamente.",
+                                    text: "acta eliminado correctamente.",
                                     type: 'success',
                                     showCancelButton: false,
                                     confirmButtonColor: '#3085d6',

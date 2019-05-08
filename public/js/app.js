@@ -1891,10 +1891,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    'initialAcuerdos': {
+    'initialactas': {
       required: false
     },
     'initialEmpleados': {
@@ -1912,7 +1913,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'firmas_consejo': '0',
         'sellos_validez': '0'
       },
-      // acuerdos: JSON.parse(this.initialAcuerdos),
+      // actas: JSON.parse(this.initialactas),
       urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
       titulo: 'Actas registradas',
       colapsableEstado: false,
@@ -1950,13 +1951,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post(route('acuerdo-pendiente.store').template, {
-            acuerdo: _this.acuerdo
+          axios.post(route('acta-consejo-desarrollo.store').template, {
+            acta: _this.acta
           }).then(function (response) {
             if (response.data.estado == 2) {
               Vue.swal({
                 title: 'Exito',
-                text: "Acuerdo creado correctamente.",
+                text: "Acta creada correctamente.",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -1985,13 +1986,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post("".concat(_this2.urlSdamuni, "/update-acuerdo-pendiente"), {
-            acuerdo: _this2.acuerdo
+          axios.post("".concat(_this2.urlSdamuni, "/update-acta-consejo-desarrollo"), {
+            acta: _this2.acta
           }).then(function (response) {
             if (response.data.estado == 2) {
               Vue.swal({
                 title: 'Exito',
-                text: "Acuerdo actualizado correctamente.",
+                text: "acta actualizado correctamente.",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -2014,11 +2015,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    eliminar: function eliminar(acuerdo) {
+    eliminar: function eliminar(acta) {
       var _this3 = this;
 
       Vue.swal({
-        title: '¿Estas seguro de eliminar el acuerdo ' + acuerdo.num_acta + '?',
+        title: '¿Estas seguro de eliminar el acta ' + acta.num_acta + '?',
         text: "No se podra revertir el cambio.",
         type: 'warning',
         showCancelButton: true,
@@ -2028,13 +2029,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cancelButtonText: 'Cancelar'
       }).then(function (result) {
         if (result.value) {
-          axios.post(_this3.urlSdamuni + '/eliminar-acuerdo-pendiente', {
-            idAcuerdo: acuerdo.id
+          axios.post(_this3.urlSdamuni + '/eliminar-acta-consejo-desarrollo', {
+            idActa: acta.id
           }).then(function (response) {
             if (response.data.estado === 1) {
               Vue.swal({
                 title: 'Exito',
-                text: "Acuerdo eliminado correctamente.",
+                text: "acta eliminado correctamente.",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -33197,7 +33198,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n\n", ""]);
+exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -76262,13 +76263,48 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-12 text-right" }, [
-                    _c("button", { staticClass: "btn btn-danger" }, [
-                      _vm._v("Cancelar")
-                    ]),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: { click: _vm.cancelar }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
                     _vm._v(" "),
-                    _c("button", { staticClass: "btn btn-success" }, [
-                      _vm._v("Guardar")
-                    ])
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 1,
+                            expression: "estadoFormulario == 1"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.store }
+                      },
+                      [_vm._v("Guardar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 2,
+                            expression: "estadoFormulario == 2"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.update }
+                      },
+                      [_vm._v("Actualizar")]
+                    )
                   ])
                 ])
               ])

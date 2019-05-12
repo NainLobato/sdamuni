@@ -100,20 +100,20 @@
                     <tr>
                         <th>Num acta</th>
                         <th>Fecha</th>
-                        <th>Empleado</th>
+                        <th>Asunto</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr v-if="actas.length === 0">
+                    <tr v-if="actas.length === 0">
                         <td colspan="4" style="text-align: center;"> Sin registros. </td>
                     </tr>
                     <tr v-for="(acta, index) in actas" :key="index">
                         <td> {{ acta.num_acta }} </td>
-                        <td> {{ acta.fecha_acta }} </td>
-                        <td> {{ acta.empleado.user.nombres }} {{ acta.empleado.user.primer_ap }} {{ acta.empleado.user.segundo_ap }} </td>
+                        <td> {{ acta.fecha_levanto_acta }} </td>
+                        <td> {{ acta.asuntos_acta }} </td>
                         <td> <a class="btn btn-default" @click=editar(acta)><i class="far fa-edit"></i></a> <a class="btn btn-default" @click="eliminar(acta)"><i class="far fa-trash-alt"></i></a>  </td>
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
     </b-card>
@@ -127,12 +127,12 @@
 
     export default {
         props: {
-            'initialactas': {
+            'initialActas': {
                 required: false
             },
-            'initialEmpleados': {
-                required: false
-            }
+            // 'initialEmpleados': {
+            //     required: false
+            // }
         },
         data(){
             return{
@@ -145,11 +145,10 @@
                     'firmas_consejo':'0',
                     'sellos_validez': '0',
                 },
-                // actas: JSON.parse(this.initialactas),
+                actas: JSON.parse(this.initialActas),
                 urlSdamuni: urlSdamuni,
                 titulo: 'Actas registradas',
                 colapsableEstado: false,
-                // empleados: JSON.parse(this.initialEmpleados),
                 estadoFormulario: 1
             }
         },
@@ -178,10 +177,8 @@
                 this.estadoFormulario = 2
                 this.acta = {
                     ...acta,
-                    // empleado: {
-                    //     id: acta.empleado.id,
-                    //     nombre: `${acta.empleado.user.nombres} ${acta.empleado.user.primer_ap} ${acta.empleado.user.segundo_ap}`
-                    // }
+                    'ao_acta': acta.año_acta,
+                    'asunto_acta': acta.asuntos_acta,
                 }
             },
             store () {
@@ -237,7 +234,7 @@
             update () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(`${this.urlSdamuni}/update-acta-consejo-desarrollo`, { acta: this.acta })
+                        axios.post(route('acta-consejo-desarrollo.update').template, { acta: this.acta })
                         .then( response => {
                             if (response.data.estado == 2) {
                                 Vue.swal({

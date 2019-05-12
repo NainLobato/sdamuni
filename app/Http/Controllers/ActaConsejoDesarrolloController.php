@@ -19,13 +19,11 @@ class ActaConsejoDesarrolloController extends Controller
         }else {
             return response()->json('No tiene un ayuntamiento asignado, inicia sesion como empleado.', 200);
         }
-        $empleados = Empleado::with(array('user' => function ($query) {
-            $query->select('id', DB::raw('CONCAT(nombres," ", primer_ap," ", segundo_ap) as nombre'));
-        }))
-        ->where('ayuntamiento_id', $ayuntamiento)
-        ->select('id','user_id')
-        ->get();
-        return view('forms.actas-consejo-desarrollo')->with('empleados',$empleados);
+        $actas = ActaConsejoDesarrollo::whereHas('relacion', function ($query) use ($usuario) {
+            $query->where('ayuntamiento_id', $usuario->empleado->ayuntamiento_id);
+        })->get();
+        // dd($actas);
+        return view('forms.actas-consejo-desarrollo')->with('actas',$actas);
     }
 
     public function store(Request $request)
@@ -38,14 +36,15 @@ class ActaConsejoDesarrolloController extends Controller
                 $relacion = new Relacion ();
                 $relacion->formato_id = 6;
                 $relacion->ayuntamiento_id = $usuario->empleado->ayuntamiento_id;
-                $relacion->fecha_actualizacion = $request->acta['fecha_levanto_acta'];
+                // $relacion->fecha_actualizacion = $request->acta['fecha_levanto_acta'];
                 $relacion->save();
             }
 
             $acta = ActaConsejoDesarrollo::where(['relacion_id' => $relacion->id, 'num_acta' => $request->acta['num_acta']])->first();
+            // dd($acta);
             if ($acta) {
                 DB::rollback();
-                return 2;//acta ya existe
+                return response()->json(['success' => true, 'estado' => 1],200);//acta ya existe
             }
             $acta = new ActaConsejoDesarrollo ();
             $acta->num_acta = $request->acta['num_acta'];
@@ -60,15 +59,15 @@ class ActaConsejoDesarrolloController extends Controller
             // dd($acta);
 
             DB::commit();
-            return 3;//guardado correctamente
+            return response()->json(['success' => true, 'estado' => 2],200);//guardado correctamente
 
         } catch (\PDOException $e) {
             dd($e);
             DB::rollback();
-            return 0;//error
+            return response()->json(['success' => true, 'estado' => 0],200);//error
         }
 
-        return 0;
+        return response()->json(['success' => true, 'estado' => 0],200);
     }
 
     public function update(Request $request)

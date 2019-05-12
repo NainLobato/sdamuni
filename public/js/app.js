@@ -1895,12 +1895,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    'initialactas': {
+    'initialActas': {
       required: false
-    },
-    'initialEmpleados': {
-      required: false
-    }
+    } // 'initialEmpleados': {
+    //     required: false
+    // }
+
   },
   data: function data() {
     return {
@@ -1913,11 +1913,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'firmas_consejo': '0',
         'sellos_validez': '0'
       },
-      // actas: JSON.parse(this.initialactas),
+      actas: JSON.parse(this.initialActas),
       urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
       titulo: 'Actas registradas',
       colapsableEstado: false,
-      // empleados: JSON.parse(this.initialEmpleados),
       estadoFormulario: 1
     };
   },
@@ -1944,7 +1943,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.titulo = 'Editar acta registrada';
       this.colapsableEstado = true;
       this.estadoFormulario = 2;
-      this.acta = _objectSpread({}, acta);
+      this.acta = _objectSpread({}, acta, {
+        'ao_acta': acta.año_acta,
+        'asunto_acta': acta.asuntos_acta
+      });
     },
     store: function store() {
       var _this = this;
@@ -1986,7 +1988,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post("".concat(_this2.urlSdamuni, "/update-acta-consejo-desarrollo"), {
+          axios.post(route('acta-consejo-desarrollo.update').template, {
             acta: _this2.acta
           }).then(function (response) {
             if (response.data.estado == 2) {
@@ -76323,13 +76325,70 @@ var render = function() {
               _vm._v(" "),
               _c("th", [_vm._v("Fecha")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Empleado")]),
+              _c("th", [_vm._v("Asunto")]),
               _vm._v(" "),
               _c("th", [_vm._v("Acciones")])
             ])
           ]),
           _vm._v(" "),
-          _c("tbody")
+          _c(
+            "tbody",
+            [
+              _vm.actas.length === 0
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: { "text-align": "center" },
+                        attrs: { colspan: "4" }
+                      },
+                      [_vm._v(" Sin registros. ")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.actas, function(acta, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(" " + _vm._s(acta.num_acta) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(" " + _vm._s(acta.fecha_levanto_acta) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(acta.asuntos_acta) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            return _vm.editar(acta)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-edit" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            return _vm.eliminar(acta)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-trash-alt" })]
+                    )
+                  ])
+                ])
+              })
+            ],
+            2
+          )
         ])
       ])
     ],
@@ -93677,14 +93736,15 @@ if (token) {
 /*!************************************************************!*\
   !*** ./resources/js/components/ActasConsejoDesarrollo.vue ***!
   \************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ActasConsejoDesarrollo_vue_vue_type_template_id_3f5e5c6f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActasConsejoDesarrollo.vue?vue&type=template&id=3f5e5c6f& */ "./resources/js/components/ActasConsejoDesarrollo.vue?vue&type=template&id=3f5e5c6f&");
 /* harmony import */ var _ActasConsejoDesarrollo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActasConsejoDesarrollo.vue?vue&type=script&lang=js& */ "./resources/js/components/ActasConsejoDesarrollo.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ActasConsejoDesarrollo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ActasConsejoDesarrollo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -93714,7 +93774,7 @@ component.options.__file = "resources/js/components/ActasConsejoDesarrollo.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/ActasConsejoDesarrollo.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

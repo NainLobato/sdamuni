@@ -1,37 +1,27 @@
 <template>
 <div>
     <b-card
-        align="center"
         style="max-width: auto; font-weight:bold; font-size: 18px;"
+        header-bg-variant="dark"
+        header-tag="header"
+        align="center"
         no-body
         >
         <template slot="header">
-        <span>Administrador de juicios en proceso promovidos por el ayuntamiento</span>
+            <span>{{ titulo }}</span>
+            <div class="card-tools float-right">
+                <button v-show="!colapsableEstado" @click="agregar" type="button" class="btn btn-secondary" >
+                    <a > <i class="fa fa-plus"></i></a>
+                </button>
+                <button v-show="colapsableEstado" @click="cancelar" type="button" class="btn btn-secondary" >
+                    <a> <i class="fa fa-minus"></i></a>
+                </button>
+            </div>
         </template>
-    </b-card>
-    <div class="row">
-        <div class="col-md-4">
-            <b-card
-                header="Juicios"
-                header-tag="header"
-                align="center"
-                style="max-width: auto; font-size: 18px;"
-            >
+        <b-collapse id="colapsable" v-model="colapsableEstado">
             <b-card-body align="left">
-                <li>1</li>
-                <li>2</li>
-            </b-card-body>
-            </b-card>
-        </div>
-        <div class="col-md-8">
-            <b-card
-                header="Informacion del juicio"
-                header-tag="header"
-                align="center"
-                style="max-width: auto; font-size: 18px;"
-            >
-                <b-card-body align="left">
                     <div class="row">
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="tipo">Materia a la que pertenece el juicio:</label>
@@ -82,23 +72,244 @@
                             </div>
                         </div>
                         <div class="col-md-12 text-right">
-                            <button class="btn btn-danger">Cancelar</button>
-                            <button class="btn btn-success">Guardar</button>
+                            <button class="btn btn-danger" @click="cancelar">Cancelar</button>
+                            <button v-show="estadoFormulario == 1" class="btn btn-success" @click="store">Guardar</button>
+                            <button v-show="estadoFormulario == 2" class="btn btn-success" @click="update">Actualizar</button>
                         </div>
                     </div>
                 </b-card-body>
-            </b-card>
-        </div>
-    </div>
+        </b-collapse>
+    </b-card>
+    <b-card>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Fecha</th>
+                        <th>Etapa</th>
+                        <th>Motivo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-if="juicios.length === 0">
+                        <td colspan="5" style="text-align: center;"> Sin registros. </td>
+                    </tr>
+                    <tr v-for="(juicio, index) in juicios" :key="index">
+                        <td> {{ juicio.num_acta }} </td>
+                        <td> {{ juicio.fecha_levanto_acta }} </td>
+                        <td> {{ juicio.etapa }} </td>
+                        <td> {{ juicio.asuntos_acta }} </td>
+                        <td> <a class="btn btn-default" @click=editar(juicio)><i class="far fa-edit"></i></a> <a class="btn btn-default" @click="eliminar(juicio)"><i class="far fa-trash-alt"></i></a>  </td>
+                    </tr>
+                </tbody>
+            </table>
+    </b-card>
+
 </div>
 
 </template>
 
 <script>
+    import urlSdamuni from '.././urlSdamuni';
+
     export default {
+        props: {
+            'initialJuicios': {
+                required: false
+            },
+            // 'initialEmpleados': {
+            //     required: false
+            // }
+        },
         data(){
             return{
+                juicio: {
+                    'tipo':'',
+                    'fecha_inicio':'',
+                    'instancia':'',
+                    'etapa':'',
+                    'imputado':'',
+                    'descripcion':'',
+                    'acciones':'',
+                },
+                juicios: JSON.parse(this.initialJuicios),
+                urlSdamuni: urlSdamuni,
+                titulo: 'Juicios registrados',
+                colapsableEstado: false,
+                estadoFormulario: 1
+            }
+        },
+        methods: {
+            agregar () {
+                this.titulo = 'Nuevo juicio'
+                this.colapsableEstado = true
+                this.estadoFormulario = 1
+            },
+            cancelar () {
+                this.titulo = 'Juicios registrados'
+                this.colapsableEstado = false
+                this.juicio = {
+                    'tipo':'',
+                    'fecha_inicio':'',
+                    'instancia':'',
+                    'etapa':'',
+                    'imputado':'',
+                    'descripcion':'',
+                    'acciones':'',
+                }
+            },
+            editar (juicio) {
+                this.titulo = 'Editar juicio registrado'
+                this.colapsableEstado = true
+                this.estadoFormulario = 2
+                this.juicio = {
+                    ...juicio,
+                }
+            },
+            store () {
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        axios.post(route('jucios-por-ayuntamiento.store').template, { juicio: this.juicio })
+                        .then( response => {
+                            if (response.data.estado == 2) {
+                                Vue.swal({
+                                title: 'Exito',
+                                text: "Acta creada correctamente.",
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Aceptar'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        location.reload();
+                                    }
+                                })
+                            } else if(response.data.estado == 1) {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ya existe el numero de juicio ingresado.',
+                                    'error'
+                                )
+                            } else {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ha ocurrido un error, intente de nuevo.',
+                                    'error'
+                                )
+                            }
+                        })
+                        .catch(error => {
+                            Vue.swal(
+                                'Error!',
+                                'Ha ocurrido un error, intente de nuevo.',
+                                'error'
+                            )
+                            console.log(error)
 
+                        })
+                    } else {
+                        Vue.swal(
+                            'Error!',
+                            'Complete el formulario.',
+                            'error'
+                        )
+                    }
+                })
+            },
+            update () {
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        axios.post(route('jucios-por-ayuntamiento.update').template, { juicio: this.juicio })
+                        .then( response => {
+                            if (response.data.estado == 2) {
+                                Vue.swal({
+                                title: 'Exito',
+                                text: "juicio actualizado correctamente.",
+                                type: 'success',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'Aceptar'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        location.reload();
+                                    }
+                                })
+                            } else if(response.data.estado == 1) {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ya existe el numero de juicio ingresado.',
+                                    'error'
+                                )
+                            } else {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ha ocurrido un error, intente de nuevo.',
+                                    'error'
+                                )
+                            }
+                        })
+                        .catch(error => {
+                            Vue.swal(
+                                'Error!',
+                                'Ha ocurrido un error, intente de nuevo.',
+                                'error'
+                            )
+                        })
+                    } else {
+                        Vue.swal(
+                            'Error!',
+                            'Complete el formulario.',
+                            'error'
+                        )
+                    }
+                })
+            },
+            eliminar (juicio) {
+                Vue.swal({
+                    title: '¿Estas seguro de eliminar el juicio '+juicio.num_acta+'?',
+                    text: "No se podra revertir el cambio.",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                    if (result.value) {
+                        axios.post(route('jucios-por-ayuntamiento.delete').template, {idActa: juicio.id})
+                        .then(function (response) {
+                            if (response.data.estado === 1) {
+                                Vue.swal({
+                                    title: 'Exito',
+                                    text: "juicio eliminado correctamente.",
+                                    type: 'success',
+                                    showCancelButton: false,
+                                    confirmButtonColor: '#3085d6',
+                                    confirmButtonText: 'Aceptar'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            location.reload();
+                                        }
+                                })
+                            }else {
+                                Vue.swal(
+                                    'Error!',
+                                    'Ha ocurrido un error, intente de nuevo.',
+                                    'error'
+                                )
+                            }
+
+                        })
+                        .catch(function (error) {
+                                Vue.swal(
+                                'Error!',
+                                'Ha ocurrido un error, intente de nuevo.',
+                                'error'
+                            )
+                        })
+                    }
+                })
             }
         },
         mounted() {

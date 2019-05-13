@@ -72,14 +72,54 @@ class ActaConsejoDesarrolloController extends Controller
 
     public function update(Request $request)
     {
-        dd($request);
-        return 0;
+        $usuario = Auth::user();
+        $relacion = Relacion::where(['formato_id' => 6, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
+        DB::beginTransaction();
+        try {
+            $relacion->save();
+            $acta = ActaConsejoDesarrollo::where([['id' , '!=', $request->acta['id']], 'relacion_id' => $relacion->id, 'num_acta' => $request->acta['num_acta']])->first();
+            if ($acta) {
+                DB::rollback();
+                return response()->json(['success' => true, 'estado' => 1],200);
+            }
+            $acta = ActaConsejoDesarrollo::find($request->acta['id']);
+            $acta->num_acta = $request->acta['num_acta'];
+            $acta->fecha_levanto_acta = $request->acta['fecha_levanto_acta'];
+            $acta->año_acta = $request->acta['ao_acta'];
+            $acta->asuntos_acta = $request->acta['asunto_acta'];
+            $acta->num_forjas = $request->acta['num_forjas'];
+            $acta->firmas_consejo = $request->acta['firmas_consejo'];
+            $acta->sellos_validez = $request->acta['sellos_validez'];
+            $acta->relacion_id = $relacion->id;
+            $acta->save();
+
+            DB::commit();
+            return response()->json(['success' => true, 'estado' => 2],200);
+
+        } catch (\PDOException $th) {
+            DB::rollback();
+            return response()->json(['success' => true, 'estado' => 3, 'error' => $th],200);
+        }
+
+        return response()->json(['success' => true, 'estado' => 4],200);
     }
 
     public function delete(Request $request)
     {
-        dd($request);
-        return 0;
+        $usuario = Auth::user();
+        $acta = ActaConsejoDesarrollo::whereHas('relacion', function ($query) use ($usuario) {
+            $query->where('ayuntamiento_id', $usuario->empleado->ayuntamiento_id);
+        })->where('id',$request->idActa)->first();
+        if ($acta) {
+            try {
+                $acta->delete();
+                return response()->json(['success' => true, 'estado' => 1],200);
+            } catch (\PDOException $th) {
+                return response()->json(['success' => true, 'estado' => 2, 'error' => $th],200);
+            }
+        } else {
+            return response()->json(['success' => true, 'estado' => 3],200);
+        }
     }
 
     public function show($id)

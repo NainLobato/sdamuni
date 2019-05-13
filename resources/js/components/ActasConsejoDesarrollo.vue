@@ -291,7 +291,7 @@
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                        axios.post(this.urlSdamuni+'/eliminar-acta-consejo-desarrollo', {idActa: acta.id})
+                        axios.post(route('acta-consejo-desarrollo.delete').template, {idActa: acta.id})
                         .then(function (response) {
                             if (response.data.estado === 1) {
                                 Vue.swal({

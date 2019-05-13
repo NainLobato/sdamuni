@@ -2018,8 +2018,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     eliminar: function eliminar(acta) {
-      var _this3 = this;
-
       Vue.swal({
         title: '¿Estas seguro de eliminar el acta ' + acta.num_acta + '?',
         text: "No se podra revertir el cambio.",
@@ -2031,7 +2029,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cancelButtonText: 'Cancelar'
       }).then(function (result) {
         if (result.value) {
-          axios.post(_this3.urlSdamuni + '/eliminar-acta-consejo-desarrollo', {
+          axios.post(route('acta-consejo-desarrollo.delete').template, {
             idActa: acta.id
           }).then(function (response) {
             if (response.data.estado === 1) {

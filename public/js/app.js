@@ -3024,7 +3024,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     eliminar: function eliminar(juicio) {
       Vue.swal({
-        title: '¿Estas seguro de eliminar el juicio ' + juicio.num_acta + '?',
+        title: '¿Estas seguro de eliminar el juicio contra ' + juicio.imputado + '?',
         text: "No se podra revertir el cambio.",
         type: 'warning',
         showCancelButton: true,
@@ -3035,7 +3035,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }).then(function (result) {
         if (result.value) {
           axios.post(route('jucios-por-ayuntamiento.delete').template, {
-            idActa: juicio.id
+            idJuicio: juicio.id
           }).then(function (response) {
             if (response.data.estado === 1) {
               Vue.swal({
@@ -78406,7 +78406,7 @@ var render = function() {
               _vm._v(" "),
               _c("th", [_vm._v("Etapa")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Motivo")]),
+              _c("th", [_vm._v("Imputado")]),
               _vm._v(" "),
               _c("th", [_vm._v("Acciones")])
             ])
@@ -78430,15 +78430,13 @@ var render = function() {
               _vm._v(" "),
               _vm._l(_vm.juicios, function(juicio, index) {
                 return _c("tr", { key: index }, [
-                  _c("td", [_vm._v(" " + _vm._s(juicio.num_acta) + " ")]),
+                  _c("td", [_vm._v(" " + _vm._s(juicio.tipo) + " ")]),
                   _vm._v(" "),
-                  _c("td", [
-                    _vm._v(" " + _vm._s(juicio.fecha_levanto_acta) + " ")
-                  ]),
+                  _c("td", [_vm._v(" " + _vm._s(juicio.fecha_inicio) + " ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" " + _vm._s(juicio.etapa) + " ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(juicio.asuntos_acta) + " ")]),
+                  _c("td", [_vm._v(" " + _vm._s(juicio.imputado) + " ")]),
                   _vm._v(" "),
                   _c("td", [
                     _c(

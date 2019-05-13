@@ -30,31 +30,31 @@ class JuicioPorAyuntamientoController extends Controller
     {
         dd($request);
         $usuario = Auth::user();
-        $relacion = Relacion::where(['formato_id' => 6, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
+        $relacion = Relacion::where(['formato_id' => 7, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
         DB::beginTransaction();
         try {
             if (!$relacion) {
                 $relacion = new Relacion ();
-                $relacion->formato_id = 6;
+                $relacion->formato_id = 7;
                 $relacion->ayuntamiento_id = $usuario->empleado->ayuntamiento_id;
-                // $relacion->fecha_actualizacion = $request->acta['fecha_levanto_acta'];
+                // $relacion->fecha_actualizacion = $request->juicio['fecha_levanto_acta'];
                 $relacion->save();
             }
 
-            $juicio = JuicioPorAyuntamiento::where(['relacion_id' => $relacion->id, 'num_acta' => $request->acta['num_acta']])->first();
+            // $juicio = JuicioPorAyuntamiento::where(['relacion_id' => $relacion->id, 'num_acta' => $request->juicio['num_acta']])->first();
             // dd($juicio);
-            if ($juicio) {
-                DB::rollback();
-                return response()->json(['success' => true, 'estado' => 1],200);//acta ya existe
-            }
+            // if ($juicio) {
+            //     DB::rollback();
+            //     return response()->json(['success' => true, 'estado' => 1],200);//juicio ya existe
+            // }
             $juicio = new JuicioPorAyuntamiento ();
-            $juicio->num_acta = $request->acta['num_acta'];
-            $juicio->fecha_levanto_acta = $request->acta['fecha_levanto_acta'];
-            $juicio->año_acta = $request->acta['ao_acta'];
-            $juicio->asuntos_acta = $request->acta['asunto_acta'];
-            $juicio->num_forjas = $request->acta['num_forjas'];
-            $juicio->firmas_consejo = $request->acta['firmas_consejo'];
-            $juicio->sellos_validez = $request->acta['sellos_validez'];
+            $juicio->tipo = $request->juicio['tipo'];
+            $juicio->fecha_inicio = $request->juicio['fecha_inicio'];
+            $juicio->instancia = $request->juicio['instancia'];
+            $juicio->imputado = $request->juicio['imputado'];
+            $juicio->descripcion = $request->juicio['descripcion'];
+            $juicio->etapa = $request->juicio['etapa'];
+            $juicio->acciones = $request->juicio['acciones'];
             $juicio->relacion_id = $relacion->id;
             $juicio->save();
             // dd($juicio);
@@ -74,23 +74,23 @@ class JuicioPorAyuntamientoController extends Controller
     {
         dd($request);
         $usuario = Auth::user();
-        $relacion = Relacion::where(['formato_id' => 6, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
+        $relacion = Relacion::where(['formato_id' => 7, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
         DB::beginTransaction();
         try {
-            $relacion->save();
-            $juicio = JuicioPorAyuntamiento::where([['id' , '!=', $request->acta['id']], 'relacion_id' => $relacion->id, 'num_acta' => $request->acta['num_acta']])->first();
-            if ($juicio) {
-                DB::rollback();
-                return response()->json(['success' => true, 'estado' => 1],200);
-            }
-            $juicio = JuicioPorAyuntamiento::find($request->acta['id']);
-            $juicio->num_acta = $request->acta['num_acta'];
-            $juicio->fecha_levanto_acta = $request->acta['fecha_levanto_acta'];
-            $juicio->año_acta = $request->acta['ao_acta'];
-            $juicio->asuntos_acta = $request->acta['asunto_acta'];
-            $juicio->num_forjas = $request->acta['num_forjas'];
-            $juicio->firmas_consejo = $request->acta['firmas_consejo'];
-            $juicio->sellos_validez = $request->acta['sellos_validez'];
+            // $relacion->save();
+            // $juicio = JuicioPorAyuntamiento::where([['id' , '!=', $request->juicio['id']], 'relacion_id' => $relacion->id, 'num_acta' => $request->juicio['num_acta']])->first();
+            // if ($juicio) {
+            //     DB::rollback();
+            //     return response()->json(['success' => true, 'estado' => 1],200);
+            // }
+            $juicio = JuicioPorAyuntamiento::find($request->juicio['id']);
+            $juicio->tipo = $request->juicio['tipo'];
+            $juicio->fecha_inicio = $request->juicio['fecha_inicio'];
+            $juicio->instancia = $request->juicio['instancia'];
+            $juicio->imputado = $request->juicio['imputado'];
+            $juicio->descripcion = $request->juicio['descripcion'];
+            $juicio->etapa = $request->juicio['etapa'];
+            $juicio->acciones = $request->juicio['acciones'];
             $juicio->relacion_id = $relacion->id;
             $juicio->save();
 
@@ -111,7 +111,7 @@ class JuicioPorAyuntamientoController extends Controller
         $usuario = Auth::user();
         $juicio = JuicioPorAyuntamiento::whereHas('relacion', function ($query) use ($usuario) {
             $query->where('ayuntamiento_id', $usuario->empleado->ayuntamiento_id);
-        })->where('id',$request->idActa)->first();
+        })->where('id',$request->idJuicio)->first();
         if ($juicio) {
             try {
                 $juicio->delete();

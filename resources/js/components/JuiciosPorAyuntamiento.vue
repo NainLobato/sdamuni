@@ -87,7 +87,7 @@
                         <th>Materia</th>
                         <th>Fecha</th>
                         <th>Etapa</th>
-                        <th>Motivo</th>
+                        <th>Imputado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -96,10 +96,10 @@
                         <td colspan="5" style="text-align: center;"> Sin registros. </td>
                     </tr>
                     <tr v-for="(juicio, index) in juicios" :key="index">
-                        <td> {{ juicio.num_acta }} </td>
-                        <td> {{ juicio.fecha_levanto_acta }} </td>
+                        <td> {{ juicio.tipo }} </td>
+                        <td> {{ juicio.fecha_inicio }} </td>
                         <td> {{ juicio.etapa }} </td>
-                        <td> {{ juicio.asuntos_acta }} </td>
+                        <td> {{ juicio.imputado }} </td>
                         <td> <a class="btn btn-default" @click=editar(juicio)><i class="far fa-edit"></i></a> <a class="btn btn-default" @click="eliminar(juicio)"><i class="far fa-trash-alt"></i></a>  </td>
                     </tr>
                 </tbody>
@@ -267,7 +267,7 @@
             },
             eliminar (juicio) {
                 Vue.swal({
-                    title: '¿Estas seguro de eliminar el juicio '+juicio.num_acta+'?',
+                    title: '¿Estas seguro de eliminar el juicio contra '+juicio.imputado+'?',
                     text: "No se podra revertir el cambio.",
                     type: 'warning',
                     showCancelButton: true,
@@ -277,7 +277,7 @@
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                        axios.post(route('jucios-por-ayuntamiento.delete').template, {idActa: juicio.id})
+                        axios.post(route('jucios-por-ayuntamiento.delete').template, {idJuicio: juicio.id})
                         .then(function (response) {
                             if (response.data.estado === 1) {
                                 Vue.swal({

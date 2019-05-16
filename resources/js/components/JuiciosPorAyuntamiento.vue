@@ -168,9 +168,11 @@
                 }
             },
             store () {
+
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(route('jucios-por-ayuntamiento.store').template, { juicio: this.juicio })
+                        console.log(this.juicio)
+                        axios.post(route('juicio-por-ayuntamiento.store').template, { juicio: this.juicio })
                         .then( response => {
                             if (response.data.estado == 2) {
                                 Vue.swal({
@@ -220,7 +222,7 @@
             update () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(route('jucios-por-ayuntamiento.update').template, { juicio: this.juicio })
+                        axios.post(route('juicio-por-ayuntamiento.update').template, { juicio: this.juicio })
                         .then( response => {
                             if (response.data.estado == 2) {
                                 Vue.swal({
@@ -277,7 +279,7 @@
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                        axios.post(route('jucios-por-ayuntamiento.delete').template, {idJuicio: juicio.id})
+                        axios.post(route('juicio-por-ayuntamiento.delete').template, {idJuicio: juicio.id})
                         .then(function (response) {
                             if (response.data.estado === 1) {
                                 Vue.swal({

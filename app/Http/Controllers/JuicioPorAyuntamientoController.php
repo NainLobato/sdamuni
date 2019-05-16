@@ -72,7 +72,7 @@ class JuicioPorAyuntamientoController extends Controller
 
     public function update(Request $request)
     {
-        dd($request);
+        // dd($request);
         $usuario = Auth::user();
         $relacion = Relacion::where(['formato_id' => 7, 'ayuntamiento_id' => $usuario->empleado->ayuntamiento_id])->first();
         DB::beginTransaction();
@@ -107,7 +107,7 @@ class JuicioPorAyuntamientoController extends Controller
 
     public function delete(Request $request)
     {
-        dd($request);
+        // dd($request);
         $usuario = Auth::user();
         $juicio = JuicioPorAyuntamiento::whereHas('relacion', function ($query) use ($usuario) {
             $query->where('ayuntamiento_id', $usuario->empleado->ayuntamiento_id);

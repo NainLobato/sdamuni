@@ -2660,6 +2660,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2763,9 +2768,184 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'initialJuicios': {
+      required: false
+    } // 'initialEmpleados': {
+    //     required: false
+    // }
+
+  },
   data: function data() {
-    return {};
+    return {
+      juicio: {
+        'tipo': '',
+        'fecha_inicio': '',
+        'instancia': '',
+        'etapa': '',
+        'monto': '',
+        'denunciante': '',
+        'descripcion': '',
+        'acciones': ''
+      },
+      juicios: JSON.parse(this.initialJuicios),
+      urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
+      titulo: 'Juicios registrados',
+      colapsableEstado: false,
+      estadoFormulario: 1
+    };
+  },
+  methods: {
+    agregar: function agregar() {
+      this.titulo = 'Nuevo juicio';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 1;
+    },
+    cancelar: function cancelar() {
+      this.titulo = 'Juicios registrados';
+      this.colapsableEstado = false;
+      this.juicio = {
+        'tipo': '',
+        'fecha_inicio': '',
+        'instancia': '',
+        'etapa': '',
+        'monto': '',
+        'denunciante': '',
+        'descripcion': '',
+        'acciones': ''
+      };
+    },
+    editar: function editar(juicio) {
+      this.titulo = 'Editar juicio registrado';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 2;
+      this.juicio = _objectSpread({}, juicio);
+    },
+    store: function store() {
+      var _this = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post(route('juicio-contra-ayuntamiento.store').template, {
+            juicio: _this.juicio
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acta creada correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de juicio ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post(route('juicio-contra-ayuntamiento.update').template, {
+            juicio: _this2.juicio
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "juicio actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de juicio ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    eliminar: function eliminar(juicio) {
+      Vue.swal({
+        title: '¿Estas seguro de eliminar el juicio contra ' + juicio.denunciante + '?',
+        text: "No se podra revertir el cambio.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post(route('juicio-contra-ayuntamiento.delete').template, {
+            idJuicio: juicio.id
+          }).then(function (response) {
+            if (response.data.estado === 1) {
+              Vue.swal({
+                title: 'Exito',
+                text: "juicio eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        }
+      });
+    }
   },
   mounted: function mounted() {
     console.log('whatever it takes');
@@ -2958,7 +3138,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post(route('jucios-por-ayuntamiento.store').template, {
+          console.log(_this.juicio);
+          axios.post(route('juicio-por-ayuntamiento.store').template, {
             juicio: _this.juicio
           }).then(function (response) {
             if (response.data.estado == 2) {
@@ -2993,7 +3174,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post(route('jucios-por-ayuntamiento.update').template, {
+          axios.post(route('juicio-por-ayuntamiento.update').template, {
             juicio: _this2.juicio
           }).then(function (response) {
             if (response.data.estado == 2) {
@@ -3034,7 +3215,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cancelButtonText: 'Cancelar'
       }).then(function (result) {
         if (result.value) {
-          axios.post(route('jucios-por-ayuntamiento.delete').template, {
+          axios.post(route('juicio-por-ayuntamiento.delete').template, {
             idJuicio: juicio.id
           }).then(function (response) {
             if (response.data.estado === 1) {
@@ -77657,353 +77838,468 @@ var render = function() {
             "font-weight": "bold",
             "font-size": "18px"
           },
-          attrs: { align: "center", "no-body": "" }
+          attrs: {
+            "header-bg-variant": "dark",
+            "header-tag": "header",
+            align: "center",
+            "no-body": ""
+          }
         },
         [
           _c("template", { slot: "header" }, [
-            _c("span", [
-              _vm._v(
-                "Administrador de juicios en proceso promovidos en contra del ayuntamiento"
+            _c("span", [_vm._v(_vm._s(_vm.titulo))]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools float-right" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.colapsableEstado,
+                      expression: "!colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.agregar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-plus" })])]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.colapsableEstado,
+                      expression: "colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.cancelar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-minus" })])]
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { id: "colapsable" },
+              model: {
+                value: _vm.colapsableEstado,
+                callback: function($$v) {
+                  _vm.colapsableEstado = $$v
+                },
+                expression: "colapsableEstado"
+              }
+            },
+            [
+              _c("b-card-body", { attrs: { align: "left" } }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "tipo" } }, [
+                        _vm._v("Materia a la que pertenece el juicio:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:50",
+                            expression: "'required|max:50'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "tipo",
+                          name: "tipo",
+                          placeholder: "Ingrese materia",
+                          "data-vv-as": "materia"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("tipo")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("tipo")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_inicio" } }, [
+                        _vm._v("Fecha en que inicio el juicio:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_inicio",
+                          name: "fecha_inicio",
+                          "data-vv-as": "fecha de juicio"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_inicio")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("fecha_inicio")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "instancia" } }, [
+                        _vm._v("Instancia encargada del analisis y resolucion:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:100",
+                            expression: "'required|max:100'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "instancia",
+                          name: "instancia",
+                          placeholder: "Ingrese instancia",
+                          "data-vv-as": "instancia"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("instancia")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("instancia")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "etapa" } }, [
+                        _vm._v("Etapa en la que se encuentra el juicio:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:20",
+                            expression: "'required|max:20'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "etapa",
+                          name: "etapa",
+                          placeholder: "Ingrese etapa",
+                          "data-vv-as": "etapa"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("etapa")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("etapa")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "monto" } }, [
+                        _vm._v(
+                          "Importe monetario que puede generarse con el fallo en contra del ayuntamiento:"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:20",
+                            expression: "'required|max:20'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          id: "monto",
+                          name: "monto",
+                          placeholder: "Ingrese monto",
+                          "data-vv-as": "monto"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("monto")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("monto")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "denunciante" } }, [
+                        _vm._v("Nombre de la persona que inicio el proceso:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:200",
+                            expression: "'required|max:200'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "denunciante",
+                          name: "denunciante",
+                          placeholder: "Ingrese nombre",
+                          "data-vv-as": "nombre"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("denunciante")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("denunciante")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "descripcion" } }, [
+                        _vm._v(
+                          "Motivo por el cual se instauro el juicio por el ayuntamiento:"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:1000",
+                            expression: "'required|max:1000'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "descripcion",
+                          name: "descripcion",
+                          placeholder: "Ingrese motivo",
+                          "data-vv-as": "motivo"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("descripcion")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("descripcion")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "acciones" } }, [
+                        _vm._v(
+                          "Acciones que deben realizarce opurtanemente en el marco del proceso juridico:"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required|max:1000",
+                            expression: "'required|max:1000'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "acciones",
+                          name: "acciones",
+                          placeholder: "Ingrese acciones",
+                          "data-vv-as": "acciones"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("acciones")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("acciones")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12 text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: { click: _vm.cancelar }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 1,
+                            expression: "estadoFormulario == 1"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.store }
+                      },
+                      [_vm._v("Guardar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 2,
+                            expression: "estadoFormulario == 2"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.update }
+                      },
+                      [_vm._v("Actualizar")]
+                    )
+                  ])
+                ])
+              ])
+            ],
+            1
+          )
         ],
         2
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-4" },
-          [
-            _c(
-              "b-card",
-              {
-                staticStyle: { "max-width": "auto", "font-size": "18px" },
-                attrs: {
-                  header: "Juicios",
-                  "header-tag": "header",
-                  align: "center"
-                }
-              },
-              [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("li", [_vm._v("1")]),
+      _c("b-card", [
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("Materia")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Etapa")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Imputado")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Acciones")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm.juicios.length === 0
+                ? _c("tr", [
+                    _c(
+                      "td",
+                      {
+                        staticStyle: { "text-align": "center" },
+                        attrs: { colspan: "5" }
+                      },
+                      [_vm._v(" Sin registros. ")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.juicios, function(juicio, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(" " + _vm._s(juicio.tipo) + " ")]),
                   _vm._v(" "),
-                  _c("li", [_vm._v("2")])
-                ])
-              ],
-              1
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-md-8" },
-          [
-            _c(
-              "b-card",
-              {
-                staticStyle: { "max-width": "auto", "font-size": "18px" },
-                attrs: {
-                  header: "Informacion del juicio",
-                  "header-tag": "header",
-                  align: "center"
-                }
-              },
-              [
-                _c("b-card-body", { attrs: { align: "left" } }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "tipo" } }, [
-                          _vm._v("Materia a la que pertenece el juicio:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:50",
-                              expression: "'required|max:50'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "tipo",
-                            name: "tipo",
-                            placeholder: "Ingrese materia",
-                            "data-vv-as": "materia"
+                  _c("td", [_vm._v(" " + _vm._s(juicio.fecha_inicio) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(juicio.etapa) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(juicio.denunciante) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            return _vm.editar(juicio)
                           }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("tipo")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("tipo")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-edit" })]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "fecha_inicio" } }, [
-                          _vm._v("Fecha en que inicio el juicio:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "date",
-                            id: "fecha_inicio",
-                            name: "fecha_inicio",
-                            "data-vv-as": "fecha de juicio"
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            return _vm.eliminar(juicio)
                           }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("fecha_inicio")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("fecha_inicio")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "instancia" } }, [
-                          _vm._v(
-                            "Instancia encargada del analisis y resolucion:"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:100",
-                              expression: "'required|max:100'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "instancia",
-                            name: "instancia",
-                            placeholder: "Ingrese instancia",
-                            "data-vv-as": "instancia"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("instancia")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("instancia")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "etapa" } }, [
-                          _vm._v("Etapa en la que se encuentra el juicio:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:20",
-                              expression: "'required|max:20'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "etapa",
-                            name: "etapa",
-                            placeholder: "Ingrese etapa",
-                            "data-vv-as": "etapa"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("etapa")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("etapa")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "monto" } }, [
-                          _vm._v(
-                            "Importe monetario que puede generarse con el fallo en contra del ayuntamiento:"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:20",
-                              expression: "'required|max:20'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "number",
-                            id: "monto",
-                            name: "monto",
-                            placeholder: "Ingrese monto",
-                            "data-vv-as": "monto"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("monto")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("monto")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "demandante" } }, [
-                          _vm._v("Nombre de la persona que inicio el proceso:")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:200",
-                              expression: "'required|max:200'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "demandante",
-                            name: "demandante",
-                            placeholder: "Ingrese nombre",
-                            "data-vv-as": "nombre"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("demandante")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("demandante")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "descripcion" } }, [
-                          _vm._v(
-                            "Motivo por el cual se instauro el juicio por el ayuntamiento:"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:1000",
-                              expression: "'required|max:1000'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "descripcion",
-                            name: "descripcion",
-                            placeholder: "Ingrese motivo",
-                            "data-vv-as": "motivo"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("descripcion")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("descripcion")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "acciones" } }, [
-                          _vm._v(
-                            "Acciones que deben realizarce opurtanemente en el marco del proceso juridico:"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|max:1000",
-                              expression: "'required|max:1000'"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            id: "acciones",
-                            name: "acciones",
-                            placeholder: "Ingrese acciones",
-                            "data-vv-as": "acciones"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _vm.errors.has("acciones")
-                          ? _c("div", { staticClass: "invalid-feedback" }, [
-                              _vm._v(_vm._s(_vm.errors.first("acciones")))
-                            ])
-                          : _vm._e()
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12 text-right" }, [
-                      _c("button", { staticClass: "btn btn-danger" }, [
-                        _vm._v("Cancelar")
-                      ]),
-                      _vm._v(" "),
-                      _c("button", { staticClass: "btn btn-success" }, [
-                        _vm._v("Guardar")
-                      ])
-                    ])
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-trash-alt" })]
+                    )
                   ])
                 ])
-              ],
-              1
-            )
-          ],
-          1
-        )
+              })
+            ],
+            2
+          )
+        ])
       ])
     ],
     1
@@ -94026,15 +94322,14 @@ if (token) {
 /*!************************************************************!*\
   !*** ./resources/js/components/ActasConsejoDesarrollo.vue ***!
   \************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ActasConsejoDesarrollo_vue_vue_type_template_id_3f5e5c6f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActasConsejoDesarrollo.vue?vue&type=template&id=3f5e5c6f& */ "./resources/js/components/ActasConsejoDesarrollo.vue?vue&type=template&id=3f5e5c6f&");
 /* harmony import */ var _ActasConsejoDesarrollo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActasConsejoDesarrollo.vue?vue&type=script&lang=js& */ "./resources/js/components/ActasConsejoDesarrollo.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ActasConsejoDesarrollo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ActasConsejoDesarrollo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -94064,7 +94359,7 @@ component.options.__file = "resources/js/components/ActasConsejoDesarrollo.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/ActasConsejoDesarrollo.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -94303,15 +94598,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************!*\
   !*** ./resources/js/components/JuiciosPorAyuntamiento.vue ***!
   \************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _JuiciosPorAyuntamiento_vue_vue_type_template_id_4479bf34___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./JuiciosPorAyuntamiento.vue?vue&type=template&id=4479bf34& */ "./resources/js/components/JuiciosPorAyuntamiento.vue?vue&type=template&id=4479bf34&");
 /* harmony import */ var _JuiciosPorAyuntamiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./JuiciosPorAyuntamiento.vue?vue&type=script&lang=js& */ "./resources/js/components/JuiciosPorAyuntamiento.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _JuiciosPorAyuntamiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _JuiciosPorAyuntamiento_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -94341,7 +94635,7 @@ component.options.__file = "resources/js/components/JuiciosPorAyuntamiento.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/JuiciosPorAyuntamiento.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

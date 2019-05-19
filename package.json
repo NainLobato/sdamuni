@@ -31,6 +31,7 @@
         "filepond-plugin-image-preview": "^4.0.8",
         "filepond-plugin-image-validate-size": "^1.2.3",
         "full-icu": "^1.2.1",
+        "v-money": "^0.8.1",
         "vee-validate": "^2.2.3",
         "vue-filepond": "^5.1.0",
         "vue-lodash": "^2.0.2",

@@ -3248,6 +3248,419 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ObrasAcciones.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ObrasAcciones.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_1__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'initialAcuerdos': {
+      required: false
+    },
+    'initialEmpleados': {
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
+      titulo: 'Obras y acciones registradas',
+      colapsableEstado: false,
+      estadoFormulario: 1,
+      obra: {
+        fuente_financiamiento: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        },
+        aportacion_municipal: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        },
+        aportacion_beneficiarios: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        },
+        otras_fuentes_federales: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        },
+        otras_fuentes_estatales: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        },
+        otros: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        },
+        costo_total: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2
+        }
+      }
+    };
+  },
+  methods: {
+    agregar: function agregar() {
+      this.titulo = 'Nueva obra o accion';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 1;
+    },
+    cancelar: function cancelar() {
+      this.titulo = 'Obras y acciones registradas';
+      this.colapsableEstado = false;
+      this.acuerdo = {
+        'num_acta': '',
+        'fecha_acta': '',
+        'acuerdo': '',
+        'empleado': '',
+        'accion_situacion': '',
+        'comentarios': ''
+      };
+    },
+    editar: function editar(acuerdo) {
+      this.titulo = 'Editar accion o acuerdo registrado';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 2;
+      this.acuerdo = _objectSpread({}, acuerdo, {
+        empleado: {
+          id: acuerdo.empleado.id,
+          nombre: "".concat(acuerdo.empleado.user.nombres, " ").concat(acuerdo.empleado.user.primer_ap, " ").concat(acuerdo.empleado.user.segundo_ap)
+        }
+      });
+    },
+    store: function store() {
+      var _this = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post(route('acuerdo-pendiente.store').template, {
+            acuerdo: _this.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo creado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    update: function update() {
+      var _this2 = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post("".concat(_this2.urlSdamuni, "/update-acuerdo-pendiente"), {
+            acuerdo: _this2.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    eliminar: function eliminar(acuerdo) {
+      var _this3 = this;
+
+      Vue.swal({
+        title: '¿Estas seguro de eliminar el acuerdo ' + acuerdo.num_acta + '?',
+        text: "No se podra revertir el cambio.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post(_this3.urlSdamuni + '/eliminar-acuerdo-pendiente', {
+            idAcuerdo: acuerdo.id
+          }).then(function (response) {
+            if (response.data.estado === 1) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Acuerdo eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    console.log('whatever it takes');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/actas.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/actas.vue?vue&type=script&lang=js& ***!
@@ -65157,6 +65570,17 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/v-money/dist/v-money.js":
+/*!**********************************************!*\
+  !*** ./node_modules/v-money/dist/v-money.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function(e,t){ true?module.exports=t():undefined})(this,function(){return function(e){function t(r){if(n[r])return n[r].exports;var i=n[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,t),i.l=!0,i.exports}var n={};return t.m=e,t.c=n,t.i=function(e){return e},t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p=".",t(t.s=9)}([function(e,t,n){"use strict";t.a={prefix:"",suffix:"",thousands:",",decimal:".",precision:2}},function(e,t,n){"use strict";var r=n(2),i=n(5),u=n(0);t.a=function(e,t){if(t.value){var o=n.i(i.a)(u.a,t.value);if("INPUT"!==e.tagName.toLocaleUpperCase()){var a=e.getElementsByTagName("input");1!==a.length||(e=a[0])}e.oninput=function(){var t=e.value.length-e.selectionEnd;e.value=n.i(r.a)(e.value,o),t=Math.max(t,o.suffix.length),t=e.value.length-t,t=Math.max(t,o.prefix.length+1),n.i(r.b)(e,t),e.dispatchEvent(n.i(r.c)("change"))},e.onfocus=function(){n.i(r.b)(e,e.value.length-o.suffix.length)},e.oninput(),e.dispatchEvent(n.i(r.c)("input"))}}},function(e,t,n){"use strict";function r(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:m.a;"number"==typeof e&&(e=e.toFixed(o(t.precision)));var n=e.indexOf("-")>=0?"-":"",r=u(e),i=c(r,t.precision),a=d(i).split("."),p=a[0],l=a[1];return p=f(p,t.thousands),t.prefix+n+s(p,l,t.decimal)+t.suffix}function i(e,t){var n=e.indexOf("-")>=0?-1:1,r=u(e),i=c(r,t);return parseFloat(i)*n}function u(e){return d(e).replace(/\D+/g,"")||"0"}function o(e){return a(0,e,20)}function a(e,t,n){return Math.max(e,Math.min(t,n))}function c(e,t){var n=Math.pow(10,t);return(parseFloat(e)/n).toFixed(o(t))}function f(e,t){return e.replace(/(\d)(?=(?:\d{3})+\b)/gm,"$1"+t)}function s(e,t,n){return t?e+n+t:e}function d(e){return e?e.toString():""}function p(e,t){var n=function(){e.setSelectionRange(t,t)};e===document.activeElement&&(n(),setTimeout(n,1))}function l(e){var t=document.createEvent("Event");return t.initEvent(e,!0,!0),t}var m=n(0);n.d(t,"a",function(){return r}),n.d(t,"d",function(){return i}),n.d(t,"b",function(){return p}),n.d(t,"c",function(){return l})},function(e,t,n){"use strict";function r(e,t){t&&Object.keys(t).map(function(e){a.a[e]=t[e]}),e.directive("money",o.a),e.component("money",u.a)}Object.defineProperty(t,"__esModule",{value:!0});var i=n(6),u=n.n(i),o=n(1),a=n(0);n.d(t,"Money",function(){return u.a}),n.d(t,"VMoney",function(){return o.a}),n.d(t,"options",function(){return a.a}),n.d(t,"VERSION",function(){return c});var c="0.8.1";t.default=r,"undefined"!=typeof window&&window.Vue&&window.Vue.use(r)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(1),i=n(0),u=n(2);t.default={name:"Money",props:{value:{required:!0,type:[Number,String],default:0},masked:{type:Boolean,default:!1},precision:{type:Number,default:function(){return i.a.precision}},decimal:{type:String,default:function(){return i.a.decimal}},thousands:{type:String,default:function(){return i.a.thousands}},prefix:{type:String,default:function(){return i.a.prefix}},suffix:{type:String,default:function(){return i.a.suffix}}},directives:{money:r.a},data:function(){return{formattedValue:""}},watch:{value:{immediate:!0,handler:function(e,t){var r=n.i(u.a)(e,this.$props);r!==this.formattedValue&&(this.formattedValue=r)}}},methods:{change:function(e){this.$emit("input",this.masked?e.target.value:n.i(u.d)(e.target.value,this.precision))}}}},function(e,t,n){"use strict";t.a=function(e,t){return e=e||{},t=t||{},Object.keys(e).concat(Object.keys(t)).reduce(function(n,r){return n[r]=void 0===t[r]?e[r]:t[r],n},{})}},function(e,t,n){var r=n(7)(n(4),n(8),null,null);e.exports=r.exports},function(e,t){e.exports=function(e,t,n,r){var i,u=e=e||{},o=typeof e.default;"object"!==o&&"function"!==o||(i=e,u=e.default);var a="function"==typeof u?u.options:u;if(t&&(a.render=t.render,a.staticRenderFns=t.staticRenderFns),n&&(a._scopeId=n),r){var c=a.computed||(a.computed={});Object.keys(r).forEach(function(e){var t=r[e];c[e]=function(){return t}})}return{esModule:i,exports:u,options:a}}},function(e,t){e.exports={render:function(){var e=this,t=e.$createElement;return(e._self._c||t)("input",{directives:[{name:"money",rawName:"v-money",value:{precision:e.precision,decimal:e.decimal,thousands:e.thousands,prefix:e.prefix,suffix:e.suffix},expression:"{precision, decimal, thousands, prefix, suffix}"}],staticClass:"v-money",attrs:{type:"tel"},domProps:{value:e.formattedValue},on:{change:e.change}})},staticRenderFns:[]}},function(e,t,n){e.exports=n(3)}])});
+
+/***/ }),
+
 /***/ "./node_modules/vee-validate/dist/locale/es.js":
 /*!*****************************************************!*\
   !*** ./node_modules/vee-validate/dist/locale/es.js ***!
@@ -78766,6 +79190,835 @@ var render = function() {
             ],
             2
           )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ObrasAcciones.vue?vue&type=template&id=4b2d440b&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ObrasAcciones.vue?vue&type=template&id=4b2d440b& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-card",
+        {
+          staticStyle: {
+            "max-width": "auto",
+            "font-weight": "bold",
+            "font-size": "18px"
+          },
+          attrs: {
+            "header-bg-variant": "dark",
+            "header-tag": "header",
+            align: "center",
+            "no-body": ""
+          }
+        },
+        [
+          _c("template", { slot: "header" }, [
+            _c("span", [_vm._v(_vm._s(_vm.titulo))]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools float-right" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.colapsableEstado,
+                      expression: "!colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.agregar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-plus" })])]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.colapsableEstado,
+                      expression: "colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.cancelar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-minus" })])]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { id: "colapsable" },
+              model: {
+                value: _vm.colapsableEstado,
+                callback: function($$v) {
+                  _vm.colapsableEstado = $$v
+                },
+                expression: "colapsableEstado"
+              }
+            },
+            [
+              _c("b-card-body", { attrs: { align: "left" } }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c(
+                          "label",
+                          { attrs: { for: "fuente_financiamiento" } },
+                          [_vm._v("Fuente de financiamiento:")]
+                        ),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "fuente_financiamiento",
+                            name: "fuente_financiamiento",
+                            placeholder: "Elige una fuente de financiamiento"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("fuente_financiamiento")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors.first("fuente_financiamiento")
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("p", [_vm._v("Techo financiero:")]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("$9999")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("p", [_vm._v("Monto Aprobado/presopuestado:")]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("$9999")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("p", [_vm._v("Monto Disponible:")]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("$9999")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "programa" } }, [
+                          _vm._v("Programa:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "programa",
+                            name: "programa",
+                            placeholder: "Elige un programa"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("programa")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("programa")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "sub_programa" } }, [
+                          _vm._v("Subprograma:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "sub_programa",
+                            name: "sub_programa",
+                            placeholder: "Elige un subprograma"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("sub_programa")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("sub_programa")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "tipo" } }, [
+                          _vm._v("Tipo:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "tipo",
+                            name: "tipo",
+                            placeholder: "Elige un tipo"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("tipo")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("tipo")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "num_obra" } }, [
+                        _vm._v("Numero de obra:")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group mb-3" }, [
+                        _c("div", { staticClass: "input-group-prepend" }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "input-group-text",
+                              attrs: { id: "num_obra" }
+                            },
+                            [_vm._v(" 201930001 ")]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required|numeric|length:4",
+                              expression: "'required|numeric|length:4'"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            id: "num_obra",
+                            name: "num_obra",
+                            placeholder: "Ingrese numero de acta",
+                            "data-vv-as": "numero de obra",
+                            "aria-describedby": "num_obra"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _vm.errors.has("num_obra")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("num_obra")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "localidad" } }, [
+                          _vm._v("Localidad:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "localidad",
+                            name: "localidad",
+                            placeholder: "Elige un localidad"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("localidad")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("localidad")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "desc_obra" } }, [
+                        _vm._v("Descripcion de la obra:")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "desc_obra",
+                          name: "desc_obra",
+                          placeholder: "Ingrese descripcion de la obra",
+                          "data-vv-as": "descripcion de la obra",
+                          "aria-describedby": "desc_obra",
+                          rows: "4"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("desc_obra")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("desc_obra")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_inicial" } }, [
+                        _vm._v("Fecha inicial:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_inicial",
+                          name: "fecha_inicial",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_inicial")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("fecha_inicial")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_final" } }, [
+                        _vm._v("Fecha final:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_final",
+                          name: "fecha_final",
+                          "data-vv-as": "fecha final"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_final")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("fecha_final")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fuente_financiemiento" } }, [
+                        _vm._v("Fuente de financiemiento:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.fuente_financiamiento,
+                            expression: "obra.fuente_financiamiento"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "fuente_financiemiento",
+                          name: "fuente_financiemiento",
+                          "data-vv-as": "fuente de financiemiento"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fuente_financiemiento")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("fuente_financiemiento"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "aportacion_municipal" } }, [
+                        _vm._v("Aportacion municipal:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.aportacion_municipal,
+                            expression: "obra.aportacion_municipal"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "aportacion_municipal",
+                          name: "aportacion_municipal",
+                          "data-vv-as": "aportacion municipal"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("aportacion_municipal")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("aportacion_municipal"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "aportacion_beneficiarios" } },
+                        [_vm._v("Aportacion beneficiarios:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.aportacion_beneficiarios,
+                            expression: "obra.aportacion_beneficiarios"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "aportacion_beneficiarios",
+                          name: "aportacion_beneficiarios",
+                          "data-vv-as": "aportacion beneficiarios"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("aportacion_beneficiarios")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("aportacion_beneficiarios")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "otras_fuentes_federales" } },
+                        [_vm._v("Otras fuentes federales:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.otras_fuentes_federales,
+                            expression: "obra.otras_fuentes_federales"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "otras_fuentes_federales",
+                          name: "otras_fuentes_federales",
+                          "data-vv-as": "otras fuentes federales"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("otras_fuentes_federales")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("otras_fuentes_federales")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "otras_fuentes_estatales" } },
+                        [_vm._v("Otras fuentes estatales:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.otras_fuentes_estatales,
+                            expression: "obra.otras_fuentes_estatales"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "otras_fuentes_estatales",
+                          name: "otras_fuentes_estatales",
+                          "data-vv-as": "otras fuentes estatales"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("otras_fuentes_estatales")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("otras_fuentes_estatales")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "otros" } }, [
+                        _vm._v("Otros:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.otros,
+                            expression: "obra.otros"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "otros",
+                          name: "otros",
+                          "data-vv-as": "otros"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("otros")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("otros")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "costo_total" } }, [
+                        _vm._v("Costo total:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.obra.costo_total,
+                            expression: "obra.costo_total"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "costo_total",
+                          name: "costo_total",
+                          "data-vv-as": "costo total"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("costo_total")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("costo_total")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12 text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: { click: _vm.cancelar }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 1,
+                            expression: "estadoFormulario == 1"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.store }
+                      },
+                      [_vm._v("Guardar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.estadoFormulario == 2,
+                            expression: "estadoFormulario == 2"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        on: { click: _vm.update }
+                      },
+                      [_vm._v("Actualizar")]
+                    )
+                  ])
+                ])
+              ])
+            ],
+            1
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("b-card", [
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("Num obra")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Descripcion")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha programada inicio")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha programada termino")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha de acta")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Acciones")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tbody")
         ])
       ])
     ],
@@ -94234,6 +95487,7 @@ Vue.component("jucios-por-ayuntamiento", __webpack_require__(/*! ./components/Ju
 Vue.component("actas", __webpack_require__(/*! ./components/actas.vue */ "./resources/js/components/actas.vue")["default"]);
 Vue.component("jucios-contra-ayuntamiento", __webpack_require__(/*! ./components/JuiciosContraAyuntamiento.vue */ "./resources/js/components/JuiciosContraAyuntamiento.vue")["default"]);
 Vue.component("contratos-convenios-acuerdos", __webpack_require__(/*! ./components/ContratosConveniosAcuerdos.vue */ "./resources/js/components/ContratosConveniosAcuerdos.vue")["default"]);
+Vue.component("obras-acciones", __webpack_require__(/*! ./components/ObrasAcciones.vue */ "./resources/js/components/ObrasAcciones.vue")["default"]);
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');
@@ -94658,6 +95912,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JuiciosPorAyuntamiento_vue_vue_type_template_id_4479bf34___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_JuiciosPorAyuntamiento_vue_vue_type_template_id_4479bf34___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ObrasAcciones.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ObrasAcciones.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ObrasAcciones.vue?vue&type=template&id=4b2d440b& */ "./resources/js/components/ObrasAcciones.vue?vue&type=template&id=4b2d440b&");
+/* harmony import */ var _ObrasAcciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ObrasAcciones.vue?vue&type=script&lang=js& */ "./resources/js/components/ObrasAcciones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ObrasAcciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ObrasAcciones.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ObrasAcciones.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/ObrasAcciones.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ObrasAcciones.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ObrasAcciones.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ObrasAcciones.vue?vue&type=template&id=4b2d440b&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/ObrasAcciones.vue?vue&type=template&id=4b2d440b& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ObrasAcciones.vue?vue&type=template&id=4b2d440b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ObrasAcciones.vue?vue&type=template&id=4b2d440b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

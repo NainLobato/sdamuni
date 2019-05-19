@@ -95,4 +95,8 @@ Route::middleware('auth')->group(function () {
         Route::post('conciliacion-delete', 'ConciliacionBancariaController@delete')->name('delete');
     });
 
+    Route::name('obra-accion.')->group(function () {
+        Route::get('obras-y-acciones', 'ObraAccionController@index')->name('index');
+    });
+
 });

@@ -44,6 +44,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('obra-accion.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Obras y acciones</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('libro-actas.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
                             <p>Libros de actas</p>

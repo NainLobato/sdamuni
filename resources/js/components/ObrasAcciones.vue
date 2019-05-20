@@ -77,7 +77,7 @@
                             <div class="invalid-feedback" v-if="errors.has('num_obra')">{{ errors.first('num_obra') }}</div>
                         </div>
                     </div>
-                     <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="localidad">Localidad:</label>
                             <v-select id="localidad" name="localidad" v-validate="'required'" placeholder="Elige un localidad" >
@@ -109,7 +109,6 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="fuente_financiemiento">Fuente de financiemiento:</label>
-                            <!-- <money v-model="price" v-bind="obra.fuente_financiamiento"  id="fuente_financiemiento" name="fuente_financiemiento" class="form-control" data-vv-as="fuente de financiemiento" v-validate="'required'"></money> -->
                             <input v-model.lazy="obra.fuente_financiamiento.value" v-money="obra.fuente_financiamiento" id="fuente_financiemiento" name="fuente_financiemiento" class="form-control" data-vv-as="fuente de financiemiento" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('fuente_financiemiento')">{{ errors.first('fuente_financiemiento') }}</div>
                         </div>
@@ -156,7 +155,73 @@
                             <div class="invalid-feedback" v-if="errors.has('costo_total')">{{ errors.first('costo_total') }}</div>
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="unidad_proyecto">Unidad proyecto:</label>
+                            <v-select id="unidad_proyecto" name="unidad_proyecto" v-validate="'required'" placeholder="Elige una unidad" >
+                            </v-select>
+                            <div class="invalid-feedback" style="display: block;" v-if="errors.has('unidad_proyecto')">{{ errors.first('unidad_proyecto') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Ingrese cantidad" data-vv-as="cantidad" v-validate="'required'">
+                            <div class="invalid-feedback" v-if="errors.has('cantidad')">{{ errors.first('cantidad') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="beneficiario">Beneficiario:</label>
+                            <v-select id="beneficiario" name="beneficiario" v-validate="'required'" placeholder="Elige un beneficiario" >
+                            </v-select>
+                            <div class="invalid-feedback" style="display: block;" v-if="errors.has('beneficiario')">{{ errors.first('beneficiario') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cantidad_beneficiarios">Cantidad beneficiarios:</label>
+                            <input type="number" id="cantidad_beneficiarios" name="cantidad_beneficiarios" class="form-control" placeholder="Ingrese cantidad de beneficiarios" data-vv-as="cantidad de beneficiarios" v-validate="'required'">
+                            <div class="invalid-feedback" v-if="errors.has('cantidad_beneficiarios')">{{ errors.first('cantidad_beneficiarios') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="modalidad_ejecucion">Modalidad ejecucion:</label>
+                            <v-select id="modalidad_ejecucion" v-model="obra.modalidad_ejecucion" :options="modalidades_ejecucion" label="nombre" name="modalidad_ejecucion" v-validate="'required'" placeholder="Elige un modalidad" >
+                            </v-select>
+                            <div class="invalid-feedback" style="display: block;" v-if="errors.has('modalidad_ejecucion')">{{ errors.first('modalidad_ejecucion') }}</div>
+                        </div>
+                    </div>
+                     <div class="col-md-6" v-if="obra.modalidad_ejecucion.value == 2">
+                        <div class="form-group">
+                            <label for="modalidad_contrato">Modalidad ejecucion:</label>
+                            <v-select id="modalidad_contrato" :options="modalidades_contrato" label="nombre" name="modalidad_contrato" v-validate="'required'" placeholder="Elige un modalidad" >
+                            </v-select>
+                            <div class="invalid-feedback" style="display: block;" v-if="errors.has('modalidad_contrato')">{{ errors.first('modalidad_contrato') }}</div>
+                        </div>
+                    </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fecha_hora_acta">Fecha y hora Acta Consejo Desarrollo/Cabildo:</label>
+                            <input type="datetime" id="fecha_hora_acta" name="fecha_hora_acta" class="form-control" placeholder="Ingrese fecha y hora" data-vv-as="fecha y hora" v-validate="'required'">
+                            <div class="invalid-feedback" v-if="errors.has('fecha_hora_acta')">{{ errors.first('fecha_hora_acta') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="longitud">Latitud:</label>
+                            <input type="number" id="longitud" name="longitud" class="form-control" placeholder="Ingrese latitud" data-vv-as="latitud" v-validate="'required'">
+                            <div class="invalid-feedback" v-if="errors.has('longitud')">{{ errors.first('longitud') }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="latitud">Longitud:</label>
+                            <input type="number" id="latitud" name="latitud" class="form-control" placeholder="Ingrese longitud" data-vv-as="longitud" v-validate="'required'">
+                            <div class="invalid-feedback" v-if="errors.has('latitud')">{{ errors.first('latitud') }}</div>
+                        </div>
+                    </div>
 
                     <div class="col-md-12 text-right">
                         <button class="btn btn-danger" @click="cancelar">Cancelar</button>
@@ -180,7 +245,14 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <tr>
+                        <td> 2019300010001 </td>
+                        <td> Descripcion obra </td>
+                        <td> 10-10-2019</td>
+                        <td> 12-12-2019</td>
+                        <td> 09-09-2019</td>
+                        <td> <a class="btn btn-default"><i class="far fa-edit"></i></a> <a class="btn btn-default"><i class="far fa-trash-alt"></i></a>  </td>
+                    </tr>
                 </tbody>
             </table>
     </b-card>
@@ -208,7 +280,17 @@
                 colapsableEstado: false,
                 estadoFormulario: 1,
                 price: 0,
+                modalidades_ejecucion: [
+                    {nombre: 'Contrato ', value: 1},
+                    {nombre: 'Administración directa', value: 2}
+                ],
+                modalidades_contrato: [
+                    {nombre: 'Adjudicación directa ', value: 1},
+                    {nombre: 'invitación', value: 2},
+                    {nombre: 'licitación pública', value: 3}
+                ],
                 obra: {
+                    modalidad_ejecucion: { nombre: '', value: ''},
                     fuente_financiamiento: {
                         decimal: '.',
                         thousands: ',',
@@ -270,26 +352,11 @@
             cancelar () {
                 this.titulo = 'Obras y acciones registradas'
                 this.colapsableEstado = false
-                this.acuerdo = {
-                    'num_acta': '',
-                    'fecha_acta': '',
-                    'acuerdo': '',
-                    'empleado': '',
-                    'accion_situacion': '',
-                    'comentarios': '',
-                }
             },
             editar (acuerdo) {
                 this.titulo = 'Editar accion o acuerdo registrado'
                 this.colapsableEstado = true
                 this.estadoFormulario = 2
-                this.acuerdo = {
-                    ...acuerdo,
-                    empleado: {
-                        id: acuerdo.empleado.id,
-                        nombre: `${acuerdo.empleado.user.nombres} ${acuerdo.empleado.user.primer_ap} ${acuerdo.empleado.user.segundo_ap}`
-                    }
-                }
             },
             store () {
                 this.$validator.validate().then(valid => {
@@ -299,7 +366,7 @@
                             if (response.data.estado == 2) {
                                 Vue.swal({
                                 title: 'Exito',
-                                text: "Acuerdo creado correctamente.",
+                                text: "Creado correctamente.",
                                 type: 'success',
                                 showCancelButton: false,
                                 confirmButtonColor: '#3085d6',
@@ -344,12 +411,12 @@
             update () {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        axios.post(`${this.urlSdamuni}/update-acuerdo-pendiente`, { acuerdo: this.acuerdo })
+                        axios.post('', { })
                         .then( response => {
                             if (response.data.estado == 2) {
                                 Vue.swal({
                                 title: 'Exito',
-                                text: "Acuerdo actualizado correctamente.",
+                                text: "Actualizado correctamente.",
                                 type: 'success',
                                 showCancelButton: false,
                                 confirmButtonColor: '#3085d6',
@@ -389,9 +456,9 @@
                     }
                 })
             },
-            eliminar (acuerdo) {
+            eliminar () {
                 Vue.swal({
-                    title: '¿Estas seguro de eliminar el acuerdo '+acuerdo.num_acta+'?',
+                    title: '¿Estas seguro de eliminar ?',
                     text: "No se podra revertir el cambio.",
                     type: 'warning',
                     showCancelButton: true,
@@ -401,12 +468,12 @@
                     cancelButtonText: 'Cancelar'
                     }).then((result) => {
                     if (result.value) {
-                        axios.post(this.urlSdamuni+'/eliminar-acuerdo-pendiente', {idAcuerdo: acuerdo.id})
+                        axios.post('', { })
                         .then(function (response) {
                             if (response.data.estado === 1) {
                                 Vue.swal({
                                     title: 'Exito',
-                                    text: "Acuerdo eliminado correctamente.",
+                                    text: "eliminado correctamente.",
                                     type: 'success',
                                     showCancelButton: false,
                                     confirmButtonColor: '#3085d6',

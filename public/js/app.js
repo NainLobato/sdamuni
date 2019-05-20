@@ -3260,10 +3260,78 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
 /* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
 /* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_1__);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3472,7 +3540,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       colapsableEstado: false,
       estadoFormulario: 1,
       price: 0,
+      modalidades_ejecucion: [{
+        nombre: 'Contrato ',
+        value: 1
+      }, {
+        nombre: 'Administración directa',
+        value: 2
+      }],
+      modalidades_contrato: [{
+        nombre: 'Adjudicación directa ',
+        value: 1
+      }, {
+        nombre: 'invitación',
+        value: 2
+      }, {
+        nombre: 'licitación pública',
+        value: 3
+      }],
       obra: {
+        modalidad_ejecucion: {
+          nombre: '',
+          value: ''
+        },
         fuente_financiamiento: {
           decimal: '.',
           thousands: ',',
@@ -3534,25 +3623,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     cancelar: function cancelar() {
       this.titulo = 'Obras y acciones registradas';
       this.colapsableEstado = false;
-      this.acuerdo = {
-        'num_acta': '',
-        'fecha_acta': '',
-        'acuerdo': '',
-        'empleado': '',
-        'accion_situacion': '',
-        'comentarios': ''
-      };
     },
     editar: function editar(acuerdo) {
       this.titulo = 'Editar accion o acuerdo registrado';
       this.colapsableEstado = true;
       this.estadoFormulario = 2;
-      this.acuerdo = _objectSpread({}, acuerdo, {
-        empleado: {
-          id: acuerdo.empleado.id,
-          nombre: "".concat(acuerdo.empleado.user.nombres, " ").concat(acuerdo.empleado.user.primer_ap, " ").concat(acuerdo.empleado.user.segundo_ap)
-        }
-      });
     },
     store: function store() {
       var _this = this;
@@ -3565,7 +3640,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             if (response.data.estado == 2) {
               Vue.swal({
                 title: 'Exito',
-                text: "Acuerdo creado correctamente.",
+                text: "Creado correctamente.",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -3590,17 +3665,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     update: function update() {
-      var _this2 = this;
-
       this.$validator.validate().then(function (valid) {
         if (valid) {
-          axios.post("".concat(_this2.urlSdamuni, "/update-acuerdo-pendiente"), {
-            acuerdo: _this2.acuerdo
-          }).then(function (response) {
+          axios.post('', {}).then(function (response) {
             if (response.data.estado == 2) {
               Vue.swal({
                 title: 'Exito',
-                text: "Acuerdo actualizado correctamente.",
+                text: "Actualizado correctamente.",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -3623,11 +3694,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    eliminar: function eliminar(acuerdo) {
-      var _this3 = this;
-
+    eliminar: function eliminar() {
       Vue.swal({
-        title: '¿Estas seguro de eliminar el acuerdo ' + acuerdo.num_acta + '?',
+        title: '¿Estas seguro de eliminar ?',
         text: "No se podra revertir el cambio.",
         type: 'warning',
         showCancelButton: true,
@@ -3637,13 +3706,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cancelButtonText: 'Cancelar'
       }).then(function (result) {
         if (result.value) {
-          axios.post(_this3.urlSdamuni + '/eliminar-acuerdo-pendiente', {
-            idAcuerdo: acuerdo.id
-          }).then(function (response) {
+          axios.post('', {}).then(function (response) {
             if (response.data.estado === 1) {
               Vue.swal({
                 title: 'Exito',
-                text: "Acuerdo eliminado correctamente.",
+                text: "eliminado correctamente.",
                 type: 'success',
                 showCancelButton: false,
                 confirmButtonColor: '#3085d6',
@@ -85265,6 +85332,366 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "unidad_proyecto" } }, [
+                          _vm._v("Unidad proyecto:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "unidad_proyecto",
+                            name: "unidad_proyecto",
+                            placeholder: "Elige una unidad"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("unidad_proyecto")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first("unidad_proyecto"))
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "cantidad" } }, [
+                        _vm._v("Cantidad:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          id: "cantidad",
+                          name: "cantidad",
+                          placeholder: "Ingrese cantidad",
+                          "data-vv-as": "cantidad"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("cantidad")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("cantidad")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "beneficiario" } }, [
+                          _vm._v("Beneficiario:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "beneficiario",
+                            name: "beneficiario",
+                            placeholder: "Elige un beneficiario"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("beneficiario")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("beneficiario")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "cantidad_beneficiarios" } },
+                        [_vm._v("Cantidad beneficiarios:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          id: "cantidad_beneficiarios",
+                          name: "cantidad_beneficiarios",
+                          placeholder: "Ingrese cantidad de beneficiarios",
+                          "data-vv-as": "cantidad de beneficiarios"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("cantidad_beneficiarios")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("cantidad_beneficiarios"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "modalidad_ejecucion" } }, [
+                          _vm._v("Modalidad ejecucion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "modalidad_ejecucion",
+                            options: _vm.modalidades_ejecucion,
+                            label: "nombre",
+                            name: "modalidad_ejecucion",
+                            placeholder: "Elige un modalidad"
+                          },
+                          model: {
+                            value: _vm.obra.modalidad_ejecucion,
+                            callback: function($$v) {
+                              _vm.$set(_vm.obra, "modalidad_ejecucion", $$v)
+                            },
+                            expression: "obra.modalidad_ejecucion"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("modalidad_ejecucion")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors.first("modalidad_ejecucion")
+                                  )
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm.obra.modalidad_ejecucion.value == 2
+                    ? _c("div", { staticClass: "col-md-6" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c(
+                              "label",
+                              { attrs: { for: "modalidad_contrato" } },
+                              [_vm._v("Modalidad ejecucion:")]
+                            ),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                id: "modalidad_contrato",
+                                options: _vm.modalidades_contrato,
+                                label: "nombre",
+                                name: "modalidad_contrato",
+                                placeholder: "Elige un modalidad"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm.errors.has("modalidad_contrato")
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass: "invalid-feedback",
+                                    staticStyle: { display: "block" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.errors.first("modalidad_contrato")
+                                      )
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_hora_acta" } }, [
+                        _vm._v("Fecha y hora Acta Consejo Desarrollo/Cabildo:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "datetime",
+                          id: "fecha_hora_acta",
+                          name: "fecha_hora_acta",
+                          placeholder: "Ingrese fecha y hora",
+                          "data-vv-as": "fecha y hora"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_hora_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("fecha_hora_acta")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "longitud" } }, [
+                        _vm._v("Latitud:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          id: "longitud",
+                          name: "longitud",
+                          placeholder: "Ingrese latitud",
+                          "data-vv-as": "latitud"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("longitud")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("longitud")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "latitud" } }, [
+                        _vm._v("Longitud:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "number",
+                          id: "latitud",
+                          name: "latitud",
+                          placeholder: "Ingrese longitud",
+                          "data-vv-as": "longitud"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("latitud")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("latitud")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "col-md-12 text-right" }, [
                     _c(
                       "button",
@@ -85336,7 +85763,29 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("tbody")
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v(" 2019300010001 ")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" Descripcion obra ")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" 10-10-2019")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" 12-12-2019")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" 09-09-2019")]),
+              _vm._v(" "),
+              _c("td", [
+                _c("a", { staticClass: "btn btn-default" }, [
+                  _c("i", { staticClass: "far fa-edit" })
+                ]),
+                _vm._v(" "),
+                _c("a", { staticClass: "btn btn-default" }, [
+                  _c("i", { staticClass: "far fa-trash-alt" })
+                ])
+              ])
+            ])
+          ])
         ])
       ])
     ],

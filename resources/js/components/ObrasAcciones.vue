@@ -109,49 +109,50 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="fuente_financiemiento">Fuente de financiemiento:</label>
-                            <input v-money="obra.fuente_financiamiento" id="fuente_financiemiento" name="fuente_financiemiento" class="form-control" data-vv-as="fuente de financiemiento" v-validate="'required'"/>
+                            <!-- <money v-model="price" v-bind="obra.fuente_financiamiento"  id="fuente_financiemiento" name="fuente_financiemiento" class="form-control" data-vv-as="fuente de financiemiento" v-validate="'required'"></money> -->
+                            <input v-model.lazy="obra.fuente_financiamiento.value" v-money="obra.fuente_financiamiento" id="fuente_financiemiento" name="fuente_financiemiento" class="form-control" data-vv-as="fuente de financiemiento" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('fuente_financiemiento')">{{ errors.first('fuente_financiemiento') }}</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="aportacion_municipal">Aportacion municipal:</label>
-                            <input v-money="obra.aportacion_municipal" id="aportacion_municipal" name="aportacion_municipal" class="form-control" data-vv-as="aportacion municipal" v-validate="'required'"/>
+                            <input v-model.lazy="obra.aportacion_municipal.value" v-money="obra.aportacion_municipal" id="aportacion_municipal" name="aportacion_municipal" class="form-control" data-vv-as="aportacion municipal" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('aportacion_municipal')">{{ errors.first('aportacion_municipal') }}</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="aportacion_beneficiarios">Aportacion beneficiarios:</label>
-                            <input v-money="obra.aportacion_beneficiarios" id="aportacion_beneficiarios" name="aportacion_beneficiarios" class="form-control" data-vv-as="aportacion beneficiarios" v-validate="'required'"/>
+                            <input v-model.lazy="obra.aportacion_beneficiarios.value" v-money="obra.aportacion_beneficiarios" id="aportacion_beneficiarios" name="aportacion_beneficiarios" class="form-control" data-vv-as="aportacion beneficiarios" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('aportacion_beneficiarios')">{{ errors.first('aportacion_beneficiarios') }}</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="otras_fuentes_federales">Otras fuentes federales:</label>
-                            <input v-money="obra.otras_fuentes_federales" id="otras_fuentes_federales" name="otras_fuentes_federales" class="form-control" data-vv-as="otras fuentes federales" v-validate="'required'"/>
+                            <input v-model.lazy="obra.otras_fuentes_federales.value" v-money="obra.otras_fuentes_federales" id="otras_fuentes_federales" name="otras_fuentes_federales" class="form-control" data-vv-as="otras fuentes federales" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('otras_fuentes_federales')">{{ errors.first('otras_fuentes_federales') }}</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="otras_fuentes_estatales">Otras fuentes estatales:</label>
-                            <input v-money="obra.otras_fuentes_estatales" id="otras_fuentes_estatales" name="otras_fuentes_estatales" class="form-control" data-vv-as="otras fuentes estatales" v-validate="'required'"/>
+                            <input v-model.lazy="obra.otras_fuentes_estatales.value" v-money="obra.otras_fuentes_estatales" id="otras_fuentes_estatales" name="otras_fuentes_estatales" class="form-control" data-vv-as="otras fuentes estatales" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('otras_fuentes_estatales')">{{ errors.first('otras_fuentes_estatales') }}</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="otros">Otros:</label>
-                            <input v-money="obra.otros" id="otros" name="otros" class="form-control" data-vv-as="otros" v-validate="'required'"/>
+                            <input v-model.lazy="obra.otros.value" v-money="obra.otros" id="otros" name="otros" class="form-control" data-vv-as="otros" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('otros')">{{ errors.first('otros') }}</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="costo_total">Costo total:</label>
-                            <input v-money="obra.costo_total" id="costo_total" name="costo_total" class="form-control" data-vv-as="costo total" v-validate="'required'"/>
+                            <input v-model.lazy="obra.costo_total.value" v-money="obra.costo_total" id="costo_total" name="costo_total" class="form-control" data-vv-as="costo total" v-validate="'required'"/>
                             <div class="invalid-feedback" v-if="errors.has('costo_total')">{{ errors.first('costo_total') }}</div>
                         </div>
                     </div>
@@ -206,48 +207,56 @@
                 titulo: 'Obras y acciones registradas',
                 colapsableEstado: false,
                 estadoFormulario: 1,
+                price: 0,
                 obra: {
                     fuente_financiamiento: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0
                     },
                     aportacion_municipal: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0,
                     },
                     aportacion_beneficiarios: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0,
                     },
                     otras_fuentes_federales: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0,
                     },
                     otras_fuentes_estatales: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0,
                     },
                     otros: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0,
                     },
                     costo_total: {
                         decimal: '.',
                         thousands: ',',
                         prefix: '$ ',
                         precision: 2,
+                        value: 0,
                     },
                 },
             }

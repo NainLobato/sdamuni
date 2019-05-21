@@ -44,6 +44,7 @@ Vue.component("actas", require("./components/actas.vue").default);
 Vue.component("jucios-contra-ayuntamiento", require("./components/JuiciosContraAyuntamiento.vue").default);
 Vue.component("contratos-convenios-acuerdos", require("./components/ContratosConveniosAcuerdos.vue").default);
 Vue.component("obras-acciones", require("./components/ObrasAcciones.vue").default);
+Vue.component("semaforo-obras", require("./components/SemaforoObras.vue").default);
 
 const app = new Vue({
    el: '#app',

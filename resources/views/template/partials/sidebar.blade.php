@@ -56,6 +56,36 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Modificaciones presupuestales</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Avances financieros</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('obras.semaforo') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Semaforización de las obras</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Detalle de la obra</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-tools"></i>
+                            <p>Expediente técnico unitario</p>
+                        </a>
+                    </li>
+                    {{--<li class="nav-item">
                         <a href="{{ route('libro-actas.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
                             <p>Libros de actas</p>
@@ -98,7 +128,7 @@
                             <i class="nav-icon fas fa-file-contract"></i>
                             <p>Contratos, convenios o acuerdos</p>
                         </a>
-                    </li>
+                    </li>--}}
 
 				{{--  <li class="nav-item has-treeview">
 					<a href="#" class="nav-link">

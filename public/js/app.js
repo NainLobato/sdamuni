@@ -3757,6 +3757,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SemaforoObras.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SemaforoObras.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/actas.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/actas.vue?vue&type=script&lang=js& ***!
@@ -86361,6 +86441,209 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SemaforoObras.vue?vue&type=template&id=5ac068ca&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SemaforoObras.vue?vue&type=template&id=5ac068ca& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "b-card",
+    {
+      staticStyle: {
+        "max-width": "auto",
+        "font-weight": "bold",
+        "font-size": "18px"
+      },
+      attrs: {
+        "header-bg-variant": "dark",
+        "header-tag": "header",
+        align: "center",
+        "no-body": ""
+      }
+    },
+    [
+      _c("template", { slot: "header" }, [_vm._v("\n        Obras\n    ")]),
+      _vm._v(" "),
+      _c("b-card-body", { attrs: { align: "left" } }, [
+        _c("table", { staticClass: "table striped" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("Número de obra")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Descripción")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Localidad")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fondo")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Monto total")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Situación")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Acciones")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("2019300010001")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle 5 de Mayo")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 5 000 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "secondary" } }, [
+                    _vm._v("Sin iniciar")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { href: "detalle-obra" }
+                  },
+                  [_vm._v("Detalle")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("2019300010002")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle Hidalgo")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 450 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "success" } }, [
+                    _vm._v("Bien")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { href: "detalle-obra" }
+                  },
+                  [_vm._v("Detalle")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("2019300010003")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle Morelos")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 2 000 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "warning" } }, [
+                    _vm._v("Preventivo")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { href: "detalle-obra" }
+                  },
+                  [_vm._v("Detalle")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("2019300010004")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle Allende")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 34 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "danger" } }, [
+                    _vm._v("Urgente")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { href: "detalle-obra" }
+                  },
+                  [_vm._v("Detalle")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/actas.vue?vue&type=template&id=593c3f09&":
 /*!********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/actas.vue?vue&type=template&id=593c3f09& ***!
@@ -102776,7 +103059,11 @@ Vue.component("actas", __webpack_require__(/*! ./components/actas.vue */ "./reso
 Vue.component("jucios-contra-ayuntamiento", __webpack_require__(/*! ./components/JuiciosContraAyuntamiento.vue */ "./resources/js/components/JuiciosContraAyuntamiento.vue")["default"]);
 Vue.component("contratos-convenios-acuerdos", __webpack_require__(/*! ./components/ContratosConveniosAcuerdos.vue */ "./resources/js/components/ContratosConveniosAcuerdos.vue")["default"]);
 Vue.component("obras-acciones", __webpack_require__(/*! ./components/ObrasAcciones.vue */ "./resources/js/components/ObrasAcciones.vue")["default"]);
+<<<<<<< HEAD
 Vue.component("registro-modificaciones", __webpack_require__(/*! ./components/registroModificaciones.vue */ "./resources/js/components/registroModificaciones.vue")["default"]);
+=======
+Vue.component("semaforo-obras", __webpack_require__(/*! ./components/SemaforoObras.vue */ "./resources/js/components/SemaforoObras.vue")["default"]);
+>>>>>>> develop
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');
@@ -103288,6 +103575,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ObrasAcciones_vue_vue_type_template_id_4b2d440b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SemaforoObras.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/SemaforoObras.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SemaforoObras_vue_vue_type_template_id_5ac068ca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SemaforoObras.vue?vue&type=template&id=5ac068ca& */ "./resources/js/components/SemaforoObras.vue?vue&type=template&id=5ac068ca&");
+/* harmony import */ var _SemaforoObras_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SemaforoObras.vue?vue&type=script&lang=js& */ "./resources/js/components/SemaforoObras.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SemaforoObras_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SemaforoObras_vue_vue_type_template_id_5ac068ca___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SemaforoObras_vue_vue_type_template_id_5ac068ca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SemaforoObras.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SemaforoObras.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/SemaforoObras.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SemaforoObras_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SemaforoObras.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SemaforoObras.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SemaforoObras_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SemaforoObras.vue?vue&type=template&id=5ac068ca&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/SemaforoObras.vue?vue&type=template&id=5ac068ca& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SemaforoObras_vue_vue_type_template_id_5ac068ca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SemaforoObras.vue?vue&type=template&id=5ac068ca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SemaforoObras.vue?vue&type=template&id=5ac068ca&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SemaforoObras_vue_vue_type_template_id_5ac068ca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SemaforoObras_vue_vue_type_template_id_5ac068ca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

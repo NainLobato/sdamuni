@@ -98,6 +98,8 @@ Route::middleware('auth')->group(function () {
     Route::name('obra-accion.')->group(function () {
         Route::get('obras-y-acciones', 'ObraAccionController@index')->name('index');
     });
+    Route::get('semaforo-de-obras', 'ObraAccionController@semaforo')->name('obras.semaforo');
+    Route::get('detalle-obra', 'ObraAccionController@detalle')->name('obras.detalle');
 
     Route::name('registro-modificaciones.')->group(function () {
         Route::get('registro-de-modificaciones', 'RegistroModificacionesController@index')->name('index');

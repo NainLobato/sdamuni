@@ -18,4 +18,12 @@ class ObraAccionController extends Controller
         }
         return view('forms.obras-acciones')->render();
     }
+
+    public function semaforo(){
+        return view('obras.semaforo');
+    }
+
+    public function detalle(){
+        return view('obras.detalle');
+    }
 }

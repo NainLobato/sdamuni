@@ -39104,7 +39104,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n\n", ""]);
+exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -103059,11 +103059,8 @@ Vue.component("actas", __webpack_require__(/*! ./components/actas.vue */ "./reso
 Vue.component("jucios-contra-ayuntamiento", __webpack_require__(/*! ./components/JuiciosContraAyuntamiento.vue */ "./resources/js/components/JuiciosContraAyuntamiento.vue")["default"]);
 Vue.component("contratos-convenios-acuerdos", __webpack_require__(/*! ./components/ContratosConveniosAcuerdos.vue */ "./resources/js/components/ContratosConveniosAcuerdos.vue")["default"]);
 Vue.component("obras-acciones", __webpack_require__(/*! ./components/ObrasAcciones.vue */ "./resources/js/components/ObrasAcciones.vue")["default"]);
-<<<<<<< HEAD
 Vue.component("registro-modificaciones", __webpack_require__(/*! ./components/registroModificaciones.vue */ "./resources/js/components/registroModificaciones.vue")["default"]);
-=======
 Vue.component("semaforo-obras", __webpack_require__(/*! ./components/SemaforoObras.vue */ "./resources/js/components/SemaforoObras.vue")["default"]);
->>>>>>> develop
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');
@@ -104247,9 +104244,9 @@ var urlSdamuni = "".concat(window.location.protocol, "//").concat(window.locatio
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

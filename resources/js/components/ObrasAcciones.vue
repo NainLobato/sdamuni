@@ -2,11 +2,11 @@
 <div>
     <div >
         <b-input-group class="col-lg-6 mx-auto my-2">
-            <b-input-group-prepend>
-                <span class="input-group-text"><i class="fas fa-search fa-lg"></i></span>
-            </b-input-group-prepend>
-            <b-form-input class="LoginInput" size="lg" placeholder="Username">
+            <b-form-input class="LoginInput" size="lg" placeholder="Ingresa el numero de obra">
             </b-form-input>
+            <b-input-group-append>
+            <b-button variant="outline-info">Buscar <i class="fas fa-search fa-lg"></i></b-button>
+            </b-input-group-append>
         </b-input-group>
     </div>
     <!-- <b-card  class="card-registro ">
@@ -256,6 +256,63 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Número de obra</th>
+                        <th>Descripción</th>
+                        <th>Localidad</th>
+                        <th>Fondo</th>
+                        <th>Monto total</th>
+                        <th>Situación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2019300010001</td>
+                        <td>Pavimentación de la calle 5 de Mayo</td>
+                        <td>Acajete</td>
+                        <td>FISMDF</td>
+                        <td>$ 5 000 000</td>
+                        <td class="text-center"><b-badge variant="secondary">Sin iniciar</b-badge></td>
+                        <td><div class="d-flex justify-content-around">
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>2019300010002</td>
+                        <td>Pavimentación de la calle Hidalgo</td>
+                        <td>Acajete</td>
+                        <td>FISMDF</td>
+                        <td>$ 450 000</td>
+                        <td class="text-center"><b-badge variant="success">Bien</b-badge></td>
+                        <td><div class="d-flex justify-content-around">
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="detalleObra" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>2019300010003</td>
+                        <td>Pavimentación de la calle Morelos</td>
+                        <td>Acajete</td>
+                        <td>FISMDF</td>
+                        <td>$ 2 000 000</td>
+                        <td class="text-center"><b-badge variant="warning">Preventivo</b-badge></td>
+                        <td><div class="d-flex justify-content-around">
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="detalleObra" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                        </div></td>
+                    </tr>
+                    <tr>
+                        <td>2019300010004</td>
+                        <td>Pavimentación de la calle Allende</td>
+                        <td>Acajete</td>
+                        <td>FISMDF</td>
+                        <td>$ 34 000</td>
+                        <td class="text-center"><b-badge variant="danger">Urgente</b-badge></td>
+                        <td><div class="d-flex justify-content-around">
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="detalleObra" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                        </div></td>
+                    </tr>
+                </tbody>
+                <!-- <thead>
+                    <tr>
                         <th>Num obra</th>
                         <th>Descripcion</th>
                         <th>Fecha programada inicio</th>
@@ -271,11 +328,56 @@
                         <td> 10-10-2019</td>
                         <td> 12-12-2019</td>
                         <td> 09-09-2019</td>
-                        <td> <a class="btn btn-default"><i class="far fa-edit"></i></a> <a class="btn btn-default"><i class="far fa-trash-alt"></i></a>  </td>
+                        <td> <div class="d-flex justify-content-around">
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                        </div>
+                        </td>
                     </tr>
-                </tbody>
+                </tbody> -->
+                <!-- <b-popover ref="popover" target="popover-button-event" title="Agregar">
+                    <a href="#" class="row mx-1 link-pop">
+                        <div class="mr-1">
+                             <i class="nav-icon fas fa-tools"></i>
+                        </div>
+                        <div>
+                             Modificaciones presupuestales
+                        </div>
+                    </a>
+                    <a href="#" class="row mx-1 link-pop">
+                        <div class="mr-1">
+                            <i class="nav-icon fas fa-tools"></i>
+                        </div>
+                        <div>
+                            Avances financieros
+                        </div>
+                    </a>
+                </b-popover> -->
             </table>
     </b-card>
+    <div>
+  <b-modal ref="modal" size="lg" hide-footer centered id="modal-1" title="Agregar/generar">
+  <div class="row">
+      <div  v-for="(card , index) in cards" :key="index" class="col-md-6 ">
+    <div class="card ">
+        <div class="row card-home">
+            <div class="col-md-12  d-flex justify-content-center align-items-center" style="background-color:#0abab5">
+                <a :href="card.href" class="py-4 link-pop">
+                    <img class="center img-circle-2 elevation-2 align-middle" :src="card.imagen"  >
+                </a>
+            </div>
+            <div class="col-md-12 my-auto">
+                <h4 class="text-center">{{card.titulo}}</h4>
+                       <!-- <h5>Registro y edción</h5> -->
+                <p class=" mr-3 text-center">{{card.descripcion}}</p>
+
+            </div>
+        </div>
+    </div>
+   </div>
+  </div>
+
+  </b-modal>
+</div>
 </div>
 
 </template>
@@ -308,6 +410,15 @@
                     {nombre: 'Adjudicación directa ', value: 1},
                     {nombre: 'invitación', value: 2},
                     {nombre: 'licitación pública', value: 3}
+                ],
+                cards:[
+                    // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-collaborator-male-96.png',href: route('empleados.index').template,color:'background-color:#0abab5;',titulo:'Empleados',descripcion:'Crea y administra usuarios para tu ayuntamiento'},
+                    // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-organization-96.png', href: route('ayuntamiento.index').template,color:'background-color:#0abab5;',titulo:'Ayuntamientos',descripcion:'Crea, elimina, edita ayuntamientos'},
+                    // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-book-96.png', href: route('libro-actas.index').template,color:'background-color:#0abab5;',titulo:'Libros de actas',descripcion:'Crea, elimina, edita actas'},
+                    {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-page-96.png', href: route('registro-modificaciones.index').template,color:'background-color:#0abab5;',titulo:'Modificaciones presupuestales',descripcion:''},
+                    {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-page-96.png', href: route('acta-consejo-desarrollo.index').template,color:'background-color:#0abab5;',titulo:'Avances financieros',descripcion:''},
+                    // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-page-96.png', href: route('acta-consejo-planeacion.index').template,color:'background-color:#0abab5;',titulo:'Actas del consejo de planeación',descripcion:'Crea, elimina, edita acuerdos'},
+
                 ],
                 obra: {
                     modalidad_ejecucion: { nombre: '', value: ''},
@@ -377,6 +488,12 @@
                 this.titulo = 'Editar accion o acuerdo registrado'
                 this.colapsableEstado = true
                 this.estadoFormulario = 2
+            },
+            detalleObra(){
+                window.location.href = route('obras.detalle').template;
+            },
+            addComplemento(){
+                this.$refs.modal.show()
             },
             store () {
                 this.$validator.validate().then(valid => {
@@ -538,5 +655,17 @@
         left: 0;
         right: 0;
 
+    }
+    .link-pop{
+        transition: all .2s ease-in-out;
+    }
+    .link-pop:hover{
+         transform: scale(1.2);
+
+    }
+    .link-pop:hover img{
+         -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
+        -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
+        box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
     }
 </style>

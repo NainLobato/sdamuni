@@ -3542,6 +3542,108 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3576,6 +3678,22 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         nombre: 'licitación pública',
         value: 3
+      }],
+      cards: [// {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-collaborator-male-96.png',href: route('empleados.index').template,color:'background-color:#0abab5;',titulo:'Empleados',descripcion:'Crea y administra usuarios para tu ayuntamiento'},
+      // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-organization-96.png', href: route('ayuntamiento.index').template,color:'background-color:#0abab5;',titulo:'Ayuntamientos',descripcion:'Crea, elimina, edita ayuntamientos'},
+      // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-book-96.png', href: route('libro-actas.index').template,color:'background-color:#0abab5;',titulo:'Libros de actas',descripcion:'Crea, elimina, edita actas'},
+      {
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
+        href: route('registro-modificaciones.index').template,
+        color: 'background-color:#0abab5;',
+        titulo: 'Modificaciones presupuestales',
+        descripcion: ''
+      }, {
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
+        href: route('acta-consejo-desarrollo.index').template,
+        color: 'background-color:#0abab5;',
+        titulo: 'Avances financieros',
+        descripcion: ''
       }],
       obra: {
         modalidad_ejecucion: {
@@ -3648,6 +3766,12 @@ __webpack_require__.r(__webpack_exports__);
       this.titulo = 'Editar accion o acuerdo registrado';
       this.colapsableEstado = true;
       this.estadoFormulario = 2;
+    },
+    detalleObra: function detalleObra() {
+      window.location.href = route('obras.detalle').template;
+    },
+    addComplemento: function addComplemento() {
+      this.$refs.modal.show();
     },
     store: function store() {
       var _this = this;
@@ -39085,7 +39209,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-registro{\n    position:absolute;\n    width: 90%;\n    z-index: 1;\n    margin-left: auto;\n    margin-right: auto;\n    left: 0;\n    right: 0;\n}\n", ""]);
+exports.push([module.i, "\n.card-registro{\n    position:absolute;\n    width: 90%;\n    z-index: 1;\n    margin-left: auto;\n    margin-right: auto;\n    left: 0;\n    right: 0;\n}\n.link-pop{\n    transition: all .2s ease-in-out;\n}\n.link-pop:hover{\n     -webkit-transform: scale(1.2);\n             transform: scale(1.2);\n}\n.link-pop:hover img{\n    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);\n}\n", ""]);
 
 // exports
 
@@ -85102,16 +85226,21 @@ var render = function() {
             "b-input-group",
             { staticClass: "col-lg-6 mx-auto my-2" },
             [
-              _c("b-input-group-prepend", [
-                _c("span", { staticClass: "input-group-text" }, [
-                  _c("i", { staticClass: "fas fa-search fa-lg" })
-                ])
-              ]),
-              _vm._v(" "),
               _c("b-form-input", {
                 staticClass: "LoginInput",
-                attrs: { size: "lg", placeholder: "Username" }
-              })
+                attrs: { size: "lg", placeholder: "Ingresa el numero de obra" }
+              }),
+              _vm._v(" "),
+              _c(
+                "b-input-group-append",
+                [
+                  _c("b-button", { attrs: { variant: "outline-info" } }, [
+                    _vm._v("Buscar "),
+                    _c("i", { staticClass: "fas fa-search fa-lg" })
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -86391,15 +86520,17 @@ var render = function() {
         _c("table", { staticClass: "table" }, [
           _c("thead", [
             _c("tr", [
-              _c("th", [_vm._v("Num obra")]),
+              _c("th", [_vm._v("Número de obra")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Descripcion")]),
+              _c("th", [_vm._v("Descripción")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Fecha programada inicio")]),
+              _c("th", [_vm._v("Localidad")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Fecha programada termino")]),
+              _c("th", [_vm._v("Fondo")]),
               _vm._v(" "),
-              _c("th", [_vm._v("Fecha de acta")]),
+              _c("th", [_vm._v("Monto total")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Situación")]),
               _vm._v(" "),
               _c("th", [_vm._v("Acciones")])
             ])
@@ -86407,29 +86538,311 @@ var render = function() {
           _vm._v(" "),
           _c("tbody", [
             _c("tr", [
-              _c("td", [_vm._v(" 2019300010001 ")]),
+              _c("td", [_vm._v("2019300010001")]),
               _vm._v(" "),
-              _c("td", [_vm._v(" Descripcion obra ")]),
+              _c("td", [_vm._v("Pavimentación de la calle 5 de Mayo")]),
               _vm._v(" "),
-              _c("td", [_vm._v(" 10-10-2019")]),
+              _c("td", [_vm._v("Acajete")]),
               _vm._v(" "),
-              _c("td", [_vm._v(" 12-12-2019")]),
+              _c("td", [_vm._v("FISMDF")]),
               _vm._v(" "),
-              _c("td", [_vm._v(" 09-09-2019")]),
+              _c("td", [_vm._v("$ 5 000 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "secondary" } }, [
+                    _vm._v("Sin iniciar")
+                  ])
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("td", [
-                _c("a", { staticClass: "btn btn-default" }, [
-                  _c("i", { staticClass: "far fa-edit" })
-                ]),
-                _vm._v(" "),
-                _c("a", { staticClass: "btn btn-default" }, [
-                  _c("i", { staticClass: "far fa-trash-alt" })
-                ])
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-around" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-info" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye" })]
+                    ),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: {
+                          id: "popover-button-event",
+                          variant: "outline-success"
+                        },
+                        on: { click: _vm.addComplemento }
+                      },
+                      [_c("i", { staticClass: "fas fa-plus" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      { attrs: { variant: "outline-secondary" } },
+                      [_c("i", { staticClass: "fas fa-edit " })]
+                    ),
+                    _c("b-button", { attrs: { variant: "outline-danger" } }, [
+                      _c("i", { staticClass: "fas fa-trash " })
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("2019300010002")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle Hidalgo")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 450 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "success" } }, [
+                    _vm._v("Bien")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-around" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-info" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye" })]
+                    ),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-success" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-plus" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      { attrs: { variant: "outline-secondary" } },
+                      [_c("i", { staticClass: "fas fa-edit " })]
+                    ),
+                    _c("b-button", { attrs: { variant: "outline-danger" } }, [
+                      _c("i", { staticClass: "fas fa-trash " })
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("2019300010003")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle Morelos")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 2 000 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "warning" } }, [
+                    _vm._v("Preventivo")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-around" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-info" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye" })]
+                    ),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-success" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-plus" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      { attrs: { variant: "outline-secondary" } },
+                      [_c("i", { staticClass: "fas fa-edit " })]
+                    ),
+                    _c("b-button", { attrs: { variant: "outline-danger" } }, [
+                      _c("i", { staticClass: "fas fa-trash " })
+                    ])
+                  ],
+                  1
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", [_vm._v("2019300010004")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Pavimentación de la calle Allende")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Acajete")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("FISMDF")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("$ 34 000")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "text-center" },
+                [
+                  _c("b-badge", { attrs: { variant: "danger" } }, [
+                    _vm._v("Urgente")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-around" },
+                  [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-info" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye" })]
+                    ),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { variant: "outline-success" },
+                        on: { click: _vm.detalleObra }
+                      },
+                      [_c("i", { staticClass: "fas fa-plus" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      { attrs: { variant: "outline-secondary" } },
+                      [_c("i", { staticClass: "fas fa-edit " })]
+                    ),
+                    _c("b-button", { attrs: { variant: "outline-danger" } }, [
+                      _c("i", { staticClass: "fas fa-trash " })
+                    ])
+                  ],
+                  1
+                )
               ])
             ])
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "b-modal",
+            {
+              ref: "modal",
+              attrs: {
+                size: "lg",
+                "hide-footer": "",
+                centered: "",
+                id: "modal-1",
+                title: "Agregar/generar"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.cards, function(card, index) {
+                  return _c("div", { key: index, staticClass: "col-md-6 " }, [
+                    _c("div", { staticClass: "card " }, [
+                      _c("div", { staticClass: "row card-home" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "col-md-12  d-flex justify-content-center align-items-center",
+                            staticStyle: { "background-color": "#0abab5" }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "py-4 link-pop",
+                                attrs: { href: card.href }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass:
+                                    "center img-circle-2 elevation-2 align-middle",
+                                  attrs: { src: card.imagen }
+                                })
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-12 my-auto" }, [
+                          _c("h4", { staticClass: "text-center" }, [
+                            _vm._v(_vm._s(card.titulo))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: " mr-3 text-center" }, [
+                            _vm._v(_vm._s(card.descripcion))
+                          ])
+                        ])
+                      ])
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -103059,11 +103472,8 @@ Vue.component("actas", __webpack_require__(/*! ./components/actas.vue */ "./reso
 Vue.component("jucios-contra-ayuntamiento", __webpack_require__(/*! ./components/JuiciosContraAyuntamiento.vue */ "./resources/js/components/JuiciosContraAyuntamiento.vue")["default"]);
 Vue.component("contratos-convenios-acuerdos", __webpack_require__(/*! ./components/ContratosConveniosAcuerdos.vue */ "./resources/js/components/ContratosConveniosAcuerdos.vue")["default"]);
 Vue.component("obras-acciones", __webpack_require__(/*! ./components/ObrasAcciones.vue */ "./resources/js/components/ObrasAcciones.vue")["default"]);
-<<<<<<< HEAD
 Vue.component("registro-modificaciones", __webpack_require__(/*! ./components/registroModificaciones.vue */ "./resources/js/components/registroModificaciones.vue")["default"]);
-=======
 Vue.component("semaforo-obras", __webpack_require__(/*! ./components/SemaforoObras.vue */ "./resources/js/components/SemaforoObras.vue")["default"]);
->>>>>>> develop
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');

@@ -1,6 +1,6 @@
 <template>
     <div>
-         <div v-if="editando==false && create==0" class="card">
+         <div v-if="editando==false && create==0" class="card tranparency">
              <div class="row">
                 <div class="col-md-2 d-flex justify-content-center  align-items-center ">
                     <div class="munic-desc">
@@ -9,7 +9,7 @@
                 </div>
                 <div  class="col-md-10 ">
                     <div class="my-2 text-center card-header">
-                        <h5><strong v-html="ayuntamiento.municipio.nombre"></strong></h5>
+                        <h3><strong v-html="ayuntamiento.municipio.nombre"></strong></h3>
                     </div>
                     <div class="row mx-1">
                         <div class="col-md-12">

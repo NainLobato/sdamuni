@@ -25,8 +25,12 @@
 		@include('template.partials.navbar')
 
 		@include('template.partials.sidebar')
-
-		<div class="content-wrapper">
+        @if(Route::current()->getName()== 'home')
+        <div class="content-wrapper" style="background-image: url('../admin/dist/img/cool-background.png') !important;
+        background-size: cover;">
+        @else
+        <div class="content-wrapper" >
+        @endif
 			<div class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">

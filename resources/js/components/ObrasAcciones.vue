@@ -285,7 +285,7 @@
                         <td>$ 450 000</td>
                         <td class="text-center"><b-badge variant="success">Bien</b-badge></td>
                         <td><div class="d-flex justify-content-around">
-                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="detalleObra" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
                     </tr>
                     <tr>
@@ -296,7 +296,7 @@
                         <td>$ 2 000 000</td>
                         <td class="text-center"><b-badge variant="warning">Preventivo</b-badge></td>
                         <td><div class="d-flex justify-content-around">
-                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="detalleObra" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
                     </tr>
                     <tr>
@@ -307,7 +307,7 @@
                         <td>$ 34 000</td>
                         <td class="text-center"><b-badge variant="danger">Urgente</b-badge></td>
                         <td><div class="d-flex justify-content-around">
-                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="detalleObra" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
+                             <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
                     </tr>
                 </tbody>
@@ -356,8 +356,8 @@
     </b-card>
     <div>
   <b-modal ref="modal" size="lg" hide-footer centered id="modal-1" title="Agregar/generar">
-  <div class="row">
-      <div  v-for="(card , index) in cards" :key="index" class="col-md-6 ">
+  <div class="row justify-content-around">
+      <div  v-for="(card , index) in cards" :key="index" class="col-md-4 ">
     <div class="card ">
         <div class="row card-home">
             <div class="col-md-12  d-flex justify-content-center align-items-center" style="background-color:#0abab5">

@@ -4629,6 +4629,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4645,23 +4669,11 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
       }, // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-organization-96.png', href: route('ayuntamiento.index').template,color:'background-color:#0abab5;',titulo:'Ayuntamientos',descripcion:'Crea, elimina, edita ayuntamientos'},
       // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-book-96.png', href: route('libro-actas.index').template,color:'background-color:#0abab5;',titulo:'Libros de actas',descripcion:'Crea, elimina, edita actas'},
       {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
-        href: route('acuerdo-pendiente.index').template,
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-organization-96.png',
+        href: route('obra-accion.index').template,
         color: 'background-color:#0abab5;',
-        titulo: 'Acuerdos pendientes',
-        descripcion: 'Crea, elimina, edita acuerdos'
-      }, {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
-        href: route('acta-consejo-desarrollo.index').template,
-        color: 'background-color:#0abab5;',
-        titulo: 'Actas del consejo de desarrollo',
-        descripcion: 'Crea, elimina, edita acuerdos'
-      }, {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
-        href: route('acta-consejo-planeacion.index').template,
-        color: 'background-color:#0abab5;',
-        titulo: 'Actas del consejo de planeación',
-        descripcion: 'Crea, elimina, edita acuerdos'
+        titulo: 'Obras y acciones',
+        descripcion: 'Gestiona lo referente a tus obras en desarrollo'
       }],
       color: 'background-color:#4286f4;',
       href: ''
@@ -39457,7 +39469,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n.tranparency{\n        background-color: rgba(255,255,255,.7);\n        /* opacity: 0.6;\n  filter: alpha(opacity=60); */\n}\n\n", ""]);
 
 // exports
 
@@ -87048,8 +87060,11 @@ var render = function() {
                     _c(
                       "b-button",
                       {
-                        attrs: { variant: "outline-success" },
-                        on: { click: _vm.detalleObra }
+                        attrs: {
+                          id: "popover-button-event",
+                          variant: "outline-success"
+                        },
+                        on: { click: _vm.addComplemento }
                       },
                       [_c("i", { staticClass: "fas fa-plus" })]
                     ),
@@ -87106,8 +87121,11 @@ var render = function() {
                     _c(
                       "b-button",
                       {
-                        attrs: { variant: "outline-success" },
-                        on: { click: _vm.detalleObra }
+                        attrs: {
+                          id: "popover-button-event",
+                          variant: "outline-success"
+                        },
+                        on: { click: _vm.addComplemento }
                       },
                       [_c("i", { staticClass: "fas fa-plus" })]
                     ),
@@ -87164,8 +87182,11 @@ var render = function() {
                     _c(
                       "b-button",
                       {
-                        attrs: { variant: "outline-success" },
-                        on: { click: _vm.detalleObra }
+                        attrs: {
+                          id: "popover-button-event",
+                          variant: "outline-success"
+                        },
+                        on: { click: _vm.addComplemento }
                       },
                       [_c("i", { staticClass: "fas fa-plus" })]
                     ),
@@ -87205,9 +87226,9 @@ var render = function() {
             [
               _c(
                 "div",
-                { staticClass: "row" },
+                { staticClass: "row justify-content-around" },
                 _vm._l(_vm.cards, function(card, index) {
-                  return _c("div", { key: index, staticClass: "col-md-6 " }, [
+                  return _c("div", { key: index, staticClass: "col-md-4 " }, [
                     _c("div", { staticClass: "card " }, [
                       _c("div", { staticClass: "row card-home" }, [
                         _c(
@@ -88318,7 +88339,7 @@ var render = function() {
           { staticClass: "row " },
           _vm._l(_vm.cards, function(card, index) {
             return _c("div", { key: index, staticClass: "col-md-6 " }, [
-              _c("div", { staticClass: "card " }, [
+              _c("div", { staticClass: "card tranparency " }, [
                 _c("div", { staticClass: "row card-home" }, [
                   _c(
                     "div",
@@ -88366,19 +88387,9 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm._m(0)
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("div", { staticClass: "card panel-derecha" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("h5", [_c("strong", [_vm._v("Opciones generales")])])
-        ]),
+    _c("div", { staticClass: "col-md-3" }, [
+      _c("div", { staticClass: "card panel-derecha tranparency" }, [
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "div",
@@ -88387,21 +88398,75 @@ var staticRenderFns = [
             staticStyle: { padding: "0.3rem !important" }
           },
           [
-            _c("div", { staticClass: "card card-panel " }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-2 text-center my-2  " }, [
-                  _c("i", { staticClass: "fas fa-check" })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-10 my-2 " }, [
-                  _vm._v("Contenido1")
-                ])
-              ])
+            _c("div", { staticClass: " card my-1" }, [
+              _c(
+                "div",
+                { staticClass: "text-center" },
+                [
+                  _vm._v(".\n                        "),
+                  _c("H5", [_c("strong", [_vm._v("Obra pública")])])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(1)
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " card my-1" }, [
+              _c(
+                "div",
+                { staticClass: "text-center" },
+                [
+                  _vm._v(".\n                        "),
+                  _c("H5", [_c("strong", [_vm._v("Actas")])])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(2)
             ])
           ]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "card-footer" })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header text-center" }, [
+      _c("h5", [_c("strong", [_vm._v("Avance general")])])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c100 p34 center mb-2" }, [
+      _c("span", [_vm._v("34%")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "slice" }, [
+        _c("div", { staticClass: "bar" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "fill" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "c100 green p60 center mb-2" }, [
+      _c("span", [_vm._v("60%")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "slice" }, [
+        _c("div", { staticClass: "bar" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "fill" })
       ])
     ])
   }
@@ -89901,7 +89966,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.editando == false && _vm.create == 0
-      ? _c("div", { staticClass: "card" }, [
+      ? _c("div", { staticClass: "card tranparency" }, [
           _c("div", { staticClass: "row" }, [
             _c(
               "div",
@@ -89921,7 +89986,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-md-10 " }, [
               _c("div", { staticClass: "my-2 text-center card-header" }, [
-                _c("h5", [
+                _c("h3", [
                   _c("strong", {
                     domProps: {
                       innerHTML: _vm._s(_vm.ayuntamiento.municipio.nombre)
@@ -105157,9 +105222,9 @@ var urlSdamuni = "".concat(window.location.protocol, "//").concat(window.locatio
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

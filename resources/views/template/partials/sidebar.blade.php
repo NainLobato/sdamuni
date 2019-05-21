@@ -98,8 +98,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-tools"></i>
+                        <a href="{{ route('expediente-tecnico.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-paste"></i>
                             <p>Expediente técnico unitario</p>
                         </a>
                     </li>  --}}

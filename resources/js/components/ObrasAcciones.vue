@@ -388,12 +388,6 @@
 
     export default {
         props: {
-            'initialAcuerdos': {
-                required: false
-            },
-            'initialEmpleados': {
-                required: false
-            }
         },
         data(){
             return{

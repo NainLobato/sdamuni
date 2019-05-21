@@ -46,6 +46,7 @@ Vue.component("contratos-convenios-acuerdos", require("./components/ContratosCon
 Vue.component("obras-acciones", require("./components/ObrasAcciones.vue").default);
 Vue.component("registro-modificaciones", require("./components/registroModificaciones.vue").default);
 Vue.component("semaforo-obras", require("./components/SemaforoObras.vue").default);
+Vue.component("expediente-tecnico", require("./components/ExpedienteTecnico.vue").default);
 
 const app = new Vue({
    el: '#app',

@@ -105,5 +105,9 @@ Route::middleware('auth')->group(function () {
         Route::get('registro-de-modificaciones', 'RegistroModificacionesController@index')->name('index');
     });
 
+    Route::name('expediente-tecnico.')->group(function () {
+        Route::get('expediente-tecnico', 'ExpedienteTecnicoController@index')->name('index');
+    });
+
 
 });

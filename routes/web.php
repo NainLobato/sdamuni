@@ -99,4 +99,9 @@ Route::middleware('auth')->group(function () {
         Route::get('obras-y-acciones', 'ObraAccionController@index')->name('index');
     });
 
+    Route::name('registro-modificaciones.')->group(function () {
+        Route::get('registro-de-modificaciones', 'RegistroModificacionesController@index')->name('index');
+    });
+
+
 });

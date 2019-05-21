@@ -50,6 +50,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('registro-modificaciones.index') }}" class="nav-link">
+                            <i class="nav-icon far fa-clipboard"></i>
+                            <p>Registro de modificaciones</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('libro-actas.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
                             <p>Libros de actas</p>

@@ -131,10 +131,10 @@
     background-color: blueviolet;
     color: white
 }
-.tranparency{
+/* .tranparency{
         background-color: rgba(255,255,255,.7);
         /* opacity: 0.6;
-  filter: alpha(opacity=60); */
-}
+  filter: alpha(opacity=60);
+} */
 
 </style>

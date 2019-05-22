@@ -20,30 +20,30 @@
 	@stack('estilos')
 </head>
 
-<body class="hold-transition sidebar-mini sidebar-collapse">
-	<div class="wrapper">
+<body class="hold-transition sidebar-mini sidebar-collapse" style="background-image: url('../admin/dist/img/cool-background.png') !important;
+background-size: cover;">
+	<div class="wrapper" >
 		@include('template.partials.navbar')
 
 		@include('template.partials.sidebar')
-        @if(Route::current()->getName()== 'home')
-        <div class="content-wrapper" style="background-image: url('../admin/dist/img/cool-background.png') !important;
-        background-size: cover;">
-        @else
-        <div class="content-wrapper" >
-        @endif
+        {{--  @if(Route::current()->getName()== 'home' || Route::current()->getName()== 'obras.detalle')  --}}
+        <div class="content-wrapper pb-4 transparencia1"  >
+        {{--  @else  --}}
+        {{--  <div class="content-wrapper" >  --}}
+        {{--  @endif  --}}
 			<div class="content-header">
 				<div class="container-fluid">
 					<div class="row mb-2">
 						<div class="col-sm-6">
                                 @if(Route::current()->getName()!='home')
-                            <h1 class="m-0 text-dark">@yield('title', 'Inicio')</h1>
+                            <h1 class="m-0 text-white">@yield('title', 'Inicio')</h1>
                             @endif
 						</div>
 						<div class="col-sm-6">
                             @if(Route::current()->getName()!='home')
 							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Inicio</a></li>
-								<li class="breadcrumb-item active">@yield('title', 'Inicio')</li>
+								<li class="breadcrumb-item "><a class="text-white" href="{{ route('home') }}">Inicio</a></li>
+								<li class="breadcrumb-item  text-white active">@yield('title', 'Inicio')</li>
                             </ol>
                             @endif
 						</div>

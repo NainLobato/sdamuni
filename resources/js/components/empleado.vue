@@ -1,11 +1,5 @@
 <template>
 <div class="">
-    <div class=" col-md-12 card">
-        <div class="text-center">
-            <h5><strong>Administrador de empleados</strong> </h5>
-        </div>
-
-    </div>
     <div class="row">
         <div class="col-md-4  ">
             <div class="card">

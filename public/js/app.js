@@ -4554,6 +4554,426 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/avanceFinanciero.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././urlSdamuni */ "./resources/js/urlSdamuni.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    'initialAcuerdos': {
+      required: false
+    },
+    'initialEmpleados': {
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      urlSdamuni: _urlSdamuni__WEBPACK_IMPORTED_MODULE_0__["default"],
+      titulo: 'Listado de modificaciones',
+      colapsableEstado: false,
+      estadoFormulario: 1,
+      price: 0,
+      modalidades_ejecucion: [{
+        nombre: 'Contrato ',
+        value: 1
+      }, {
+        nombre: 'Administración directa',
+        value: 2
+      }],
+      modalidades_contrato: [{
+        nombre: 'Adjudicación directa ',
+        value: 1
+      }, {
+        nombre: 'invitación',
+        value: 2
+      }, {
+        nombre: 'licitación pública',
+        value: 3
+      }],
+      localidades: [{
+        nombre: 'Acatlán',
+        value: 1
+      }, {
+        nombre: 'Xalapa',
+        value: 2
+      }, {
+        nombre: 'Veracruz',
+        value: 3
+      }],
+      modificacion: {
+        numero_acta: '',
+        fecha_acta: '',
+        cancelar_obra: '',
+        localidad: [],
+        fecha_prog_inicio: '',
+        fuente_financiamiento: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        },
+        aportacion_municipal: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        },
+        aportacion_beneficiarios: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        },
+        otras_fuentes_federales: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        },
+        otras_fuentes_estatales: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        },
+        otros: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        },
+        costo_total: {
+          decimal: '.',
+          thousands: ',',
+          prefix: '$ ',
+          precision: 2,
+          value: 0
+        }
+      }
+    };
+  },
+  methods: {
+    agregar: function agregar() {
+      this.titulo = 'Nueva modificación';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 1;
+    },
+    cancelar: function cancelar() {
+      this.titulo = 'Listado de modificaciones';
+      this.colapsableEstado = false;
+    },
+    editar: function editar(acuerdo) {
+      this.titulo = 'Editar accion o acuerdo registrado';
+      this.colapsableEstado = true;
+      this.estadoFormulario = 2;
+    },
+    store: function store() {
+      var _this = this;
+
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post(route('acuerdo-pendiente.store').template, {
+            acuerdo: _this.acuerdo
+          }).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Creado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            console.log(error);
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    update: function update() {
+      this.$validator.validate().then(function (valid) {
+        if (valid) {
+          axios.post('', {}).then(function (response) {
+            if (response.data.estado == 2) {
+              Vue.swal({
+                title: 'Exito',
+                text: "Actualizado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else if (response.data.estado == 1) {
+              Vue.swal('Error!', 'Ya existe el numero de acta ingresado.', 'error');
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        } else {
+          Vue.swal('Error!', 'Complete el formulario.', 'error');
+        }
+      });
+    },
+    eliminar: function eliminar() {
+      Vue.swal({
+        title: '¿Estas seguro de eliminar ?',
+        text: "No se podra revertir el cambio.",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('', {}).then(function (response) {
+            if (response.data.estado === 1) {
+              Vue.swal({
+                title: 'Exito',
+                text: "eliminado correctamente.",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+              }).then(function (result) {
+                if (result.value) {
+                  location.reload();
+                }
+              });
+            } else {
+              Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+            }
+          })["catch"](function (error) {
+            Vue.swal('Error!', 'Ha ocurrido un error, intente de nuevo.', 'error');
+          });
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    console.log('whatever it takes');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard.vue?vue&type=script&lang=js& ***!
@@ -4711,12 +5131,6 @@ Vue.component('v-select', vue_select__WEBPACK_IMPORTED_MODULE_0___default.a);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -39457,6 +39871,25 @@ exports.push([module.i, "\n.card-registro{\n    position:absolute;\n    width: 9
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.title-obra{\n    margin-bottom: -.5rem;\n    border-radius: 10px 10px 0px 0px;\n    -moz-border-radius: 10px 10px 0px 0px;\n    -webkit-border-radius: 10px 10px 0px 0px;\n    border: 0px solid #000000;\n    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.52);\n    padding-top: 0.5rem;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css& ***!
@@ -39469,7 +39902,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n.tranparency{\n        background-color: rgba(255,255,255,.7);\n        /* opacity: 0.6;\n  filter: alpha(opacity=60); */\n}\n\n", ""]);
+exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n/* .tranparency{\n        background-color: rgba(255,255,255,.7);\n        /* opacity: 0.6;\n  filter: alpha(opacity=60);\n} */\n\n", ""]);
 
 // exports
 
@@ -39488,7 +39921,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput[type=\"text\"]{\r\n    text-transform:uppercase;\n}\n.ver{\r\n    display: block;\n}\r\n", ""]);
+exports.push([module.i, "\ninput[type=\"text\"]{\n    text-transform:uppercase;\n}\n.ver{\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -71072,6 +71505,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./avanceFinanciero.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard.vue?vue&type=style&index=0&lang=css& ***!
@@ -88310,6 +88773,965 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=template&id=79cb0133&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/avanceFinanciero.vue?vue&type=template&id=79cb0133& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "b-card",
+        {
+          staticStyle: {
+            "max-width": "auto",
+            "font-weight": "bold",
+            "font-size": "18px"
+          },
+          attrs: {
+            "header-bg-variant": "dark",
+            "header-tag": "header",
+            align: "center",
+            "no-body": ""
+          }
+        },
+        [
+          _c("template", { slot: "header" }, [
+            _c("span", [_vm._v(_vm._s(_vm.titulo))]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools float-right" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.colapsableEstado,
+                      expression: "!colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.agregar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-plus" })])]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.colapsableEstado,
+                      expression: "colapsableEstado"
+                    }
+                  ],
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.cancelar }
+                },
+                [_c("a", [_c("i", { staticClass: "fa fa-minus" })])]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-collapse",
+            {
+              attrs: { id: "colapsable" },
+              model: {
+                value: _vm.colapsableEstado,
+                callback: function($$v) {
+                  _vm.colapsableEstado = $$v
+                },
+                expression: "colapsableEstado"
+              }
+            },
+            [
+              _c("b-card-body", { attrs: { align: "left" } }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_acta" } }, [
+                        _vm._v("Fecha acta")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_acta",
+                          name: "fecha_acta",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_acta")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("fecha_acta")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("label", { attrs: { for: "numero_acta" } }, [
+                      _vm._v("Numero acta")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required",
+                          expression: "'required'"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "numero_acta",
+                        name: "numero_acta",
+                        "data-vv-as": "fecha inicial"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.has("numero_acta")
+                      ? _c("div", { staticClass: "invalid-feedback" }, [
+                          _vm._v(_vm._s(_vm.errors.first("numero_acta")))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-md-4 text-center" },
+                    [
+                      _c("label", { attrs: { for: "cancelar_obra" } }, [
+                        _vm._v("Cancelar obra")
+                      ]),
+                      _vm._v(" "),
+                      _c("b-form-checkbox", {
+                        staticClass: "text-center",
+                        attrs: {
+                          id: "cancelar_obra",
+                          name: "cancelar_obra",
+                          value: "1",
+                          switch: ""
+                        },
+                        model: {
+                          value: _vm.modificacion.cancelar_obra,
+                          callback: function($$v) {
+                            _vm.$set(_vm.modificacion, "cancelar_obra", $$v)
+                          },
+                          expression: "modificacion.cancelar_obra"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "localidad" } }, [
+                          _vm._v("Localidad")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-select",
+                          _vm._b(
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                id: "localidad",
+                                name: "localidad",
+                                options: _vm.localidades,
+                                label: "nombre",
+                                placeholder: "Elige un localidad"
+                              }
+                            },
+                            "v-select",
+                            _vm.modificacion.localidad,
+                            false
+                          )
+                        ),
+                        _vm._v(" "),
+                        _vm.errors.has("localidad")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("localidad")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "modalidad" } }, [
+                          _vm._v("Modalidad")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-select",
+                          _vm._b(
+                            {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                id: "modalidad",
+                                name: "modalidad",
+                                options: _vm.modalidades_ejecucion,
+                                label: "nombre",
+                                placeholder: "Elige un modalidad"
+                              }
+                            },
+                            "v-select",
+                            _vm.modificacion.modalidad,
+                            false
+                          )
+                        ),
+                        _vm._v(" "),
+                        _vm.errors.has("modalidad")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("modalidad")))]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_prog_inicio" } }, [
+                        _vm._v("Fecha programado inicio")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_prog_inicio",
+                          name: "fecha_prog_inicio",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_prog_inicio")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("fecha_prog_inicio"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fecha_prog_termino" } }, [
+                        _vm._v("Fecha programado termino")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "fecha_prog_termino",
+                          name: "fecha_prog_termino",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fecha_prog_termino")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("fecha_prog_termino"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "descripcion" } }, [
+                        _vm._v("Descripcion")
+                      ]),
+                      _vm._v(" "),
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "descripcion",
+                          name: "descripcion",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("descripcion")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("descripcion")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("h5", { staticClass: "text-center text-bold" }, [
+                      _vm._v("Datos financieros")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "fuente_financiemiento" } }, [
+                        _vm._v("Fuente de financiemiento:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value: _vm.modificacion.fuente_financiamiento.value,
+                            expression:
+                              "modificacion.fuente_financiamiento.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.fuente_financiamiento,
+                            expression: "modificacion.fuente_financiamiento"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "fuente_financiemiento",
+                          name: "fuente_financiemiento",
+                          "data-vv-as": "fuente de financiemiento"
+                        },
+                        domProps: {
+                          value: _vm.modificacion.fuente_financiamiento.value
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.fuente_financiamiento,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("fuente_financiemiento")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("fuente_financiemiento"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "aportacion_municipal" } }, [
+                        _vm._v("Aportacion municipal:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value: _vm.modificacion.aportacion_municipal.value,
+                            expression:
+                              "modificacion.aportacion_municipal.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.aportacion_municipal,
+                            expression: "modificacion.aportacion_municipal"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "aportacion_municipal",
+                          name: "aportacion_municipal",
+                          "data-vv-as": "aportacion municipal"
+                        },
+                        domProps: {
+                          value: _vm.modificacion.aportacion_municipal.value
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.aportacion_municipal,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("aportacion_municipal")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("aportacion_municipal"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "aportacion_beneficiarios" } },
+                        [_vm._v("Aportacion beneficiarios:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value:
+                              _vm.modificacion.aportacion_beneficiarios.value,
+                            expression:
+                              "modificacion.aportacion_beneficiarios.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.aportacion_beneficiarios,
+                            expression: "modificacion.aportacion_beneficiarios"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "aportacion_beneficiarios",
+                          name: "aportacion_beneficiarios",
+                          "data-vv-as": "aportacion beneficiarios"
+                        },
+                        domProps: {
+                          value: _vm.modificacion.aportacion_beneficiarios.value
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.aportacion_beneficiarios,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("aportacion_beneficiarios")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("aportacion_beneficiarios")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "otras_fuentes_federales" } },
+                        [_vm._v("Otras fuentes federales:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value:
+                              _vm.modificacion.otras_fuentes_federales.value,
+                            expression:
+                              "modificacion.otras_fuentes_federales.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.otras_fuentes_federales,
+                            expression: "modificacion.otras_fuentes_federales"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "otras_fuentes_federales",
+                          name: "otras_fuentes_federales",
+                          "data-vv-as": "otras fuentes federales"
+                        },
+                        domProps: {
+                          value: _vm.modificacion.otras_fuentes_federales.value
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.otras_fuentes_federales,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("otras_fuentes_federales")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("otras_fuentes_federales")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "otras_fuentes_estatales" } },
+                        [_vm._v("Otras fuentes estatales:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value:
+                              _vm.modificacion.otras_fuentes_estatales.value,
+                            expression:
+                              "modificacion.otras_fuentes_estatales.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.otras_fuentes_estatales,
+                            expression: "modificacion.otras_fuentes_estatales"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "otras_fuentes_estatales",
+                          name: "otras_fuentes_estatales",
+                          "data-vv-as": "otras fuentes estatales"
+                        },
+                        domProps: {
+                          value: _vm.modificacion.otras_fuentes_estatales.value
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.otras_fuentes_estatales,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("otras_fuentes_estatales")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("otras_fuentes_estatales")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "otros" } }, [
+                        _vm._v("Otros:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value: _vm.modificacion.otros.value,
+                            expression: "modificacion.otros.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.otros,
+                            expression: "modificacion.otros"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "otros",
+                          name: "otros",
+                          "data-vv-as": "otros"
+                        },
+                        domProps: { value: _vm.modificacion.otros.value },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.otros,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("otros")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("otros")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "costo_total" } }, [
+                        _vm._v("Costo total:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.lazy",
+                            value: _vm.modificacion.costo_total.value,
+                            expression: "modificacion.costo_total.value",
+                            modifiers: { lazy: true }
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.modificacion.costo_total,
+                            expression: "modificacion.costo_total"
+                          },
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "costo_total",
+                          name: "costo_total",
+                          "data-vv-as": "costo total"
+                        },
+                        domProps: { value: _vm.modificacion.costo_total.value },
+                        on: {
+                          change: function($event) {
+                            return _vm.$set(
+                              _vm.modificacion.costo_total,
+                              "value",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("costo_total")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(_vm._s(_vm.errors.first("costo_total")))
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("h5", { staticClass: "text-center text-bold" }, [
+                      _vm._v("Metas")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "cantidad_unidad_proyecto" } },
+                        [_vm._v("Cantidad unidad del proyecto")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "cantidad_unidad_proyecto",
+                          name: "cantidad_unidad_proyecto",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("cantidad_unidad_proyecto")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.errors.first("cantidad_unidad_proyecto")
+                              )
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "cantidad_destinatarios" } },
+                        [_vm._v("Cantidad destinatarios")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "validate",
+                            rawName: "v-validate",
+                            value: "required",
+                            expression: "'required'"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "cantidad_destinatarios",
+                          name: "cantidad_destinatarios",
+                          "data-vv-as": "fecha inicial"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.errors.has("cantidad_destinatarios")
+                        ? _c("div", { staticClass: "invalid-feedback" }, [
+                            _vm._v(
+                              _vm._s(_vm.errors.first("cantidad_destinatarios"))
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  ])
+                ])
+              ])
+            ],
+            1
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("b-card", [
+        _c("table", { staticClass: "table" }, [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("Num acta")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Descripcion")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha programada inicio")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha programada termino")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Fecha de acta")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Acciones")])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v(" 62323")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" Modificacion sexta ")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" 11-08-2019")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" 12-12-2019")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" 01-05-2019")]),
+              _vm._v(" "),
+              _c("td", [
+                _c("a", { staticClass: "btn btn-default" }, [
+                  _c("i", { staticClass: "far fa-edit" })
+                ]),
+                _vm._v(" "),
+                _c("a", { staticClass: "btn btn-default" }, [
+                  _c("i", { staticClass: "far fa-trash-alt" })
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-6 mx-auto title-obra " }, [
+      _c("h5", { staticClass: "text-center" }, [
+        _c("strong", [_vm._v("No. Obra: 2019300010001")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dashboard.vue?vue&type=template&id=57220a4e&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dashboard.vue?vue&type=template&id=57220a4e& ***!
@@ -88493,12 +89915,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", {}, [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-4  " }, [
         _c("div", { staticClass: "card" }, [
-          _vm._m(1),
+          _vm._m(0),
           _vm._v(" "),
           _c(
             "div",
@@ -88578,7 +89998,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-8 card " }, [
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
           _c(
@@ -88880,7 +90300,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-4 text-center" }, [
-                  _vm._m(3),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check " }, [
                     _c("input", {
@@ -89260,7 +90680,7 @@ var render = function() {
                 _vm._v(" "),
                 _vm.formStatus == 2
                   ? _c("div", { staticClass: "col-md-4 text-center" }, [
-                      _vm._m(4),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-check " }, [
                         _c("input", {
@@ -89357,16 +90777,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " col-md-12 card" }, [
-      _c("div", { staticClass: "text-center" }, [
-        _c("h5", [_c("strong", [_vm._v("Administrador de empleados")])])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -91647,7 +93057,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-6 mx-auto title-obra " }, [
+    return _c("div", { staticClass: "col-lg-6 mx-auto title-obra  bg-light" }, [
       _c("h5", { staticClass: "text-center" }, [
         _c("strong", [_vm._v("No. Obra: 2019300010001")])
       ])
@@ -103952,6 +105362,7 @@ Vue.component("obras-acciones", __webpack_require__(/*! ./components/ObrasAccion
 Vue.component("registro-modificaciones", __webpack_require__(/*! ./components/registroModificaciones.vue */ "./resources/js/components/registroModificaciones.vue")["default"]);
 Vue.component("semaforo-obras", __webpack_require__(/*! ./components/SemaforoObras.vue */ "./resources/js/components/SemaforoObras.vue")["default"]);
 Vue.component("expediente-tecnico", __webpack_require__(/*! ./components/ExpedienteTecnico.vue */ "./resources/js/components/ExpedienteTecnico.vue")["default"]);
+Vue.component("avance-financiero", __webpack_require__(/*! ./components/avanceFinanciero.vue */ "./resources/js/components/avanceFinanciero.vue")["default"]);
 var app = new Vue({
   el: '#app'
 }); // require('./bootstrap');
@@ -104757,6 +106168,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_acuerdosPendientes_vue_vue_type_template_id_d4a8d5a4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_acuerdosPendientes_vue_vue_type_template_id_d4a8d5a4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/avanceFinanciero.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/avanceFinanciero.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _avanceFinanciero_vue_vue_type_template_id_79cb0133___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./avanceFinanciero.vue?vue&type=template&id=79cb0133& */ "./resources/js/components/avanceFinanciero.vue?vue&type=template&id=79cb0133&");
+/* harmony import */ var _avanceFinanciero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./avanceFinanciero.vue?vue&type=script&lang=js& */ "./resources/js/components/avanceFinanciero.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./avanceFinanciero.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _avanceFinanciero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _avanceFinanciero_vue_vue_type_template_id_79cb0133___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _avanceFinanciero_vue_vue_type_template_id_79cb0133___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/avanceFinanciero.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/avanceFinanciero.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/avanceFinanciero.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./avanceFinanciero.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--7-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/vue-loader/lib??vue-loader-options!./avanceFinanciero.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/avanceFinanciero.vue?vue&type=template&id=79cb0133&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/avanceFinanciero.vue?vue&type=template&id=79cb0133& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_template_id_79cb0133___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./avanceFinanciero.vue?vue&type=template&id=79cb0133& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/avanceFinanciero.vue?vue&type=template&id=79cb0133&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_template_id_79cb0133___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_avanceFinanciero_vue_vue_type_template_id_79cb0133___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

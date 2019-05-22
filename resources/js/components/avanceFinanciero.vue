@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="col-lg-6 mx-auto title-obra  bg-light">
+    <div class="col-lg-6 mx-auto title-obra ">
         <h5 class="text-center"><strong>No. Obra: 2019300010001</strong> </h5>
     </div>
     <b-card

@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div id="app">
-                <expediente-tecnico></expediente-tecnico>
+            <expediente-tecnico initial-cat-adju="{{ $catTenicoAdju }}" initial-cat-invi="{{ $catTenicoInvi }}" initial-cat-lici="{{ $catTenicoLici }}"></expediente-tecnico>
             </div>
         </div>
     </div>

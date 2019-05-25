@@ -2728,11 +2728,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     'initialCatTenico': {
+      required: false
+    },
+    'initialCatAdju': {
+      required: false
+    },
+    'initialCatInvi': {
+      required: false
+    },
+    'initialCatLici': {
       required: false
     }
   },
@@ -2742,7 +2779,21 @@ __webpack_require__.r(__webpack_exports__);
       titulo: 'Expediente técnico unitario de obra pública',
       colapsableEstado: false,
       estadoFormulario: 1,
-      catTenico: this.initialCatTenico
+      catTenico: this.initialCatTenico,
+      modalidades_contrato: [{
+        nombre: 'Adjudicación directa ',
+        value: 1
+      }, {
+        nombre: 'invitación',
+        value: 2
+      }, {
+        nombre: 'licitación pública',
+        value: 3
+      }],
+      cat_adju: JSON.parse(this.initialCatAdju),
+      cat_invi: JSON.parse(this.initialCatInvi),
+      cat_lici: JSON.parse(this.initialCatLici),
+      modalidad: ''
     };
   },
   methods: {
@@ -39902,7 +39953,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n/* .tranparency{\n        background-color: rgba(255,255,255,.7);\n        /* opacity: 0.6;\n  filter: alpha(opacity=60);\n} */\n\n", ""]);
+exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n/* .tranparency{\r\n        background-color: rgba(255,255,255,.7);\r\n        /* opacity: 0.6;\r\n  filter: alpha(opacity=60);\r\n} */\r\n\r\n", ""]);
 
 // exports
 
@@ -39921,7 +39972,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput[type=\"text\"]{\n    text-transform:uppercase;\n}\n.ver{\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\ninput[type=\"text\"]{\r\n    text-transform:uppercase;\n}\n.ver{\r\n    display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -85057,8 +85108,155 @@ var render = function() {
               }
             },
             [
-              _c("b-card-body", { attrs: { align: "left" } }, [
-                _c("table", [_c("tr")])
+              _c("b-card-body", [
+                _c(
+                  "div",
+                  { staticClass: "col-md-12" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "form-group" },
+                      [
+                        _c("label", { attrs: { for: "modalidad_contrato" } }, [
+                          _vm._v("Modalidad ejecucion:")
+                        ]),
+                        _vm._v(" "),
+                        _c("v-select", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            id: "modalidad_contrato",
+                            options: _vm.modalidades_contrato,
+                            label: "nombre",
+                            name: "modalidad_contrato",
+                            placeholder: "Elige un modalidad"
+                          },
+                          model: {
+                            value: _vm.modalidad,
+                            callback: function($$v) {
+                              _vm.modalidad = $$v
+                            },
+                            expression: "modalidad"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.has("modalidad_contrato")
+                          ? _c(
+                              "div",
+                              {
+                                staticClass: "invalid-feedback",
+                                staticStyle: { display: "block" }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first("modalidad_contrato"))
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.modalidad
+                      ? [
+                          _c("table", { staticClass: "table" }, [
+                            _c("thead", [
+                              _c("tr", [
+                                _c("th", [_vm._v("Nombre")]),
+                                _vm._v(" "),
+                                _c("th")
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "tbody",
+                              [
+                                _vm.modalidad.value == 1
+                                  ? _vm._l(_vm.cat_adju, function(item, index) {
+                                      return _c("tr", { key: index }, [
+                                        _c("td", [
+                                          _vm._v(
+                                            " " + _vm._s(item.nombre) + " "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _c("input", {
+                                            attrs: {
+                                              type: "checkbox",
+                                              name: "",
+                                              id: ""
+                                            }
+                                          })
+                                        ])
+                                      ])
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.modalidad.value == 2
+                                  ? _vm._l(_vm.cat_invi, function(item, index) {
+                                      return _c("tr", { key: index }, [
+                                        _c("td", [
+                                          _vm._v(
+                                            " " + _vm._s(item.nombre) + " "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _c("input", {
+                                            attrs: {
+                                              type: "checkbox",
+                                              name: "",
+                                              id: ""
+                                            }
+                                          })
+                                        ])
+                                      ])
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _vm.modalidad.value == 3
+                                  ? _vm._l(_vm.cat_lici, function(item, index) {
+                                      return _c("tr", { key: index }, [
+                                        _c("td", [
+                                          _vm._v(
+                                            " " + _vm._s(item.nombre) + " "
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("td", [
+                                          _c("input", {
+                                            attrs: {
+                                              type: "checkbox",
+                                              name: "",
+                                              id: ""
+                                            }
+                                          })
+                                        ])
+                                      ])
+                                    })
+                                  : _vm._e()
+                              ],
+                              2
+                            )
+                          ])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _c("br"),
+                _c("br"),
+                _c("br")
               ])
             ],
             1
@@ -106720,9 +106918,9 @@ var urlSdamuni = "".concat(window.location.protocol, "//").concat(window.locatio
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

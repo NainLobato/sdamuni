@@ -1,14 +1,6 @@
 <template>
 <div>
-    <!-- <div >
-        <b-input-group class="col-lg-6 mx-auto my-2">
-            <b-input-group-prepend>
-                <span class="input-group-text"><i class="fas fa-search fa-lg"></i></span>
-            </b-input-group-prepend>
-            <b-form-input class="LoginInput" size="lg" placeholder="Username">
-            </b-form-input>
-        </b-input-group>
-    </div> -->
+
     <b-card
         style="max-width: auto; font-weight:bold; font-size: 18px;"
         header-bg-variant="dark"
@@ -28,10 +20,46 @@
             </div>
         </template>
         <b-collapse id="colapsable" v-model="colapsableEstado">
-            <b-card-body align="left">
-                <table>
-                    <tr></tr>
-                </table>
+            <b-card-body>
+                <div class="col-md-12" >
+                    <div class="form-group">
+                        <label for="modalidad_contrato">Modalidad ejecucion:</label>
+                        <v-select id="modalidad_contrato" :options="modalidades_contrato" v-model="modalidad" label="nombre" name="modalidad_contrato" v-validate="'required'" placeholder="Elige un modalidad" >
+                        </v-select>
+                        <div class="invalid-feedback" style="display: block;" v-if="errors.has('modalidad_contrato')">{{ errors.first('modalidad_contrato') }}</div>
+                    </div>
+                    <template v-if="modalidad">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-if="modalidad.value == 1">
+                                    <tr v-for="(item, index) in cat_adju" :key="index">
+                                        <td> {{ item.nombre}} </td>
+                                        <td> <input type="checkbox" name="" id=""> </td>
+                                    </tr>
+                                </template>
+                                <template v-if="modalidad.value == 2">
+                                    <tr v-for="(item, index) in cat_invi" :key="index">
+                                        <td> {{ item.nombre}} </td>
+                                        <td> <input type="checkbox" name="" id=""> </td>
+                                    </tr>
+                                </template>
+                                <template v-if="modalidad.value == 3">
+                                    <tr v-for="(item, index) in cat_lici" :key="index">
+                                        <td> {{ item.nombre}} </td>
+                                        <td> <input type="checkbox" name="" id=""> </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+                </div>
+            <br><br><br><br>
             </b-card-body>
         </b-collapse>
     </b-card>
@@ -71,7 +99,17 @@
         props: {
             'initialCatTenico': {
                 required: false
+            },
+            'initialCatAdju': {
+                required: false
+            },
+            'initialCatInvi': {
+                required: false
+            },
+            'initialCatLici': {
+                required: false
             }
+
         },
         data(){
             return{
@@ -79,7 +117,17 @@
                 titulo: 'Expediente técnico unitario de obra pública',
                 colapsableEstado: false,
                 estadoFormulario: 1,
-                catTenico: this.initialCatTenico
+                catTenico: this.initialCatTenico,
+                modalidades_contrato: [
+                    {nombre: 'Adjudicación directa ', value: 1},
+                    {nombre: 'invitación', value: 2},
+                    {nombre: 'licitación pública', value: 3}
+                ],
+                cat_adju: JSON.parse(this.initialCatAdju),
+                cat_invi: JSON.parse(this.initialCatInvi),
+                cat_lici: JSON.parse(this.initialCatLici),
+                modalidad: ''
+
             }
         },
         methods: {

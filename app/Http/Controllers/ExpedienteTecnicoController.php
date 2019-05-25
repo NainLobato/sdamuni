@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\CatTecnico;
 class ExpedienteTecnicoController extends Controller
 {
     public function index ()
@@ -14,6 +14,12 @@ class ExpedienteTecnicoController extends Controller
         // }else {
         //     return response()->json('No tiene un ayuntamiento asignado, inicia sesion como empleado.', 200);
         // }
-        return view('forms.expediente-tecnico')->render();
+        $catTenicoAdju = CatTecnico::where('adju_directa', 1)->select('nombre', 'id')->get();
+        $catTenicoInvi = CatTecnico::where('invitacion', 1)->select('nombre', 'id')->get();
+        $catTenicoLici = CatTecnico::where('licitacion_publica', 1)->select('nombre', 'id')->get();
+        return view('forms.expediente-tecnico')
+        ->with('catTenicoAdju', $catTenicoAdju)
+        ->with('catTenicoInvi', $catTenicoInvi)
+        ->with('catTenicoLici', $catTenicoLici);
     }
 }

@@ -32,27 +32,53 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
                                     <th></th>
+                                    <th>Nombre</th>
+                                    <th>Seleccionar</th>
+                                    <th>Archivo</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <template v-if="modalidad.value == 1">
                                     <tr v-for="(item, index) in cat_adju" :key="index">
-                                        <td> {{ item.nombre}} </td>
-                                        <td> <input type="checkbox" name="" id=""> </td>
+                                        <template v-if="item.adju_directa">
+                                            <td>{{ index + 1 }}</td>
+                                            <td> {{ item.nombre}} </td>
+                                            <td> <input type="checkbox" name="" id=""> </td>
+                                            <td>    <b-form-file
+                                                placeholder=""
+                                                drop-placeholder=""
+                                                v-if="item.archivo"
+                                                ></b-form-file> </td>
+                                        </template>
                                     </tr>
                                 </template>
                                 <template v-if="modalidad.value == 2">
-                                    <tr v-for="(item, index) in cat_invi" :key="index">
-                                        <td> {{ item.nombre}} </td>
-                                        <td> <input type="checkbox" name="" id=""> </td>
+                                    <tr v-for="(item, index) in cat_adju" :key="index">
+                                        <template v-if="item.invitacion">
+                                            <td>{{ index + 1 }}</td>
+                                            <td> {{ item.nombre}} </td>
+                                            <td> <input type="checkbox" name="" id=""> </td>
+                                            <td>    <b-form-file
+                                                placeholder=""
+                                                drop-placeholder=""
+                                                v-if="item.archivo"
+                                                ></b-form-file> </td>
+                                        </template>
                                     </tr>
                                 </template>
                                 <template v-if="modalidad.value == 3">
-                                    <tr v-for="(item, index) in cat_lici" :key="index">
-                                        <td> {{ item.nombre}} </td>
-                                        <td> <input type="checkbox" name="" id=""> </td>
+                                    <tr v-for="(item, index) in cat_adju" :key="index">
+                                        <template v-if="item.licitacion_publica">
+                                            <td>{{ index + 1 }}</td>
+                                            <td> {{ item.nombre}} </td>
+                                            <td> <input type="checkbox" name="" id=""> </td>
+                                            <td>    <b-form-file
+                                                placeholder=""
+                                                drop-placeholder=""
+                                                v-if="item.archivo"
+                                                ></b-form-file> </td>
+                                        </template>
                                     </tr>
                                 </template>
                             </tbody>

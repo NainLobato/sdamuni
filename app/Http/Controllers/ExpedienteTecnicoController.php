@@ -14,7 +14,7 @@ class ExpedienteTecnicoController extends Controller
         // }else {
         //     return response()->json('No tiene un ayuntamiento asignado, inicia sesion como empleado.', 200);
         // }
-        $catTenicoAdju = CatTecnico::where('adju_directa', 1)->select('nombre', 'id')->get();
+        $catTenicoAdju = CatTecnico::all();
         $catTenicoInvi = CatTecnico::where('invitacion', 1)->select('nombre', 'id')->get();
         $catTenicoLici = CatTecnico::where('licitacion_publica', 1)->select('nombre', 'id')->get();
         return view('forms.expediente-tecnico')

@@ -358,6 +358,7 @@
   <b-modal ref="modal" size="lg" hide-footer centered id="modal-1" title="Agregar/generar">
   <div class="row justify-content-around">
       <div  v-for="(card , index) in cards" :key="index" class="col-md-4 ">
+          
     <div class="card ">
         <div class="row card-home">
             <div class="col-md-12  d-flex justify-content-center align-items-center" style="background-color:#0abab5">
@@ -409,8 +410,8 @@
                     // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-collaborator-male-96.png',href: route('empleados.index').template,color:'background-color:#0abab5;',titulo:'Empleados',descripcion:'Crea y administra usuarios para tu ayuntamiento'},
                     // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-organization-96.png', href: route('ayuntamiento.index').template,color:'background-color:#0abab5;',titulo:'Ayuntamientos',descripcion:'Crea, elimina, edita ayuntamientos'},
                     // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-book-96.png', href: route('libro-actas.index').template,color:'background-color:#0abab5;',titulo:'Libros de actas',descripcion:'Crea, elimina, edita actas'},
-                    {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-page-96.png', href: route('registro-modificaciones.index').template,color:'background-color:#0abab5;',titulo:'Modificaciones presupuestales',descripcion:''},
-                    {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-page-96.png', href: route('acta-consejo-desarrollo.index').template,color:'background-color:#0abab5;',titulo:'Avances financieros',descripcion:''},
+                    {imagen: window.location.protocol+ '//' + window.location.host+'/'+'sdamuni/public/admin/dist/img/presupuesto.png', href: route('registro-modificaciones.index').template,color:'background-color:#0abab5;',titulo:'Modificaciones presupuestales',descripcion:''},
+                    {imagen: window.location.protocol+ '//' + window.location.host+'/'+'sdamuni/public/admin/dist/img/comprobacion.png', href: route('').template,color:'background-color:#0abab5;',titulo:'Avances financieros',descripcion:''},
                     // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-page-96.png', href: route('acta-consejo-planeacion.index').template,color:'background-color:#0abab5;',titulo:'Actas del consejo de planeación',descripcion:'Crea, elimina, edita acuerdos'},
 
                 ],

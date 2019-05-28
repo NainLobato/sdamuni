@@ -2756,6 +2756,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -85169,9 +85195,13 @@ var render = function() {
                           _c("table", { staticClass: "table" }, [
                             _c("thead", [
                               _c("tr", [
+                                _c("th"),
+                                _vm._v(" "),
                                 _c("th", [_vm._v("Nombre")]),
                                 _vm._v(" "),
-                                _c("th")
+                                _c("th", [_vm._v("Seleccionar")]),
+                                _vm._v(" "),
+                                _c("th", [_vm._v("Archivo")])
                               ])
                             ]),
                             _vm._v(" "),
@@ -85180,67 +85210,160 @@ var render = function() {
                               [
                                 _vm.modalidad.value == 1
                                   ? _vm._l(_vm.cat_adju, function(item, index) {
-                                      return _c("tr", { key: index }, [
-                                        _c("td", [
-                                          _vm._v(
-                                            " " + _vm._s(item.nombre) + " "
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _c("input", {
-                                            attrs: {
-                                              type: "checkbox",
-                                              name: "",
-                                              id: ""
-                                            }
-                                          })
-                                        ])
-                                      ])
+                                      return _c(
+                                        "tr",
+                                        { key: index },
+                                        [
+                                          item.adju_directa
+                                            ? [
+                                                _c("td", [
+                                                  _vm._v(_vm._s(index + 1))
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _vm._v(
+                                                    " " +
+                                                      _vm._s(item.nombre) +
+                                                      " "
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: "checkbox",
+                                                      name: "",
+                                                      id: ""
+                                                    }
+                                                  })
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "td",
+                                                  [
+                                                    item.archivo
+                                                      ? _c("b-form-file", {
+                                                          attrs: {
+                                                            placeholder: "",
+                                                            "drop-placeholder":
+                                                              ""
+                                                          }
+                                                        })
+                                                      : _vm._e()
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      )
                                     })
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _vm.modalidad.value == 2
-                                  ? _vm._l(_vm.cat_invi, function(item, index) {
-                                      return _c("tr", { key: index }, [
-                                        _c("td", [
-                                          _vm._v(
-                                            " " + _vm._s(item.nombre) + " "
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _c("input", {
-                                            attrs: {
-                                              type: "checkbox",
-                                              name: "",
-                                              id: ""
-                                            }
-                                          })
-                                        ])
-                                      ])
+                                  ? _vm._l(_vm.cat_adju, function(item, index) {
+                                      return _c(
+                                        "tr",
+                                        { key: index },
+                                        [
+                                          item.invitacion
+                                            ? [
+                                                _c("td", [
+                                                  _vm._v(_vm._s(index + 1))
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _vm._v(
+                                                    " " +
+                                                      _vm._s(item.nombre) +
+                                                      " "
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: "checkbox",
+                                                      name: "",
+                                                      id: ""
+                                                    }
+                                                  })
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "td",
+                                                  [
+                                                    item.archivo
+                                                      ? _c("b-form-file", {
+                                                          attrs: {
+                                                            placeholder: "",
+                                                            "drop-placeholder":
+                                                              ""
+                                                          }
+                                                        })
+                                                      : _vm._e()
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      )
                                     })
                                   : _vm._e(),
                                 _vm._v(" "),
                                 _vm.modalidad.value == 3
-                                  ? _vm._l(_vm.cat_lici, function(item, index) {
-                                      return _c("tr", { key: index }, [
-                                        _c("td", [
-                                          _vm._v(
-                                            " " + _vm._s(item.nombre) + " "
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("td", [
-                                          _c("input", {
-                                            attrs: {
-                                              type: "checkbox",
-                                              name: "",
-                                              id: ""
-                                            }
-                                          })
-                                        ])
-                                      ])
+                                  ? _vm._l(_vm.cat_adju, function(item, index) {
+                                      return _c(
+                                        "tr",
+                                        { key: index },
+                                        [
+                                          item.licitacion_publica
+                                            ? [
+                                                _c("td", [
+                                                  _vm._v(_vm._s(index + 1))
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _vm._v(
+                                                    " " +
+                                                      _vm._s(item.nombre) +
+                                                      " "
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
+                                                  _c("input", {
+                                                    attrs: {
+                                                      type: "checkbox",
+                                                      name: "",
+                                                      id: ""
+                                                    }
+                                                  })
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "td",
+                                                  [
+                                                    item.archivo
+                                                      ? _c("b-form-file", {
+                                                          attrs: {
+                                                            placeholder: "",
+                                                            "drop-placeholder":
+                                                              ""
+                                                          }
+                                                        })
+                                                      : _vm._e()
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            : _vm._e()
+                                        ],
+                                        2
+                                      )
                                     })
                                   : _vm._e()
                               ],

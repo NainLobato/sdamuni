@@ -19,6 +19,7 @@ class CreateCatTecnicoTable extends Migration
             $table->boolean('adju_directa');
             $table->boolean('invitacion');
             $table->boolean('licitacion_publica');
+            $table->boolean('archivo')->default(false);
             $table->timestamps();
         });
     }

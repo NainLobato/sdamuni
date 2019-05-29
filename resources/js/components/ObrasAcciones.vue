@@ -5,7 +5,7 @@
             <b-form-input class="LoginInput" size="lg" placeholder="Ingresa el numero de obra">
             </b-form-input>
             <b-input-group-append>
-            <b-button variant="outline-info">Buscar <i class="fas fa-search fa-lg"></i></b-button>
+            <b-button variant="light">Buscar <i class="fas fa-search fa-lg"></i></b-button>
             </b-input-group-append>
         </b-input-group>
     </div>
@@ -253,7 +253,7 @@
         </b-collapse>
     </b-card>
     <b-card>
-            <table class="table">
+            <table class="table" id="obrasA">
                 <thead>
                     <tr>
                         <th>Número de obra</th>
@@ -272,7 +272,14 @@
                         <td>Acajete</td>
                         <td>FISMDF</td>
                         <td>$ 5 000 000</td>
-                        <td class="text-center"><b-badge variant="secondary">Sin iniciar</b-badge></td>
+                        <td ><div class="progress">
+                        <div class="barOverflow">
+                            <div class="bar"></div>
+                        </div>
+                        <span>0</span><i>%</i>
+                        <p>SIN INICIAR</p>
+                        </div>
+                        </td>
                         <td><div class="d-flex justify-content-around">
                              <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
@@ -283,7 +290,13 @@
                         <td>Acajete</td>
                         <td>FISMDF</td>
                         <td>$ 450 000</td>
-                        <td class="text-center"><b-badge variant="success">Bien</b-badge></td>
+                        <td ><div class="progress">
+                        <div class="barOverflow">
+                            <div class="bar"></div>
+                        </div>
+                        <span>18</span><i>%</i>
+                        <p>URGENTE</p>
+                        </div></td>
                         <td><div class="d-flex justify-content-around">
                              <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
@@ -294,7 +307,13 @@
                         <td>Acajete</td>
                         <td>FISMDF</td>
                         <td>$ 2 000 000</td>
-                        <td class="text-center"><b-badge variant="warning">Preventivo</b-badge></td>
+                        <td ><div class="progress">
+                        <div class="barOverflow">
+                            <div class="bar"></div>
+                        </div>
+                        <span>60</span><i>%</i>
+                        <p>PREVENTIVO</p>
+                        </div></td>
                         <td><div class="d-flex justify-content-around">
                              <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
@@ -305,7 +324,13 @@
                         <td>Acajete</td>
                         <td>FISMDF</td>
                         <td>$ 34 000</td>
-                        <td class="text-center"><b-badge variant="danger">Urgente</b-badge></td>
+                        <td ><div class="progress">
+                        <div class="barOverflow">
+                            <div class="bar"></div>
+                        </div>
+                        <span>82</span><i>%</i>
+                        <p>BIEN</p>
+                        </div></td>
                         <td><div class="d-flex justify-content-around">
                              <b-button @click="detalleObra" variant="outline-info"> <i class="fas fa-eye"></i></b-button><b-button @click="addComplemento" id="popover-button-event" variant="outline-success"> <i class="fas fa-plus"></i></b-button> <b-button variant="outline-secondary"> <i class="fas fa-edit "></i></b-button><b-button variant="outline-danger"> <i class="fas fa-trash "></i></b-button>
                         </div></td>
@@ -358,7 +383,7 @@
   <b-modal ref="modal" size="lg" hide-footer centered id="modal-1" title="Agregar/generar">
   <div class="row justify-content-around">
       <div  v-for="(card , index) in cards" :key="index" class="col-md-4 ">
-          
+
     <div class="card ">
         <div class="row card-home">
             <div class="col-md-12  d-flex justify-content-center align-items-center" style="background-color:#0abab5">
@@ -633,10 +658,43 @@
                         })
                     }
                 })
+            },
+            progress(){
+                $("#obrasA .progress").each(function(){
+            var $bar = $(this).find(".bar");
+            var $val = $(this).find("span");
+            var perc = parseInt( $val.text(), 10);
+
+            if($val.text() >0 && $val.text() <20){
+                $(this).find('.bar').css({'border-bottom-color':'red','border-right-color': 'red'})
+            }
+            else if($val.text() >20 && $val.text() <80){
+                $(this).find('.bar').css({'border-bottom-color':'yellow','border-right-color': 'yellow'})
+            }
+            else if ($val.text() >80 && $val.text() <101){
+                $(this).find('.bar').css({'border-bottom-color':'green','border-right-color': 'green'})
+            }
+            else if ($val.text() ==0 ){
+                $(this).find('.bar').css({'border-bottom-color':'grey','border-right-color': 'grey'})
+            }
+            $({p:0}).animate({p:perc}, {
+                duration: 3000,
+                easing: "swing",
+                step: function(p) {
+                $bar.css({
+                    transform: "rotate("+ (45+(p*1.8)) +"deg)", // 100%=180° so: ° = % * 1.8
+                    // 45 is to add the needed rotation to have the green borders at the bottom
+                });
+                $val.text(p|0);
+                }
+            });
+            });
+
             }
         },
         mounted() {
             console.log('whatever it takes')
+            this.progress()
         }
     }
 </script>
@@ -662,5 +720,48 @@
          -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
         -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
         box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);
+    }
+    .progress{
+    position: relative;
+    margin: 4px;
+    float:left;
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
+    }
+    .barOverflow{ /* Wraps the rotating .bar */
+    position: relative;
+    overflow: hidden; /* Comment this line to understand the trick */
+    width: 4rem;
+    height: 3rem; /* Half circle (overflow) */
+    margin-bottom: -14px; /* bring the numbers up */
+    }
+    .bar{
+    position: absolute;
+    top: 0; left: 0;
+    width: 4rem;
+    height: 4rem; /* full circle! */
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 5px solid #eee;     /* half gray, */
+    border-bottom-color: #0bf;  /* half azure */
+    border-right-color: #0bf;
+    }
+    .progress p{
+        position: absolute;
+        bottom: -1.2rem;
+        font-weight: bold;
+    }
+    .progress span{
+        position: absolute;
+        top: 1rem;
+        left: 1.5rem;
+        font-weight: bold;
+    }
+    .progress i{
+        position: absolute;;
+        bottom: 1rem;
+        left: 1.5rem;
+        font-weight: bold;
     }
 </style>

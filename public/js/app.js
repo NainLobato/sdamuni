@@ -3938,6 +3938,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3970,14 +3996,14 @@ __webpack_require__.r(__webpack_exports__);
       // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-organization-96.png', href: route('ayuntamiento.index').template,color:'background-color:#0abab5;',titulo:'Ayuntamientos',descripcion:'Crea, elimina, edita ayuntamientos'},
       // {imagen: window.location.protocol+ '//' + window.location.host+'/'+'admin/dist/img/icons8-book-96.png', href: route('libro-actas.index').template,color:'background-color:#0abab5;',titulo:'Libros de actas',descripcion:'Crea, elimina, edita actas'},
       {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'sdamuni/public/admin/dist/img/presupuesto.png',
         href: route('registro-modificaciones.index').template,
         color: 'background-color:#0abab5;',
         titulo: 'Modificaciones presupuestales',
         descripcion: ''
       }, {
-        imagen: window.location.protocol + '//' + window.location.host + '/' + 'admin/dist/img/icons8-page-96.png',
-        href: route('acta-consejo-desarrollo.index').template,
+        imagen: window.location.protocol + '//' + window.location.host + '/' + 'sdamuni/public/admin/dist/img/comprobacion.png',
+        href: route('').template,
         color: 'background-color:#0abab5;',
         titulo: 'Avances financieros',
         descripcion: ''
@@ -4159,10 +4185,57 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    progress: function progress() {
+      $("#obrasA .progress").each(function () {
+        var $bar = $(this).find(".bar");
+        var $val = $(this).find("span");
+        var perc = parseInt($val.text(), 10);
+
+        if ($val.text() > 0 && $val.text() < 20) {
+          $(this).find('.bar').css({
+            'border-bottom-color': 'red',
+            'border-right-color': 'red'
+          });
+        } else if ($val.text() > 20 && $val.text() < 80) {
+          $(this).find('.bar').css({
+            'border-bottom-color': 'yellow',
+            'border-right-color': 'yellow'
+          });
+        } else if ($val.text() > 80 && $val.text() < 101) {
+          $(this).find('.bar').css({
+            'border-bottom-color': 'green',
+            'border-right-color': 'green'
+          });
+        } else if ($val.text() == 0) {
+          $(this).find('.bar').css({
+            'border-bottom-color': 'grey',
+            'border-right-color': 'grey'
+          });
+        }
+
+        $({
+          p: 0
+        }).animate({
+          p: perc
+        }, {
+          duration: 3000,
+          easing: "swing",
+          step: function step(p) {
+            $bar.css({
+              transform: "rotate(" + (45 + p * 1.8) + "deg)" // 100%=180° so: ° = % * 1.8
+              // 45 is to add the needed rotation to have the green borders at the bottom
+
+            });
+            $val.text(p | 0);
+          }
+        });
+      });
     }
   },
   mounted: function mounted() {
     console.log('whatever it takes');
+    this.progress();
   }
 });
 
@@ -39941,7 +40014,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-registro{\n    position:absolute;\n    width: 90%;\n    z-index: 1;\n    margin-left: auto;\n    margin-right: auto;\n    left: 0;\n    right: 0;\n}\n.link-pop{\n    transition: all .2s ease-in-out;\n}\n.link-pop:hover{\n     -webkit-transform: scale(1.2);\n             transform: scale(1.2);\n}\n.link-pop:hover img{\n    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);\n}\n", ""]);
+exports.push([module.i, "\n.card-registro{\n    position:absolute;\n    width: 90%;\n    z-index: 1;\n    margin-left: auto;\n    margin-right: auto;\n    left: 0;\n    right: 0;\n}\n.link-pop{\n    transition: all .2s ease-in-out;\n}\n.link-pop:hover{\n     -webkit-transform: scale(1.2);\n             transform: scale(1.2);\n}\n.link-pop:hover img{\n    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.4);\n}\n.progress{\nposition: relative;\nmargin: 4px;\nfloat:left;\ntext-align: center;\nwidth: 4rem;\nheight: 4rem;\n}\n.barOverflow{ /* Wraps the rotating .bar */\nposition: relative;\noverflow: hidden; /* Comment this line to understand the trick */\nwidth: 4rem;\nheight: 3rem; /* Half circle (overflow) */\nmargin-bottom: -14px; /* bring the numbers up */\n}\n.bar{\nposition: absolute;\ntop: 0; left: 0;\nwidth: 4rem;\nheight: 4rem; /* full circle! */\nborder-radius: 50%;\nbox-sizing: border-box;\nborder: 5px solid #eee;     /* half gray, */\nborder-bottom-color: #0bf;  /* half azure */\nborder-right-color: #0bf;\n}\n.progress p{\n    position: absolute;\n    bottom: -1.2rem;\n    font-weight: bold;\n}\n.progress span{\n    position: absolute;\n    top: 1rem;\n    left: 1.5rem;\n    font-weight: bold;\n}\n.progress i{\n    position: absolute;;\n    bottom: 1rem;\n    left: 1.5rem;\n    font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -39979,7 +40052,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.card-panel{\r\n    background-color: blueviolet;\r\n    color: white\n}\r\n/* .tranparency{\r\n        background-color: rgba(255,255,255,.7);\r\n        /* opacity: 0.6;\r\n  filter: alpha(opacity=60);\r\n} */\r\n\r\n", ""]);
+exports.push([module.i, "\n.card-panel{\n    background-color: blueviolet;\n    color: white\n}\n/* .tranparency{\n        background-color: rgba(255,255,255,.7);\n        /* opacity: 0.6;\n  filter: alpha(opacity=60);\n} */\n\n", ""]);
 
 // exports
 
@@ -39998,7 +40071,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput[type=\"text\"]{\r\n    text-transform:uppercase;\n}\n.ver{\r\n    display: block;\n}\r\n", ""]);
+exports.push([module.i, "\ninput[type=\"text\"]{\n    text-transform:uppercase;\n}\n.ver{\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -86442,7 +86515,7 @@ var render = function() {
               _c(
                 "b-input-group-append",
                 [
-                  _c("b-button", { attrs: { variant: "outline-info" } }, [
+                  _c("b-button", { attrs: { variant: "light" } }, [
                     _vm._v("Buscar "),
                     _c("i", { staticClass: "fas fa-search fa-lg" })
                   ])
@@ -87725,7 +87798,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("b-card", [
-        _c("table", { staticClass: "table" }, [
+        _c("table", { staticClass: "table", attrs: { id: "obrasA" } }, [
           _c("thead", [
             _c("tr", [
               _c("th", [_vm._v("Número de obra")]),
@@ -87756,16 +87829,18 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v("$ 5 000 000")]),
               _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "text-center" },
-                [
-                  _c("b-badge", { attrs: { variant: "secondary" } }, [
-                    _vm._v("Sin iniciar")
-                  ])
-                ],
-                1
-              ),
+              _c("td", [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", { staticClass: "barOverflow" }, [
+                    _c("div", { staticClass: "bar" })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("0")]),
+                  _c("i", [_vm._v("%")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("SIN INICIAR")])
+                ])
+              ]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -87817,16 +87892,18 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v("$ 450 000")]),
               _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "text-center" },
-                [
-                  _c("b-badge", { attrs: { variant: "success" } }, [
-                    _vm._v("Bien")
-                  ])
-                ],
-                1
-              ),
+              _c("td", [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", { staticClass: "barOverflow" }, [
+                    _c("div", { staticClass: "bar" })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("18")]),
+                  _c("i", [_vm._v("%")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("URGENTE")])
+                ])
+              ]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -87878,16 +87955,18 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v("$ 2 000 000")]),
               _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "text-center" },
-                [
-                  _c("b-badge", { attrs: { variant: "warning" } }, [
-                    _vm._v("Preventivo")
-                  ])
-                ],
-                1
-              ),
+              _c("td", [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", { staticClass: "barOverflow" }, [
+                    _c("div", { staticClass: "bar" })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("60")]),
+                  _c("i", [_vm._v("%")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("PREVENTIVO")])
+                ])
+              ]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -87939,16 +88018,18 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v("$ 34 000")]),
               _vm._v(" "),
-              _c(
-                "td",
-                { staticClass: "text-center" },
-                [
-                  _c("b-badge", { attrs: { variant: "danger" } }, [
-                    _vm._v("Urgente")
-                  ])
-                ],
-                1
-              ),
+              _c("td", [
+                _c("div", { staticClass: "progress" }, [
+                  _c("div", { staticClass: "barOverflow" }, [
+                    _c("div", { staticClass: "bar" })
+                  ]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("82")]),
+                  _c("i", [_vm._v("%")]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("BIEN")])
+                ])
+              ]),
               _vm._v(" "),
               _c("td", [
                 _c(
@@ -107041,9 +107122,9 @@ var urlSdamuni = "".concat(window.location.protocol, "//").concat(window.locatio
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\LUIS1\Documents\Proyectos\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\laragon\www\sdamuni\resources\sass\login.scss */"./resources/sass/login.scss");
 
 
 /***/ })

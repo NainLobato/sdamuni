@@ -32,6 +32,38 @@
                 <div class="col-lg-6 ">
                     <div class="card h-100 p-2">
                         <h4 class="card-header text-center text-bold">Acciones</h4>
+                        <div class="row justify-content-around">
+                            <div class="col-3 card my-1">
+                                <div class="text-center">.
+                                    <H5><strong>Modificaciones presupuestales</strong></H5>
+                                </div>
+                                <div class="c100 green p70 center mb-2">
+                                    <span>34%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary">Agregar</button>
+                                </div>
+                            </div>
+                            <div class=" col-3 card my-1">
+                                <div class="text-center">.
+                                    <H5><strong>Avance financiero</strong></H5>
+                                </div>
+                                <div class="c100 green p60 center mb-2">
+                                    <span>60%</span>
+                                    <div class="slice">
+                                        <div class="bar"></div>
+                                        <div class="fill"></div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,32 +115,51 @@
                 </div>
             </div>
             <div class="col-12 card p-2 mb-3">
-
                     <h4 class="card-header text-center text-bold"><strong>Monto aprobado</strong></h4>
-                    <table class="table striped">
-                        <thead>
-                            <tr>
-                                <th>Fuente de financiamiento</th>
-                                <th>Aportación municipal</th>
-                                <th>Aportación de beneficiarios</th>
-                                <th>Otras fuentes federales</th>
-                                <th>Otras fuentes estatales</th>
-                                <th>Otros</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <td>$ 5 000 000</td>
-                                <td>$ 0</td>
-                                <td>$ 0</td>
-                                <td>$ 0</td>
-                                <td>$ 0</td>
-                                <td>$ 0</td>
-                        </tbody>
-                    </table>
-                    <h5 class="card-title">Avance (pagado) 75%</h5>
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="card my-1">
+                            <div class="text-center">.
+                                <H5><strong>Avance general</strong></H5>
+                            </div>
+                            <div class="c100  p75 center mb-2">
+                                <span>75%</span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                            <table class="table striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Fuente de financiamiento</th>
+                                            <th>Aportación municipal</th>
+                                            <th>Aportación de beneficiarios</th>
+                                            <th>Otras fuentes federales</th>
+                                            <th>Otras fuentes estatales</th>
+                                            <th>Otros</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <td>$ 5 000 000</td>
+                                            <td>$ 0</td>
+                                            <td>$ 0</td>
+                                            <td>$ 0</td>
+                                            <td>$ 0</td>
+                                            <td>$ 0</td>
+                                    </tbody>
+                                </table>
+                    </div>
+                </div>
+
+                    {{--  <h5 class="card-title">Avance (pagado) 75%</h5>
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-                    </div>
+                    </div>  --}}
 
             </div>
         </div>
@@ -119,5 +170,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/app.js')}}"></script>
+    {{--  <script src="{{ asset('js/app.js')}}"></script>  --}}
 @endpush
